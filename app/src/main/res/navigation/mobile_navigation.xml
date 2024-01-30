@@ -12,14 +12,14 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.trainingtracker.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_status"
+        android:name="com.example.trainingtracker.ui.Status.StatusFragment"
+        android:label="@string/title_status"
+        tools:layout="@layout/fragment_status" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.trainingtracker.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_setting"
+        android:name="com.example.trainingtracker.ui.Setting.SettingFragment"
+        android:label="@string/title_setting"
+        tools:layout="@layout/fragment_setting" />
 </navigation>

@@ -1,4 +1,4 @@
-package com.example.trainingtracker.ui.notifications
+package com.example.trainingtracker.ui.Status
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.trainingtracker.databinding.FragmentNotificationsBinding
+import com.example.trainingtracker.databinding.FragmentStatusBinding
 
-class NotificationsFragment : Fragment() {
+class StatusFragment : Fragment() {
 
-private var _binding: FragmentNotificationsBinding? = null
+private var _binding: FragmentStatusBinding? = null
   // This property is only valid between onCreateView and
   // onDestroyView.
   private val binding get() = _binding!!
@@ -21,14 +21,14 @@ private var _binding: FragmentNotificationsBinding? = null
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View {
-    val notificationsViewModel =
-            ViewModelProvider(this).get(NotificationsViewModel::class.java)
+    val statusViewModel =
+            ViewModelProvider(this).get(StatusViewModel::class.java)
 
-    _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+    _binding = FragmentStatusBinding.inflate(inflater, container, false)
     val root: View = binding.root
 
-    val textView: TextView = binding.textNotifications
-    notificationsViewModel.text.observe(viewLifecycleOwner) {
+    val textView: TextView = binding.textStatus
+      statusViewModel.text.observe(viewLifecycleOwner) {
       textView.text = it
     }
     return root
