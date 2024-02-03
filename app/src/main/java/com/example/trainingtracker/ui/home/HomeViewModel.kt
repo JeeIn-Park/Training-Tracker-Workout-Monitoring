@@ -3,11 +3,22 @@ package com.example.trainingtracker.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.trainingtracker.ExerciseCard
 
 class HomeViewModel : ViewModel() {
 
+    // text
     private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+        value = "Enter exercise"
     }
     val text: LiveData<String> = _text
+
+    // recycler
+    private val _recyclerViewData = MutableLiveData<List<ExerciseCard>>()
+    val recyclerViewData : LiveData<List<ExerciseCard>> = _recyclerViewData
+
+    fun updateRecyclerViewData(data : List<ExerciseCard>) {
+        _recyclerViewData.value = data
+    }
+
 }
