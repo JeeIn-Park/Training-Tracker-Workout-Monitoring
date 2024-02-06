@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
+//TODO : this card adapter is the one especially for the home, there will be another for the status and I think I need to put it in different package
 class CardAdapter(private val context: Context) :
     ListAdapter<ExerciseCard, CardAdapter.CardViewHolder>(ExerciseCardDiffCallback()) {
 
@@ -41,6 +42,7 @@ class CardAdapter(private val context: Context) :
         private val textView: TextView = itemView.findViewById(R.id.textView)
         private val deleteButton: Button = itemView.findViewById(R.id.deleteButton)
 
+        // reference (each parts in a card layout)
         fun bind(cardItem: ExerciseCard) {
             textView.text = "${cardItem.name} - Muscles: ${cardItem.mainMuscles.joinToString(", ")}"
             deleteButton.setOnClickListener {
