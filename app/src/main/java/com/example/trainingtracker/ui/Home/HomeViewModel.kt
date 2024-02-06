@@ -1,4 +1,4 @@
-package com.example.trainingtracker.ui.home
+package com.example.trainingtracker.ui.Home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

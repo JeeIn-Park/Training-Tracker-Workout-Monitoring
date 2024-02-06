@@ -116,6 +116,10 @@
         "source": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-main-52:/layout/card_item.xml"
     },
     {
+        "merged": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-merged_res-50:/drawable_baseline_account_circle_24.xml.flat",
+        "source": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-main-52:/drawable/baseline_account_circle_24.xml"
+    },
+    {
         "merged": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-merged_res-50:/drawable_ic_status_black_24dp.xml.flat",
         "source": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-main-52:/drawable/ic_status_black_24dp.xml"
     }

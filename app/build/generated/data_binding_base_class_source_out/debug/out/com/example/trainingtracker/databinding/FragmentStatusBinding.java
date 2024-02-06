@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.trainingtracker.R;
@@ -20,10 +21,15 @@ public final class FragmentStatusBinding implements ViewBinding {
   private final ConstraintLayout rootView;
 
   @NonNull
+  public final RecyclerView recyclerView;
+
+  @NonNull
   public final TextView textStatus;
 
-  private FragmentStatusBinding(@NonNull ConstraintLayout rootView, @NonNull TextView textStatus) {
+  private FragmentStatusBinding(@NonNull ConstraintLayout rootView,
+      @NonNull RecyclerView recyclerView, @NonNull TextView textStatus) {
     this.rootView = rootView;
+    this.recyclerView = recyclerView;
     this.textStatus = textStatus;
   }
 
@@ -54,13 +60,19 @@ public final class FragmentStatusBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.recyclerView;
+      RecyclerView recyclerView = ViewBindings.findChildViewById(rootView, id);
+      if (recyclerView == null) {
+        break missingId;
+      }
+
       id = R.id.text_status;
       TextView textStatus = ViewBindings.findChildViewById(rootView, id);
       if (textStatus == null) {
         break missingId;
       }
 
-      return new FragmentStatusBinding((ConstraintLayout) rootView, textStatus);
+      return new FragmentStatusBinding((ConstraintLayout) rootView, recyclerView, textStatus);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -1,12 +1,12 @@
 package com.example.trainingtracker
 
-import android.health.connect.datatypes.WeightRecord
+import android.health.connect.datatypes.units.Mass
 import java.time.LocalDateTime
 
-data class ExerciseLog (
+data class ExerciseLog(
+    val dateTime: LocalDateTime,
     val exerciseCard: ExerciseCard,
-    val time: LocalDateTime,
-    val rep : Int,
-    val weightRecord: WeightRecord
+    val mass: Mass,
+    val set: Int,
+    val rep: Int
 )
-

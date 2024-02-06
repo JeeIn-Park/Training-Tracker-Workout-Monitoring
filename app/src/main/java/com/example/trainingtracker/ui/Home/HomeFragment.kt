@@ -1,4 +1,4 @@
-package com.example.trainingtracker.ui.home
+package com.example.trainingtracker.ui.Home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.trainingtracker.CardAdapter
 import com.example.trainingtracker.databinding.FragmentHomeBinding
-import com.example.trainingtracker.ExerciseCard
 
 class HomeFragment : Fragment() {
 

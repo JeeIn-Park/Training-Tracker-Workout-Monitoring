@@ -1,4 +1,4 @@
-package com.example.trainingtracker.ui.Setting
+package com.example.trainingtracker.ui.MyMenu
 
 import android.os.Bundle
 import android.view.LayoutInflater
