@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <string name="add_a_new_exercise">Add a new exercise</string>
     <string name="app_name">TrainingTracker</string>
     <string name="title_home">Home</string>
     <string name="title_setting">Setting</string>

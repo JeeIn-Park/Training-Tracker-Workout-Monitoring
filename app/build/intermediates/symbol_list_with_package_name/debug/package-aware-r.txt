@@ -3082,6 +3082,7 @@ drawable abc_vector_test
 drawable avd_hide_password
 drawable avd_show_password
 drawable baseline_account_circle_24
+drawable baseline_add_circle_24
 drawable btn_checkbox_checked_mtrl
 drawable btn_checkbox_checked_to_unchecked_mtrl_animation
 drawable btn_checkbox_unchecked_mtrl
@@ -3590,6 +3591,7 @@ id endToStart
 id end_padder
 id enterAlways
 id enterAlwaysCollapsed
+id exerciseRecyclerView
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
@@ -4252,6 +4254,7 @@ string abc_searchview_description_voice
 string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
+string add_a_new_exercise
 string androidx_startup
 string app_name
 string appbar_scrolling_view_behavior

@@ -4,6 +4,7 @@ package com.example.trainingtracker.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,15 +22,19 @@ public final class FragmentStatusBinding implements ViewBinding {
   private final ConstraintLayout rootView;
 
   @NonNull
-  public final RecyclerView recyclerView;
+  public final Button deleteButton;
+
+  @NonNull
+  public final RecyclerView exerciseRecyclerView;
 
   @NonNull
   public final TextView textStatus;
 
-  private FragmentStatusBinding(@NonNull ConstraintLayout rootView,
-      @NonNull RecyclerView recyclerView, @NonNull TextView textStatus) {
+  private FragmentStatusBinding(@NonNull ConstraintLayout rootView, @NonNull Button deleteButton,
+      @NonNull RecyclerView exerciseRecyclerView, @NonNull TextView textStatus) {
     this.rootView = rootView;
-    this.recyclerView = recyclerView;
+    this.deleteButton = deleteButton;
+    this.exerciseRecyclerView = exerciseRecyclerView;
     this.textStatus = textStatus;
   }
 
@@ -60,9 +65,15 @@ public final class FragmentStatusBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.recyclerView;
-      RecyclerView recyclerView = ViewBindings.findChildViewById(rootView, id);
-      if (recyclerView == null) {
+      id = R.id.deleteButton;
+      Button deleteButton = ViewBindings.findChildViewById(rootView, id);
+      if (deleteButton == null) {
+        break missingId;
+      }
+
+      id = R.id.exerciseRecyclerView;
+      RecyclerView exerciseRecyclerView = ViewBindings.findChildViewById(rootView, id);
+      if (exerciseRecyclerView == null) {
         break missingId;
       }
 
@@ -72,7 +83,8 @@ public final class FragmentStatusBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentStatusBinding((ConstraintLayout) rootView, recyclerView, textStatus);
+      return new FragmentStatusBinding((ConstraintLayout) rootView, deleteButton,
+          exerciseRecyclerView, textStatus);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

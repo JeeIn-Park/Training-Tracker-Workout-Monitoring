@@ -3081,6 +3081,7 @@ int drawable abc_vector_test 0x7f070077
 int drawable avd_hide_password 0x7f070078
 int drawable avd_show_password 0x7f070079
 int drawable baseline_account_circle_24 0x7f0701bf
+int drawable baseline_add_circle_24 0x7f0701c0
 int drawable btn_checkbox_checked_mtrl 0x7f07007a
 int drawable btn_checkbox_checked_to_unchecked_mtrl_animation 0x7f07007b
 int drawable btn_checkbox_unchecked_mtrl 0x7f07007c
@@ -3589,6 +3590,7 @@ int id endToStart 0x7f0800b3
 int id end_padder 0x7f0800b4
 int id enterAlways 0x7f0800b5
 int id enterAlwaysCollapsed 0x7f0800b6
+int id exerciseRecyclerView 0x7f08024e
 int id exitUntilCollapsed 0x7f0800b7
 int id expand_activities_button 0x7f0800b8
 int id expanded_menu 0x7f0800b9
@@ -4251,6 +4253,7 @@ int string abc_searchview_description_voice 0x7f110017
 int string abc_shareactionprovider_share_with 0x7f110018
 int string abc_shareactionprovider_share_with_application 0x7f110019
 int string abc_toolbar_collapse_description 0x7f11001a
+int string add_a_new_exercise 0x7f1100d0
 int string androidx_startup 0x7f11001b
 int string app_name 0x7f11001c
 int string appbar_scrolling_view_behavior 0x7f11001d

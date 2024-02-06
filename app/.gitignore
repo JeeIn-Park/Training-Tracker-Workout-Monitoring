@@ -15,3 +15,7 @@
 
 # Gradle Wrapper
 gradle-wrapper.jar
+
+
+# build
+app/build
