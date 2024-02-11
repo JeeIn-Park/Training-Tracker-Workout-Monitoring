@@ -8,9 +8,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import androidx.viewpager2.widget.ViewPager2;
 import com.example.trainingtracker.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -21,16 +21,16 @@ public final class FragmentHomeBinding implements ViewBinding {
   private final ConstraintLayout rootView;
 
   @NonNull
-  public final RecyclerView recyclerView;
+  public final TextView cardTopBar;
 
   @NonNull
-  public final TextView textHome;
+  public final ViewPager2 exerciseCard;
 
-  private FragmentHomeBinding(@NonNull ConstraintLayout rootView,
-      @NonNull RecyclerView recyclerView, @NonNull TextView textHome) {
+  private FragmentHomeBinding(@NonNull ConstraintLayout rootView, @NonNull TextView cardTopBar,
+      @NonNull ViewPager2 exerciseCard) {
     this.rootView = rootView;
-    this.recyclerView = recyclerView;
-    this.textHome = textHome;
+    this.cardTopBar = cardTopBar;
+    this.exerciseCard = exerciseCard;
   }
 
   @Override
@@ -60,19 +60,19 @@ public final class FragmentHomeBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.recyclerView;
-      RecyclerView recyclerView = ViewBindings.findChildViewById(rootView, id);
-      if (recyclerView == null) {
+      id = R.id.cardTopBar;
+      TextView cardTopBar = ViewBindings.findChildViewById(rootView, id);
+      if (cardTopBar == null) {
         break missingId;
       }
 
-      id = R.id.text_home;
-      TextView textHome = ViewBindings.findChildViewById(rootView, id);
-      if (textHome == null) {
+      id = R.id.exerciseCard;
+      ViewPager2 exerciseCard = ViewBindings.findChildViewById(rootView, id);
+      if (exerciseCard == null) {
         break missingId;
       }
 
-      return new FragmentHomeBinding((ConstraintLayout) rootView, recyclerView, textHome);
+      return new FragmentHomeBinding((ConstraintLayout) rootView, cardTopBar, exerciseCard);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

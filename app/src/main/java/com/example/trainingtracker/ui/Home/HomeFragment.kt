@@ -31,16 +31,15 @@ class HomeFragment : Fragment() {
       val root: View = binding.root
 
       cardAdapter = CardAdapter(requireContext())
+      val cardView = binding.exerciseCard
+      cardView.adapter = cardAdapter
 
-      val recyclerView = binding.recyclerView
-      recyclerView.layoutManager = LinearLayoutManager(requireContext())
-      recyclerView.adapter = cardAdapter
 
       homeViewModel.recyclerViewData.observe(viewLifecycleOwner) {
           newData -> cardAdapter.submitList(newData)
       }
 
-      val textView: TextView = binding.textHome
+      val textView: TextView = binding.cardTopBar
       homeViewModel.text.observe(viewLifecycleOwner) {
           textView.text = it
       }

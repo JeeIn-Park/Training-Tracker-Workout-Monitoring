@@ -16,21 +16,26 @@ import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
 
-public final class CardItemBinding implements ViewBinding {
+public final class CardContainerBinding implements ViewBinding {
   @NonNull
   private final ConstraintLayout rootView;
 
   @NonNull
-  public final Button deleteButton;
+  public final ConstraintLayout cardContainer;
 
   @NonNull
-  public final TextView textView;
+  public final TextView exerciseName;
 
-  private CardItemBinding(@NonNull ConstraintLayout rootView, @NonNull Button deleteButton,
-      @NonNull TextView textView) {
+  @NonNull
+  public final Button logButton;
+
+  private CardContainerBinding(@NonNull ConstraintLayout rootView,
+      @NonNull ConstraintLayout cardContainer, @NonNull TextView exerciseName,
+      @NonNull Button logButton) {
     this.rootView = rootView;
-    this.deleteButton = deleteButton;
-    this.textView = textView;
+    this.cardContainer = cardContainer;
+    this.exerciseName = exerciseName;
+    this.logButton = logButton;
   }
 
   @Override
@@ -40,14 +45,14 @@ public final class CardItemBinding implements ViewBinding {
   }
 
   @NonNull
-  public static CardItemBinding inflate(@NonNull LayoutInflater inflater) {
+  public static CardContainerBinding inflate(@NonNull LayoutInflater inflater) {
     return inflate(inflater, null, false);
   }
 
   @NonNull
-  public static CardItemBinding inflate(@NonNull LayoutInflater inflater,
+  public static CardContainerBinding inflate(@NonNull LayoutInflater inflater,
       @Nullable ViewGroup parent, boolean attachToParent) {
-    View root = inflater.inflate(R.layout.card_item, parent, false);
+    View root = inflater.inflate(R.layout.card_container, parent, false);
     if (attachToParent) {
       parent.addView(root);
     }
@@ -55,24 +60,27 @@ public final class CardItemBinding implements ViewBinding {
   }
 
   @NonNull
-  public static CardItemBinding bind(@NonNull View rootView) {
+  public static CardContainerBinding bind(@NonNull View rootView) {
     // The body of this method is generated in a way you would not otherwise write.
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.deleteButton;
-      Button deleteButton = ViewBindings.findChildViewById(rootView, id);
-      if (deleteButton == null) {
+      ConstraintLayout cardContainer = (ConstraintLayout) rootView;
+
+      id = R.id.exerciseName;
+      TextView exerciseName = ViewBindings.findChildViewById(rootView, id);
+      if (exerciseName == null) {
         break missingId;
       }
 
-      id = R.id.textView;
-      TextView textView = ViewBindings.findChildViewById(rootView, id);
-      if (textView == null) {
+      id = R.id.logButton;
+      Button logButton = ViewBindings.findChildViewById(rootView, id);
+      if (logButton == null) {
         break missingId;
       }
 
-      return new CardItemBinding((ConstraintLayout) rootView, deleteButton, textView);
+      return new CardContainerBinding((ConstraintLayout) rootView, cardContainer, exerciseName,
+          logButton);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
