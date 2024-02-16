@@ -1,6 +1,5 @@
 # Gradle
 .gradle/
-.gradle/8.2/
 *.iml
 
 # Android Studio
