@@ -52,8 +52,8 @@
         "source": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-main-52:/mipmap-xxhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.trainingtracker.app-merged_res-50:/drawable_baseline_add_circle_24.xml.flat",
-        "source": "com.example.trainingtracker.app-main-52:/drawable/baseline_add_circle_24.xml"
+        "merged": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-merged_res-50:/drawable_baseline_add_circle_24.xml.flat",
+        "source": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-main-52:/drawable/baseline_add_circle_24.xml"
     },
     {
         "merged": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-merged_res-50:/mipmap-hdpi_ic_launcher_round.webp.flat",
@@ -122,6 +122,10 @@
     {
         "merged": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-merged_res-50:/drawable_baseline_account_circle_24.xml.flat",
         "source": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-main-52:/drawable/baseline_account_circle_24.xml"
+    },
+    {
+        "merged": "com.example.trainingtracker.app-merged_res-50:/layout_fragment_add_card.xml.flat",
+        "source": "com.example.trainingtracker.app-main-52:/layout/fragment_add_card.xml"
     },
     {
         "merged": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-merged_res-50:/drawable_ic_status_black_24dp.xml.flat",

@@ -1,5 +1,9 @@
 [
     {
+        "merged": "com.example.trainingtracker.app-mergeDebugResources-49:/layout/fragment_add_card.xml",
+        "source": "com.example.trainingtracker.app-main-52:/layout/fragment_add_card.xml"
+    },
+    {
         "merged": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-mergeDebugResources-49:/layout/activity_main.xml",
         "source": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-main-52:/layout/activity_main.xml"
     },

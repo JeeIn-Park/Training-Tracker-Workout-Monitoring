@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -22,20 +21,16 @@ public final class FragmentStatusBinding implements ViewBinding {
   private final ConstraintLayout rootView;
 
   @NonNull
-  public final Button deleteButton;
+  public final Button addCardButton;
 
   @NonNull
   public final RecyclerView exerciseRecyclerView;
 
-  @NonNull
-  public final TextView textStatus;
-
-  private FragmentStatusBinding(@NonNull ConstraintLayout rootView, @NonNull Button deleteButton,
-      @NonNull RecyclerView exerciseRecyclerView, @NonNull TextView textStatus) {
+  private FragmentStatusBinding(@NonNull ConstraintLayout rootView, @NonNull Button addCardButton,
+      @NonNull RecyclerView exerciseRecyclerView) {
     this.rootView = rootView;
-    this.deleteButton = deleteButton;
+    this.addCardButton = addCardButton;
     this.exerciseRecyclerView = exerciseRecyclerView;
-    this.textStatus = textStatus;
   }
 
   @Override
@@ -65,9 +60,9 @@ public final class FragmentStatusBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.deleteButton;
-      Button deleteButton = ViewBindings.findChildViewById(rootView, id);
-      if (deleteButton == null) {
+      id = R.id.addCardButton;
+      Button addCardButton = ViewBindings.findChildViewById(rootView, id);
+      if (addCardButton == null) {
         break missingId;
       }
 
@@ -77,14 +72,8 @@ public final class FragmentStatusBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.text_status;
-      TextView textStatus = ViewBindings.findChildViewById(rootView, id);
-      if (textStatus == null) {
-        break missingId;
-      }
-
-      return new FragmentStatusBinding((ConstraintLayout) rootView, deleteButton,
-          exerciseRecyclerView, textStatus);
+      return new FragmentStatusBinding((ConstraintLayout) rootView, addCardButton,
+          exerciseRecyclerView);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
