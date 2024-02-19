@@ -3,15 +3,12 @@
 *.iml
 
 # Android Studio
+.idea
 /.idea/
 
 # Compiled files
 *.class
 *.jar
-
-# Local configuration file (e.g., studio-related files)
-.gradle
-.idea
 
 # Gradle Wrapper
 gradle-wrapper.jar
