@@ -16,7 +16,28 @@
         "source": "com.example.trainingtracker.app-main-53:/layout/fragment_setting.xml"
     },
     {
+<<<<<<< HEAD
+        "merged": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-mergeDebugResources-49:/layout/fragment_dashboard.xml",
+        "source": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-main-52:/layout/fragment_dashboard.xml"
+    },
+    {
+        "merged": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-mergeDebugResources-49:/layout/fragment_setting.xml",
+        "source": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-main-52:/layout/fragment_setting.xml"
+    },
+    {
+        "merged": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-mergeDebugResources-49:/layout/fragment_notifications.xml",
+        "source": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-main-52:/layout/fragment_notifications.xml"
+    },
+    {
+        "merged": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-mergeDebugResources-49:/layout/fragment_add_card.xml",
+        "source": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-main-52:/layout/fragment_add_card.xml"
+    },
+    {
+        "merged": "com.example.trainingtracker.app-mergeDebugResources-49:/layout/activity_add_card.xml",
+        "source": "com.example.trainingtracker.app-main-52:/layout/activity_add_card.xml"
+=======
         "merged": "com.example.trainingtracker.app-mergeDebugResources-50:/layout/card_container.xml",
         "source": "com.example.trainingtracker.app-main-53:/layout/card_container.xml"
+>>>>>>> main
     }
 ]

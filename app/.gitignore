@@ -1,5 +1,5 @@
 # Gradle
-.gradle/
+.gradle
 *.iml
 
 # Android Studio
@@ -16,6 +16,7 @@
 # Gradle Wrapper
 gradle-wrapper.jar
 
-
 # build
-app/build
+/app/build
+/build
+build

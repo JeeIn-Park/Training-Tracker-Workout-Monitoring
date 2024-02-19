@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/jeein/Documents/dissertation _ individual project/TrainingTracker/app/src/main/AndroidManifest.xml:2:1-27:12
-INJECTED from /home/jeein/Documents/dissertation _ individual project/TrainingTracker/app/src/main/AndroidManifest.xml:2:1-27:12
-INJECTED from /home/jeein/Documents/dissertation _ individual project/TrainingTracker/app/src/main/AndroidManifest.xml:2:1-27:12
-INJECTED from /home/jeein/Documents/dissertation _ individual project/TrainingTracker/app/src/main/AndroidManifest.xml:2:1-27:12
+ADDED from /home/jeein/Documents/dissertation _ individual project/TrainingTracker/app/src/main/AndroidManifest.xml:2:1-29:12
+INJECTED from /home/jeein/Documents/dissertation _ individual project/TrainingTracker/app/src/main/AndroidManifest.xml:2:1-29:12
+INJECTED from /home/jeein/Documents/dissertation _ individual project/TrainingTracker/app/src/main/AndroidManifest.xml:2:1-29:12
+INJECTED from /home/jeein/Documents/dissertation _ individual project/TrainingTracker/app/src/main/AndroidManifest.xml:2:1-29:12
 MERGED from [androidx.databinding:viewbinding:8.2.2] /home/jeein/.gradle/caches/transforms-3/d64262d30dfd028fefb0db007e75e64f/transformed/viewbinding-8.2.2/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.navigation:navigation-common:2.7.6] /home/jeein/.gradle/caches/transforms-3/ba2ce66ca0878151fa65b1d1d72e0ee5/transformed/navigation-common-2.7.6/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.navigation:navigation-common-ktx:2.7.6] /home/jeein/.gradle/caches/transforms-3/6ff88bf81f9a02407f3dca84b756dedd/transformed/navigation-common-ktx-2.7.6/AndroidManifest.xml:2:1-7:12
@@ -78,8 +78,8 @@ MERGED from [com.makeramen:roundedimageview:2.3.0] /home/jeein/.gradle/caches/tr
 	xmlns:android
 		ADDED from /home/jeein/Documents/dissertation _ individual project/TrainingTracker/app/src/main/AndroidManifest.xml:2:11-69
 application
-ADDED from /home/jeein/Documents/dissertation _ individual project/TrainingTracker/app/src/main/AndroidManifest.xml:5:5-25:19
-INJECTED from /home/jeein/Documents/dissertation _ individual project/TrainingTracker/app/src/main/AndroidManifest.xml:5:5-25:19
+ADDED from /home/jeein/Documents/dissertation _ individual project/TrainingTracker/app/src/main/AndroidManifest.xml:5:5-27:19
+INJECTED from /home/jeein/Documents/dissertation _ individual project/TrainingTracker/app/src/main/AndroidManifest.xml:5:5-27:19
 MERGED from [com.google.android.material:material:1.11.0] /home/jeein/.gradle/caches/transforms-3/56af212e940d1f2bde023f0cf7bfa9c5/transformed/material-1.11.0/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.11.0] /home/jeein/.gradle/caches/transforms-3/56af212e940d1f2bde023f0cf7bfa9c5/transformed/material-1.11.0/AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] /home/jeein/.gradle/caches/transforms-3/a1c5e08825da8b3508fd7a457a086ebc/transformed/constraintlayout-2.1.4/AndroidManifest.xml:9:5-20
@@ -138,6 +138,10 @@ category#android.intent.category.LAUNCHER
 ADDED from /home/jeein/Documents/dissertation _ individual project/TrainingTracker/app/src/main/AndroidManifest.xml:22:17-77
 	android:name
 		ADDED from /home/jeein/Documents/dissertation _ individual project/TrainingTracker/app/src/main/AndroidManifest.xml:22:27-74
+activity#com.example.trainingtracker.ui.Status.AddCardActivity
+ADDED from /home/jeein/Documents/dissertation _ individual project/TrainingTracker/app/src/main/AndroidManifest.xml:26:9-72
+	android:name
+		ADDED from /home/jeein/Documents/dissertation _ individual project/TrainingTracker/app/src/main/AndroidManifest.xml:26:19-60
 uses-sdk
 INJECTED from /home/jeein/Documents/dissertation _ individual project/TrainingTracker/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/jeein/Documents/dissertation _ individual project/TrainingTracker/app/src/main/AndroidManifest.xml

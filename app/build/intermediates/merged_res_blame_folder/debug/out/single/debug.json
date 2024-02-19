@@ -20,6 +20,18 @@
         "source": "com.example.trainingtracker.app-main-53:/drawable/baseline_add_circle_24.xml"
     },
     {
+<<<<<<< HEAD
+        "merged": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-merged_res-50:/layout_fragment_status.xml.flat",
+        "source": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-main-52:/layout/fragment_status.xml"
+    },
+    {
+        "merged": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-merged_res-50:/layout_activity_main.xml.flat",
+        "source": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-main-52:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-merged_res-50:/drawable_ic_notifications_black_24dp.xml.flat",
+        "source": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-main-52:/drawable/ic_notifications_black_24dp.xml"
+=======
         "merged": "com.example.trainingtracker.app-merged_res-51:/xml_backup_rules.xml.flat",
         "source": "com.example.trainingtracker.app-main-53:/xml/backup_rules.xml"
     },
@@ -30,18 +42,24 @@
     {
         "merged": "com.example.trainingtracker.app-merged_res-51:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
         "source": "com.example.trainingtracker.app-main-53:/mipmap-anydpi-v26/ic_launcher_round.xml"
+>>>>>>> main
     },
     {
         "merged": "com.example.trainingtracker.app-merged_res-51:/mipmap-anydpi-v26_ic_launcher.xml.flat",
         "source": "com.example.trainingtracker.app-main-53:/mipmap-anydpi-v26/ic_launcher.xml"
     },
     {
+<<<<<<< HEAD
+        "merged": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-merged_res-50:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-main-52:/mipmap-xxhdpi/ic_launcher.webp"
+=======
         "merged": "com.example.trainingtracker.app-merged_res-51:/xml_data_extraction_rules.xml.flat",
         "source": "com.example.trainingtracker.app-main-53:/xml/data_extraction_rules.xml"
     },
     {
         "merged": "com.example.trainingtracker.app-merged_res-51:/mipmap-hdpi_ic_launcher_round.webp.flat",
         "source": "com.example.trainingtracker.app-main-53:/mipmap-hdpi/ic_launcher_round.webp"
+>>>>>>> main
     },
     {
         "merged": "com.example.trainingtracker.app-merged_res-51:/drawable_ic_home_black_24dp.xml.flat",
@@ -52,8 +70,13 @@
         "source": "com.example.trainingtracker.app-main-53:/drawable/baseline_account_circle_24.xml"
     },
     {
+<<<<<<< HEAD
+        "merged": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-merged_res-50:/drawable_baseline_add_circle_24.xml.flat",
+        "source": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-main-52:/drawable/baseline_add_circle_24.xml"
+=======
         "merged": "com.example.trainingtracker.app-merged_res-51:/navigation_mobile_navigation.xml.flat",
         "source": "com.example.trainingtracker.app-main-53:/navigation/mobile_navigation.xml"
+>>>>>>> main
     },
     {
         "merged": "com.example.trainingtracker.app-merged_res-51:/layout_fragment_home.xml.flat",
@@ -68,8 +91,21 @@
         "source": "com.example.trainingtracker.app-main-53:/mipmap-xhdpi/ic_launcher.webp"
     },
     {
+<<<<<<< HEAD
+        "merged": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-merged_res-50:/layout_fragment_add_card.xml.flat",
+        "source": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-main-52:/layout/fragment_add_card.xml"
+    },
+    {
+        "merged": "com.example.trainingtracker.app-merged_res-50:/layout_activity_add_card.xml.flat",
+        "source": "com.example.trainingtracker.app-main-52:/layout/activity_add_card.xml"
+    },
+    {
+        "merged": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-merged_res-50:/menu_bottom_nav_menu.xml.flat",
+        "source": "/home/jeein/.gradle/daemon/8.2/com.example.trainingtracker.app-main-52:/menu/bottom_nav_menu.xml"
+=======
         "merged": "com.example.trainingtracker.app-merged_res-51:/menu_bottom_nav_menu.xml.flat",
         "source": "com.example.trainingtracker.app-main-53:/menu/bottom_nav_menu.xml"
+>>>>>>> main
     },
     {
         "merged": "com.example.trainingtracker.app-merged_res-51:/drawable_ic_status_black_24dp.xml.flat",
