@@ -66,6 +66,7 @@ MERGED from [androidx.arch.core:core-runtime:2.2.0] /home/jeein/.gradle/caches/t
 MERGED from [androidx.documentfile:documentfile:1.0.0] /home/jeein/.gradle/caches/transforms-3/9df73e7003301e6fd55fe85a9a84be59/transformed/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/jeein/.gradle/caches/transforms-3/7b115708b95e2006844688cb5d0e7417/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.print:print:1.0.0] /home/jeein/.gradle/caches/transforms-3/3d2071ecff002f078b1511d7965c37b5/transformed/print-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.makeramen:roundedimageview:2.3.0] /home/jeein/.gradle/caches/transforms-3/2ba8adcb82751ee37f297cb976a3b881/transformed/roundedimageview-2.3.0/AndroidManifest.xml:2:1-9:12
 	package
 		INJECTED from /home/jeein/Documents/dissertation _ individual project/TrainingTracker/app/src/main/AndroidManifest.xml
 	android:versionName
@@ -269,6 +270,8 @@ MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/j
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/jeein/.gradle/caches/transforms-3/7b115708b95e2006844688cb5d0e7417/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.print:print:1.0.0] /home/jeein/.gradle/caches/transforms-3/3d2071ecff002f078b1511d7965c37b5/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.print:print:1.0.0] /home/jeein/.gradle/caches/transforms-3/3d2071ecff002f078b1511d7965c37b5/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.makeramen:roundedimageview:2.3.0] /home/jeein/.gradle/caches/transforms-3/2ba8adcb82751ee37f297cb976a3b881/transformed/roundedimageview-2.3.0/AndroidManifest.xml:7:5-43
+MERGED from [com.makeramen:roundedimageview:2.3.0] /home/jeein/.gradle/caches/transforms-3/2ba8adcb82751ee37f297cb976a3b881/transformed/roundedimageview-2.3.0/AndroidManifest.xml:7:5-43
 	android:targetSdkVersion
 		INJECTED from /home/jeein/Documents/dissertation _ individual project/TrainingTracker/app/src/main/AndroidManifest.xml
 	android:minSdkVersion

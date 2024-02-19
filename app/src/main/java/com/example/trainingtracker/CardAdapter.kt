@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 
 //TODO : this card adapter is the one especially for the home, there will be another for the status and I think I need to put it in different package
 class CardAdapter(private val context: Context) :
@@ -16,7 +17,7 @@ class CardAdapter(private val context: Context) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.card_item, parent, false)
+        val view = inflater.inflate(R.layout.card_container, parent, false)
         return CardViewHolder(view)
     }
 
@@ -39,14 +40,15 @@ class CardAdapter(private val context: Context) :
     }
 
     inner class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val textView: TextView = itemView.findViewById(R.id.textView)
-        private val deleteButton: Button = itemView.findViewById(R.id.deleteButton)
+        private val exerciseName: TextView = itemView.findViewById(R.id.exerciseName)
+        private val logButton: Button = itemView.findViewById(R.id.logButton)
 
         // reference (each parts in a card layout)
         fun bind(cardItem: ExerciseCard) {
-            textView.text = "${cardItem.name} - Muscles: ${cardItem.mainMuscles.joinToString(", ")}"
-            deleteButton.setOnClickListener {
+            exerciseName.text = cardItem.name
+            logButton.setOnClickListener {
                 removeItem(adapterPosition)
+                //TODO : this need to add database the log user entered
             }
         }
     }

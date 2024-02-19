@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.trainingtracker.app-mergeDebugResources-48:/values-si/values-si.xml",
+            "outputFile": "com.example.trainingtracker.app-mergeDebugResources-49:/values-si/values-si.xml",
             "map": [
                 {
                     "source": "/home/jeein/.gradle/caches/transforms-3/3b4236fc978d524b66bb666cb34f4c8a/transformed/navigation-ui-2.7.6/res/values-si/values-si.xml",

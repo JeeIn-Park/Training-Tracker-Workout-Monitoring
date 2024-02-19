@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.trainingtracker.app-mergeDebugResources-48:/values-fr/values-fr.xml",
+            "outputFile": "com.example.trainingtracker.app-mergeDebugResources-49:/values-fr/values-fr.xml",
             "map": [
                 {
                     "source": "/home/jeein/.gradle/caches/transforms-3/60b492a510ec931c8abbf232e0a5612c/transformed/appcompat-1.6.1/res/values-fr/values-fr.xml",

@@ -16,27 +16,41 @@ drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable ic_notifications_black_24dp
 drawable ic_status_black_24dp
+<<<<<<< HEAD
 id addCardButton
 id add_button
+=======
+id cardTopBar
+id card_container
+>>>>>>> main
 id container
 id deleteButton
+id exerciseCard
+id exerciseName
 id exerciseRecyclerView
+<<<<<<< HEAD
 id exercise_name
 id main_muscles
+=======
+id logButton
+>>>>>>> main
 id mobile_navigation
 id nav_host_fragment_activity_main
 id nav_view
 id navigation_home
 id navigation_setting
 id navigation_status
+<<<<<<< HEAD
 id recyclerView
 id sub_muscles
 id textView
 id text_home
+=======
+>>>>>>> main
 id text_setting
 layout activity_add_card
 layout activity_main
-layout card_item
+layout card_container
 layout fragment_home
 layout fragment_setting
 layout fragment_status

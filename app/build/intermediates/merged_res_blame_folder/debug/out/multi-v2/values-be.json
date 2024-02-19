@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.trainingtracker.app-mergeDebugResources-48:/values-be/values-be.xml",
+            "outputFile": "com.example.trainingtracker.app-mergeDebugResources-49:/values-be/values-be.xml",
             "map": [
                 {
                     "source": "/home/jeein/.gradle/caches/transforms-3/2d47a78c43d2b7d65af8a785c93ef753/transformed/mediarouter-1.6.0/res/values-be/values-be.xml",

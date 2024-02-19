@@ -27,6 +27,13 @@ private var _binding: FragmentSettingBinding? = null
     _binding = FragmentSettingBinding.inflate(inflater, container, false)
     val root: View = binding.root
 
+<<<<<<< HEAD
+=======
+//    val textView: TextView = binding.textSetting
+//      settingViewModel.text.observe(viewLifecycleOwner) {
+//      textView.text = it
+//    }
+>>>>>>> main
     return root
   }
 
