@@ -26,6 +26,8 @@ replay_pid*
 # Gradle
 .gradle
 .gradle/
+/.gradle/
+/.gradle
 *.iml
 
 # Android Studio
