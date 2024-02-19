@@ -34,9 +34,9 @@ id sub_muscles
 id textView
 id text_home
 id text_setting
+layout activity_add_card
 layout activity_main
 layout card_item
-layout fragment_add_card
 layout fragment_home
 layout fragment_setting
 layout fragment_status

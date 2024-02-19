@@ -43,6 +43,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.example.trainingtracker.ui.Status.AddCardActivity" />
 
         <provider
             android:name="androidx.startup.InitializationProvider"

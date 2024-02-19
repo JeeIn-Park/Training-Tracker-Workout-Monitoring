@@ -4118,6 +4118,7 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_add_card
 layout activity_main
 layout card_item
 layout custom_dialog
@@ -4136,7 +4137,6 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
-layout fragment_add_card
 layout fragment_home
 layout fragment_setting
 layout fragment_status
