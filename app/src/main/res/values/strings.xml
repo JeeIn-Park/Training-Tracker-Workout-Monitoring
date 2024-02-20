@@ -4,4 +4,11 @@
     <string name="title_status">Status</string>
     <string name="title_setting">Setting</string>
     <string name="add_a_new_exercise">Add a new exercise</string>
+
+    <string-array name="muscles_array">
+        <item>Arm</item>
+        <item>Leg</item>
+        <item>Chest</item>
+        <!--TODO : add more muscles -->
+    </string-array>
 </resources>

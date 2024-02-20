@@ -1,5 +1,6 @@
 package com.example.trainingtracker.ui.Status
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -36,6 +37,8 @@ class StatusFragment : Fragment() {
 
       val addCardButton = binding.addCardButton
       addCardButton.setOnClickListener {
+          val intent = Intent(activity, AddCardActivity::class.java)
+          startActivity(intent)
       }
 
 

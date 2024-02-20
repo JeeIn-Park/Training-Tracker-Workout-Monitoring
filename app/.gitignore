@@ -10,7 +10,6 @@
 *.jar
 
 # Local configuration file (e.g., studio-related files)
-.gradle/
 .idea/
 
 # Gradle Wrapper
