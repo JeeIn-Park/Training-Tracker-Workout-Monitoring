@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.trainingtracker.CardAdapter
+import com.example.trainingtracker.CardStorage
 import com.example.trainingtracker.databinding.FragmentStatusBinding
 
 class StatusFragment : Fragment() {
@@ -45,7 +46,14 @@ class StatusFragment : Fragment() {
       return root
   }
 
-override fun onDestroyView() {
+    override fun onResume() {
+        super.onResume()
+        val cards = CardStorage.loadCards(requireContext())
+        cardAdapter.submitList(cards)
+    }
+
+
+    override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }

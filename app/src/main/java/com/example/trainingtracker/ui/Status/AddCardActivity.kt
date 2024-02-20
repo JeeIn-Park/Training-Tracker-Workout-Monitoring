@@ -56,6 +56,7 @@ class AddCardActivity : AppCompatActivity() {
 
             val card = ExerciseCard(lastActivity = lastActivity, timeAdded = timeAdded, name = exerciseName, mainMuscles = mainMuscle, subMuscles = subMuscle, tag = tag) // Create a new card
             CardStorage.addCard(this, card)
+            finish()
 
         }
 
