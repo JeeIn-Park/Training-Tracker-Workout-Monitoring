@@ -46,6 +46,7 @@ class HomeCardAdapter(private val context: Context) :
             textView.text = "${cardItem.name} - Muscles: ${cardItem.mainMuscles.joinToString(", ")}"
             logButton.setOnClickListener {
                 removeItem(adapterPosition)
+                // TODO : log, not delete the card item
             }
         }
     }

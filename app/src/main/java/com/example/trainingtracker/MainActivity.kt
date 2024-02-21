@@ -7,15 +7,17 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+//import androidx.recyclerview.widget.LinearLayoutManager
+//import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingtracker.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
 private lateinit var binding: ActivityMainBinding
 
-private lateinit var cardAdapter: CardAdapter
+//private lateinit var statusCardAdapter: StatusCardAdapter
+//private lateinit var homeCardAdapter: HomeCardAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,10 +37,15 @@ private lateinit var cardAdapter: CardAdapter
 
 
         // card
-        cardAdapter = CardAdapter(this)
+//        statusCardAdapter = StatusCardAdapter(this)
+//        homeCardAdapter = HomeCardAdapter(this)
 
-        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = cardAdapter
+//        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
+//        recyclerView.layoutManager = LinearLayoutManager(this)
+//        recyclerView.adapter = cardAdapter
+//
+//        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
+//        recyclerView.layoutManager = LinearLayoutManager(this)
+//        recyclerView.adapter = cardAdapter
     }
 }
