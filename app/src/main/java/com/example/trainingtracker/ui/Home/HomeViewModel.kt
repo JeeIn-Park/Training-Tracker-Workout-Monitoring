@@ -9,7 +9,7 @@ class HomeViewModel : ViewModel() {
 
     // text
     private val _text = MutableLiveData<String>().apply {
-        value = "Enter exercise"
+        value = "Select exercise"
     }
     val text: LiveData<String> = _text
 

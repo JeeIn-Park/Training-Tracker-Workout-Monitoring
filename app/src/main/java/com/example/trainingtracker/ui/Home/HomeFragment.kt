@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.trainingtracker.HomeCardAdapter
+import com.example.trainingtracker.CardStorage
 import com.example.trainingtracker.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -36,17 +36,22 @@ class HomeFragment : Fragment() {
 
       val textView: TextView = binding.textAboveRecyclerView
 
-      homeViewModel.recyclerViewData.observe(viewLifecycleOwner) {
-              newData -> cardAdapter.submitList(newData)
-      }
-
-      homeViewModel.text.observe(viewLifecycleOwner) {
-          textView.text = it
-      }
+//      homeViewModel.recyclerViewData.observe(viewLifecycleOwner) {
+//              newData -> cardAdapter.submitList(newData)
+//      }
+//
+//      homeViewModel.text.observe(viewLifecycleOwner) {
+//          textView.text = it
+//      }
 
       return root
   }
 
+    override fun onResume() {
+        super.onResume()
+        val cards = CardStorage.loadCards(requireContext())
+        cardAdapter.submitList(cards)
+    }
 override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

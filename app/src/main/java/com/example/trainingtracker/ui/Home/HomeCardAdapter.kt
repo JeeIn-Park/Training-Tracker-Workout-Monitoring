@@ -1,4 +1,4 @@
-package com.example.trainingtracker
+package com.example.trainingtracker.ui.Home
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,13 +8,18 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.trainingtracker.CardStorage
+import com.example.trainingtracker.ExerciseCard
+import com.example.trainingtracker.ExerciseCardDiffCallback
+import com.example.trainingtracker.R
 
-class StatusCardAdapter(private val context: Context) :
-    ListAdapter<ExerciseCard, StatusCardAdapter.CardViewHolder>(ExerciseCardDiffCallback()) {
+//TODO : this card adapter is the one especially for the status, there will be another for the status and I think I need to put it in different package
+class HomeCardAdapter(private val context: Context) :
+    ListAdapter<ExerciseCard, HomeCardAdapter.CardViewHolder>(ExerciseCardDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.status_card_item, parent, false)
+        val view = inflater.inflate(R.layout.home_card_item, parent, false)
         return CardViewHolder(view)
     }
 
@@ -38,13 +43,14 @@ class StatusCardAdapter(private val context: Context) :
 
     inner class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val textView: TextView = itemView.findViewById(R.id.textView)
-        private val deleteButton: Button = itemView.findViewById(R.id.deleteButton)
+        private val logButton: Button = itemView.findViewById(R.id.logButton)
 
         // reference (each parts in a card layout)
         fun bind(cardItem: ExerciseCard) {
-            textView.text = "${cardItem.name} - : ${cardItem.mainMuscles.joinToString(", ")}"
-            deleteButton.setOnClickListener {
+            textView.text = "${cardItem.name} - Muscles: ${cardItem.mainMuscles.joinToString(", ")}"
+            logButton.setOnClickListener {
                 removeItem(adapterPosition)
+                // TODO : log, not delete the card item
             }
         }
     }
