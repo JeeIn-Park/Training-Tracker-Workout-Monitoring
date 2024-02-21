@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.trainingtracker.CardAdapter
+import com.example.trainingtracker.StatusCardAdapter
 import com.example.trainingtracker.CardStorage
 import com.example.trainingtracker.databinding.FragmentStatusBinding
 
@@ -18,7 +18,7 @@ class StatusFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    private lateinit var cardAdapter: CardAdapter
+    private lateinit var cardAdapter: StatusCardAdapter
 
 
   override fun onCreateView(
@@ -31,7 +31,7 @@ class StatusFragment : Fragment() {
       _binding = FragmentStatusBinding.inflate(inflater, container, false)
       val root: View = binding.root
 
-      cardAdapter = CardAdapter(requireContext())
+      cardAdapter = StatusCardAdapter(requireContext())
       val exerciseRecyclerView = binding.exerciseRecyclerView
       exerciseRecyclerView.layoutManager = LinearLayoutManager(requireContext())
       exerciseRecyclerView.adapter = cardAdapter

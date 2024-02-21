@@ -6,17 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
-//TODO : this card adapter is the one especially for the home, there will be another for the status and I think I need to put it in different package
-class CardAdapter(private val context: Context) :
-    ListAdapter<ExerciseCard, CardAdapter.CardViewHolder>(ExerciseCardDiffCallback()) {
+class StatusCardAdapter(private val context: Context) :
+    ListAdapter<ExerciseCard, StatusCardAdapter.CardViewHolder>(ExerciseCardDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.card_item, parent, false)
+        val view = inflater.inflate(R.layout.status_card_item, parent, false)
         return CardViewHolder(view)
     }
 
@@ -44,7 +42,7 @@ class CardAdapter(private val context: Context) :
 
         // reference (each parts in a card layout)
         fun bind(cardItem: ExerciseCard) {
-            textView.text = "${cardItem.name} - Muscles: ${cardItem.mainMuscles.joinToString(", ")}"
+            textView.text = "${cardItem.name} - : ${cardItem.mainMuscles.joinToString(", ")}"
             deleteButton.setOnClickListener {
                 removeItem(adapterPosition)
             }
@@ -52,12 +50,3 @@ class CardAdapter(private val context: Context) :
     }
 }
 
-class ExerciseCardDiffCallback : DiffUtil.ItemCallback<ExerciseCard>() {
-    override fun areItemsTheSame(oldItem: ExerciseCard, newItem: ExerciseCard): Boolean {
-        return oldItem.id == newItem.id
-    }
-
-    override fun areContentsTheSame(oldItem: ExerciseCard, newItem: ExerciseCard): Boolean {
-        return oldItem == newItem
-    }
-}

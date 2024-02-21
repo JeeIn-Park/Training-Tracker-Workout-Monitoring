@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.trainingtracker.CardAdapter
+import com.example.trainingtracker.HomeCardAdapter
 import com.example.trainingtracker.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -17,7 +17,7 @@ class HomeFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    private lateinit var cardAdapter: CardAdapter
+    private lateinit var cardAdapter: HomeCardAdapter
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -26,21 +26,20 @@ class HomeFragment : Fragment() {
   ): View {
     val homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
-
       _binding = FragmentHomeBinding.inflate(inflater, container, false)
       val root: View = binding.root
 
-      cardAdapter = CardAdapter(requireContext())
+      cardAdapter = HomeCardAdapter(requireContext())
+      val exerciseRecyclerView = binding.exerciseRecyclerView
+      exerciseRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+      exerciseRecyclerView.adapter = cardAdapter
 
-      val recyclerView = binding.recyclerView
-      recyclerView.layoutManager = LinearLayoutManager(requireContext())
-      recyclerView.adapter = cardAdapter
+      val textView: TextView = binding.textAboveRecyclerView
 
       homeViewModel.recyclerViewData.observe(viewLifecycleOwner) {
-          newData -> cardAdapter.submitList(newData)
+              newData -> cardAdapter.submitList(newData)
       }
 
-      val textView: TextView = binding.textHome
       homeViewModel.text.observe(viewLifecycleOwner) {
           textView.text = it
       }
