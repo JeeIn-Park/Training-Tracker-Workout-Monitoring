@@ -1,5 +1,6 @@
 package com.example.trainingtracker.ui.Home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -36,13 +37,14 @@ class HomeFragment : Fragment() {
 
       val textView: TextView = binding.textAboveRecyclerView
 
-//      homeViewModel.recyclerViewData.observe(viewLifecycleOwner) {
-//              newData -> cardAdapter.submitList(newData)
-//      }
-//
-//      homeViewModel.text.observe(viewLifecycleOwner) {
-//          textView.text = it
-//      }
+      // TODO : how does it work
+      homeViewModel.recyclerViewData.observe(viewLifecycleOwner) {
+              newData -> cardAdapter.submitList(newData)
+      }
+
+      homeViewModel.text.observe(viewLifecycleOwner) {
+          textView.text = it
+      }
 
       return root
   }

@@ -4,6 +4,8 @@
     <string name="title_status">Status</string>
     <string name="title_setting">Setting</string>
     <string name="add_a_new_exercise">Add a new exercise</string>
+    <string name="kg_entering_description">Enter weight lifted</string>
+    <string name="rep_entering_description">Enter reps</string>
 
     <string-array name="muscles_array">
         <item>Arm</item>

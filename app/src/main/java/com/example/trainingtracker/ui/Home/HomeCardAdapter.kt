@@ -1,6 +1,7 @@
 package com.example.trainingtracker.ui.Home
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,6 @@ import com.example.trainingtracker.ExerciseCard
 import com.example.trainingtracker.ExerciseCardDiffCallback
 import com.example.trainingtracker.R
 
-//TODO : this card adapter is the one especially for the status, there will be another for the status and I think I need to put it in different package
 class HomeCardAdapter(private val context: Context) :
     ListAdapter<ExerciseCard, HomeCardAdapter.CardViewHolder>(ExerciseCardDiffCallback()) {
 
@@ -49,10 +49,12 @@ class HomeCardAdapter(private val context: Context) :
         fun bind(cardItem: ExerciseCard) {
             textView.text = "${cardItem.name} - Muscles: ${cardItem.mainMuscles.joinToString(", ")}"
             logButton.setOnClickListener {
-                removeItem(adapterPosition)
-                // TODO : log, not delete the card item
+                val intent = Intent(context, AddLogActivity::class.java)
+                intent.putExtra("EXTRA_CARD_ITEM", cardItem)
+                context.startActivity(intent)
             }
         }
     }
+
 }
 

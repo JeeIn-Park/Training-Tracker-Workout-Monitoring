@@ -6,7 +6,7 @@ import java.time.LocalDateTime
 data class ExerciseLog(
     val dateTime: LocalDateTime,
     val exerciseCard: ExerciseCard,
-    val mass: Mass,
-    val set: Int,
-    val rep: Int
+    val mass: Float?,
+    val set: Int?,
+    val rep: Int?
 )
