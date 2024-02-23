@@ -23,6 +23,8 @@
         </activity>
 
         <activity android:name=".ui.Status.AddCardActivity" />
+        <activity android:name=".ui.Home.AddLogActivity" />
+
     </application>
 
 </manifest>

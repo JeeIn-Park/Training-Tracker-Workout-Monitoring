@@ -13,13 +13,14 @@ import com.example.trainingtracker.R
 import java.time.LocalDateTime
 
 class AddLogActivity : AppCompatActivity(){
-    val cardItem = intent.getSerializableExtra("EXTRA_CARD_ITEM") as ExerciseCard
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         //layout
         setContentView(R.layout.activity_add_log)
+
+        val cardItem = intent.getSerializableExtra("EXTRA_CARD_ITEM") as ExerciseCard
 
         val kgEditText : EditText = findViewById(R.id.kgEnterText)
         val repEditText : EditText = findViewById(R.id.repEnterText)
