@@ -34,18 +34,5 @@ private lateinit var binding: ActivityMainBinding
             R.id.navigation_home, R.id.navigation_status, R.id.navigation_setting))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-
-        // card
-//        statusCardAdapter = StatusCardAdapter(this)
-//        homeCardAdapter = HomeCardAdapter(this)
-
-//        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
-//        recyclerView.layoutManager = LinearLayoutManager(this)
-//        recyclerView.adapter = cardAdapter
-//
-//        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
-//        recyclerView.layoutManager = LinearLayoutManager(this)
-//        recyclerView.adapter = cardAdapter
     }
 }

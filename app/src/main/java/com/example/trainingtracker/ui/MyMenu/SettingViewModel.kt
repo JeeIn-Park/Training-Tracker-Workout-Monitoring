@@ -1,23 +1,24 @@
 package com.example.trainingtracker.ui.MyMenu
 
+import android.app.Application
+import android.content.pm.PackageManager
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.example.trainingtracker.ExerciseCard
 
-class SettingViewModel : ViewModel() {
+
+class SettingViewModel(application: Application) : AndroidViewModel(application) {
+
 
     // text
     private val _text = MutableLiveData<String>().apply {
-        value = "Select an exercise to enter ..."
+        try {
+            val appVersion = application.packageManager.getPackageInfo(application.packageName, 0).versionName
+            value = "app version : $appVersion"
+        } catch (e: PackageManager.NameNotFoundException) {
+            e.printStackTrace()
+        }
     }
     val text: LiveData<String> = _text
 
-    // recycler
-    private val _recyclerViewData = MutableLiveData<List<ExerciseCard>>()
-    val recyclerViewData : LiveData<List<ExerciseCard>> = _recyclerViewData
-
-    fun updateRecyclerViewData(data : List<ExerciseCard>) {
-        _recyclerViewData.value = data
-    }
 }

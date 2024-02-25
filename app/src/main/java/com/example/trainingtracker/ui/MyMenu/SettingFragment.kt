@@ -12,8 +12,7 @@ import com.example.trainingtracker.databinding.FragmentSettingBinding
 class SettingFragment : Fragment() {
 
 private var _binding: FragmentSettingBinding? = null
-  // This property is only valid between onCreateView and
-  // onDestroyView.
+  // This property is only valid between onCreateView and onDestroyView.
   private val binding get() = _binding!!
 
   override fun onCreateView(
@@ -27,7 +26,13 @@ private var _binding: FragmentSettingBinding? = null
     _binding = FragmentSettingBinding.inflate(inflater, container, false)
     val root: View = binding.root
 
-    return root
+      val textView: TextView = binding.textSetting
+      settingViewModel.text.observe(viewLifecycleOwner) {
+          textView.text = it
+      }
+
+
+      return root
   }
 
 override fun onDestroyView() {
