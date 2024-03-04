@@ -30,7 +30,10 @@ class HomeFragment : Fragment() {
       _binding = FragmentHomeBinding.inflate(inflater, container, false)
       val root: View = binding.root
 
-      cardAdapter = HomeCardAdapter(requireContext())
+      cardAdapter = HomeCardAdapter(requireContext()) { clickedCard ->
+          // val intent = Intent(requireContext(), )
+          // TODO : deal with clicked card
+      }
       val exerciseRecyclerView = binding.exerciseRecyclerView
       exerciseRecyclerView.layoutManager = LinearLayoutManager(requireContext())
       exerciseRecyclerView.adapter = cardAdapter
