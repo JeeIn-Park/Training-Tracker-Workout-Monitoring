@@ -48,23 +48,47 @@ class HomeCardAdapter(private val context: Context, private val onItemClick: (Ex
     }
 
     inner class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val textView: TextView = itemView.findViewById(R.id.textView)
-        private val logButton: Button = itemView.findViewById(R.id.logButton)
-
+        private val exerciseName: TextView = itemView.findViewById(R.id.ExerciseName)
+        private val tag: TextView = itemView.findViewById(R.id.Tag)
+        private val lastExercise: TextView = itemView.findViewById(R.id.LastExercise)
+        private val mainMuscle: TextView = itemView.findViewById(R.id.MainMuscle)
+        private val subMuscle: TextView = itemView.findViewById(R.id.SubMuscle)
+        private val personalRecord: TextView = itemView.findViewById(R.id.PersonalRecord)
         // reference (each parts in a card layout)
         fun bind(cardItem: ExerciseCard) {
-            //TODO : change the layout of the card
-            textView.text = "${cardItem.name} - Muscles: ${cardItem.mainMuscles.joinToString(", ")}"
+            exerciseName.text = if (cardItem.name != null) {
+                cardItem.name.toString()
+            } else {
+                "N/A"
+            }
 
+            tag.text = if (cardItem.tag != null) {
+                cardItem.tag.toString()
+            } else {
+                "N/A"
+            }
+
+            lastExercise.text = cardItem.lastActivity.toString()
+
+            mainMuscle.text = if (cardItem.mainMuscles != null) {
+                "Main muscle : ${cardItem.mainMuscles.toString()}"
+            } else {
+                "Main muscle : N/A"
+            }
+
+            subMuscle.text = if (cardItem.subMuscles != null) {
+                "Sub muscle :${cardItem.subMuscles.toString()}"
+            } else {
+                "Sub muscle : N/A"
+            }
+
+            personalRecord.text = "place holder"// need to check the whole cards
             // Set long click listener
             itemView.setOnLongClickListener {
                 showEditDeleteOptions(cardItem)
                 true // Consume the long click
             }
 
-            // TODO : delete the log button
-            logButton.setOnClickListener {
-            }
         }
 
         private fun showEditDeleteOptions(cardItem: ExerciseCard) {
