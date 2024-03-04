@@ -16,6 +16,8 @@ class AddLogActivity : AppCompatActivity(){
 
         val cardItem = intent.getSerializableExtra("EXTRA_CARD_ITEM") as ExerciseCard
 
+        supportActionBar?.title = cardItem.name
+
         val kgEditText : EditText = findViewById(R.id.kgEnterText)
         val repEditText : EditText = findViewById(R.id.repEnterText)
         val logButton : Button = findViewById(R.id.logButton)
