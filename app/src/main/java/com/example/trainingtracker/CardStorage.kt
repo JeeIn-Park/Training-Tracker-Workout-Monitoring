@@ -47,4 +47,15 @@ object CardStorage {
         saveCards(context, currentCards)
     }
 
+    //TODO : study how edit card works
+    fun editCard(context: Context, oldCard: ExerciseCard, newCard: ExerciseCard) {
+        val currentCards = loadCards(context).toMutableList()
+        val index = currentCards.indexOfFirst { it == oldCard }
+        if (index != -1) {
+            currentCards[index] = newCard
+            saveCards(context, currentCards)
+        }
+    }
+
+
 }

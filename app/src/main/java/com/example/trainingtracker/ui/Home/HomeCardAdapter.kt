@@ -13,6 +13,7 @@ import com.example.trainingtracker.CardStorage
 import com.example.trainingtracker.ExerciseCard
 import com.example.trainingtracker.ExerciseCardDiffCallback
 import com.example.trainingtracker.R
+import com.example.trainingtracker.AddLogActivity
 
 class HomeCardAdapter(private val context: Context, private val onItemClick: (ExerciseCard) -> Unit) :
     ListAdapter<ExerciseCard, HomeCardAdapter.CardViewHolder>(ExerciseCardDiffCallback()) {

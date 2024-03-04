@@ -1,15 +1,9 @@
-package com.example.trainingtracker.ui.Home
+package com.example.trainingtracker
 
-import android.health.connect.datatypes.units.Mass
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import com.example.trainingtracker.CardStorage
-import com.example.trainingtracker.ExerciseCard
-import com.example.trainingtracker.ExerciseLog
-import com.example.trainingtracker.LogStorage
-import com.example.trainingtracker.R
 import java.time.LocalDateTime
 
 class AddLogActivity : AppCompatActivity(){

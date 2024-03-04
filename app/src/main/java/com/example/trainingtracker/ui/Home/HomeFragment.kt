@@ -1,5 +1,6 @@
 package com.example.trainingtracker.ui.Home
 
+import com.example.trainingtracker.AddCardActivity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -31,9 +32,13 @@ class HomeFragment : Fragment() {
       val root: View = binding.root
 
       cardAdapter = HomeCardAdapter(requireContext()) { clickedCard ->
-          // val intent = Intent(requireContext(), )
-          // TODO : deal with clicked card
+          // Handle the click action here
+          // Launch the com.example.trainingtracker.AddCardActivity with the card details for editing
+          val intent = Intent(requireContext(), AddCardActivity::class.java)
+          intent.putExtra("edit_card", clickedCard) // Pass the clicked card
+          startActivity(intent)
       }
+
       val exerciseRecyclerView = binding.exerciseRecyclerView
       exerciseRecyclerView.layoutManager = LinearLayoutManager(requireContext())
       exerciseRecyclerView.adapter = cardAdapter
