@@ -51,7 +51,7 @@ class StatusCardAdapter(private val context: Context, private val onItemClick: (
 
         // reference (each parts in a card layout)
         fun bind(cardItem: ExerciseCard) {
-            textView.text = "${cardItem.name} - : ${cardItem.mainMuscles.joinToString(", ")}"
+            textView.text = "${cardItem.name} - : ${cardItem.mainMuscles?.joinToString(", ")}"
             deleteButton.setOnClickListener {
             }
 

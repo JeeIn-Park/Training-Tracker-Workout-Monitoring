@@ -15,6 +15,8 @@ import com.example.trainingtracker.ExerciseCard
 import com.example.trainingtracker.ExerciseCardDiffCallback
 import com.example.trainingtracker.R
 import com.example.trainingtracker.AddLogActivity
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 class HomeCardAdapter(private val context: Context, private val onItemClick: (ExerciseCard) -> Unit) :
     ListAdapter<ExerciseCard, HomeCardAdapter.CardViewHolder>(ExerciseCardDiffCallback()) {
@@ -65,10 +67,12 @@ class HomeCardAdapter(private val context: Context, private val onItemClick: (Ex
             tag.text = if (cardItem.tag != null) {
                 cardItem.tag.toString()
             } else {
-                "N/A"
+                ""
             }
 
-            lastExercise.text = cardItem.lastActivity.toString()
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault())
+            val formattedDate = cardItem.lastActivity.format(formatter)
+            lastExercise.text = formattedDate
 
             mainMuscle.text = if (cardItem.mainMuscles != null) {
                 "Main muscle : ${cardItem.mainMuscles.toString()}"
