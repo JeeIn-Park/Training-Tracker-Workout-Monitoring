@@ -1,8 +1,9 @@
-package com.example.trainingtracker.ui.Home
+package com.example.trainingtracker.ui.home
 
 import com.example.trainingtracker.AddLogActivity
 import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,8 +35,8 @@ class HomeFragment : Fragment() {
       cardAdapter = HomeCardAdapter(requireContext()) { clickedCard ->
           // Handle the click action here
           // Launch the com.example.trainingtracker.AddCardActivity with the card details for editing
-          val intent = Intent(requireContext(), AddLogActivity::class.java)
-          intent.putExtra("EXTRA_CARD_ITEM", clickedCard)
+          val intent = Intent(context, AddLogActivity::class.java)
+          intent.putExtra("EXTRA_CARD_ITEM", clickedCard as Parcelable) // or cardItem as Serializable
           startActivity(intent)
       }
 

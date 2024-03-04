@@ -46,7 +46,9 @@ class StatusCardAdapter(private val context: Context) :
 
         // reference (each parts in a card layout)
         fun bind(cardItem: ExerciseCard) {
-            textView.text = "${cardItem.name} - : ${cardItem.mainMuscles.joinToString(", ")}"
+//            textView.text = "${cardItem.name} - : ${cardItem.mainMuscles.joinToString(", ")}"
+            textView.text = ""
+
             deleteButton.setOnClickListener {
                 removeItem(adapterPosition)
             }

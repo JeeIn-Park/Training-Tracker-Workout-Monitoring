@@ -42,10 +42,10 @@ class AddCardActivity : AppCompatActivity() {
 
         // Set click listener for add/edit button
         addButton.setOnClickListener {
-            val exerciseName = exerciseNameEditText.text.toString()
-            val mainMuscle = listOf(mainMusclesSpinner.selectedItem.toString())
-            val subMuscle = listOf(subMusclesSpinner.selectedItem.toString())
-            val lastActivity = LocalDateTime.now()
+            val exerciseName: String? = exerciseNameEditText.text?.toString()
+            val mainMuscle: List<String>? = mainMusclesSpinner.selectedItem?.toString()?.let { listOf(it) }
+            val subMuscle: List<String>? = subMusclesSpinner.selectedItem?.toString()?.let { listOf(it) }
+            val lastActivity: LocalDateTime? = LocalDateTime.now()
             val timeAdded = LocalDateTime.now()
             // TODO: Replace with actual values
             val tag = null
