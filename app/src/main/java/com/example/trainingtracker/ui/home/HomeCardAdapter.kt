@@ -1,5 +1,6 @@
 package com.example.trainingtracker.ui.Home
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -52,14 +53,56 @@ class HomeCardAdapter(private val context: Context, private val onItemClick: (Ex
 
         // reference (each parts in a card layout)
         fun bind(cardItem: ExerciseCard) {
+            //TODO : change the layout of the card
             textView.text = "${cardItem.name} - Muscles: ${cardItem.mainMuscles.joinToString(", ")}"
+
+            // Set long click listener
+            itemView.setOnLongClickListener {
+                showEditDeleteOptions(cardItem)
+                true // Consume the long click
+            }
+
+            // TODO : delete the log button
             logButton.setOnClickListener {
                 val intent = Intent(context, AddLogActivity::class.java)
                 intent.putExtra("EXTRA_CARD_ITEM", cardItem)
                 context.startActivity(intent)
             }
         }
+
+        private fun showEditDeleteOptions(cardItem: ExerciseCard) {
+            val options = arrayOf("Edit", "Delete")
+            AlertDialog.Builder(context)
+                .setItems(options) { dialog, which ->
+                    when (which) {
+                        // Edit
+                        0 -> {
+                            // implement edit
+                        }
+                        // Delete
+                        1 -> {
+                            showDeleteWarning(cardItem)
+                        }
+                    }
+                    dialog.dismiss()
+                }
+                .show()
+        }
+
+        private fun showDeleteWarning(cardItem: ExerciseCard) {
+            AlertDialog.Builder(context)
+                .setTitle("Are you sure you want to delete this item?")
+                .setMessage("All records will be deleted. Once deleted, it cannot be recovered.")
+                .setPositiveButton("Delete") { dialog, which ->
+                    removeItem(adapterPosition)
+                }
+                .setNegativeButton("Cancel") { dialog, which ->
+                    dialog.dismiss()
+                }
+                .show()
+        }
     }
+
 
 }
 
