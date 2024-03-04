@@ -2,13 +2,11 @@ package com.example.trainingtracker
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
-import com.example.trainingtracker.CardStorage
-import com.example.trainingtracker.ExerciseCard
-import com.example.trainingtracker.R
 import java.time.LocalDateTime
 
 class AddCardActivity : AppCompatActivity() {
@@ -32,6 +30,25 @@ class AddCardActivity : AppCompatActivity() {
         val mainMusclesSpinner: Spinner = findViewById(R.id.main_muscles)
         val subMusclesSpinner: Spinner = findViewById(R.id.sub_muscles)
         val addButton: Button = findViewById(R.id.add_button)
+
+        // Retrieve the array from strings.xml
+        val musclesArray = resources.getStringArray(R.array.muscles_array)
+
+        // Create adapter for spinners using the retrieved array
+        val mainMusclesAdapter =
+            ArrayAdapter(this, android.R.layout.simple_spinner_item, musclesArray)
+        val subMusclesAdapter =
+            ArrayAdapter(this, android.R.layout.simple_spinner_item, musclesArray)
+
+        // Set dropdown layout style
+        mainMusclesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        subMusclesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        // Set adapters to spinners
+        mainMusclesSpinner.adapter = mainMusclesAdapter
+        subMusclesSpinner.adapter = subMusclesAdapter
+
+        // Now you can access selected items without null issues
 
         // Populate views with data of the card being edited?
         if (isEditMode) {
