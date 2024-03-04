@@ -13,7 +13,7 @@ import com.example.trainingtracker.ExerciseCard
 import com.example.trainingtracker.ExerciseCardDiffCallback
 import com.example.trainingtracker.R
 
-class StatusCardAdapter(private val context: Context) :
+class StatusCardAdapter(private val context: Context, private val onItemClick: (ExerciseCard) -> Unit) :
     ListAdapter<ExerciseCard, StatusCardAdapter.CardViewHolder>(ExerciseCardDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
@@ -23,7 +23,11 @@ class StatusCardAdapter(private val context: Context) :
     }
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val currentItem = getItem(position)
+        holder.bind(currentItem)
+        holder.itemView.setOnClickListener {
+            onItemClick(currentItem)
+        }
     }
 
     fun addItem(cardItem: ExerciseCard) {

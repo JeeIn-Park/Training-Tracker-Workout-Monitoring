@@ -26,15 +26,12 @@ class AddCardActivity : AppCompatActivity() {
         isEditMode = intent.getBooleanExtra("is_edit_mode", false)
 
         // Initialize views
+        val musclesArray = resources.getStringArray(R.array.muscles_array)
         val exerciseNameEditText: EditText = findViewById(R.id.exercise_name)
         val mainMusclesSpinner: Spinner = findViewById(R.id.main_muscles)
         val subMusclesSpinner: Spinner = findViewById(R.id.sub_muscles)
         val addButton: Button = findViewById(R.id.add_button)
 
-        // Retrieve the array from strings.xml
-        val musclesArray = resources.getStringArray(R.array.muscles_array)
-
-        // Create adapter for spinners using the retrieved array
         val mainMusclesAdapter =
             ArrayAdapter(this, android.R.layout.simple_spinner_item, musclesArray)
         val subMusclesAdapter =
@@ -47,8 +44,6 @@ class AddCardActivity : AppCompatActivity() {
         // Set adapters to spinners
         mainMusclesSpinner.adapter = mainMusclesAdapter
         subMusclesSpinner.adapter = subMusclesAdapter
-
-        // Now you can access selected items without null issues
 
         // Populate views with data of the card being edited?
         if (isEditMode) {
