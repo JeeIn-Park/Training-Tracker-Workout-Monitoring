@@ -64,9 +64,6 @@ class HomeCardAdapter(private val context: Context, private val onItemClick: (Ex
 
             // TODO : delete the log button
             logButton.setOnClickListener {
-                val intent = Intent(context, AddLogActivity::class.java)
-                intent.putExtra("EXTRA_CARD_ITEM", cardItem)
-                context.startActivity(intent)
             }
         }
 

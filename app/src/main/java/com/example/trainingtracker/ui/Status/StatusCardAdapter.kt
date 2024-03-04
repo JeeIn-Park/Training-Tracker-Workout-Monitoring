@@ -1,5 +1,6 @@
 package com.example.trainingtracker.ui.Status
 
+import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -52,9 +53,47 @@ class StatusCardAdapter(private val context: Context, private val onItemClick: (
         fun bind(cardItem: ExerciseCard) {
             textView.text = "${cardItem.name} - : ${cardItem.mainMuscles.joinToString(", ")}"
             deleteButton.setOnClickListener {
-                removeItem(adapterPosition)
+            }
+
+            // Set long click listener
+            itemView.setOnLongClickListener {
+                showEditDeleteOptions(cardItem)
+                true // Consume the long click
             }
         }
+
+        private fun showEditDeleteOptions(cardItem: ExerciseCard) {
+            val options = arrayOf("Edit", "Delete")
+            AlertDialog.Builder(context)
+                .setItems(options) { dialog, which ->
+                    when (which) {
+                        // Edit
+                        0 -> {
+                            // implement edit
+                        }
+                        // Delete
+                        1 -> {
+                            showDeleteWarning(cardItem)
+                        }
+                    }
+                    dialog.dismiss()
+                }
+                .show()
+        }
+
+        private fun showDeleteWarning(cardItem: ExerciseCard) {
+            AlertDialog.Builder(context)
+                .setTitle("Are you sure you want to delete this item?")
+                .setMessage("All records will be deleted. Once deleted, it cannot be recovered.")
+                .setPositiveButton("Delete") { dialog, which ->
+                    removeItem(adapterPosition)
+                }
+                .setNegativeButton("Cancel") { dialog, which ->
+                    dialog.dismiss()
+                }
+                .show()
+        }
     }
+
 }
 
