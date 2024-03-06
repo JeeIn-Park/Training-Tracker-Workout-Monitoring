@@ -2,12 +2,14 @@ package com.example.trainingtracker
 
 import android.os.Bundle
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import java.time.LocalDateTime
 
 class AddLogActivity : AppCompatActivity(){
 
+    private lateinit var warmUpCheckBox : CheckBox
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
