@@ -20,22 +20,29 @@ class AddLogActivity : AppCompatActivity(){
 
         supportActionBar?.title = cardItem.name
 
+        var setCount : Int = 0
+
         val kgEditText : EditText = findViewById(R.id.kgEnterText)
         val repEditText : EditText = findViewById(R.id.repEnterText)
+        val warmUpCheckBox : CheckBox = findViewById(R.id.warmUpCheck)
         val logButton : Button = findViewById(R.id.logButton)
 
-        val massString = kgEditText.text.toString()
-        val mass = massString.toFloatOrNull()
-
-        val repString = repEditText.text.toString()
-        val rep = repString.toIntOrNull()
+        var set: Int?
 
         logButton.setOnClickListener{
             val dateTime = LocalDateTime.now()
-            val set = null
+            val massString = kgEditText.text.toString()
+            val mass = massString.toFloatOrNull()
+            val repString = repEditText.text.toString()
+            val rep = repString.toIntOrNull()
+            if (warmUpCheckBox.isChecked) {
+                set = null
+            } else {
+                setCount += 1
+                set = setCount
+            }
             val log = ExerciseLog(dateTime = dateTime, exerciseCard = cardItem, mass = mass, set = set, rep = rep) // Create a new card
             LogStorage.addLog(this, log)
-            finish()
         }
     }
 
