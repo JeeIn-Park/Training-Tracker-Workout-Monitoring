@@ -3,11 +3,13 @@ package com.example.trainingtracker.ui.Home
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingtracker.CardStorage
@@ -15,6 +17,10 @@ import com.example.trainingtracker.ExerciseCard
 import com.example.trainingtracker.ExerciseCardDiffCallback
 import com.example.trainingtracker.R
 import com.example.trainingtracker.AddLogActivity
+import java.time.Duration
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 class HomeCardAdapter(private val context: Context, private val onItemClick: (ExerciseCard) -> Unit) :
     ListAdapter<ExerciseCard, HomeCardAdapter.CardViewHolder>(ExerciseCardDiffCallback()) {
@@ -25,6 +31,7 @@ class HomeCardAdapter(private val context: Context, private val onItemClick: (Ex
         return CardViewHolder(view)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O) //todo : check the version requirement
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
         val currentItem = getItem(position)
         holder.bind(currentItem)
@@ -48,23 +55,73 @@ class HomeCardAdapter(private val context: Context, private val onItemClick: (Ex
     }
 
     inner class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val textView: TextView = itemView.findViewById(R.id.textView)
-        private val logButton: Button = itemView.findViewById(R.id.logButton)
+        private val exerciseName: TextView = itemView.findViewById(R.id.ExerciseName)
+        private val tag: TextView = itemView.findViewById(R.id.Tag)
+        private val lastExercise: TextView = itemView.findViewById(R.id.LastExercise)
+        private val mainMuscle: TextView = itemView.findViewById(R.id.MainMuscle)
+        private val subMuscle: TextView = itemView.findViewById(R.id.SubMuscle)
+        private val personalRecord: TextView = itemView.findViewById(R.id.PersonalRecord)
 
+        private val emptyString : List<String> = listOf("Select muscle")
         // reference (each parts in a card layout)
+        @RequiresApi(Build.VERSION_CODES.O) //todo : check the version requirement
         fun bind(cardItem: ExerciseCard) {
-            //TODO : change the layout of the card
-            textView.text = "${cardItem.name} - Muscles: ${cardItem.mainMuscles.joinToString(", ")}"
+            exerciseName.text = if (cardItem.name != null) {
+                cardItem.name.toString()
+            } else {
+                "N/A"
+            }
 
+            tag.text = if (cardItem.tag != null) {
+                cardItem.tag.toString()
+            } else {
+                ""
+            }
+
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault())
+            val formattedDate = cardItem.lastActivity.format(formatter)
+
+            val currentDate = LocalDateTime.now()
+            val daysAgo = Duration.between(cardItem.lastActivity, currentDate).toDays()
+            if (daysAgo == 0.toLong()) {
+                lastExercise.text = formattedDate
+            } else if (daysAgo == 1.toLong()) {
+                lastExercise.text = "$formattedDate (1 day ago)"
+            } else {
+                val dateStringWithDaysAgo = "$formattedDate ($daysAgo days ago)"
+                lastExercise.text = dateStringWithDaysAgo
+            }
+
+
+            if (cardItem.mainMuscles == emptyString) {
+                mainMuscle.visibility = View.INVISIBLE
+            } else {
+                mainMuscle.visibility = View.VISIBLE
+                mainMuscle.text = if (cardItem.mainMuscles == null) {
+                    "Main muscle : N/A"
+                } else {
+                    "Main muscle : ${cardItem.mainMuscles.toString()}"
+                }
+            }
+
+            if (cardItem.subMuscles == emptyString) {
+                subMuscle.visibility = View.INVISIBLE
+            } else {
+                subMuscle.visibility = View.VISIBLE
+                subMuscle.text = if (cardItem.subMuscles == null) {
+                    "Main muscle : N/A"
+                } else {
+                    "Sub muscle : ${cardItem.subMuscles.toString()}"
+                }
+            }
+
+            personalRecord.text = "place holder"// need to check the whole cards
             // Set long click listener
             itemView.setOnLongClickListener {
                 showEditDeleteOptions(cardItem)
                 true // Consume the long click
             }
 
-            // TODO : delete the log button
-            logButton.setOnClickListener {
-            }
         }
 
         private fun showEditDeleteOptions(cardItem: ExerciseCard) {

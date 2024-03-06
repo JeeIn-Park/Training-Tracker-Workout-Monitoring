@@ -5,6 +5,7 @@ import java.time.LocalDateTime
 import java.util.UUID
 
 data class ExerciseCard(
+    // TODO : null-able
     val id : UUID = UUID.randomUUID(),
     val lastActivity: LocalDateTime,
     val timeAdded : LocalDateTime,

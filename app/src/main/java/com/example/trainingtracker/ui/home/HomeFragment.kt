@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.trainingtracker.CardStorage
 import com.example.trainingtracker.databinding.FragmentHomeBinding
@@ -42,6 +43,7 @@ class HomeFragment : Fragment() {
       val exerciseRecyclerView = binding.exerciseRecyclerView
       exerciseRecyclerView.layoutManager = LinearLayoutManager(requireContext())
       exerciseRecyclerView.adapter = cardAdapter
+      exerciseRecyclerView.itemAnimator = DefaultItemAnimator()
 
       val textView: TextView = binding.textAboveRecyclerView
 
