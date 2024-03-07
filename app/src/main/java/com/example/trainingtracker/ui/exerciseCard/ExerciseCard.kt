@@ -1,4 +1,4 @@
-package com.example.trainingtracker
+package com.example.trainingtracker.ui.exerciseCard
 
 import java.io.Serializable
 import java.time.LocalDateTime

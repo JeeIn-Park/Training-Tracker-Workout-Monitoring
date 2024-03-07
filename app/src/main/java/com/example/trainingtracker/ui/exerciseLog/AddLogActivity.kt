@@ -1,4 +1,4 @@
-package com.example.trainingtracker
+package com.example.trainingtracker.ui.exerciseLog
 
 import android.os.Bundle
 import android.widget.Button
@@ -10,7 +10,8 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.widget.TextView
-import com.jjoe64.graphview.GraphView
+import com.example.trainingtracker.R
+import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
 

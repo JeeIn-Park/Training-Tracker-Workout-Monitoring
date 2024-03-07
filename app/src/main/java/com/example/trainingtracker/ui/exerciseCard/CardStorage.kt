@@ -1,4 +1,4 @@
-package com.example.trainingtracker
+package com.example.trainingtracker.ui.exerciseCard
 
 import android.content.Context
 import java.io.FileNotFoundException

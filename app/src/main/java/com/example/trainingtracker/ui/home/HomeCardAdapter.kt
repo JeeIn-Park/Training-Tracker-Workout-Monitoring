@@ -10,9 +10,9 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.trainingtracker.CardStorage
-import com.example.trainingtracker.ExerciseCard
-import com.example.trainingtracker.ExerciseCardDiffCallback
+import com.example.trainingtracker.ui.exerciseCard.CardStorage
+import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
+import com.example.trainingtracker.ui.exerciseCard.ExerciseCardDiffCallback
 import com.example.trainingtracker.R
 import java.time.Duration
 import java.time.LocalDateTime

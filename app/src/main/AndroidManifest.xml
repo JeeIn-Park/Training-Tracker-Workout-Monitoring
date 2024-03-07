@@ -22,8 +22,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".AddCardActivity" />
-        <activity android:name=".AddLogActivity" />
+        <activity android:name=".ui.exerciseCard.AddCardActivity" />
+        <activity android:name=".ui.exerciseLog.AddLogActivity" />
 
     </application>
 

@@ -1,5 +1,6 @@
-package com.example.trainingtracker
+package com.example.trainingtracker.ui.exerciseLog
 
+import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
 import java.time.LocalDateTime
 
 data class ExerciseLogSet(

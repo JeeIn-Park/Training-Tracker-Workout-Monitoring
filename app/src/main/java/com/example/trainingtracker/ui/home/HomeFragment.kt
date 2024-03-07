@@ -1,6 +1,6 @@
 package com.example.trainingtracker.ui.Home
 
-import com.example.trainingtracker.AddLogActivity
+import com.example.trainingtracker.ui.exerciseLog.AddLogActivity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.trainingtracker.CardStorage
+import com.example.trainingtracker.ui.exerciseCard.CardStorage
 import com.example.trainingtracker.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -34,7 +34,7 @@ class HomeFragment : Fragment() {
 
       cardAdapter = HomeCardAdapter(requireContext()) { clickedCard ->
           // Handle the click action here
-          // Launch the com.example.trainingtracker.AddCardActivity with the card details for editing
+          // Launch the com.example.trainingtracker.ui.exerciseCard.AddCardActivity with the card details for editing
           val intent = Intent(requireContext(), AddLogActivity::class.java)
           intent.putExtra("EXTRA_CARD_ITEM", clickedCard)
           startActivity(intent)
