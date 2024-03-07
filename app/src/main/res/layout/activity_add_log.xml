@@ -5,93 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id = "@+id/middle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="4dp"-->
-<!--        android:layout_marginEnd="4dp"-->
-<!--        app:layout_constraintEnd_toStartOf="@+id/middleLine"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        tools:layout_editor_absoluteY="292dp" />-->
-
-<!--    <com.github.mikephil.charting.charts.LineChart-->
-<!--        android:id="@+id/lineChart"-->
-<!--        android:layout_width="50dp"-->
-<!--        android:layout_height="50dp"-->
-<!--        android:visibility="visible"-->
-<!--        tools:layout_editor_absoluteX="232dp"-->
-<!--        tools:layout_editor_absoluteY="292dp" />-->
-
-<!--    <com.github.mikephil.charting.charts.LineChart-->
-<!--        android:id="@+id/lineChart"-->
-<!--        android:layout_width="50dp"-->
-<!--        android:layout_height="50dp"-->
-<!--        android:visibility="visible"-->
-<!--        tools:layout_editor_absoluteX="232dp"-->
-<!--        tools:layout_editor_absoluteY="363dp" />-->
-
-<!--    <androidx.constraintlayout.widget.Guideline-->
-<!--        android:id="@+id/middleLine"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="vertical"-->
-<!--        app:layout_constraintGuide_percent="0.5" />-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="290dp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="1dp">
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintEnd_toStartOf="@+id/middle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-<!--        <androidx.cardview.widget.CardView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:cardCornerRadius="20dp"-->
-<!--            app:cardElevation="4dp">-->
+        <include layout="@layout/personal_record_card" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--            <TableLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:padding="8dp">-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
 
-<!--                &lt;!&ndash; Header row &ndash;&gt;-->
-<!--                <TableRow>-->
-<!--                    <TextView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="Column 1"-->
-<!--                        android:textStyle="bold"-->
-<!--                        android:padding="8dp"/>-->
-<!--                    <TextView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="Column 2"-->
-<!--                        android:textStyle="bold"-->
-<!--                        android:padding="8dp"/>-->
-<!--                    &lt;!&ndash; Add more columns as needed &ndash;&gt;-->
-<!--                </TableRow>-->
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/middle"
+        app:layout_constraintTop_toTopOf="parent">
 
-<!--                &lt;!&ndash; Data rows &ndash;&gt;-->
-<!--                <TableRow>-->
-<!--                    <TextView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="Data 1"-->
-<!--                        android:padding="8dp"/>-->
-<!--                    <TextView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="Data 2"-->
-<!--                        android:padding="8dp"/>-->
-<!--                    &lt;!&ndash; Add more columns as needed &ndash;&gt;-->
-<!--                </TableRow>-->
-<!--                &lt;!&ndash; Add more rows as needed &ndash;&gt;-->
-<!--            </TableLayout>-->
-
-<!--        </androidx.cardview.widget.CardView>-->
-
-
+        <include layout="@layout/personal_record_card" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -112,7 +58,7 @@
 
         <Button
             android:id="@+id/logButton"
-            android:layout_width="140dp"
+            android:layout_width="106dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
