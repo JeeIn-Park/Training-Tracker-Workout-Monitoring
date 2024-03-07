@@ -6,7 +6,6 @@ import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.ListAdapter
@@ -25,7 +24,7 @@ class StatusCardAdapter(private val context: Context, private val onItemClick: (
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.status_card_item, parent, false)
+        val view = inflater.inflate(R.layout.item_status_card, parent, false)
         return CardViewHolder(view)
     }
 

@@ -2,12 +2,10 @@ package com.example.trainingtracker.ui.Home
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.ListAdapter
@@ -16,7 +14,6 @@ import com.example.trainingtracker.CardStorage
 import com.example.trainingtracker.ExerciseCard
 import com.example.trainingtracker.ExerciseCardDiffCallback
 import com.example.trainingtracker.R
-import com.example.trainingtracker.AddLogActivity
 import java.time.Duration
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -27,7 +24,7 @@ class HomeCardAdapter(private val context: Context, private val onItemClick: (Ex
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.home_card_item, parent, false)
+        val view = inflater.inflate(R.layout.item_home_card, parent, false)
         return CardViewHolder(view)
     }
 

@@ -24,7 +24,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <include layout="@layout/personal_record_card"
+        <include layout="@layout/item_personal_record_card"
             android:id="@+id/box1"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -40,7 +40,7 @@
         app:layout_constraintStart_toStartOf="@+id/middle"
         app:layout_constraintTop_toTopOf="parent">
 
-        <include layout="@layout/personal_record_card"
+        <include layout="@layout/item_personal_record_card"
             android:id="@+id/box2"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
