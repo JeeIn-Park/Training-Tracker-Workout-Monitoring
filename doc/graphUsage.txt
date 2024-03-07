@@ -1,0 +1,45 @@
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
+
+public class MainActivity extends AppCompatActivity {
+    private final Handler mHandler = new Handler();
+    private Runnable mTimer1;
+    private LineGraphSeries<DataPoint> mSeries1;
+    private double graph2LastXValue = 5d;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        GraphView graph = (GraphView) findViewById(R.id.graph);
+        mSeries1 = new LineGraphSeries<>();
+        graph.addSeries(mSeries1);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        mTimer1 = new Runnable() {
+            @Override
+            public void run() {
+                graph2LastXValue += 1d;
+                mSeries1.appendData(new DataPoint(graph2LastXValue, getRandom()), true, 40);
+                mHandler.postDelayed(this, 200);
+            }
+        };
+        mHandler.postDelayed(mTimer1, 1000);
+    }
+
+    @Override
+    public void onPause() {
+        mHandler.removeCallbacks(mTimer1);
+        super.onPause();
+    }
+
+    private double getRandom() {
+        return Math.random() * 10d;
+    }
+}
