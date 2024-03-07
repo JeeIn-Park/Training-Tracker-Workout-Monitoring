@@ -47,6 +47,8 @@ object CardStorage {
         saveCards(context, currentCards)
     }
 
+    //TODO : remove all the log data
+
     //TODO : study how edit card works
     fun editCard(context: Context, oldCard: ExerciseCard, newCard: ExerciseCard) {
         val currentCards = loadCards(context).toMutableList()
