@@ -28,7 +28,6 @@ class StatusCardAdapter(private val context: Context, private val onItemClick: (
         return CardViewHolder(view)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
         val currentItem = getItem(position)
         holder.bind(currentItem)
@@ -60,7 +59,6 @@ class StatusCardAdapter(private val context: Context, private val onItemClick: (
 
         private val emptyString : List<String> = listOf("Select muscle")
         // reference (each parts in a card layout)
-        @RequiresApi(Build.VERSION_CODES.O) //todo : check the version requirement
         fun bind(cardItem: ExerciseCard) {
             exerciseName.text = if (cardItem.name != null) {
                 cardItem.name.toString()
