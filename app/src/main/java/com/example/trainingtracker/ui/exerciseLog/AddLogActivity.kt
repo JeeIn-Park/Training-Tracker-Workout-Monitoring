@@ -74,7 +74,7 @@ class AddLogActivity : AppCompatActivity(){
                 setCount += 1
                 set = setCount
             }
-            val log = ExerciseLog(dateTime = dateTime, exerciseCard = cardItem, mass = mass, set = set, rep = rep) // Create a new card
+            val log = ExerciseSet(dateTime = dateTime, exerciseCard = cardItem, mass = mass, set = set, rep = rep) // Create a new card
             LogStorage.addLog(this, log)
         }
     }

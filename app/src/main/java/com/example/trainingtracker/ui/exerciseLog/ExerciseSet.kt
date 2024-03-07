@@ -3,10 +3,10 @@ package com.example.trainingtracker.ui.exerciseLog
 import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
 import java.time.LocalDateTime
 
-data class ExerciseLogSet(
+data class ExerciseSet(
     val dateTime: LocalDateTime,
     val exerciseCard: ExerciseCard,
-    val list: List<ExerciseLog>,
-    val totalSet: Int?,
-    val totalWeight: Float?
+    val mass: Float?,
+    val set: Int?,
+    val rep: Int?
 )
