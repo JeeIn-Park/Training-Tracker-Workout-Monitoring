@@ -47,11 +47,10 @@ class HomeFragment : Fragment() {
 
       val textView: TextView = binding.textAboveRecyclerView
 
-      // TODO : how does it work
+      //observer pattern
       homeViewModel.recyclerViewData.observe(viewLifecycleOwner) {
               newData -> cardAdapter.submitList(newData)
       }
-
       homeViewModel.text.observe(viewLifecycleOwner) {
           textView.text = it
       }

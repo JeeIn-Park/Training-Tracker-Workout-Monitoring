@@ -2,12 +2,10 @@ package com.example.trainingtracker.ui.Home
 
 import android.app.AlertDialog
 import android.content.Context
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingtracker.ui.exerciseCard.CardStorage
@@ -28,7 +26,6 @@ class HomeCardAdapter(private val context: Context, private val onItemClick: (Ex
         return CardViewHolder(view)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O) //todo : check the version requirement
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
         val currentItem = getItem(position)
         holder.bind(currentItem)
@@ -61,7 +58,6 @@ class HomeCardAdapter(private val context: Context, private val onItemClick: (Ex
 
         private val emptyString : List<String> = listOf("Select muscle")
         // reference (each parts in a card layout)
-        @RequiresApi(Build.VERSION_CODES.O) //todo : check the version requirement
         fun bind(cardItem: ExerciseCard) {
             exerciseName.text = if (cardItem.name != null) {
                 cardItem.name.toString()

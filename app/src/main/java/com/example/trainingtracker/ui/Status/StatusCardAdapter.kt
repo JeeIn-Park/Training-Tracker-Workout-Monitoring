@@ -2,12 +2,10 @@ package com.example.trainingtracker.ui.Status
 
 import android.app.AlertDialog
 import android.content.Context
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingtracker.ui.exerciseCard.CardStorage
