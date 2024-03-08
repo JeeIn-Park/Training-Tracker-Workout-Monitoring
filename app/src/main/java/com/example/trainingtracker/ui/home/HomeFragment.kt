@@ -35,8 +35,9 @@ class HomeFragment : Fragment() {
       cardAdapter = HomeCardAdapter(requireContext()) { clickedCard ->
           // Handle the click action here
           // Launch the com.example.trainingtracker.ui.exerciseCard.AddCardActivity with the card details for editing
-          val intent = Intent(requireContext(), AddLogActivity::class.java)
-          intent.putExtra("EXTRA_CARD_ITEM", clickedCard)
+          val intent = Intent(context, AddLogActivity::class.java).apply {
+              putExtra("EXTRA_CARD_ITEM", clickedCard)
+          }
           startActivity(intent)
       }
 

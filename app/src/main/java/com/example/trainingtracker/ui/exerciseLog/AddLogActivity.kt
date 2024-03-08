@@ -10,6 +10,8 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.widget.TextView
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingtracker.R
 import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
 import com.jjoe64.graphview.series.DataPoint
@@ -29,24 +31,29 @@ class AddLogActivity : AppCompatActivity(){
     private val exerciseDate = LocalDateTime.now()
     private var exerciseSetList: MutableList<ExerciseSet> = mutableListOf()
     private var currentSetCount : Int = 0
-
+    private lateinit var pastLogTableAdapter: PastLogTableAdapter
 
     // get selected card
-    private val cardItem = intent.getSerializableExtra("EXTRA_CARD_ITEM") as ExerciseCard
-
+    private lateinit var cardItem : ExerciseCard
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val pastLog : List<ExerciseLog> = LogStorage.loadLogs(this)
 
         // layout binding
         setContentView(R.layout.activity_add_log)
+        cardItem = intent.getSerializableExtra("EXTRA_CARD_ITEM") as ExerciseCard
 
 
-            // logging (bottom of the page)
+            // bottom
         val kgEditText : EditText = findViewById(R.id.kgEnterText)
         val repEditText : EditText = findViewById(R.id.repEnterText)
         val warmUpCheckBox : CheckBox = findViewById(R.id.warmUpCheck)
         val logButton : Button = findViewById(R.id.logButton)
+
+            // Mid left
+        val pastLogRecyclerView: RecyclerView = findViewById(R.id.pastRecords)
+        pastLogTableAdapter = PastLogTableAdapter(this, pastLog)
+        pastLogRecyclerView.adapter = pastLogTableAdapter
 
         // title with selected card
         supportActionBar?.title = cardItem.name
