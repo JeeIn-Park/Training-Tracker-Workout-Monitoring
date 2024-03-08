@@ -9,18 +9,19 @@ import java.time.LocalDateTime
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import android.widget.TableLayout
+import android.widget.TableRow
 import android.widget.TextView
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingtracker.R
 import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
 
-class AddLogActivity : AppCompatActivity(){
+class AddLogActivity : AppCompatActivity() {
 
     // check box
-    private lateinit var warmUpCheckBox : CheckBox
+    private lateinit var warmUpCheckBox: CheckBox
 
     // graph
     private val mHandler = Handler(Looper.getMainLooper())
@@ -30,27 +31,27 @@ class AddLogActivity : AppCompatActivity(){
 
     private val exerciseDate = LocalDateTime.now()
     private var exerciseSetList: MutableList<ExerciseSet> = mutableListOf()
-    private var currentSetCount : Int = 0
+    private var currentSetCount: Int = 0
     private lateinit var pastLogTableAdapter: PastLogTableAdapter
 
     // get selected card
-    private lateinit var cardItem : ExerciseCard
+    private lateinit var cardItem: ExerciseCard
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val pastLog : List<ExerciseLog> = LogStorage.loadLogs(this)
+        val pastLog: List<ExerciseLog> = LogStorage.loadLogs(this)
 
         // layout binding
         setContentView(R.layout.activity_add_log)
         cardItem = intent.getSerializableExtra("EXTRA_CARD_ITEM") as ExerciseCard
 
 
-            // bottom
-        val kgEditText : EditText = findViewById(R.id.kgEnterText)
-        val repEditText : EditText = findViewById(R.id.repEnterText)
-        val warmUpCheckBox : CheckBox = findViewById(R.id.warmUpCheck)
-        val logButton : Button = findViewById(R.id.logButton)
+        // bottom
+        val kgEditText: EditText = findViewById(R.id.kgEnterText)
+        val repEditText: EditText = findViewById(R.id.repEnterText)
+        val warmUpCheckBox: CheckBox = findViewById(R.id.warmUpCheck)
+        val logButton: Button = findViewById(R.id.logButton)
 
-            // Mid left
+        // Mid left
         val pastLogRecyclerView: RecyclerView = findViewById(R.id.pastRecords)
         pastLogTableAdapter = PastLogTableAdapter(this, pastLog)
         pastLogRecyclerView.adapter = pastLogTableAdapter
@@ -69,12 +70,13 @@ class AddLogActivity : AppCompatActivity(){
         titleTextView2.text = title2
 
         var setNum: Int?
-        logButton.setOnClickListener{
+        logButton.setOnClickListener {
             val dateTime = LocalDateTime.now()
             val massString = kgEditText.text.toString()
             val mass = massString.toFloatOrNull()
             val repString = repEditText.text.toString()
             val rep = repString.toIntOrNull()
+            val setNum: Int?
             if (warmUpCheckBox.isChecked) {
                 setNum = null
             } else {
@@ -87,11 +89,32 @@ class AddLogActivity : AppCompatActivity(){
                 exerciseCard = cardItem,
                 mass = mass,
                 set = setNum,
-                rep = rep)
+                rep = rep
+            )
             exerciseSetList.add(set)
-        }
-    }
 
+            // Update the TableLayout
+            val tableLayout = findViewById<TableLayout>(R.id.todaySetTable)
+            val tableRow = TableRow(this)
+            val setCountTextView = TextView(this)
+            val massTextView = TextView(this)
+            val repTextView = TextView(this)
+
+            // Set text for the TextViews
+            setCountTextView.text = setNum?.toString() ?: ""  // If setNum is null, leave it blank
+            massTextView.text = massString
+            repTextView.text = repString
+
+            // Add TextViews to the TableRow
+            tableRow.addView(setCountTextView)
+            tableRow.addView(massTextView)
+            tableRow.addView(repTextView)
+
+            // Add TableRow to the TableLayout
+            tableLayout.addView(tableRow)
+        }
+
+    }
     override fun onDestroy() {
         super.onDestroy()
         val log = ExerciseLog(
