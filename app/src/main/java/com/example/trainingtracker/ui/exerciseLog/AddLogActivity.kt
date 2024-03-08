@@ -1,5 +1,6 @@
 package com.example.trainingtracker.ui.exerciseLog
 
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
 import android.widget.CheckBox
@@ -105,6 +106,11 @@ class AddLogActivity : AppCompatActivity() {
             massTextView.text = massString
             repTextView.text = repString
 
+            // Apply some basic styling
+            setCountTextView.setPadding(16, 8, 16, 8)
+            massTextView.setPadding(16, 8, 16, 8)
+            repTextView.setPadding(16, 8, 16, 8)
+
             // Add TextViews to the TableRow
             tableRow.addView(setCountTextView)
             tableRow.addView(massTextView)
@@ -112,7 +118,14 @@ class AddLogActivity : AppCompatActivity() {
 
             // Add TableRow to the TableLayout
             tableLayout.addView(tableRow)
+
+            // Optionally, you can also set background color, text color, etc. for better visualization
+            tableRow.setBackgroundColor(Color.WHITE)
+            setCountTextView.setTextColor(Color.BLACK)
+            massTextView.setTextColor(Color.BLACK)
+            repTextView.setTextColor(Color.BLACK)
         }
+
 
     }
     override fun onDestroy() {
