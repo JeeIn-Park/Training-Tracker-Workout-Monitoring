@@ -1,0 +1,57 @@
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.item_type1.view.*
+import kotlinx.android.synthetic.main.item_type2.view.*
+
+class MyAdapter(private val items: List<Item>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    companion object {
+        private const val TYPE_ONE = 1
+        private const val TYPE_TWO = 2
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return when (items[position]) {
+            is ItemType1 -> TYPE_ONE
+            is ItemType2 -> TYPE_TWO
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        return when (viewType) {
+            TYPE_ONE -> ViewHolderType1(inflater.inflate(R.layout.item_type1, parent, false))
+            TYPE_TWO -> ViewHolderType2(inflater.inflate(R.layout.item_type2, parent, false))
+            else -> throw IllegalArgumentException("Invalid view type")
+        }
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (val item = items[position]) {
+            is ItemType1 -> (holder as ViewHolderType1).bind(item)
+            is ItemType2 -> (holder as ViewHolderType2).bind(item)
+        }
+    }
+
+    override fun getItemCount() = items.size
+
+    class ViewHolderType1(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bind(item: ItemType1) {
+            itemView.textView1.text = item.text
+            // Bind other views in item_type1 layout
+        }
+    }
+
+    class ViewHolderType2(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bind(item: ItemType2) {
+            itemView.textView2.text = item.text
+            // Bind other views in item_type2 layout
+        }
+    }
+}
+
+//In this example, ItemType1 and ItemType2 are data classes that represent the different types of items in your list. You would replace these with your actual data classes. The R.layout.item_type1 and R.layout.item_type2 are the layout resource IDs for the different item views. You would replace these with your actual layout resource IDs.
+
+//This adapter checks the type of the item at a given position in getItemViewType(int position), and inflates the corresponding layout in onCreateViewHolder(ViewGroup parent, int viewType). It then binds the data to the views in onBindViewHolder(RecyclerView.ViewHolder holder, int position).
