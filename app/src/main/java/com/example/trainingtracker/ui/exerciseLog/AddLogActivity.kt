@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import java.time.LocalDateTime
 import android.os.Handler
 import android.os.Looper
+import android.view.Gravity
 import android.view.View
 import android.widget.TableLayout
 import android.widget.TableRow
@@ -110,6 +111,8 @@ class AddLogActivity : AppCompatActivity() {
 
             setCountTextView.setPadding(16, 8, 16, 8)
             kgAndRepTextView.setPadding(16, 8, 16, 8)
+            setCountTextView.gravity = Gravity.CENTER_VERTICAL
+            kgAndRepTextView.gravity = Gravity.CENTER_VERTICAL
             setCountTextView.setBackgroundResource(R.drawable.style_textview_outline)
             kgAndRepTextView.setBackgroundResource(R.drawable.style_textview_outline)
 

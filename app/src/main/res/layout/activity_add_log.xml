@@ -127,7 +127,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/midLeft"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="99dp"
@@ -141,9 +141,13 @@
             android:id="@+id/todaySetTable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_gravity="center"
+            app:layout_constraintBottom_toTopOf="@+id/pastRecords"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />
 
 <!--        <Button-->
 <!--            android:id="@+id/button"-->
