@@ -1,6 +1,5 @@
 package com.example.trainingtracker.ui.exerciseLog
 
-import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
 import android.widget.CheckBox
@@ -13,6 +12,7 @@ import android.view.View
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingtracker.R
 import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
@@ -94,33 +94,28 @@ class AddLogActivity : AppCompatActivity() {
             )
             exerciseSetList.add(set)
 
-            // Update the TableLayout
-            val tableLayout = findViewById<TableLayout>(R.id.todaySetTable)
+
+            val midLeftLayout = findViewById<ConstraintLayout>(R.id.midLeft)
+            val tableLayout = midLeftLayout.findViewById<TableLayout>(R.id.todaySetTable)
+
+            // Create a new TableRow
             val tableRow = TableRow(this)
             val setCountTextView = TextView(this)
             val kgAndRepTextView = TextView(this)
 
-            // Set text for the TextViews
             setCountTextView.text = if (setNum != null) {
                 "${setNum?.toString()} set"
             } else { "" }
             kgAndRepTextView.text = "${massString} kg * ${repString}"
 
-            // Apply some basic styling
             setCountTextView.setPadding(16, 8, 16, 8)
             kgAndRepTextView.setPadding(16, 8, 16, 8)
+            setCountTextView.setBackgroundResource(R.drawable.style_textview_outline)
+            kgAndRepTextView.setBackgroundResource(R.drawable.style_textview_outline)
 
-            // Add TextViews to the TableRow
             tableRow.addView(setCountTextView)
             tableRow.addView(kgAndRepTextView)
-
-            // Add TableRow to the TableLayout
             tableLayout.addView(tableRow)
-
-            // Optionally, you can also set background color, text color, etc. for better visualization
-            tableRow.setBackgroundColor(Color.WHITE)
-            setCountTextView.setTextColor(Color.BLACK)
-            kgAndRepTextView.setTextColor(Color.BLACK)
         }
 
         // todo :
