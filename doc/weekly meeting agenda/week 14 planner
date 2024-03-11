@@ -1,0 +1,80 @@
+https://developer.android.com/courses/android-basics-compose/course
+
+mon
+* reading android basic  (just quick reading)
+
+tue
+* ethics approval 
+* bottom menu bar(home, status, setting)
+
+wed
+* gym equipment information correction
+* device request
+* unit 1 : 10 hours
+	introduction to Kotlin : 3 hours ( 2:25 +  
+	setup andorid studio : 4 hours (skip)
+	build a basic layout (3 hours)
+
+thu
+* Kortlin app example download and read through it
+* git document directory
+* gym equipment information correction
+* device request
+* unit 1 : 10 hours
+	introduction to Kotlin : 3 hours ( 2:25 +  
+	setup andorid studio : 4 hours (skip)
+	build a basic layout : 3 hours
+* dissertation template reading
+* unit 2 (21 hours)
+	kotlin fundamentals : 8 hours (skip)
+	add a button to an app (6 hours)
+	interacting with ui and state (7 hours)
+
+fri
+* unit 3 (15 hours)
+	more kotlin fundamentals (8 hours)
+	build a scrollable list (4 hours)
+	build beautiful apps (3 hours)
+* unit 4 (27 hours)
+	architecture components (9 hours)
+	navigation in jetpack compose (6 hours)
+	adapt for different screen sizes (13 hours)
+* unit 5 (14 hours)
+	get data from the internet (6 hours)
+	load and display images from the internet (3 hours)
+* unit 6 (10 hours)
+	introduction to SQL (2 hours)
+	use room for data persistence (6 hours)
+	store and sccess data using keys with DataStore (2 hours)
+
+sat
+* unit 7 (6 hours)
+	schedule tasks with WorkManager (3 hours)
+* unit 8 (4 hours)
+	android views and compose in views (3 hours)
+	views in compose (1 hours)
+
+sun
+* local data storage with SQL
+* visualised muscle buttons - exercises menu
+* add/delete/change exercise
+* history (spread sheet)
+* slide exercises dack
+* past recordings
+
+
+mon tue wed thu fri sat sun
+* github template
+* introduction to Kotlin conclusion
+* firebase connection
+* get basic exercise from firebase
+* history data coneect to firebase
+* user login function
+
+training
+tracking
+recording
+visualisation
+working out
+graph
+muscle
