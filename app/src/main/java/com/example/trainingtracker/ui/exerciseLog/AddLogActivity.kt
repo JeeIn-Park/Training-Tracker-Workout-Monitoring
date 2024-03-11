@@ -42,6 +42,7 @@ class AddLogActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val pastLog: List<ExerciseLog> = LogStorage.loadLogs(this)
+        println(pastLog)
 
         // layout binding
         setContentView(R.layout.activity_add_log)
@@ -57,7 +58,7 @@ class AddLogActivity : AppCompatActivity() {
         // Mid left
         val pastLogRecyclerView: RecyclerView = findViewById(R.id.pastRecords)
         pastLogRecyclerView.layoutManager = LinearLayoutManager(this)
-        pastLogTableAdapter = PastLogTableAdapter(this, pastLog)
+        pastLogTableAdapter = PastLogTableAdapter(pastLog)
         pastLogRecyclerView.adapter = pastLogTableAdapter
 
         // title with selected card
