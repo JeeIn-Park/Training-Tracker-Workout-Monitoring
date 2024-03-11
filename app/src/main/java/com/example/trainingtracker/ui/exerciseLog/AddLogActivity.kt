@@ -14,6 +14,7 @@ import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingtracker.R
 import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
@@ -55,6 +56,7 @@ class AddLogActivity : AppCompatActivity() {
 
         // Mid left
         val pastLogRecyclerView: RecyclerView = findViewById(R.id.pastRecords)
+        pastLogRecyclerView.layoutManager = LinearLayoutManager(this)
         pastLogTableAdapter = PastLogTableAdapter(this, pastLog)
         pastLogRecyclerView.adapter = pastLogTableAdapter
 
@@ -125,8 +127,18 @@ class AddLogActivity : AppCompatActivity() {
         // date - today
         // kg * reps
     }
-    override fun onDestroy() {
-        super.onDestroy()
+//    override fun onBackPressed() {
+//        saveLog()
+//        super.onBackPressed()
+//    }
+
+//    override fun onStop() {
+//        saveLog()
+//        super.onStop()
+//    }
+
+    // TODO : save when it is not null
+    private fun saveLog() {
         val log = ExerciseLog(
             dateTime = exerciseDate,
             exerciseCard = cardItem,
@@ -134,6 +146,8 @@ class AddLogActivity : AppCompatActivity() {
             totalSet = currentSetCount,
             totalWeight = null // TODO : implement this algorithm
         )
+        println(log)
         LogStorage.addLog(this, log)
     }
+
 }
