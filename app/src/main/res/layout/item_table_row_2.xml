@@ -10,12 +10,13 @@
         android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/style_textview_outline" >
 
         <TextView
             android:id="@+id/setCountTextView"
-            android:layout_width="5dp"
-            android:layout_height="wrap_content"
+            android:layout_width="10sp"
+            android:layout_height="20sp"
             android:layout_weight="1"
             android:textColor="@color/black"
             android:textSize="16sp"
@@ -25,7 +26,7 @@
         <TextView
             android:id="@+id/repTextView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="20sp"
             android:layout_weight="1"
             android:textColor="@color/black"
             android:textSize="16sp"
