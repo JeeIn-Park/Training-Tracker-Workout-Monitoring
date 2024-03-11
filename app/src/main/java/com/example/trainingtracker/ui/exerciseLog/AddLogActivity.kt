@@ -98,23 +98,21 @@ class AddLogActivity : AppCompatActivity() {
             val tableLayout = findViewById<TableLayout>(R.id.todaySetTable)
             val tableRow = TableRow(this)
             val setCountTextView = TextView(this)
-            val massTextView = TextView(this)
-            val repTextView = TextView(this)
+            val kgAndRepTextView = TextView(this)
 
             // Set text for the TextViews
-            setCountTextView.text = setNum?.toString() ?: ""  // If setNum is null, leave it blank
-            massTextView.text = massString
-            repTextView.text = repString
+            setCountTextView.text = if (setNum != null) {
+                "${setNum?.toString()} set"
+            } else { "" }
+            kgAndRepTextView.text = "${massString} kg * ${repString}"
 
             // Apply some basic styling
             setCountTextView.setPadding(16, 8, 16, 8)
-            massTextView.setPadding(16, 8, 16, 8)
-            repTextView.setPadding(16, 8, 16, 8)
+            kgAndRepTextView.setPadding(16, 8, 16, 8)
 
             // Add TextViews to the TableRow
             tableRow.addView(setCountTextView)
-            tableRow.addView(massTextView)
-            tableRow.addView(repTextView)
+            tableRow.addView(kgAndRepTextView)
 
             // Add TableRow to the TableLayout
             tableLayout.addView(tableRow)
@@ -122,11 +120,12 @@ class AddLogActivity : AppCompatActivity() {
             // Optionally, you can also set background color, text color, etc. for better visualization
             tableRow.setBackgroundColor(Color.WHITE)
             setCountTextView.setTextColor(Color.BLACK)
-            massTextView.setTextColor(Color.BLACK)
-            repTextView.setTextColor(Color.BLACK)
+            kgAndRepTextView.setTextColor(Color.BLACK)
         }
 
-
+        // todo :
+        // date - today
+        // kg * reps
     }
     override fun onDestroy() {
         super.onDestroy()
