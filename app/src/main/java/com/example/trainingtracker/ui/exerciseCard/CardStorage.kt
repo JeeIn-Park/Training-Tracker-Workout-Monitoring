@@ -1,4 +1,4 @@
-package com.example.trainingtracker
+package com.example.trainingtracker.ui.exerciseCard
 
 import android.content.Context
 import java.io.FileNotFoundException
@@ -46,6 +46,8 @@ object CardStorage {
         currentCards.remove(card)
         saveCards(context, currentCards)
     }
+
+    //TODO : remove all the log data
 
     //TODO : study how edit card works
     fun editCard(context: Context, oldCard: ExerciseCard, newCard: ExerciseCard) {

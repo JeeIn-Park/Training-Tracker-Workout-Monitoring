@@ -1,4 +1,4 @@
-package com.example.trainingtracker
+package com.example.trainingtracker.ui.exerciseCard
 
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
+import com.example.trainingtracker.R
 import java.time.LocalDateTime
 
 class AddCardActivity : AppCompatActivity() {
@@ -20,7 +21,7 @@ class AddCardActivity : AppCompatActivity() {
 
         // Retrieve the card to edit if this activity was launched for editing
         val cardFromIntent = intent.getSerializableExtra("edit_card") as? ExerciseCard
-        Log.d("com.example.trainingtracker.AddCardActivity", "Card from Intent: $cardFromIntent")
+        Log.d("com.example.trainingtracker.ui.exerciseCard.AddCardActivity", "Card from Intent: $cardFromIntent")
 
         // Check if the activity is in edit mode
         isEditMode = intent.getBooleanExtra("is_edit_mode", false)

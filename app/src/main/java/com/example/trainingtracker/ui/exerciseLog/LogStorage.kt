@@ -1,4 +1,4 @@
-package com.example.trainingtracker
+package com.example.trainingtracker.ui.exerciseLog
 
 import android.content.Context
 import java.io.FileNotFoundException
@@ -13,7 +13,7 @@ object LogStorage {
 
     fun saveLogs(context: Context, logs :List<ExerciseLog>) {
         try {
-            ObjectOutputStream(context.openFileOutput(LogStorage.FILE_NAME, Context.MODE_PRIVATE)).use {
+            ObjectOutputStream(context.openFileOutput(FILE_NAME, Context.MODE_PRIVATE)).use {
                 it.writeObject(logs)
             }
         } catch (e : IOException) {
@@ -23,7 +23,7 @@ object LogStorage {
 
     fun loadLogs(context: Context) : List<ExerciseLog> {
         try {
-            ObjectInputStream(context.openFileInput(LogStorage.FILE_NAME)).use {
+            ObjectInputStream(context.openFileInput(FILE_NAME)).use {
                 return it.readObject() as? List<ExerciseLog> ?: emptyList()
             }
         } catch (e : FileNotFoundException) {
@@ -40,6 +40,7 @@ object LogStorage {
     fun addLog(context: Context, log: ExerciseLog) {
         val currentLogs = loadLogs(context).toMutableList()
         currentLogs.add(log)
+        println(currentLogs)
         saveLogs(context, currentLogs)
     }
 

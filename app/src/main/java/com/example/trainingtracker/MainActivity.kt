@@ -32,6 +32,8 @@ private lateinit var binding: ActivityMainBinding
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(setOf(
             R.id.navigation_home, R.id.navigation_status, R.id.navigation_setting))
+
+        //TODO : deal with data sync
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }

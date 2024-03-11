@@ -4,13 +4,12 @@
     <string name="title_status">Status</string>
     <string name="title_setting">Setting</string>
     <string name="add_a_new_exercise">Add a new exercise</string>
-    <string name="kg_entering_description">Enter weight lifted</string>
+    <string name="kg_entering_description">Enter weight</string>
     <string name="rep_entering_description">Enter reps</string>
 
     <string-array name="muscles_array">
         <item>Select muscle</item>
-        <item>Neck</item>
-        <item>Traps</item>
+        <item>Neck / Traps</item>
         <item>Shoulder</item>
         <item>Chest</item>
         <item>Arm</item>
@@ -19,11 +18,11 @@
         <item>Forearms</item>
         <item>Abs</item>
         <item>Obliques</item>
-        <item>Leg</item>
-        <item>Inner thigh</item>
         <item>Back</item>
         <item>Upper Back</item>
         <item>Lower Back</item>
+        <item>Leg</item>
+        <item>Inner thigh</item>
         <item>Glutes / buttocks</item>
         <item>Quadriceps</item>
         <item>Hamstrings</item>

@@ -3,7 +3,7 @@ package com.example.trainingtracker.ui.Home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.trainingtracker.ExerciseCard
+import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
 
 class HomeViewModel : ViewModel() {
 
