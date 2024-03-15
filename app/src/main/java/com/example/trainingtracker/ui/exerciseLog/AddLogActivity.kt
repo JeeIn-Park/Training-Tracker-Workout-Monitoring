@@ -32,6 +32,7 @@ class AddLogActivity : AppCompatActivity() {
     private lateinit var mSeries1: LineGraphSeries<DataPoint>
     private var graph2LastXValue = 5.0
 
+    // past log
     private val exerciseDate = LocalDateTime.now()
     private var exerciseSetList: MutableList<ExerciseSet> = mutableListOf()
     private var currentSetCount: Int = 0
@@ -42,7 +43,7 @@ class AddLogActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val pastLog: List<ExerciseLog> = LogStorage.loadLogs(this)
-        println(pastLog)
+//        println(pastLog)
 
         // layout binding
         setContentView(R.layout.activity_add_log)
@@ -58,7 +59,8 @@ class AddLogActivity : AppCompatActivity() {
         // Mid left
         val pastLogRecyclerView: RecyclerView = findViewById(R.id.pastRecords)
         pastLogRecyclerView.layoutManager = LinearLayoutManager(this)
-        pastLogTableAdapter = PastLogTableAdapter(pastLog)
+        val filteredCard = filterCard(pastLog)
+        pastLogTableAdapter = PastLogTableAdapter(filteredCard)
         pastLogRecyclerView.adapter = pastLogTableAdapter
 
         // title with selected card
@@ -133,10 +135,10 @@ class AddLogActivity : AppCompatActivity() {
 //        super.onBackPressed()
 //    }
 
-//    override fun onStop() {
-//        saveLog()
-//        super.onStop()
-//    }
+    override fun onStop() {
+        saveLog()
+        super.onStop()
+    }
 
     // TODO : save when it is not null
     private fun saveLog() {
@@ -149,6 +151,16 @@ class AddLogActivity : AppCompatActivity() {
         )
         println(log)
         LogStorage.addLog(this, log)
+    }
+
+    private fun filterCard( pastLogs: List<ExerciseLog> ) : MutableList<ExerciseLog>{
+        var filteredCard : MutableList<ExerciseLog> = mutableListOf()
+        pastLogs.forEach{ pastlog ->
+            if (pastlog.exerciseCard.id == cardItem.id) {
+                filteredCard.add(pastlog)
+            }
+        }
+        return filteredCard
     }
 
 }
