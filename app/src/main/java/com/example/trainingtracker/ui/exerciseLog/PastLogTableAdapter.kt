@@ -14,6 +14,7 @@ class PastLogTableAdapter(private val items: List<ExerciseLog>) : RecyclerView.A
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TableItemViewHolder {
         val context = parent.context
         val tableLayout = TableLayout(context)
+        tableLayout.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         return TableItemViewHolder(tableLayout)
     }
 
@@ -29,6 +30,7 @@ class PastLogTableAdapter(private val items: List<ExerciseLog>) : RecyclerView.A
     class TableItemViewHolder(private val tableLayout: TableLayout) : RecyclerView.ViewHolder(tableLayout) {
 
         fun bind(item: ExerciseLog) {
+            if (item.exerciseSetList.isNotEmpty()) {
             // Clear existing rows before binding new data
             tableLayout.removeAllViews()
 
@@ -46,18 +48,22 @@ class PastLogTableAdapter(private val items: List<ExerciseLog>) : RecyclerView.A
                 setView.text = if (exerciseSet.set != null) {
                     "${exerciseSet.set?.toString()} set"
                 } else { "" }
-                setView.layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT)
                 setView.setBackgroundResource(R.drawable.style_textview_outline)
+                setView.layoutParams = TableRow.LayoutParams( TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT)
 
                 val recordView = TextView(tableLayout.context)
                 recordView.text = "${exerciseSet.mass} kg x ${exerciseSet.rep}"
-                recordView.layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT)
                 recordView.setBackgroundResource(R.drawable.style_textview_outline)
+                recordView.layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT)
+
+
 
                 val setRow = TableRow(tableLayout.context)
                 setRow.addView(setView)
                 setRow.addView(recordView)
                 tableLayout.addView(setRow)
+
+                }
             }
         }
     }

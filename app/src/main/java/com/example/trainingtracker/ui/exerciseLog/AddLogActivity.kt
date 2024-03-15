@@ -137,7 +137,7 @@ class AddLogActivity : AppCompatActivity() {
 //    }
 
     override fun onStop() {
-        if (exerciseSetList.size > 1) {
+        if (exerciseSetList.isNotEmpty()) {
             saveLog()
         }
         super.onStop()
