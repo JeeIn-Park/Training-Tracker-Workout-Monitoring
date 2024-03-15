@@ -80,7 +80,6 @@ class PastLogTableAdapter(private val items: List<ExerciseLog>) : RecyclerView.A
                     setRow.addView(kgAndRepTextView)
                     setRow.setBackgroundResource(R.drawable.style_textview_outline)
                     setTableLayout.addView(setRow)
-                    setTableLayout.removeAllViews()
                 }
             }
         }
