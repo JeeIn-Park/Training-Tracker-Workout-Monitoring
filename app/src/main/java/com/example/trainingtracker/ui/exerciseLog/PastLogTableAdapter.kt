@@ -2,6 +2,7 @@ package com.example.trainingtracker.ui.exerciseLog
 
 import android.view.Gravity
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
@@ -19,10 +20,19 @@ class PastLogTableAdapter(private val items: List<ExerciseLog>) : RecyclerView.A
         val dateTableLayout = TableLayout(context)
         setTableLayout.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         setTableLayout.setPadding(8, 0, 8, 0)
-        dateTableLayout.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+//        dateTableLayout.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         dateTableLayout.setPadding(8, 0, 8, 0)
-        return TableItemViewHolder(setTableLayout, dateTableLayout)
+
+        // Add both TableLayouts to the parent view
+        val parentLayout = LinearLayout(context)
+        parentLayout.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        parentLayout.orientation = LinearLayout.VERTICAL
+        parentLayout.addView(dateTableLayout)
+        parentLayout.addView(setTableLayout)
+
+        return TableItemViewHolder(parentLayout, setTableLayout, dateTableLayout)
     }
+
 
     override fun onBindViewHolder(holder: TableItemViewHolder, position: Int) {
         val item = items[position]
@@ -32,14 +42,18 @@ class PastLogTableAdapter(private val items: List<ExerciseLog>) : RecyclerView.A
     override fun getItemCount(): Int {
         return items.size
     }
-    class TableItemViewHolder(private val setTableLayout: TableLayout, private val dateTableLayout: TableLayout) : RecyclerView.ViewHolder(setTableLayout) {
+    class TableItemViewHolder(
+        private val parentView: LinearLayout,
+        private val setTableLayout: TableLayout,
+        private val dateTableLayout: TableLayout
+    ) : RecyclerView.ViewHolder(parentView) {
 
         fun bind(item: ExerciseLog) {
             if (item.exerciseSetList.isNotEmpty()) {
+                dateRow(item.dateTime)
                 // Clear existing rows before binding new data
                 setTableLayout.removeAllViews()
 
-                dateRow(item.dateTime)
 
                 // Bind data to views here
                 for (exerciseSet in item.exerciseSetList) {
@@ -66,12 +80,13 @@ class PastLogTableAdapter(private val items: List<ExerciseLog>) : RecyclerView.A
                     setRow.addView(kgAndRepTextView)
                     setRow.setBackgroundResource(R.drawable.style_textview_outline)
                     setTableLayout.addView(setRow)
-
+                    setTableLayout.removeAllViews()
                 }
             }
         }
 
         private fun dateRow(dateTime: LocalDateTime) {
+            dateTableLayout.removeAllViews()
 
             val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault())
             val formattedDateView = TextView(dateTableLayout.context)
