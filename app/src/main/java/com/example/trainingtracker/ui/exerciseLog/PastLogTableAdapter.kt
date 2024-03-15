@@ -31,31 +31,36 @@ class PastLogTableAdapter(private val items: List<ExerciseLog>) : RecyclerView.A
         fun bind(item: ExerciseLog) {
             // Clear existing rows before binding new data
             tableLayout.removeAllViews()
-            val row = TableRow(tableLayout.context)
+
             val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault())
             val formattedDateView = TextView(tableLayout.context)
             formattedDateView.text = item.dateTime.format(formatter)
-            row.addView(formattedDateView)
-            tableLayout.addView(row)
+
+            val dateRow = TableRow(tableLayout.context)
+            dateRow.addView(formattedDateView)
+            tableLayout.addView(dateRow)
 
             // Bind data to views here
             for (exerciseSet in item.exerciseSetList) {
-
                 val setView = TextView(tableLayout.context)
                 setView.text = if (exerciseSet.set != null) {
                     "${exerciseSet.set?.toString()} set"
                 } else { "" }
+                setView.layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT)
                 setView.setBackgroundResource(R.drawable.style_textview_outline)
 
                 val recordView = TextView(tableLayout.context)
                 recordView.text = "${exerciseSet.mass} kg x ${exerciseSet.rep}"
+                recordView.layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT)
                 recordView.setBackgroundResource(R.drawable.style_textview_outline)
 
-                row.addView(setView)
-                row.addView(recordView)
-                tableLayout.addView(row)
+                val setRow = TableRow(tableLayout.context)
+                setRow.addView(setView)
+                setRow.addView(recordView)
+                tableLayout.addView(setRow)
             }
         }
     }
+
 }
 

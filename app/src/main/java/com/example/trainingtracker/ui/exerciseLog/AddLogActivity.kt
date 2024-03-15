@@ -22,21 +22,22 @@ import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
 
 class AddLogActivity : AppCompatActivity() {
-
     // check box
     private lateinit var warmUpCheckBox: CheckBox
 
     // graph
     private val mHandler = Handler(Looper.getMainLooper())
+
     private lateinit var mTimer1: Runnable
     private lateinit var mSeries1: LineGraphSeries<DataPoint>
     private var graph2LastXValue = 5.0
 
     // past log
-    private val exerciseDate = LocalDateTime.now()
-    private var exerciseSetList: MutableList<ExerciseSet> = mutableListOf()
-    private var currentSetCount: Int = 0
     private lateinit var pastLogTableAdapter: PastLogTableAdapter
+
+    private var exerciseSetList: MutableList<ExerciseSet> = mutableListOf()
+    private val exerciseDate = LocalDateTime.now()
+    private var currentSetCount: Int = 0
 
     // get selected card
     private lateinit var cardItem: ExerciseCard
@@ -136,7 +137,9 @@ class AddLogActivity : AppCompatActivity() {
 //    }
 
     override fun onStop() {
-        saveLog()
+        if (exerciseSetList.size > 1) {
+            saveLog()
+        }
         super.onStop()
     }
 
@@ -149,7 +152,7 @@ class AddLogActivity : AppCompatActivity() {
             totalSet = currentSetCount,
             totalWeight = null // TODO : implement this algorithm
         )
-        println(log)
+//        println(log)
         LogStorage.addLog(this, log)
     }
 
