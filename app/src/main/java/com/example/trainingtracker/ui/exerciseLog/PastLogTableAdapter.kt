@@ -15,10 +15,13 @@ class PastLogTableAdapter(private val items: List<ExerciseLog>) : RecyclerView.A
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TableItemViewHolder {
         val context = parent.context
-        val tableLayout = TableLayout(context)
-        tableLayout.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        tableLayout.setPadding(8, 0, 8, 0)
-        return TableItemViewHolder(tableLayout)
+        val setTableLayout = TableLayout(context)
+        val dateTableLayout = TableLayout(context)
+        setTableLayout.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        setTableLayout.setPadding(8, 0, 8, 0)
+        dateTableLayout.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        dateTableLayout.setPadding(8, 0, 8, 0)
+        return TableItemViewHolder(setTableLayout, dateTableLayout)
     }
 
     override fun onBindViewHolder(holder: TableItemViewHolder, position: Int) {
@@ -29,27 +32,27 @@ class PastLogTableAdapter(private val items: List<ExerciseLog>) : RecyclerView.A
     override fun getItemCount(): Int {
         return items.size
     }
-    class TableItemViewHolder(private val tableLayout: TableLayout) : RecyclerView.ViewHolder(tableLayout) {
+    class TableItemViewHolder(private val setTableLayout: TableLayout, private val dateTableLayout: TableLayout) : RecyclerView.ViewHolder(setTableLayout) {
 
         fun bind(item: ExerciseLog) {
             if (item.exerciseSetList.isNotEmpty()) {
                 // Clear existing rows before binding new data
-                tableLayout.removeAllViews()
+                setTableLayout.removeAllViews()
 
                 dateRow(item.dateTime)
 
                 // Bind data to views here
                 for (exerciseSet in item.exerciseSetList) {
-                    val setRow = TableRow(tableLayout.context)
+                    val setRow = TableRow(setTableLayout.context)
 
-                    val setCountTextView = TextView(tableLayout.context)
+                    val setCountTextView = TextView(setTableLayout.context)
                     setCountTextView.text = if (exerciseSet.set != null) {
                         "${exerciseSet.set.toString()} set"
                     } else { "" }
                     val setCountParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT)
                     setCountTextView.layoutParams = setCountParams
 
-                    val kgAndRepTextView = TextView(tableLayout.context)
+                    val kgAndRepTextView = TextView(setTableLayout.context)
                     kgAndRepTextView.text = "${exerciseSet.mass} kg x ${exerciseSet.rep}"
                     val kgAndRepParams = TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT)
                     kgAndRepTextView.layoutParams = kgAndRepParams
@@ -62,22 +65,21 @@ class PastLogTableAdapter(private val items: List<ExerciseLog>) : RecyclerView.A
                     setRow.addView(setCountTextView)
                     setRow.addView(kgAndRepTextView)
                     setRow.setBackgroundResource(R.drawable.style_textview_outline)
-                    tableLayout.addView(setRow)
+                    setTableLayout.addView(setRow)
 
                 }
             }
         }
 
-        fun dateRow( dateTime: LocalDateTime) {
-            tableLayout.removeAllViews()
+        private fun dateRow(dateTime: LocalDateTime) {
 
             val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault())
-            val formattedDateView = TextView(tableLayout.context)
+            val formattedDateView = TextView(dateTableLayout.context)
             formattedDateView.text = dateTime.format(formatter)
 
-            val dateRow = TableRow(tableLayout.context)
+            val dateRow = TableRow(dateTableLayout.context)
             dateRow.addView(formattedDateView)
-            tableLayout.addView(dateRow)
+            dateTableLayout.addView(dateRow)
         }
     }
 
