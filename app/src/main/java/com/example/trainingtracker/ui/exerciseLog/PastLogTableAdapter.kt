@@ -7,6 +7,7 @@ import android.widget.TableRow
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingtracker.R
+import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
@@ -35,13 +36,7 @@ class PastLogTableAdapter(private val items: List<ExerciseLog>) : RecyclerView.A
                 // Clear existing rows before binding new data
                 tableLayout.removeAllViews()
 
-                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault())
-                val formattedDateView = TextView(tableLayout.context)
-                formattedDateView.text = item.dateTime.format(formatter)
-//
-//                val dateRow = TableRow(tableLayout.context)
-//                dateRow.addView(formattedDateView)
-//                tableLayout.addView(dateRow)
+                dateRow(item.dateTime)
 
                 // Bind data to views here
                 for (exerciseSet in item.exerciseSetList) {
@@ -71,6 +66,18 @@ class PastLogTableAdapter(private val items: List<ExerciseLog>) : RecyclerView.A
 
                 }
             }
+        }
+
+        fun dateRow( dateTime: LocalDateTime) {
+            tableLayout.removeAllViews()
+
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault())
+            val formattedDateView = TextView(tableLayout.context)
+            formattedDateView.text = dateTime.format(formatter)
+
+            val dateRow = TableRow(tableLayout.context)
+            dateRow.addView(formattedDateView)
+            tableLayout.addView(dateRow)
         }
     }
 
