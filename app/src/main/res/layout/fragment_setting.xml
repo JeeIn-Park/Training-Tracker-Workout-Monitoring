@@ -28,6 +28,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:backgroundTint="?attr/buttonStyle"
+        android:textColor="?attr/colorOnBackground"
         android:text="Personal Information"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,6 +37,8 @@
 
     <Button
         android:id="@+id/appVersion"
+        android:backgroundTint="?attr/buttonStyle"
+        android:textColor="?attr/colorOnBackground"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -47,6 +51,8 @@
 
     <Button
         android:id="@+id/sendFeedback"
+        android:backgroundTint="?attr/buttonStyle"
+        android:textColor="?attr/colorOnBackground"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -59,6 +65,8 @@
 
     <Button
         android:id="@+id/privacyPolicy"
+        android:backgroundTint="?attr/buttonStyle"
+        android:textColor="?attr/colorOnBackground"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

@@ -45,6 +45,8 @@
         android:id="@+id/add_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="?attr/buttonStyle"
+        android:textColor="?attr/colorOnBackground"
         android:layout_marginBottom="16dp"
         android:text="ADD"
         app:layout_constraintBottom_toBottomOf="parent"
