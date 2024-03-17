@@ -26,7 +26,7 @@
 
     <Button
         android:id="@+id/muscle_back_sholder"
-        android:background="@drawable/muscle_back_sholder"
+        android:background="@drawable/muscle_back_shoulder"
         android:layout_width="45pt"
         android:layout_height="45pt"
         android:layout_marginTop="0dp"
