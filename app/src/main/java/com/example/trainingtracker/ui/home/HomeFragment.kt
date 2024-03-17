@@ -46,7 +46,7 @@ class HomeFragment : Fragment() {
       exerciseRecyclerView.adapter = cardAdapter
       exerciseRecyclerView.itemAnimator = DefaultItemAnimator()
 
-      val textView: TextView = binding.textAboveRecyclerView
+      val textView: TextView = binding.filterBar.textAboveRecyclerView
 
       //observer pattern
       homeViewModel.recyclerViewData.observe(viewLifecycleOwner) {
