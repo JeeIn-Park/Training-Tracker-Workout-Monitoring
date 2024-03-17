@@ -21,11 +21,13 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/exerciseRecyclerView"
         android:scrollbars="vertical"
+        android:fadeScrollbars="true"
         android:scrollbarThumbVertical="@drawable/style_scroll_bar"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:orientation="horizontal"
         android:paddingVertical="4dp"
+        android:paddingHorizontal="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">

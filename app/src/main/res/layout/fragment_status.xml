@@ -35,6 +35,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/exerciseRecyclerView"
         android:scrollbars="vertical"
+        android:scrollbarThumbVertical="@drawable/style_scroll_bar"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:paddingVertical="4dp"
