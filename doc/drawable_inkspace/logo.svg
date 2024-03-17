@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="168.94981mm"
+   height="168.94981mm"
+   viewBox="0 0 168.94981 168.94981"
+   version="1.1"
+   id="svg1"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1">
+    <linearGradient
+       id="linearGradient3">
+      <stop
+         style="stop-color:#39527c;stop-opacity:1;"
+         offset="0.2462845"
+         id="stop3" />
+      <stop
+         style="stop-color:#f1df96;stop-opacity:1;"
+         offset="1"
+         id="stop4" />
+    </linearGradient>
+    <linearGradient
+       xlink:href="#linearGradient3"
+       id="linearGradient4"
+       x1="152.02016"
+       y1="206.11591"
+       x2="15.61783"
+       y2="17.308056"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(0.43487726)" />
+  </defs>
+  <g
+     id="layer1"
+     transform="translate(-21.458045,-37.077224)">
+    <rect
+       style="display:inline;fill:url(#linearGradient4);stroke-width:0.264583"
+       id="rect1"
+       width="168.94981"
+       height="168.94981"
+       x="21.458044"
+       y="37.077221"
+       ry="21.787645" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:85.3206px;line-height:0;font-family:'Book Antiqua';-inkscape-font-specification:'Book Antiqua Bold';fill:#ffffff;fill-opacity:1;stroke-width:0.319952"
+       x="52.994823"
+       y="145.40762"
+       id="text3"
+       transform="scale(0.95224183,1.0501534)"><tspan
+         id="tspan3"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:85.3206px;line-height:0;font-family:'Book Antiqua';-inkscape-font-specification:'Book Antiqua Bold';fill:#ffffff;fill-opacity:1;stroke-width:0.319952"
+         x="52.994823"
+         y="145.40762">TT</tspan></text>
+  </g>
+</svg>
