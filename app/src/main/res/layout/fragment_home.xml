@@ -9,21 +9,28 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/muscleContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/filterBarContainer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/filterBarContainer"
         app:layout_constraintTop_toTopOf="parent">
 
         <include
             android:id="@+id/muscle_back"
             layout="@layout/fragment_muscle_back"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/middle"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/middle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            tools:layout_editor_absoluteX="135dp"
-            tools:layout_editor_absoluteY="0dp" />
-
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -31,6 +38,8 @@
         android:id="@+id/filterBarContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/exerciseRecyclerView">
 
         <include
