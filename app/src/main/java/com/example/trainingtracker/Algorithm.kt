@@ -6,41 +6,30 @@ import java.util.UUID
 
 class Algorithm(context: Context) {
 
-    fun totalMass(){
-
-    }
-
-    fun personalOneRepMaxRecord(context: Context, id : UUID) {
+    fun personalOneRepMaxRecord(context: Context, id : UUID) : Float {
         val logs = LogStorage.loadLogs(context)
-
-
-
+        var finalOneRepMax : Float = 0F
+        logs.forEach{
+            if (id == it.exerciseCard) {
+                val sets = it.exerciseSetList
+                sets.forEach{
+                    val mass = it.mass
+                    val rep = it.rep
+                    if ( (mass != null) && (rep != null)){
+                        val tempOneRepMax : Float = oneRepMax(mass, rep)
+                        finalOneRepMax = maxOf(finalOneRepMax, tempOneRepMax)
+                    }
+                }
+            }
+        }
+        return finalOneRepMax
     }
 
 
-    fun brzyckiFormula(weight: Float, reps: Int): Float {
-        return weight * (36f / (37 - reps))
+    fun oneRepMax(mass: Float, reps: Int): Float{
+           return ((mass * (36f / (37 - reps))) +
+                    (mass * (1f + (0.0333f * reps))) +
+                    (mass * Math.pow(reps.toDouble(), 0.1).toFloat()) +
+                    (mass * (1f + (0.025f * reps)))) / 4
     }
-
-    fun epleyFormula(weight: Float, reps: Int): Float {
-        return weight * (1f + (0.0333f * reps))
-    }
-
-    fun lombardiFormula(weight: Float, reps: Int): Float {
-        return weight * Math.pow(reps.toDouble(), 0.1).toFloat()
-    }
-
-    fun oConnerFormula(weight: Float, reps: Int): Float {
-        return weight * (1f + (0.025f * reps))
-    }
-
-    fun oneRepMax(weight: Float, reps: Int): Float{
-        val brzycki =  brzyckiFormula(weight, reps)
-        val epley = epleyFormula(weight, reps)
-        val lombardi =  lombardiFormula(weight, reps)
-        val oConner = oConnerFormula(weight, reps)
-
-        return (brzycki + epley + lombardi + oConner)/4
-    }
-
 }
