@@ -2,6 +2,8 @@ package com.example.trainingtracker.ui.exerciseCard
 
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
+import android.view.inputmethod.EditorInfo
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
@@ -45,6 +47,9 @@ class AddCardActivity : AppCompatActivity() {
         // Set adapters to spinners
         mainMusclesSpinner.adapter = mainMusclesAdapter
         subMusclesSpinner.adapter = subMusclesAdapter
+
+        // Set maxLines to 1 to prevent new lines
+        exerciseNameEditText.maxLines = 1
 
         // Populate views with data of the card being edited?
         if (isEditMode) {
