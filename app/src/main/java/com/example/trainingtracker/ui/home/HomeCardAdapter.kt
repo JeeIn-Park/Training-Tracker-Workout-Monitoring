@@ -111,7 +111,7 @@ class HomeCardAdapter(private val context: Context, private val onItemClick: (Ex
                 }
             }
 
-            personalRecord.text = "place holder"// need to check the whole cards
+            personalRecord.text = "One Rep Max"// need to check the whole cards
             // Set long click listener
             itemView.setOnLongClickListener {
                 showEditDeleteOptions(cardItem)

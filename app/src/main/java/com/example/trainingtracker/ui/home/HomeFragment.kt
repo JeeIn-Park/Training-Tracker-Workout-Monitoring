@@ -33,8 +33,6 @@ class HomeFragment : Fragment() {
       val root: View = binding.root
 
       cardAdapter = HomeCardAdapter(requireContext()) { clickedCard ->
-          // Handle the click action here
-          // Launch the com.example.trainingtracker.ui.exerciseCard.AddCardActivity with the card details for editing
           val intent = Intent(context, AddLogActivity::class.java).apply {
               putExtra("EXTRA_CARD_ITEM", clickedCard)
           }
@@ -48,9 +46,9 @@ class HomeFragment : Fragment() {
 
       val textView: TextView = binding.filterBar.textAboveRecyclerView
 
-      //observer pattern
       homeViewModel.recyclerViewData.observe(viewLifecycleOwner) {
-              newData -> cardAdapter.submitList(newData)
+          newData -> cardAdapter.submitList(newData)
+          homeViewModel.updateRecyclerViewData(newData) // TODO : is this necessary
       }
       homeViewModel.text.observe(viewLifecycleOwner) {
           textView.text = it
