@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <!--  front muscle  -->
+
+    <Button
+        android:id="@+id/muscle_front_neck_traps"
+        android:layout_width="27pt"
+        android:layout_height="27pt"
+        android:layout_marginTop="-8pt"
+        android:background="@drawable/muscle_front_neck_traps"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/muscle_front_chest"
+        android:layout_width="29pt"
+        android:layout_height="29pt"
+        android:layout_marginTop="4pt"
+        android:background="@drawable/muscle_front_chest"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/muscle_front_shoulder"
+        android:layout_width="45pt"
+        android:layout_height="45pt"
+        android:layout_marginTop="-9pt"
+        android:background="@drawable/muscle_front_shoulder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/muscle_front_biceps"
+        android:layout_width="46pt"
+        android:layout_height="46pt"
+        android:layout_marginTop="4pt"
+        android:background="@drawable/muscle_front_biceps"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/muscle_front_forearm"
+        android:layout_width="55pt"
+        android:layout_height="55pt"
+        android:layout_marginTop="13pt"
+        android:background="@drawable/muscle_front_forearm"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/muscle_front_abs"
+        android:layout_width="27pt"
+        android:layout_height="27pt"
+        android:layout_marginTop="25pt"
+        android:background="@drawable/muscle_front_abs"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/muscle_front_obliques"
+        android:layout_width="30pt"
+        android:layout_height="30pt"
+        android:layout_marginTop="21pt"
+        android:background="@drawable/muscle_front_obliques"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/muscle_front_inner_thigh"
+        android:background="@drawable/muscle_front_inner_thigh"
+        android:layout_width="17pt"
+        android:layout_height="19pt"
+        android:layout_marginTop="49pt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/muscle_front_quadriceps"
+        android:background="@drawable/muscle_front_quadriceps"
+        android:layout_width="40pt"
+        android:layout_height="40pt"
+        android:layout_marginTop="47pt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    <Button
+        android:id="@+id/muscle_front_calves"
+        android:layout_width="48pt"
+        android:layout_height="48pt"
+        android:layout_marginTop="67pt"
+        android:background="@drawable/muscle_front_calves"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
