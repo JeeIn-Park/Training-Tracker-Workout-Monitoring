@@ -10,19 +10,23 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/muscleContainer"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/filterBarContainer"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/filterBarContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <include
             android:id="@+id/muscle_back"
-            layout="@layout/fragment_muscle_back"
+            layout="@layout/fragment_muscle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
+            app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -30,9 +34,10 @@
         android:id="@+id/filterBarContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="-5pt"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/exerciseRecyclerView">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/muscleContainer">
 
         <include
             android:id="@+id/filterBar"
@@ -41,17 +46,18 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/exerciseRecyclerView"
-        android:scrollbars="vertical"
-        android:fadeScrollbars="true"
-        android:scrollbarThumbVertical="@drawable/style_scroll_bar"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="0dp"
+        android:fadeScrollbars="true"
         android:orientation="horizontal"
-        android:paddingVertical="4dp"
         android:paddingHorizontal="4dp"
+        android:paddingVertical="4dp"
+        android:scrollbarThumbVertical="@drawable/style_scroll_bar"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/filterBarContainer">
 
     </androidx.recyclerview.widget.RecyclerView>
 
