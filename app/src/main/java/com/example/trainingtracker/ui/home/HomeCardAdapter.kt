@@ -71,18 +71,21 @@ class HomeCardAdapter(private val context: Context, private val onItemClick: (Ex
                 ""
             }
 
-            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault())
-            val formattedDate = cardItem.lastActivity.format(formatter)
-
-            val currentDate = LocalDateTime.now()
-            val daysAgo = Duration.between(cardItem.lastActivity, currentDate).toDays()
-            if (daysAgo == 0.toLong()) {
-                lastExercise.text = formattedDate
-            } else if (daysAgo == 1.toLong()) {
-                lastExercise.text = "$formattedDate (1 day ago)"
+            if ( cardItem.lastActivity != null ) {
+                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault())
+                val formattedDate = cardItem.lastActivity.format(formatter)
+                val currentDate = LocalDateTime.now()
+                val daysAgo = Duration.between(cardItem.lastActivity, currentDate).toDays()
+                if (daysAgo == 0.toLong()) {
+                    lastExercise.text = formattedDate
+                } else if (daysAgo == 1.toLong()) {
+                    lastExercise.text = "$formattedDate (1 day ago)"
+                } else {
+                    val dateStringWithDaysAgo = "$formattedDate ($daysAgo days ago)"
+                    lastExercise.text = dateStringWithDaysAgo
+                }
             } else {
-                val dateStringWithDaysAgo = "$formattedDate ($daysAgo days ago)"
-                lastExercise.text = dateStringWithDaysAgo
+                lastExercise.text =  ""
             }
 
 

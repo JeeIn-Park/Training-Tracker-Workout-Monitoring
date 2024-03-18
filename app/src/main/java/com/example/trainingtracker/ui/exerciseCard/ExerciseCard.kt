@@ -7,7 +7,7 @@ import java.util.UUID
 data class ExerciseCard(
     // TODO : null-able
     val id : UUID = UUID.randomUUID(),
-    val lastActivity: LocalDateTime,
+    val lastActivity: LocalDateTime?,
     val timeAdded : LocalDateTime,
     val name : String,
     val mainMuscles : List<String>,

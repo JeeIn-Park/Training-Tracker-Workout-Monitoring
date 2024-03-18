@@ -42,7 +42,7 @@
 
     <Button
         android:id="@+id/muscle_front_biceps"
-        android:layout_width="46pt"
+        android:layout_width="48pt"
         android:layout_height="46pt"
         android:layout_marginTop="4pt"
         android:background="@drawable/muscle_front_biceps"

@@ -39,6 +39,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:paddingVertical="4dp"
+        android:paddingHorizontal="4dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

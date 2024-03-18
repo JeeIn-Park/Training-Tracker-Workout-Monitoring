@@ -17,6 +17,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingtracker.R
+import com.example.trainingtracker.ui.exerciseCard.CardStorage
 import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
@@ -94,7 +95,7 @@ class AddLogActivity : AppCompatActivity() {
 
             val set = ExerciseSet(
                 dateTime = dateTime,
-                exerciseCard = cardItem,
+                exerciseCard = cardItem.id,
                 mass = mass,
                 set = setNum,
                 rep = rep
@@ -143,23 +144,34 @@ class AddLogActivity : AppCompatActivity() {
         super.onStop()
     }
 
-    // TODO : save when it is not null
     private fun saveLog() {
+        val updatedCard = ExerciseCard(
+            id = cardItem.id,
+            lastActivity = exerciseDate,
+            timeAdded = cardItem.timeAdded,
+            name = cardItem.name,
+            mainMuscles = cardItem.mainMuscles,
+            subMuscles = cardItem.subMuscles,
+            tag = cardItem.tag
+        )
+        CardStorage.editCard(this, cardItem, updatedCard)
+
         val log = ExerciseLog(
             dateTime = exerciseDate,
-            exerciseCard = cardItem,
+            exerciseCard = cardItem.id,
             exerciseSetList = exerciseSetList,
             totalSet = currentSetCount,
             totalWeight = null // TODO : implement this algorithm
         )
-//        println(log)
         LogStorage.addLog(this, log)
+
+        println(updatedCard)
     }
 
     private fun filterCard( pastLogs: List<ExerciseLog> ) : MutableList<ExerciseLog>{
-        var filteredCard : MutableList<ExerciseLog> = mutableListOf()
+        val filteredCard : MutableList<ExerciseLog> = mutableListOf()
         pastLogs.forEach{ pastlog ->
-            if (pastlog.exerciseCard.id == cardItem.id) {
+            if (pastlog.exerciseCard == cardItem.id) {
                 filteredCard.add(pastlog)
             }
         }
