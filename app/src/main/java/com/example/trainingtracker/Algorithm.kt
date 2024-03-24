@@ -7,7 +7,8 @@ import java.util.UUID
 class Algorithm(context: Context) {
 
     fun personalOneRepMaxRecord(context: Context, id : UUID) : Float {
-        val logs = LogStorage.loadLogs(context)
+        val logStorage = LogStorage(id)
+        val logs = logStorage.loadLogs(context)
         var finalOneRepMax : Float = 0F
         logs.forEach{
             if (id == it.exerciseCard) {

@@ -5,15 +5,16 @@ import java.io.FileNotFoundException
 import java.io.IOException
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
+import java.util.UUID
 
-object LogStorage {
-    private const val FILE_NAME = "exercise_logs.dat"
+class LogStorage(id : UUID) {
+    private val fileName = "log_${id}.dat"
 
     // TODO: make storage for muscles and list
 
     fun saveLogs(context: Context, logs :List<ExerciseLog>) {
         try {
-            ObjectOutputStream(context.openFileOutput(FILE_NAME, Context.MODE_PRIVATE)).use {
+            ObjectOutputStream(context.openFileOutput(fileName, Context.MODE_PRIVATE)).use {
                 it.writeObject(logs)
             }
         } catch (e : IOException) {
@@ -23,7 +24,7 @@ object LogStorage {
 
     fun loadLogs(context: Context) : List<ExerciseLog> {
         try {
-            ObjectInputStream(context.openFileInput(FILE_NAME)).use {
+            ObjectInputStream(context.openFileInput(fileName)).use {
                 return it.readObject() as? List<ExerciseLog> ?: emptyList()
             }
         } catch (e : FileNotFoundException) {
@@ -35,6 +36,10 @@ object LogStorage {
             e.printStackTrace()
             return emptyList()
         }
+    }
+
+    fun deleteLogs(context: Context) {
+        context.deleteFile(fileName)
     }
 
     fun addLog(context: Context, log: ExerciseLog) {

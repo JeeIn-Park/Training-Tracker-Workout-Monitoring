@@ -30,26 +30,30 @@ class AddLogActivity : AppCompatActivity() {
     private val mHandler = Handler(Looper.getMainLooper())
 
     private lateinit var mTimer1: Runnable
+
     private lateinit var mSeries1: LineGraphSeries<DataPoint>
     private var graph2LastXValue = 5.0
-
     // past log
     private lateinit var pastLogTableAdapter: PastLogTableAdapter
 
     private var exerciseSetList: MutableList<ExerciseSet> = mutableListOf()
+
     private val exerciseDate = LocalDateTime.now()
     private var currentSetCount: Int = 0
 
     // get selected card
     private lateinit var cardItem: ExerciseCard
+    private lateinit var logStorage: LogStorage
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val pastLog: List<ExerciseLog> = LogStorage.loadLogs(this)
+        val pastLog: List<ExerciseLog> = logStorage.loadLogs(this)
 //        println(pastLog)
 
         // layout binding
         setContentView(R.layout.activity_add_log)
         cardItem = intent.getSerializableExtra("EXTRA_CARD_ITEM") as ExerciseCard
+        logStorage = LogStorage(cardItem.id)
 
 
         // bottom
@@ -163,7 +167,8 @@ class AddLogActivity : AppCompatActivity() {
             totalSet = currentSetCount,
             totalWeight = null // TODO : implement this algorithm
         )
-        LogStorage.addLog(this, log)
+        logStorage = LogStorage(cardItem.id)
+        logStorage.addLog(this, log)
 
         println(updatedCard)
     }

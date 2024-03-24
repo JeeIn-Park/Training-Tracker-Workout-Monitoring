@@ -12,6 +12,7 @@ import com.example.trainingtracker.ui.exerciseCard.CardStorage
 import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
 import com.example.trainingtracker.ui.exerciseCard.ExerciseCardDiffCallback
 import com.example.trainingtracker.R
+import com.example.trainingtracker.ui.exerciseLog.LogStorage
 import java.time.Duration
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -144,6 +145,8 @@ class HomeCardAdapter(private val context: Context, private val onItemClick: (Ex
                 .setTitle("Are you sure you want to delete this item?")
                 .setMessage("All records will be deleted. Once deleted, it cannot be recovered.")
                 .setPositiveButton("Delete") { dialog, which ->
+                    val logStorage = LogStorage(cardItem.id)
+                    logStorage.deleteLogs(context)
                     removeItem(adapterPosition)
                 }
                 .setNegativeButton("Cancel") { dialog, which ->
