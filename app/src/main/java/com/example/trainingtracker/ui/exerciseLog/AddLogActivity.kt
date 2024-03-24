@@ -16,11 +16,14 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.trainingtracker.Algorithm
 import com.example.trainingtracker.R
 import com.example.trainingtracker.ui.exerciseCard.CardStorage
 import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
+import kotlin.math.round
+import kotlin.math.roundToInt
 
 class AddLogActivity : AppCompatActivity() {
     // check box
@@ -70,13 +73,22 @@ class AddLogActivity : AppCompatActivity() {
 
         val boxView1: View = findViewById(R.id.box1)
         val titleTextView1: TextView = boxView1.findViewById(R.id.title)
-        val title1 = "MAX KG"
+        val contentTextView1: TextView = boxView1.findViewById(R.id.content)
+        val dateTextView1: TextView = boxView1.findViewById(R.id.date)
+        val title1 = "ONE REP MAX - PB"
         titleTextView1.text = title1
+        val content1 = Algorithm.oneRepMaxRecord_pb(pastLog).roundToInt().toString()
+        contentTextView1.text = content1
 
         val boxView2: View = findViewById(R.id.box2)
         val titleTextView2: TextView = boxView2.findViewById(R.id.title)
-        val title2 = "MEAN REPS"
+        val contentTextView2: TextView = boxView2.findViewById(R.id.content)
+        val dateTextView2: TextView = boxView2.findViewById(R.id.date)
+        val title2 = "ONE REP MAX"
         titleTextView2.text = title2
+        val content2 = Algorithm.oneRepMaxRecord(pastLog[pastLog.lastIndex]).roundToInt().toString()
+        contentTextView2.text = content2
+
 
         var setNum: Int?
         logButton.setOnClickListener {

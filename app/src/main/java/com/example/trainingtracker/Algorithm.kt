@@ -1,31 +1,42 @@
 package com.example.trainingtracker
 
 import android.content.Context
+import com.example.trainingtracker.ui.exerciseLog.ExerciseLog
 import com.example.trainingtracker.ui.exerciseLog.LogStorage
 import java.util.UUID
 
-class Algorithm(context: Context) {
+object Algorithm {
 
-    fun personalOneRepMaxRecord(context: Context, id : UUID) : Float {
-        val logStorage = LogStorage(id)
-        val logs = logStorage.loadLogs(context)
+    fun oneRepMaxRecord_pb(logs : List<ExerciseLog>) : Float {
         var finalOneRepMax : Float = 0F
         logs.forEach{
-            if (id == it.exerciseCard) {
-                val sets = it.exerciseSetList
-                sets.forEach{
-                    val mass = it.mass
-                    val rep = it.rep
-                    if ( (mass != null) && (rep != null)){
-                        val tempOneRepMax : Float = oneRepMax(mass, rep)
-                        finalOneRepMax = maxOf(finalOneRepMax, tempOneRepMax)
-                    }
+            val sets = it.exerciseSetList
+            sets.forEach{
+                val mass = it.mass
+                val rep = it.rep
+                if ( (mass != null) && (rep != null)){
+                    val tempOneRepMax : Float = oneRepMax(mass, rep)
+                    finalOneRepMax = maxOf(finalOneRepMax, tempOneRepMax)
                 }
             }
         }
         return finalOneRepMax
     }
 
+
+    fun oneRepMaxRecord(log : ExerciseLog) : Float {
+        var finalOneRepMax : Float = 0F
+        val sets = log.exerciseSetList
+        sets.forEach{
+            val mass = it.mass
+            val rep = it.rep
+            if ( (mass != null) && (rep != null)){
+                val tempOneRepMax : Float = oneRepMax(mass, rep)
+                finalOneRepMax = maxOf(finalOneRepMax, tempOneRepMax)
+            }
+        }
+        return finalOneRepMax
+    }
 
     fun oneRepMax(mass: Float, reps: Int): Float{
            return ((mass * (36f / (37 - reps))) +

@@ -30,8 +30,8 @@
             app:layout_constraintTop_toBottomOf="parent"
             tools:text="title" />
 
-        <View
-            android:id="@+id/view"
+        <TextView
+            android:id="@+id/content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
