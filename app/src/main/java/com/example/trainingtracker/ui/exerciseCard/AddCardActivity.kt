@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
@@ -48,14 +49,32 @@ class AddCardActivity : AppCompatActivity() {
         mainMusclesSpinner.adapter = mainMusclesAdapter
         subMusclesSpinner.adapter = subMusclesAdapter
 
-        // Set maxLines to 1 to prevent new lines
-        exerciseNameEditText.maxLines = 1
-
         // Populate views with data of the card being edited?
         if (isEditMode) {
             exerciseNameEditText.setText(cardToEdit.name)
             // Set selection for spinners
             // (You need to implement this based on your logic)
+        }
+
+//        // Set key listener for exercise name EditText
+//        exerciseNameEditText.setOnKeyListener { _, keyCode, event ->
+//            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN) {
+//                // Hide the keyboard
+//                hideKeyboard()
+//                return@setOnKeyListener true
+//            }
+//            return@setOnKeyListener false
+//        }
+
+
+        // Set key listener for exercise name EditText
+        exerciseNameEditText.setOnKeyListener { _, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                // Hide the keyboard
+                hideKeyboard()
+                return@setOnKeyListener true
+            }
+            return@setOnKeyListener false
         }
 
         // Set click listener for add/edit button
@@ -88,4 +107,10 @@ class AddCardActivity : AppCompatActivity() {
             finish()
         }
     }
+
+    private fun hideKeyboard() {
+        val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+    }
 }
+

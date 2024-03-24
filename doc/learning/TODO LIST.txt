@@ -1,0 +1,109 @@
+TODO LIST
+
+	friday
+	breakfast 
+alio e olio
+
+	dinner
+kimchi fried rice + cheese + egg + nori
+
+	snack
+makgeoli
+brownie
+
+	saturday
+	breakfast
+fast / meal deal
+
+	dinner
+kimchi fried rice + cheese + egg + nori
+
+	snack
+caramel cake
+caramel pudding
+
+
+6:00 - 7:00
+make plan (for today and tomorrow) *
+meal plan (for today and tomorrow) *
+take bottles to the kitchen * 
+clean up the desk (put stuff away)
+find my phone *
+
+7:00 - 8:00
+
+
+8:00 - 9:00
+train ticket *
+bag packing
+ERP claim
+check emails
+Ethics email
+write a letter (세영)
+change the storage structure
+do laundry
+appointment (정우)
+appointment (세영)
+reply to chats
+make global variable storage
+make login screen
+
+9:00 - 10:00
+book a GP appointment
+boots medication collection
+
+10:00 - 11:00
+sugar free ketchup
+bag packing
+start with login screen depands on the global variable
+
+
+
+18:00 - 19:00
+breakfast
+clean the kitchen
+meal prep
+make log in function work
+
+
+19:00 - 20:00
+make it able to make an account with personal information section
+
+20:00 - 21:00
+connect firebase
+
+21:00 - 22:00
+store data to firebase 
+(what is efficient way to store and load items? should I still store items locally? make backup available/ auto back up)
+
+
+
+
+return primark
+
+
+
+
+in plain
+muscle colour change
+feedback screen with my email
+delete the privarcy policy
+start with muscles and once you select the tag, it gives you the list with an animation (sliding up)
+make it slidable up and down
+
+
+
+
+cover letter
+check the mini project material
+find a room to model for my mini project
+
+
+딱 붙는 반팔티 (흰색)
+붙는 긴팔티 
+기본 사이즈 긴팔티
+블랙 코트
+롱부츠
+트렌치코트
+
+
