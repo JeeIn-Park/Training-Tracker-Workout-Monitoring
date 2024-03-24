@@ -28,16 +28,13 @@ class AddLogActivity : AppCompatActivity() {
 
     // graph
     private val mHandler = Handler(Looper.getMainLooper())
-
     private lateinit var mTimer1: Runnable
-
     private lateinit var mSeries1: LineGraphSeries<DataPoint>
     private var graph2LastXValue = 5.0
+
     // past log
     private lateinit var pastLogTableAdapter: PastLogTableAdapter
-
     private var exerciseSetList: MutableList<ExerciseSet> = mutableListOf()
-
     private val exerciseDate = LocalDateTime.now()
     private var currentSetCount: Int = 0
 
@@ -47,13 +44,13 @@ class AddLogActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val pastLog: List<ExerciseLog> = logStorage.loadLogs(this)
 //        println(pastLog)
 
         // layout binding
         setContentView(R.layout.activity_add_log)
         cardItem = intent.getSerializableExtra("EXTRA_CARD_ITEM") as ExerciseCard
         logStorage = LogStorage(cardItem.id)
+        val pastLog: List<ExerciseLog> = logStorage.loadLogs(this)
 
 
         // bottom
@@ -65,8 +62,7 @@ class AddLogActivity : AppCompatActivity() {
         // Mid left
         val pastLogRecyclerView: RecyclerView = findViewById(R.id.pastRecords)
         pastLogRecyclerView.layoutManager = LinearLayoutManager(this)
-        val filteredCard = filterCard(pastLog)
-        pastLogTableAdapter = PastLogTableAdapter(filteredCard)
+        pastLogTableAdapter = PastLogTableAdapter(pastLog)
         pastLogRecyclerView.adapter = pastLogTableAdapter
 
         // title with selected card
@@ -167,20 +163,9 @@ class AddLogActivity : AppCompatActivity() {
             totalSet = currentSetCount,
             totalWeight = null // TODO : implement this algorithm
         )
-        logStorage = LogStorage(cardItem.id)
         logStorage.addLog(this, log)
 
         println(updatedCard)
-    }
-
-    private fun filterCard( pastLogs: List<ExerciseLog> ) : MutableList<ExerciseLog>{
-        val filteredCard : MutableList<ExerciseLog> = mutableListOf()
-        pastLogs.forEach{ pastlog ->
-            if (pastlog.exerciseCard == cardItem.id) {
-                filteredCard.add(pastlog)
-            }
-        }
-        return filteredCard
     }
 
 }
