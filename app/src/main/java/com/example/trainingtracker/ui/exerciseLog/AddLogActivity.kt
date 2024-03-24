@@ -114,17 +114,22 @@ class AddLogActivity : AppCompatActivity() {
             setCountTextView.text = if (setNum != null) {
                 "${setNum?.toString()} set"
             } else { "" }
+            val setCountParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT)
+            setCountTextView.layoutParams = setCountParams
+
             kgAndRepTextView.text = "${massString} kg * ${repString}"
+            val kgAndRepParams = TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT)
+            kgAndRepTextView.layoutParams = kgAndRepParams
 
             setCountTextView.setPadding(16, 8, 16, 8)
             kgAndRepTextView.setPadding(16, 8, 16, 8)
             setCountTextView.gravity = Gravity.CENTER_VERTICAL
-            kgAndRepTextView.gravity = Gravity.CENTER_VERTICAL
+            kgAndRepTextView.gravity = Gravity.RIGHT
             setCountTextView.setBackgroundResource(R.drawable.style_textview_outline)
-            kgAndRepTextView.setBackgroundResource(R.drawable.style_textview_outline)
 
             tableRow.addView(setCountTextView)
             tableRow.addView(kgAndRepTextView)
+            tableRow.setBackgroundResource(R.drawable.style_textview_outline)
             tableLayout.addView(tableRow)
         }
 
