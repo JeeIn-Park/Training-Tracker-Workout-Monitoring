@@ -12,7 +12,8 @@ data class ExerciseCard(
     val name : String,
     val mainMuscles : List<String>,
     val subMuscles : List<String>?,
-    val tag : List<String>?
+    val tag : List<String>?,
+    val oneRepMax : Float?
     // TODO: maybe it's better to save tag for each card rather than make muscle class
     // TODO : maybe I can use muscle library
 ) : Serializable

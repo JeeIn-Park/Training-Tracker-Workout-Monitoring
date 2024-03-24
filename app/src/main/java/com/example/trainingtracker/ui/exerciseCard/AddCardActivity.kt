@@ -82,18 +82,18 @@ class AddCardActivity : AppCompatActivity() {
             val exerciseName = exerciseNameEditText.text.toString()
             val mainMuscle = listOf(mainMusclesSpinner.selectedItem.toString())
             val subMuscle = listOf(subMusclesSpinner.selectedItem.toString())
-            val lastActivity = null
             val timeAdded = LocalDateTime.now()
             // TODO: Replace with actual values
             val tag = null
 
             val card = ExerciseCard(
-                lastActivity = lastActivity,
+                lastActivity = null,
                 timeAdded = timeAdded,
                 name = exerciseName,
                 mainMuscles = mainMuscle,
                 subMuscles = subMuscle,
-                tag = tag
+                tag = tag,
+                oneRepMax = null
             )
 
             if (isEditMode) {

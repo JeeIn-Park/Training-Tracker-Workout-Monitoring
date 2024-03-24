@@ -169,7 +169,8 @@ class AddLogActivity : AppCompatActivity() {
             name = cardItem.name,
             mainMuscles = cardItem.mainMuscles,
             subMuscles = cardItem.subMuscles,
-            tag = cardItem.tag
+            tag = cardItem.tag,
+            oneRepMax = null
         )
         CardStorage.editCard(this, cardItem, updatedCard)
 
