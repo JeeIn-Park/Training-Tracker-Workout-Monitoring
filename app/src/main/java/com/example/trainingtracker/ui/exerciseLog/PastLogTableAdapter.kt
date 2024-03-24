@@ -18,6 +18,7 @@ class PastLogTableAdapter(private val items: List<ExerciseLog>) : RecyclerView.A
         val context = parent.context
         val setTableLayout = TableLayout(context)
         val dateTableLayout = TableLayout(context)
+        val emptyTableLayout = TableLayout(context)
         setTableLayout.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         setTableLayout.setPadding(8, 0, 8, 0)
 //        dateTableLayout.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
@@ -29,8 +30,9 @@ class PastLogTableAdapter(private val items: List<ExerciseLog>) : RecyclerView.A
         parentLayout.orientation = LinearLayout.VERTICAL
         parentLayout.addView(dateTableLayout)
         parentLayout.addView(setTableLayout)
+        parentLayout.addView(emptyTableLayout)
 
-        return TableItemViewHolder(parentLayout, setTableLayout, dateTableLayout)
+        return TableItemViewHolder(parentLayout, setTableLayout, dateTableLayout, emptyTableLayout)
     }
 
 
@@ -45,7 +47,8 @@ class PastLogTableAdapter(private val items: List<ExerciseLog>) : RecyclerView.A
     class TableItemViewHolder(
         private val parentView: LinearLayout,
         private val setTableLayout: TableLayout,
-        private val dateTableLayout: TableLayout
+        private val dateTableLayout: TableLayout,
+        private val emptyTableLayout: TableLayout
     ) : RecyclerView.ViewHolder(parentView) {
 
         fun bind(item: ExerciseLog) {
@@ -53,7 +56,6 @@ class PastLogTableAdapter(private val items: List<ExerciseLog>) : RecyclerView.A
                 dateRow(item.dateTime)
                 // Clear existing rows before binding new data
                 setTableLayout.removeAllViews()
-
 
                 // Bind data to views here
                 for (exerciseSet in item.exerciseSetList) {
@@ -81,6 +83,13 @@ class PastLogTableAdapter(private val items: List<ExerciseLog>) : RecyclerView.A
                     setRow.setBackgroundResource(R.drawable.style_textview_outline)
                     setTableLayout.addView(setRow)
                 }
+
+                emptyTableLayout.removeAllViews()
+                val emptyView = TextView(emptyTableLayout.context)
+                emptyView.text = ""
+                val emptyRow = TableRow(emptyTableLayout.context)
+                emptyRow.addView(emptyView)
+                emptyTableLayout.addView(emptyRow)
             }
         }
 
