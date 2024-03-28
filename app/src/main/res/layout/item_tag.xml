@@ -13,6 +13,7 @@
         app:cardBackgroundColor="?attr/colorSecondary"
         app:cardCornerRadius="16dp">
 
+<!--        todo : outline-->
         <TextView
             android:id="@+id/tagName"
             android:layout_width="match_parent"

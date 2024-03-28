@@ -13,12 +13,18 @@ class HomeViewModel : ViewModel() {
     }
     val text: LiveData<String> = _text
 
-    // recycler
-    private val _recyclerViewData = MutableLiveData<List<ExerciseCard>>()
-    val recyclerViewData : LiveData<List<ExerciseCard>> = _recyclerViewData
+    // card recycler
+    private val _cardRecyclerViewData = MutableLiveData<List<ExerciseCard>>()
+    val cardRecyclerViewData : LiveData<List<ExerciseCard>> = _cardRecyclerViewData
+    fun updateCardRecyclerViewData(data : List<ExerciseCard>) {
+        _cardRecyclerViewData.value = data
+    }
 
-    fun updateRecyclerViewData(data : List<ExerciseCard>) {
-        _recyclerViewData.value = data
+    // tag recycler
+    private val _tagRecyclerViewData = MutableLiveData<List<String>>()
+    val tagRecyclerViewData : LiveData<List<String>> = _tagRecyclerViewData
+    fun updateTagRecyclerViewData(data : List<String>) {
+        _tagRecyclerViewData.value = data
     }
 
 }

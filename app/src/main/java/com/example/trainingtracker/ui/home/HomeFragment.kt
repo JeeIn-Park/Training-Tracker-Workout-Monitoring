@@ -6,13 +6,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.trainingtracker.ui.exerciseCard.CardStorage
 import com.example.trainingtracker.databinding.FragmentHomeBinding
+import com.example.trainingtracker.ui.tag.TagAdapter
+import com.example.trainingtracker.ui.tag.TagStorage
 
 class HomeFragment : Fragment() {
 
@@ -21,6 +22,7 @@ class HomeFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
     private lateinit var cardAdapter: HomeCardAdapter
+    private lateinit var tagAdapter: TagAdapter
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -39,20 +41,25 @@ class HomeFragment : Fragment() {
           startActivity(intent)
       }
 
+      tagAdapter = TagAdapter(TagStorage.loadTags(requireContext()))
+
       val exerciseRecyclerView = binding.exerciseRecyclerView
       exerciseRecyclerView.layoutManager = LinearLayoutManager(requireContext())
       exerciseRecyclerView.adapter = cardAdapter
       exerciseRecyclerView.itemAnimator = DefaultItemAnimator()
-
-      val textView: TextView = binding.filterBar.textAboveRecyclerView
-
-      homeViewModel.recyclerViewData.observe(viewLifecycleOwner) {
-          newData -> cardAdapter.submitList(newData)
-          homeViewModel.updateRecyclerViewData(newData) // TODO : is this necessary
+      //todo : better animator
+      homeViewModel.cardRecyclerViewData.observe(viewLifecycleOwner) {
+              newData -> cardAdapter.submitList(newData)
+          homeViewModel.updateCardRecyclerViewData(newData)
       }
-      homeViewModel.text.observe(viewLifecycleOwner) {
-          textView.text = it
-      }
+
+      val tagRecyclerView  = binding.filterBar.tagRecyclerView
+      tagRecyclerView.adapter = tagAdapter
+      tagRecyclerView.itemAnimator = DefaultItemAnimator()
+//      homeViewModel.tagRecyclerViewData.observe(viewLifecycleOwner) {
+//          newData -> tagRecyclerView.submitList(newData)
+//          homeViewModel.updateCardRecyclerViewData(newData)
+//      }
 
       return root
   }
