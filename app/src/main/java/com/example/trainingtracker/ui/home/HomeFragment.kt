@@ -1,4 +1,4 @@
-package com.example.trainingtracker.ui.Home
+package com.example.trainingtracker.ui.home
 
 import com.example.trainingtracker.ui.exerciseLog.AddLogActivity
 import android.content.Intent

@@ -1,4 +1,4 @@
-package com.example.trainingtracker.ui.Home
+package com.example.trainingtracker.ui.home
 
 import android.app.AlertDialog
 import android.content.Context

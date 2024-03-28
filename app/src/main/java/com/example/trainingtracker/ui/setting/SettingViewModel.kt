@@ -1,4 +1,4 @@
-package com.example.trainingtracker.ui.MyMenu
+package com.example.trainingtracker.ui.setting
 
 import android.app.Application
 import android.content.pm.PackageManager

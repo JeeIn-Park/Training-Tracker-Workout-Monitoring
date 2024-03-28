@@ -1,4 +1,4 @@
-package com.example.trainingtracker.ui.Status
+package com.example.trainingtracker.ui.status
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
