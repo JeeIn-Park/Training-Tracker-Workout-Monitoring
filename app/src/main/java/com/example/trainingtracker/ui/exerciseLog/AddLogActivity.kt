@@ -73,10 +73,17 @@ class AddLogActivity : AppCompatActivity() {
 
         val boxView1: View = findViewById(R.id.box1)
         val titleTextView1: TextView = boxView1.findViewById(R.id.title)
+        // todo : title disappeared
         val contentTextView1: TextView = boxView1.findViewById(R.id.content)
         val dateTextView1: TextView = boxView1.findViewById(R.id.date)
-        val title1 = "ONE REP MAX - PB"
-        titleTextView1.text = title1
+        titleTextView1.text = "ONE REP MAX, PB"
+        if (pastLog.isEmpty()) {
+            titleTextView1.text = ""
+        } else {
+            val content = Algorithm.oneRepMaxRecord(pastLog[pastLog.lastIndex]).roundToInt().toString()
+            titleTextView1.text = content
+        }
+
         val content1 = Algorithm.oneRepMaxRecord_pb(pastLog).roundToInt().toString()
         contentTextView1.text = content1
 
@@ -84,10 +91,14 @@ class AddLogActivity : AppCompatActivity() {
         val titleTextView2: TextView = boxView2.findViewById(R.id.title)
         val contentTextView2: TextView = boxView2.findViewById(R.id.content)
         val dateTextView2: TextView = boxView2.findViewById(R.id.date)
-        val title2 = "ONE REP MAX"
-        titleTextView2.text = title2
-        val content2 = Algorithm.oneRepMaxRecord(pastLog[pastLog.lastIndex]).roundToInt().toString()
-        contentTextView2.text = content2
+        titleTextView2.text =  "ONE REP MAX, last session"
+        if (pastLog.isEmpty()) {
+            contentTextView2.text = ""
+        } else {
+            val content = Algorithm.oneRepMaxRecord(pastLog[pastLog.lastIndex]).roundToInt().toString()
+            contentTextView2.text = content
+        }
+
 
 
         var setNum: Int?
