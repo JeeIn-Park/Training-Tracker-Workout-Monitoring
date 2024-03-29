@@ -6,11 +6,12 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
-class TagAdapter(private val tags: List<String>) :
-    RecyclerView.Adapter<TagAdapter.TagViewHolder>() {
-
+class TagAdapter(private val context: Context, private val tags: List<String>) :
+    ListAdapter<String, TagAdapter.TagViewHolder>(TagDiffCallback()) {
     // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): TagViewHolder {
         // Create a new CardView programmatically
@@ -22,16 +23,37 @@ class TagAdapter(private val tags: List<String>) :
         return TagViewHolder(cardView)
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
-    override fun onBindViewHolder(viewHolder: TagViewHolder, position: Int) {
-        // Get element from your dataset at this position and replace the
-        // contents of the view with that element
-        viewHolder.textView.text = tags[position]
+    override fun onBindViewHolder(holder: TagViewHolder, position: Int) {
+        val currentItem = getItem(position)
+        holder.bind(currentItem)
+//        holder.itemView.setOnClickListener {
+//            onItemClick(currentItem)
+//        }
     }
+
 
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = tags.size
-    class TagViewHolder(outerCardView: CardView) : RecyclerView.ViewHolder(outerCardView) {
+
+    fun addItem(tag: String) {
+        val updatedList = currentList.toMutableList()
+        updatedList.add(tag)
+        submitList(updatedList)
+        TagStorage.addTag(context, tag)
+    }
+
+    fun removeItem(position: Int) {
+        val updatedList = currentList.toMutableList()
+        val removedTag = updatedList.removeAt(position)
+        submitList(updatedList)
+        TagStorage.removeTag(context, removedTag)
+    }
+
+
+    inner class TagViewHolder(outerCardView: CardView) : RecyclerView.ViewHolder(outerCardView) {
+        //  connect layout and bind it through id
+        // add bind function
+
         private val innerCardView: CardView = CardView(outerCardView.context).apply {
             layoutParams = FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -52,6 +74,15 @@ class TagAdapter(private val tags: List<String>) :
         }
     }
 
+}
 
 
+class TagDiffCallback : DiffUtil.ItemCallback<String>() {
+    override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+        return oldItem == newItem
+    }
+
+    override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+        return oldItem == newItem
+    }
 }

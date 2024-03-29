@@ -77,7 +77,7 @@ class AddLogActivity : AppCompatActivity() {
         val contentTextView1: TextView = boxView1.findViewById(R.id.content)
         val dateTextView1: TextView = boxView1.findViewById(R.id.date)
         titleTextView1.text = "ONE REP MAX, PB"
-        if (pastLog.isEmpty()) {
+        if (pastLog.isEmpty()) { // todo : need better way to deal with it
             titleTextView1.text = ""
         } else {
             val content = Algorithm.oneRepMaxRecord(pastLog[pastLog.lastIndex]).roundToInt().toString()

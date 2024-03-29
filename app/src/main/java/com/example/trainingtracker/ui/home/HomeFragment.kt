@@ -56,10 +56,10 @@ class HomeFragment : Fragment() {
       val tagRecyclerView  = binding.filterBar.tagRecyclerView
       tagRecyclerView.adapter = tagAdapter
       tagRecyclerView.itemAnimator = DefaultItemAnimator()
-//      homeViewModel.tagRecyclerViewData.observe(viewLifecycleOwner) {
-//          newData -> tagRecyclerView.submitList(newData)
-//          homeViewModel.updateCardRecyclerViewData(newData)
-//      }
+      homeViewModel.tagRecyclerViewData.observe(viewLifecycleOwner) {
+          newData -> tagRecyclerView.submitList(newData)
+          homeViewModel.updateCardRecyclerViewData(newData)
+      }
 
       return root
   }
@@ -68,6 +68,9 @@ class HomeFragment : Fragment() {
         super.onResume()
         val cards = CardStorage.loadCards(requireContext())
         cardAdapter.submitList(cards)
+        val tags = TagStorage.loadTags(requireContext())
+        tagAdapter.submitList(tags)
+
     }
 override fun onDestroyView() {
         super.onDestroyView()
