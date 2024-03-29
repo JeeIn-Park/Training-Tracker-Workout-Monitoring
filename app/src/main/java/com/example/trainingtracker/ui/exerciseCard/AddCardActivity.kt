@@ -3,7 +3,6 @@ package com.example.trainingtracker.ui.exerciseCard
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
-import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -13,9 +12,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.trainingtracker.R
 import java.time.LocalDateTime
 
+
 class AddCardActivity : AppCompatActivity() {
 
-    private var isEditMode = false
     private lateinit var cardToEdit: ExerciseCard
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,8 +25,8 @@ class AddCardActivity : AppCompatActivity() {
         val cardFromIntent = intent.getSerializableExtra("edit_card") as? ExerciseCard
         Log.d("com.example.trainingtracker.ui.exerciseCard.AddCardActivity", "Card from Intent: $cardFromIntent")
 
+
         // Check if the activity is in edit mode
-        isEditMode = intent.getBooleanExtra("is_edit_mode", false)
 
         // Initialize views
         val musclesArray = resources.getStringArray(R.array.muscles_array)
@@ -48,13 +47,6 @@ class AddCardActivity : AppCompatActivity() {
         // Set adapters to spinners
         mainMusclesSpinner.adapter = mainMusclesAdapter
         subMusclesSpinner.adapter = subMusclesAdapter
-
-        // Populate views with data of the card being edited?
-        if (isEditMode) {
-            exerciseNameEditText.setText(cardToEdit.name)
-            // Set selection for spinners
-            // (You need to implement this based on your logic)
-        }
 
 //        // Set key listener for exercise name EditText
 //        exerciseNameEditText.setOnKeyListener { _, keyCode, event ->
@@ -96,14 +88,7 @@ class AddCardActivity : AppCompatActivity() {
                 oneRepMax = null
             )
 
-            if (isEditMode) {
-                // Replace the edited card in storage
-                CardStorage.editCard(this, cardToEdit, card)
-            } else {
-                // Add the new card to storage
-                CardStorage.addCard(this, card)
-            }
-
+            CardStorage.addCard(this, card)
             finish()
         }
     }
