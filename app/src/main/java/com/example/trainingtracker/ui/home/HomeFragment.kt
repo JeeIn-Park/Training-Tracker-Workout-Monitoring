@@ -89,7 +89,7 @@ class HomeFragment : Fragment() {
         }
 
         val tagRecyclerView = binding.filterBar.tagRecyclerView
-        tagRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        tagRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         tagRecyclerView.adapter = tagAdapter
         tagRecyclerView.itemAnimator = DefaultItemAnimator()
         homeViewModel.tagRecyclerViewData.observe(viewLifecycleOwner) { newData ->
@@ -102,12 +102,7 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        val cards = CardStorage.loadCards(requireContext())
-        cardAdapter.submitList(cards)
-        val tags: MutableList<String> = TagStorage.loadTags(requireContext()).toMutableList()
-        tags.add("  +  ")
-        tagAdapter.submitList(tags)
-
+        refresh()
     }
 
     override fun onDestroyView() {
@@ -115,5 +110,13 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
+
+    private fun refresh() {
+        val cards = CardStorage.loadCards(requireContext())
+        cardAdapter.submitList(cards)
+        val tags: MutableList<String> = TagStorage.loadTags(requireContext()).toMutableList()
+        tags.add("  +  ")
+        tagAdapter.submitList(tags)
+    }
 
 }
