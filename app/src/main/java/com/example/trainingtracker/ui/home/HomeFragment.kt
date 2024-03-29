@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.trainingtracker.R
 import com.example.trainingtracker.ui.exerciseCard.CardStorage
 import com.example.trainingtracker.databinding.FragmentHomeBinding
 import com.example.trainingtracker.ui.tag.TagAdapter
@@ -43,10 +44,10 @@ class HomeFragment : Fragment() {
       // todo : study intent, put extra?
 
       tagAdapter = TagAdapter(requireContext()) {clickedTag ->
-          val intent = Intent(context, AddLogActivity::class.java).apply {
-              putExtra("EXTRA_TAG_ITEM", clickedTag)
-          }
-          startActivity(intent)
+//          val intent = Intent(context, AddLogActivity::class.java).apply {
+//              putExtra("EXTRA_TAG_ITEM", clickedTag)
+//          }
+//          startActivity(intent)
       }
 
       val exerciseRecyclerView = binding.exerciseRecyclerView
@@ -75,7 +76,8 @@ class HomeFragment : Fragment() {
         super.onResume()
         val cards = CardStorage.loadCards(requireContext())
         cardAdapter.submitList(cards)
-        val tags = TagStorage.loadTags(requireContext())
+        val tags : MutableList<String> = TagStorage.loadTags(requireContext()).toMutableList()
+        tags.add(" + ")
         tagAdapter.submitList(tags)
 
     }
