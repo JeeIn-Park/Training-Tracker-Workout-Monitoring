@@ -10,11 +10,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.trainingtracker.R
 import com.example.trainingtracker.ui.exerciseCard.CardStorage
 import com.example.trainingtracker.databinding.FragmentHomeBinding
 import com.example.trainingtracker.ui.tag.TagAdapter
 import com.example.trainingtracker.ui.tag.TagStorage
+import android.app.AlertDialog
+import android.widget.EditText
+
 
 class HomeFragment : Fragment() {
 
@@ -43,12 +45,37 @@ class HomeFragment : Fragment() {
       }
       // todo : study intent, put extra?
 
-      tagAdapter = TagAdapter(requireContext()) {clickedTag ->
-//          val intent = Intent(context, AddLogActivity::class.java).apply {
-//              putExtra("EXTRA_TAG_ITEM", clickedTag)
-//          }
-//          startActivity(intent)
+      tagAdapter = TagAdapter(requireContext()) { clickedTag ->
+          if (clickedTag == "  +  ") {
+              // Ask for user input and change "+" to it
+              val inputDialog = AlertDialog.Builder(requireContext())
+              val inputEditText = EditText(requireContext())
+              inputDialog.setView(inputEditText)
+              inputDialog.setTitle("Enter a new tag")
+
+              inputDialog.setPositiveButton("OK") { dialog, _ ->
+                  val newTag = inputEditText.text.toString().trim()
+                  if (newTag.isNotEmpty()) {
+                      // Add the new tag to your data source and notify the adapter
+                      val updatedTags = mutableListOf<String>()
+                      updatedTags.addAll(tagAdapter.currentList.dropLast(1))
+                      updatedTags.add(newTag)
+                      updatedTags.add("  +  ")
+                      tagAdapter.submitList(updatedTags)
+                  }
+                  dialog.dismiss()
+              }
+
+              inputDialog.setNegativeButton("Cancel") { dialog, _ ->
+                  dialog.dismiss()
+              }
+
+              inputDialog.show()
+          } else {
+              // Change the recyclerView item background color
+          }
       }
+
 
       val exerciseRecyclerView = binding.exerciseRecyclerView
       exerciseRecyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -77,7 +104,7 @@ class HomeFragment : Fragment() {
         val cards = CardStorage.loadCards(requireContext())
         cardAdapter.submitList(cards)
         val tags : MutableList<String> = TagStorage.loadTags(requireContext()).toMutableList()
-        tags.add(" + ")
+        tags.add("  +  ")
         tagAdapter.submitList(tags)
 
     }
