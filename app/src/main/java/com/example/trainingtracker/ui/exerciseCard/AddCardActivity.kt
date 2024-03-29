@@ -10,6 +10,7 @@ import android.widget.EditText
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import com.example.trainingtracker.R
+import com.example.trainingtracker.ui.tag.TagStorage
 import java.time.LocalDateTime
 
 
@@ -25,39 +26,33 @@ class AddCardActivity : AppCompatActivity() {
         val cardFromIntent = intent.getSerializableExtra("edit_card") as? ExerciseCard
         Log.d("com.example.trainingtracker.ui.exerciseCard.AddCardActivity", "Card from Intent: $cardFromIntent")
 
-
-        // Check if the activity is in edit mode
+        val musclesArray = resources.getStringArray(R.array.muscles_array)
+        val tagArray = (listOf(resources.getString(R.string.select_tag))
+                + TagStorage.loadTags(this)).toTypedArray()
 
         // Initialize views
-        val musclesArray = resources.getStringArray(R.array.muscles_array)
         val exerciseNameEditText: EditText = findViewById(R.id.exercise_name)
         val mainMusclesSpinner: Spinner = findViewById(R.id.main_muscles)
         val subMusclesSpinner: Spinner = findViewById(R.id.sub_muscles)
+        val tagMuscleSpinner: Spinner = findViewById(R.id.select_tag)
         val addButton: Button = findViewById(R.id.add_button)
 
         val mainMusclesAdapter =
             ArrayAdapter(this, android.R.layout.simple_spinner_item, musclesArray)
         val subMusclesAdapter =
             ArrayAdapter(this, android.R.layout.simple_spinner_item, musclesArray)
+        val tagAdapter =
+            ArrayAdapter(this, android.R.layout.simple_spinner_item, tagArray)
 
         // Set dropdown layout style
         mainMusclesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         subMusclesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        tagAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
         // Set adapters to spinners
         mainMusclesSpinner.adapter = mainMusclesAdapter
         subMusclesSpinner.adapter = subMusclesAdapter
-
-//        // Set key listener for exercise name EditText
-//        exerciseNameEditText.setOnKeyListener { _, keyCode, event ->
-//            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN) {
-//                // Hide the keyboard
-//                hideKeyboard()
-//                return@setOnKeyListener true
-//            }
-//            return@setOnKeyListener false
-//        }
-
+        tagMuscleSpinner.adapter = tagAdapter
 
         // Set key listener for exercise name EditText
         exerciseNameEditText.setOnKeyListener { _, keyCode, event ->

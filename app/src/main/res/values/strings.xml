@@ -6,6 +6,8 @@
     <string name="add_a_new_exercise">Add a new exercise</string>
     <string name="kg_entering_description">Enter weight</string>
     <string name="rep_entering_description">Enter reps</string>
+    <string name="select_tag">Select tag</string>
+
 
     <string-array name="muscles_array">
         <item>Select muscle</item>
