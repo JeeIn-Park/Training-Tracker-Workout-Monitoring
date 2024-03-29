@@ -60,7 +60,7 @@ class StatusCardAdapter(private val context: Context, private val onItemClick: (
         // reference (each parts in a card layout)
         fun bind(cardItem: ExerciseCard) {
             exerciseName.text = if (cardItem.name != null) {
-                cardItem.name.toString()
+                cardItem.name
             } else {
                 "N/A"
             }

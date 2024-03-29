@@ -40,8 +40,14 @@ class HomeFragment : Fragment() {
           }
           startActivity(intent)
       }
+      // todo : study intent, put extra?
 
-      tagAdapter = TagAdapter(TagStorage.loadTags(requireContext()))
+      tagAdapter = TagAdapter(requireContext()) {clickedTag ->
+          val intent = Intent(context, AddLogActivity::class.java).apply {
+              putExtra("EXTRA_TAG_ITEM", clickedTag)
+          }
+          startActivity(intent)
+      }
 
       val exerciseRecyclerView = binding.exerciseRecyclerView
       exerciseRecyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -54,11 +60,12 @@ class HomeFragment : Fragment() {
       }
 
       val tagRecyclerView  = binding.filterBar.tagRecyclerView
+      tagRecyclerView.layoutManager = LinearLayoutManager(requireContext())
       tagRecyclerView.adapter = tagAdapter
       tagRecyclerView.itemAnimator = DefaultItemAnimator()
       homeViewModel.tagRecyclerViewData.observe(viewLifecycleOwner) {
-          newData -> tagRecyclerView.submitList(newData)
-          homeViewModel.updateCardRecyclerViewData(newData)
+              newData -> tagAdapter.submitList(newData)
+          homeViewModel.updateTagRecyclerViewData(newData)
       }
 
       return root
