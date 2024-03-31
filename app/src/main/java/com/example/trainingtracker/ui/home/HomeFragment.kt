@@ -111,6 +111,9 @@ class HomeFragment : Fragment() {
     }
 
     override fun onStop() {
+        val tags = mutableListOf<String>()
+        tags.addAll(tagAdapter.currentList.dropLast(1))
+        TagStorage.saveTags(requireContext(), tags)
         super.onStop()
     }
 
