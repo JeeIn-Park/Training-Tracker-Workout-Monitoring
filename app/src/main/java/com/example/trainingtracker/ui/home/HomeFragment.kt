@@ -47,7 +47,7 @@ class HomeFragment : Fragment() {
         // todo : study intent, put extra?
 
         tagAdapter = TagAdapter(requireContext()) { clickedTag ->
-            if (clickedTag == "  +  ") {
+            if (clickedTag == "+") {
                 // Ask for user input and change "+" to it
                 val inputDialog = AlertDialog.Builder(requireContext())
                 val inputEditText = EditText(requireContext())
@@ -61,7 +61,7 @@ class HomeFragment : Fragment() {
                         val updatedTags = mutableListOf<String>()
                         updatedTags.addAll(tagAdapter.currentList.dropLast(1))
                         updatedTags.add(newTag)
-                        updatedTags.add("  +  ")
+                        updatedTags.add("+")
                         tagAdapter.submitList(updatedTags)
                     }
                     dialog.dismiss()
@@ -110,12 +110,15 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
+    override fun onStop() {
+        super.onStop()
+    }
 
     private fun refresh() {
         val cards = CardStorage.loadCards(requireContext())
         cardAdapter.submitList(cards)
         val tags: MutableList<String> = TagStorage.loadTags(requireContext()).toMutableList()
-        tags.add("  +  ")
+        tags.add("+")
         tagAdapter.submitList(tags)
     }
 

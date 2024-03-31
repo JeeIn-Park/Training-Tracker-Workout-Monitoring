@@ -20,7 +20,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="6dp"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="6dp"
+
             android:text="Tag"
             android:textColor="?attr/colorOnBackground"
             android:textSize="16sp" />
