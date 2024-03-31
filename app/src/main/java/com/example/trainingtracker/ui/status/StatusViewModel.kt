@@ -6,8 +6,11 @@ import androidx.lifecycle.ViewModel
 
 class StatusViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
+    // tag recycler
+    private val _tagRecyclerViewData = MutableLiveData<List<String>>()
+    val tagRecyclerViewData : LiveData<List<String>> = _tagRecyclerViewData
+    fun updateTagRecyclerViewData(data : List<String>) {
+        _tagRecyclerViewData.value = data
     }
-    val text: LiveData<String> = _text
+
 }
