@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.trainingtracker.databinding.FragmentHomeBinding
+import com.example.trainingtracker.ui.exerciseCard.AddCardActivity
 import com.example.trainingtracker.ui.exerciseCard.CardStorage
 import com.example.trainingtracker.ui.exerciseLog.AddLogActivity
 import com.example.trainingtracker.ui.tag.TagAdapter
@@ -37,6 +38,12 @@ class HomeFragment : Fragment() {
             ViewModelProvider(this).get(HomeViewModel::class.java)
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        val addCardButton = binding.addCardButton
+        addCardButton.setOnClickListener {
+            val intent = Intent(activity, AddCardActivity::class.java)
+            startActivity(intent)
+        }
 
         cardAdapter = HomeCardAdapter(requireContext()) { clickedCard ->
             val intent = Intent(context, AddLogActivity::class.java).apply {
