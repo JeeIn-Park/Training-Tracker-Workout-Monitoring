@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingtracker.R
 
-class TagAdapter(private val context: Context, private val onItemClick: (String) -> Unit) :
-    ListAdapter<String, TagAdapter.TagViewHolder>(TagDiffCallback()) {
+class TagAdapter(private val context: Context, private val onItemClick: (Tag) -> Unit) :
+    ListAdapter<Tag, TagAdapter.TagViewHolder>(TagDiffCallback()) {
     // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TagViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -21,13 +21,13 @@ class TagAdapter(private val context: Context, private val onItemClick: (String)
 
     override fun onBindViewHolder(holder: TagViewHolder, position: Int) {
         val currentItem = getItem(position)
-        holder.bind(currentItem)
+        holder.bind(currentItem.name)
         holder.itemView.setOnClickListener {
             onItemClick(currentItem)
         }
     }
 
-    fun addItem(tag: String) {
+    fun addItem(tag: Tag) {
         val updatedList = currentList.toMutableList()
         updatedList.add(tag)
         submitList(updatedList)

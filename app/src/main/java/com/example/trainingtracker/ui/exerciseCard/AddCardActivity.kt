@@ -9,8 +9,10 @@ import android.widget.EditText
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import com.example.trainingtracker.R
+import com.example.trainingtracker.ui.tag.Tag
 import com.example.trainingtracker.ui.tag.TagStorage
 import java.time.LocalDateTime
+import java.util.UUID
 
 
 class AddCardActivity : AppCompatActivity() {
@@ -62,11 +64,11 @@ class AddCardActivity : AppCompatActivity() {
         if (cardItem != null) {
             supportActionBar?.title = cardItem.name
             exerciseNameEditText.setText(cardItem.name)
-            val mainMuscleIndex = find(cardItem.mainMuscles[0], musclesArray)
+            val mainMuscleIndex = findMuscleIndex(cardItem.mainMuscles[0], musclesArray)
             mainMusclesSpinner.setSelection(mainMuscleIndex)
-            val subMuscleIndex = find(cardItem.subMuscles[0], musclesArray)
+            val subMuscleIndex = findMuscleIndex(cardItem.subMuscles[0], musclesArray)
             subMusclesSpinner.setSelection(subMuscleIndex)
-            val tagIndex = find(cardItem.tag[0], tagArray)
+            val tagIndex = findMuscleIndex(cardItem.tag[0], tagArray)
             tagSpinner.setSelection(tagIndex)
             addButton.text = "SAVE"
         }
@@ -81,6 +83,7 @@ class AddCardActivity : AppCompatActivity() {
 
             if (cardItem != null) {
                 val card = ExerciseCard(
+                    id = cardItem.id,
                     lastActivity = cardItem.lastActivity,
                     timeAdded = timeAdded,
                     name = exerciseName,
@@ -94,7 +97,13 @@ class AddCardActivity : AppCompatActivity() {
                 finish()
 
             } else {
+                var uniqueId: UUID
+                do {
+                    uniqueId = UUID.randomUUID()
+                } while (CardStorage.isIdInUse(this, uniqueId))
+
                 val card = ExerciseCard(
+                    id = uniqueId,
                     lastActivity = null,
                     timeAdded = timeAdded,
                     name = exerciseName,
@@ -118,7 +127,9 @@ class AddCardActivity : AppCompatActivity() {
 
     // TODO : back press warning, on stop
 
-    private fun find(item: String, resourceArray: Array<String>) : Int {
+
+    // TODO : make general
+    private fun findMuscleIndex(item: String, resourceArray: Array<String>) : Int {
         for (i in resourceArray.indices) {
             if (resourceArray[i] == item) {
                 return i
@@ -126,5 +137,15 @@ class AddCardActivity : AppCompatActivity() {
         }
         return 0
     }
+
+    private fun findTagIndex(item: Tag, resourceArray: Array<Tag>) : Int {
+        for (i in resourceArray.indices) {
+            if (resourceArray[i] == item) {
+                return i
+            }
+        }
+        return 0
+    }
+
 }
 

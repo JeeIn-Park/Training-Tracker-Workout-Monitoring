@@ -1,16 +1,18 @@
 package com.example.trainingtracker.ui.tag
 
 import android.content.Context
+import com.example.trainingtracker.ui.exerciseCard.CardStorage
 import java.io.FileNotFoundException
 import java.io.IOException
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
+import java.util.UUID
 
 object TagStorage {
 
     private const val FILE_NAME = "tags.dat"
 
-    fun saveTags(context: Context, tags : List<String>) {
+    fun saveTags(context: Context, tags : List<Tag>) {
         try {
             ObjectOutputStream(context.openFileOutput(FILE_NAME, Context.MODE_PRIVATE)).use {
                 it.writeObject(tags)
@@ -21,10 +23,10 @@ object TagStorage {
     }
 
     // TODO : when not match the type
-    fun loadTags(context: Context) : List<String> {
+    fun loadTags(context: Context) : List<Tag> {
         try {
             ObjectInputStream(context.openFileInput(FILE_NAME)).use {
-                return it.readObject() as? List<String> ?: emptyList()
+                return it.readObject() as? List<Tag> ?: emptyList()
             }
         } catch (e : FileNotFoundException) {
             return emptyList()
@@ -37,25 +39,30 @@ object TagStorage {
         }
     }
 
-    fun addTag(context: Context, tag: String) {
+    fun addTag(context: Context, tag: Tag) {
         val currentTags = loadTags(context).toMutableList()
         currentTags.add(tag)
         saveTags(context, currentTags)
     }
 
-    fun removeTag(context: Context, tag: String) {
+    fun removeTag(context: Context, tag: Tag) {
         val currentTags = loadTags(context).toMutableList()
         currentTags.remove(tag)
         saveTags(context, currentTags)
     }
 
-    fun editTag(context: Context, oldTag: String, newTag: String) {
+    fun editTag(context: Context, oldTag: Tag, newTag: Tag) {
         val currentTags = loadTags(context).toMutableList()
         val index = currentTags.indexOfFirst { it == oldTag } // TODO : what is this code
         if (index != -1) {
             currentTags[index] = newTag
             saveTags(context, currentTags)
         }
+    }
+
+    fun isIdInUse(context: Context, id: UUID): Boolean {
+        val currentCards = CardStorage.loadCards(context)
+        return currentCards.any { it.id == id }
     }
 
 

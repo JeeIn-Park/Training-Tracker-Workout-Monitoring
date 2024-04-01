@@ -1,12 +1,12 @@
 package com.example.trainingtracker.ui.tag
 import androidx.recyclerview.widget.DiffUtil
 
-class TagDiffCallback : DiffUtil.ItemCallback<String>() {
-    override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+class TagDiffCallback : DiffUtil.ItemCallback<Tag>() {
+    override fun areItemsTheSame(oldItem: Tag, newItem: Tag): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+    override fun areContentsTheSame(oldItem: Tag, newItem: Tag): Boolean {
         return oldItem == newItem
     }
 }

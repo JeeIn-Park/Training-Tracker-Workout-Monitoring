@@ -5,6 +5,7 @@ import java.io.FileNotFoundException
 import java.io.IOException
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
+import java.util.UUID
 
 object CardStorage {
     private const val FILE_NAME = "exercise_cards.dat"
@@ -57,6 +58,11 @@ object CardStorage {
             currentCards[index] = newCard
             saveCards(context, currentCards)
         }
+    }
+
+    fun isIdInUse(context: Context, id: UUID): Boolean {
+        val currentCards = loadCards(context)
+        return currentCards.any { it.id == id }
     }
 
 
