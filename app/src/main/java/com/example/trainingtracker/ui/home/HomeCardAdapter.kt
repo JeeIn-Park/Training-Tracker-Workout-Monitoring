@@ -2,6 +2,7 @@ package com.example.trainingtracker.ui.home
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,13 +13,16 @@ import com.example.trainingtracker.ui.exerciseCard.CardStorage
 import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
 import com.example.trainingtracker.ui.exerciseCard.ExerciseCardDiffCallback
 import com.example.trainingtracker.R
+import com.example.trainingtracker.ui.exerciseCard.AddCardActivity
+import com.example.trainingtracker.ui.exerciseLog.AddLogActivity
 import com.example.trainingtracker.ui.exerciseLog.LogStorage
 import java.time.Duration
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-class HomeCardAdapter(private val context: Context, private val onItemClick: (ExerciseCard) -> Unit) :
+class HomeCardAdapter(
+    private val context: Context, private val onItemClick: (ExerciseCard) -> Unit) :
     ListAdapter<ExerciseCard, HomeCardAdapter.CardViewHolder>(ExerciseCardDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
@@ -128,7 +132,10 @@ class HomeCardAdapter(private val context: Context, private val onItemClick: (Ex
                     when (which) {
                         // Edit
                         0 -> {
-                            // implement edit
+                            val intent = Intent(context, AddCardActivity::class.java).apply {
+                                putExtra("EXTRA_CARD_ITEM", cardItem)
+                            }
+                            context.startActivity(intent)
                         }
                         // Delete
                         1 -> {

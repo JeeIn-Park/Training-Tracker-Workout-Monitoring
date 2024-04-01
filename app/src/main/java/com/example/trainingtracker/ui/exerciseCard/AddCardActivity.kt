@@ -1,7 +1,6 @@
 package com.example.trainingtracker.ui.exerciseCard
 
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
@@ -16,15 +15,11 @@ import java.time.LocalDateTime
 
 class AddCardActivity : AppCompatActivity() {
 
-    private lateinit var cardToEdit: ExerciseCard
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_card)
 
-        // Retrieve the card to edit if this activity was launched for editing
-        val cardFromIntent = intent.getSerializableExtra("edit_card") as? ExerciseCard
-        Log.d("com.example.trainingtracker.ui.exerciseCard.AddCardActivity", "Card from Intent: $cardFromIntent")
+        val cardItem = intent.getSerializableExtra("EXTRA_CARD_ITEM") as ExerciseCard?
 
         val musclesArray = resources.getStringArray(R.array.muscles_array)
         val tagArray = (listOf(resources.getString(R.string.select_tag))
@@ -34,7 +29,7 @@ class AddCardActivity : AppCompatActivity() {
         val exerciseNameEditText: EditText = findViewById(R.id.exercise_name)
         val mainMusclesSpinner: Spinner = findViewById(R.id.main_muscles)
         val subMusclesSpinner: Spinner = findViewById(R.id.sub_muscles)
-        val tagMuscleSpinner: Spinner = findViewById(R.id.select_tag)
+        val tagSpinner: Spinner = findViewById(R.id.select_tag)
         val addButton: Button = findViewById(R.id.add_button)
 
         val mainMusclesAdapter =
@@ -52,7 +47,7 @@ class AddCardActivity : AppCompatActivity() {
         // Set adapters to spinners
         mainMusclesSpinner.adapter = mainMusclesAdapter
         subMusclesSpinner.adapter = subMusclesAdapter
-        tagMuscleSpinner.adapter = tagAdapter
+        tagSpinner.adapter = tagAdapter
 
         // Set key listener for exercise name EditText
         exerciseNameEditText.setOnKeyListener { _, keyCode, event ->
@@ -64,33 +59,72 @@ class AddCardActivity : AppCompatActivity() {
             return@setOnKeyListener false
         }
 
+        if (cardItem != null) {
+            supportActionBar?.title = cardItem.name
+            exerciseNameEditText.setText(cardItem.name)
+            val mainMuscleIndex = find(cardItem.mainMuscles[0], musclesArray)
+            mainMusclesSpinner.setSelection(mainMuscleIndex)
+            val subMuscleIndex = find(cardItem.subMuscles[0], musclesArray)
+            subMusclesSpinner.setSelection(subMuscleIndex)
+            val tagIndex = find(cardItem.tag[0], tagArray)
+            tagSpinner.setSelection(tagIndex)
+            addButton.text = "SAVE"
+        }
+
         // Set click listener for add/edit button
         addButton.setOnClickListener {
             val exerciseName = exerciseNameEditText.text.toString()
             val mainMuscle = listOf(mainMusclesSpinner.selectedItem.toString())
             val subMuscle = listOf(subMusclesSpinner.selectedItem.toString())
+            val tag = listOf(tagSpinner.selectedItem.toString())
             val timeAdded = LocalDateTime.now()
-            // TODO: Replace with actual values
-            val tag = null
 
-            val card = ExerciseCard(
-                lastActivity = null,
-                timeAdded = timeAdded,
-                name = exerciseName,
-                mainMuscles = mainMuscle,
-                subMuscles = subMuscle,
-                tag = tag,
-                oneRepMax = null
-            )
+            if (cardItem != null) {
+                val card = ExerciseCard(
+                    lastActivity = cardItem.lastActivity,
+                    timeAdded = timeAdded,
+                    name = exerciseName,
+                    mainMuscles = mainMuscle,
+                    subMuscles = subMuscle,
+                    tag = tag,
+                    oneRepMax = cardItem.oneRepMax
+                )
 
-            CardStorage.addCard(this, card)
-            finish()
+                CardStorage.editCard(this, cardItem, card)
+                finish()
+
+            } else {
+                val card = ExerciseCard(
+                    lastActivity = null,
+                    timeAdded = timeAdded,
+                    name = exerciseName,
+                    mainMuscles = mainMuscle,
+                    subMuscles = subMuscle,
+                    tag = tag,
+                    oneRepMax = null
+                )
+
+                CardStorage.addCard(this, card)
+                finish()
+            }
         }
+
     }
 
     private fun hideKeyboard() {
         val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+    }
+
+    // TODO : back press warning, on stop
+
+    private fun find(item: String, resourceArray: Array<String>) : Int {
+        for (i in resourceArray.indices) {
+            if (resourceArray[i] == item) {
+                return i
+            }
+        }
+        return 0
     }
 }
 
