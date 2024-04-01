@@ -57,6 +57,7 @@ class HomeFragment : Fragment() {
         }
         // todo : study intent, put extra?
 
+        var selectedTags: MutableList<Tag> = mutableListOf()
         tagAdapter = TagAdapter(requireContext()) { clickedTag ->
             if (clickedTag.name == "+") {
                 // Ask for user input and change "+" to it
@@ -96,7 +97,12 @@ class HomeFragment : Fragment() {
 
                 inputDialog.show()
             } else {
-                // Change the recyclerView item background color
+                if (selectedTags.contains(clickedTag)) {
+                    selectedTags.remove(clickedTag)
+                } else {
+                    selectedTags.add(clickedTag)
+                }
+                tagAdapter.setSelectedTags(selectedTags)
             }
         }
 

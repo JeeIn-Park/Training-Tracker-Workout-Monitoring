@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="6dp"
-        app:cardBackgroundColor="?attr/colorSecondary"
+        app:cardBackgroundColor="@color/tag_color_selector"
         app:cardCornerRadius="16dp">
 
 <!--        todo : outline-->
