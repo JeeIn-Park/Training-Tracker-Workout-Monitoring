@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.trainingtracker.R
 import com.example.trainingtracker.databinding.FragmentHomeBinding
 import com.example.trainingtracker.ui.exerciseCard.AddCardActivity
 import com.example.trainingtracker.ui.exerciseCard.CardStorage
@@ -62,7 +63,7 @@ class HomeFragment : Fragment() {
                 val inputDialog = AlertDialog.Builder(requireContext())
                 val inputEditText = EditText(requireContext())
                 inputDialog.setView(inputEditText)
-                inputDialog.setTitle("Enter a new tag")
+                inputDialog.setTitle(getString(R.string.enter_tag_title))
 
                 inputDialog.setPositiveButton("OK") { dialog, _ ->
                     val newTagString = inputEditText.text.toString().trim()

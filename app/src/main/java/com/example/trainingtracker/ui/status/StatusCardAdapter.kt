@@ -139,8 +139,8 @@ class StatusCardAdapter(private val context: Context, private val onItemClick: (
 
         private fun showDeleteWarning(cardItem: ExerciseCard) {
             AlertDialog.Builder(context)
-                .setTitle("Are you sure you want to delete this item?")
-                .setMessage("All records will be deleted. Once deleted, it cannot be recovered.")
+                .setTitle(context.getString(R.string.general_deletion_warning))
+                .setMessage(context.getString(R.string.exercise_deletion_warning))
                 .setPositiveButton("Delete") { dialog, which ->
                     val logStorage = LogStorage(cardItem.id)
                     logStorage.deleteLogs(context)

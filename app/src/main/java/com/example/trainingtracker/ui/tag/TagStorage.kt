@@ -54,7 +54,7 @@ object TagStorage {
 
     fun editTag(context: Context, oldTag: Tag, newTag: Tag) {
         val currentTags = loadTags(context).toMutableList()
-        val index = currentTags.indexOfFirst { it == oldTag } // TODO : what is this code
+        val index = currentTags.indexOfFirst { it == oldTag }
         if (index != -1) {
             currentTags[index] = newTag
             saveTags(context, currentTags)
