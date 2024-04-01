@@ -24,7 +24,11 @@ class AddCardActivity : AppCompatActivity() {
         val cardItem = intent.getSerializableExtra("EXTRA_CARD_ITEM") as ExerciseCard?
 
         val musclesArray = resources.getStringArray(R.array.muscles_array)
-        val tagArray = (listOf(resources.getString(R.string.select_tag))
+        val selectTag = Tag(
+        id = UUID.randomUUID(),
+        timeAdded = LocalDateTime.now(),
+        name = getString(R.string.select_tag))
+        val tagArray = (listOf(selectTag)
                 + TagStorage.loadTags(this)).toTypedArray()
 
         // Initialize views
@@ -39,7 +43,7 @@ class AddCardActivity : AppCompatActivity() {
         val subMusclesAdapter =
             ArrayAdapter(this, android.R.layout.simple_spinner_item, musclesArray)
         val tagAdapter =
-            ArrayAdapter(this, android.R.layout.simple_spinner_item, tagArray)
+            ArrayAdapter(this, android.R.layout.simple_spinner_item, tagArray.map { it.name })
 
         // Set dropdown layout style
         mainMusclesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -68,7 +72,7 @@ class AddCardActivity : AppCompatActivity() {
             mainMusclesSpinner.setSelection(mainMuscleIndex)
             val subMuscleIndex = findMuscleIndex(cardItem.subMuscles[0], musclesArray)
             subMusclesSpinner.setSelection(subMuscleIndex)
-            val tagIndex = findMuscleIndex(cardItem.tag[0], tagArray)
+            val tagIndex = findTagIndex(cardItem.tag[0], tagArray)
             tagSpinner.setSelection(tagIndex)
             addButton.text = "SAVE"
         }
@@ -78,7 +82,7 @@ class AddCardActivity : AppCompatActivity() {
             val exerciseName = exerciseNameEditText.text.toString()
             val mainMuscle = listOf(mainMusclesSpinner.selectedItem.toString())
             val subMuscle = listOf(subMusclesSpinner.selectedItem.toString())
-            val tag = listOf(tagSpinner.selectedItem.toString())
+            val tag = listOf(tagArray[tagArray.indexOfFirst { it.name == tagSpinner.selectedItem.toString() }])
             val timeAdded = LocalDateTime.now()
 
             if (cardItem != null) {

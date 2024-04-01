@@ -71,7 +71,7 @@ class HomeCardAdapter(
             }
 
             tag.text = if (cardItem.tag != null) {
-                cardItem.tag.toString()
+                cardItem.tag.toString() // TODO
             } else {
                 ""
             }

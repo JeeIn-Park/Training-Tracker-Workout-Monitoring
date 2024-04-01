@@ -15,6 +15,7 @@ import com.example.trainingtracker.ui.exerciseCard.AddCardActivity
 import com.example.trainingtracker.ui.exerciseLog.AddLogActivity
 import com.example.trainingtracker.ui.exerciseCard.CardStorage
 import com.example.trainingtracker.databinding.FragmentStatusBinding
+import com.example.trainingtracker.ui.tag.Tag
 import com.example.trainingtracker.ui.tag.TagAdapter
 import com.example.trainingtracker.ui.tag.TagStorage
 
@@ -48,34 +49,6 @@ class StatusFragment : Fragment() {
       }
 
       tagAdapter = TagAdapter(requireContext()) { clickedTag ->
-          if (clickedTag == "+") {
-              // Ask for user input and change "+" to it
-              val inputDialog = AlertDialog.Builder(requireContext())
-              val inputEditText = EditText(requireContext())
-              inputDialog.setView(inputEditText)
-              inputDialog.setTitle("Enter a new tag")
-
-              inputDialog.setPositiveButton("OK") { dialog, _ ->
-                  val newTag = inputEditText.text.toString().trim()
-                  if (newTag.isNotEmpty()) {
-                      // Add the new tag to your data source and notify the adapter
-                      val updatedTags = mutableListOf<String>()
-                      updatedTags.addAll(tagAdapter.currentList.dropLast(1))
-                      updatedTags.add(newTag)
-                      updatedTags.add("+")
-                      tagAdapter.submitList(updatedTags)
-                  }
-                  dialog.dismiss()
-              }
-
-              inputDialog.setNegativeButton("Cancel") { dialog, _ ->
-                  dialog.dismiss()
-              }
-
-              inputDialog.show()
-          } else {
-              // Change the recyclerView item background color
-          }
       }
 
 
@@ -109,7 +82,7 @@ class StatusFragment : Fragment() {
     }
 
     override fun onStop() {
-        val tags = mutableListOf<String>()
+        val tags = mutableListOf<Tag>()
         tags.addAll(tagAdapter.currentList.dropLast(1))
         TagStorage.saveTags(requireContext(), tags)
         super.onStop()
@@ -123,9 +96,7 @@ class StatusFragment : Fragment() {
     private fun refresh() {
         val cards = CardStorage.loadCards(requireContext())
         cardAdapter.submitList(cards)
-        val tags: MutableList<String> = TagStorage.loadTags(requireContext()).toMutableList()
-        tags.add("+")
-        tagAdapter.submitList(tags)
+        tagAdapter.submitList(TagStorage.loadTags(requireContext()))
     }
 
 }

@@ -11,12 +11,16 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.trainingtracker.R
 import com.example.trainingtracker.databinding.FragmentHomeBinding
 import com.example.trainingtracker.ui.exerciseCard.AddCardActivity
 import com.example.trainingtracker.ui.exerciseCard.CardStorage
 import com.example.trainingtracker.ui.exerciseLog.AddLogActivity
+import com.example.trainingtracker.ui.tag.Tag
 import com.example.trainingtracker.ui.tag.TagAdapter
 import com.example.trainingtracker.ui.tag.TagStorage
+import java.time.LocalDateTime
+import java.util.UUID
 
 
 class HomeFragment : Fragment() {
@@ -53,8 +57,12 @@ class HomeFragment : Fragment() {
         }
         // todo : study intent, put extra?
 
+        val addTag = Tag(
+            id = UUID.randomUUID(),
+            timeAdded = LocalDateTime.now(),
+            name = getString(R.string.select_tag))
         tagAdapter = TagAdapter(requireContext()) { clickedTag ->
-            if (clickedTag == "+") {
+            if (clickedTag == addTag) {
                 // Ask for user input and change "+" to it
                 val inputDialog = AlertDialog.Builder(requireContext())
                 val inputEditText = EditText(requireContext())
@@ -62,13 +70,24 @@ class HomeFragment : Fragment() {
                 inputDialog.setTitle("Enter a new tag")
 
                 inputDialog.setPositiveButton("OK") { dialog, _ ->
-                    val newTag = inputEditText.text.toString().trim()
-                    if (newTag.isNotEmpty()) {
+                    val newTagString = inputEditText.text.toString().trim()
+                    if (newTagString.isNotEmpty()) {
+                        var uniqueId: UUID
+                        do {
+                            uniqueId = UUID.randomUUID()
+                        } while (CardStorage.isIdInUse(requireContext(), uniqueId))
+
                         // Add the new tag to your data source and notify the adapter
-                        val updatedTags = mutableListOf<String>()
+
+                        val newTag = Tag(
+                            id = uniqueId,
+                            timeAdded = LocalDateTime.now(),
+                            name = newTagString)
+
+                        val updatedTags = mutableListOf<Tag>()
                         updatedTags.addAll(tagAdapter.currentList.dropLast(1))
                         updatedTags.add(newTag)
-                        updatedTags.add("+")
+                        updatedTags.add(addTag)
                         tagAdapter.submitList(updatedTags)
                     }
                     dialog.dismiss()
@@ -118,7 +137,7 @@ class HomeFragment : Fragment() {
     }
 
     override fun onStop() {
-        val tags = mutableListOf<String>()
+        val tags = mutableListOf<Tag>()
         tags.addAll(tagAdapter.currentList.dropLast(1))
         TagStorage.saveTags(requireContext(), tags)
         super.onStop()
@@ -127,8 +146,12 @@ class HomeFragment : Fragment() {
     private fun refresh() {
         val cards = CardStorage.loadCards(requireContext())
         cardAdapter.submitList(cards)
-        val tags: MutableList<String> = TagStorage.loadTags(requireContext()).toMutableList()
-        tags.add("+")
+        val tags: MutableList<Tag> = TagStorage.loadTags(requireContext()).toMutableList()
+        val addTag = Tag(
+            id = UUID.randomUUID(),
+            timeAdded = LocalDateTime.now(),
+            name = getString(R.string.select_tag))
+        tags.add(addTag)
         tagAdapter.submitList(tags)
     }
 
