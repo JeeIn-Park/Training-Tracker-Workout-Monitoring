@@ -32,12 +32,6 @@ class HomeFragment : Fragment() {
     private lateinit var cardAdapter: HomeCardAdapter
     private lateinit var tagAdapter: TagAdapter
 
-    private val addTag: Tag = Tag(
-        id = UUID.randomUUID(),
-        timeAdded = LocalDateTime.now(),
-        name = "+"
-    )
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -86,9 +80,9 @@ class HomeFragment : Fragment() {
                             name = newTagString)
 
                         val updatedTags = mutableListOf<Tag>()
-                        updatedTags.addAll(tagAdapter.currentList.filter { it != addTag })
+                        updatedTags.addAll(tagAdapter.currentList.filter { it != Tag.ADD_TAG })
                         updatedTags.add(newTag)
-                        updatedTags.add(addTag)
+                        updatedTags.add(Tag.ADD_TAG)
                         tagAdapter.submitList(updatedTags)
                     }
                     dialog.dismiss()
@@ -139,7 +133,7 @@ class HomeFragment : Fragment() {
 
 
     override fun onStop() {
-        val tags = tagAdapter.currentList.filter { it != addTag }
+        val tags = tagAdapter.currentList.filter { it != Tag.ADD_TAG }
         TagStorage.saveTags(requireContext(), tags)
         super.onStop()
     }
@@ -150,8 +144,8 @@ class HomeFragment : Fragment() {
 
         // Load tags and remove existing addTag if present, then add it again
         val tags: MutableList<Tag> = TagStorage.loadTags(requireContext()).toMutableList()
-        tags.removeAll { it == addTag } // Remove existing addTag if present
-        tags.add(addTag) // Add addTag
+        tags.removeAll { it == Tag.ADD_TAG } // Remove existing addTag if present
+        tags.add(Tag.ADD_TAG) // Add addTag
         tagAdapter.submitList(tags)
     }
 
