@@ -83,7 +83,7 @@ class StatusFragment : Fragment() {
 
     override fun onStop() {
         val tags = mutableListOf<Tag>()
-        tags.addAll(tagAdapter.currentList.dropLast(1))
+        tags.addAll(tagAdapter.currentList)
         TagStorage.saveTags(requireContext(), tags)
         super.onStop()
     }

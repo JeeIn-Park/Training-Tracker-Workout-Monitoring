@@ -59,18 +59,14 @@ class StatusCardAdapter(private val context: Context, private val onItemClick: (
         private val emptyString : List<String> = listOf("Select muscle")
         // reference (each parts in a card layout)
         fun bind(cardItem: ExerciseCard) {
-            exerciseName.text = if (cardItem.name != null) {
-                cardItem.name
-            } else {
-                "N/A"
-            }
+            exerciseName.text = cardItem.name
 
-            tag.text = if (cardItem.tag != null) {
-                cardItem.tag.toString()
+            val tagText = if (cardItem.tag[0].name != context.getString(R.string.select_tag)) {
+                cardItem.tag[0].name
             } else {
                 ""
             }
-
+            tag.text = tagText
 
             if ( cardItem.lastActivity != null ) {
                 val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault())
@@ -90,7 +86,7 @@ class StatusCardAdapter(private val context: Context, private val onItemClick: (
             }
 
 
-            if (cardItem.mainMuscles == emptyString) {
+            if (cardItem.mainMuscles[0] == context.getString(R.string.select_muscle)) {
                 mainMuscle.visibility = View.INVISIBLE
             } else {
                 mainMuscle.visibility = View.VISIBLE
@@ -101,7 +97,7 @@ class StatusCardAdapter(private val context: Context, private val onItemClick: (
                 }
             }
 
-            if (cardItem.subMuscles == emptyString) {
+            if (cardItem.subMuscles[0] == context.getString(R.string.select_muscle)) {
                 subMuscle.visibility = View.INVISIBLE
             } else {
                 subMuscle.visibility = View.VISIBLE
@@ -112,7 +108,8 @@ class StatusCardAdapter(private val context: Context, private val onItemClick: (
                 }
             }
 
-            personalRecord.text = "place holder"// need to check the whole cards
+            personalRecord.text = context.getString(R.string.one_rep_max_title)
+            // need to check the whole cards
             // Set long click listener
             itemView.setOnLongClickListener {
                 showEditDeleteOptions(cardItem)

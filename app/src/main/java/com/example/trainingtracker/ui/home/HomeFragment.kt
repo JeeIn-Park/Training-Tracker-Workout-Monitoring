@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.trainingtracker.R
 import com.example.trainingtracker.databinding.FragmentHomeBinding
 import com.example.trainingtracker.ui.exerciseCard.AddCardActivity
 import com.example.trainingtracker.ui.exerciseCard.CardStorage
@@ -32,6 +31,12 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var cardAdapter: HomeCardAdapter
     private lateinit var tagAdapter: TagAdapter
+
+    private val addTag: Tag = Tag(
+        id = UUID.randomUUID(),
+        timeAdded = LocalDateTime.now(),
+        name = "+"
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,12 +62,8 @@ class HomeFragment : Fragment() {
         }
         // todo : study intent, put extra?
 
-        val addTag = Tag(
-            id = UUID.randomUUID(),
-            timeAdded = LocalDateTime.now(),
-            name = getString(R.string.select_tag))
         tagAdapter = TagAdapter(requireContext()) { clickedTag ->
-            if (clickedTag == addTag) {
+            if (clickedTag.name == "+") {
                 // Ask for user input and change "+" to it
                 val inputDialog = AlertDialog.Builder(requireContext())
                 val inputEditText = EditText(requireContext())
@@ -85,7 +86,7 @@ class HomeFragment : Fragment() {
                             name = newTagString)
 
                         val updatedTags = mutableListOf<Tag>()
-                        updatedTags.addAll(tagAdapter.currentList.dropLast(1))
+                        updatedTags.addAll(tagAdapter.currentList.filter { it != addTag })
                         updatedTags.add(newTag)
                         updatedTags.add(addTag)
                         tagAdapter.submitList(updatedTags)
@@ -127,8 +128,8 @@ class HomeFragment : Fragment() {
     }
 
     override fun onResume() {
-        super.onResume()
         refresh()
+        super.onResume()
     }
 
     override fun onDestroyView() {
@@ -136,9 +137,9 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
+
     override fun onStop() {
-        val tags = mutableListOf<Tag>()
-        tags.addAll(tagAdapter.currentList.dropLast(1))
+        val tags = tagAdapter.currentList.filter { it != addTag }
         TagStorage.saveTags(requireContext(), tags)
         super.onStop()
     }
@@ -146,13 +147,13 @@ class HomeFragment : Fragment() {
     private fun refresh() {
         val cards = CardStorage.loadCards(requireContext())
         cardAdapter.submitList(cards)
+
+        // Load tags and remove existing addTag if present, then add it again
         val tags: MutableList<Tag> = TagStorage.loadTags(requireContext()).toMutableList()
-        val addTag = Tag(
-            id = UUID.randomUUID(),
-            timeAdded = LocalDateTime.now(),
-            name = getString(R.string.select_tag))
-        tags.add(addTag)
+        tags.removeAll { it == addTag } // Remove existing addTag if present
+        tags.add(addTag) // Add addTag
         tagAdapter.submitList(tags)
     }
+
 
 }
