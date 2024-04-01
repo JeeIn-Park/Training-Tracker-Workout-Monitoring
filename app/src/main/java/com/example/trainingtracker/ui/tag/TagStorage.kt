@@ -14,8 +14,9 @@ object TagStorage {
 
     fun saveTags(context: Context, tags : List<Tag>) {
         try {
+            val filteredTags = tags.filter { it != Tag.ADD_TAG }
             ObjectOutputStream(context.openFileOutput(FILE_NAME, Context.MODE_PRIVATE)).use {
-                it.writeObject(tags)
+                it.writeObject(filteredTags)
             }
         } catch (e : IOException) {
             e.printStackTrace()

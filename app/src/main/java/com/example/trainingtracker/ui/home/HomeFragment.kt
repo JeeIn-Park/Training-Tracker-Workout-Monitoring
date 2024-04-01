@@ -84,6 +84,7 @@ class HomeFragment : Fragment() {
                         updatedTags.add(newTag)
                         updatedTags.add(Tag.ADD_TAG)
                         tagAdapter.submitList(updatedTags)
+                        TagStorage.saveTags(requireContext(), updatedTags)
                     }
                     dialog.dismiss()
                 }
@@ -133,8 +134,7 @@ class HomeFragment : Fragment() {
 
 
     override fun onStop() {
-        val tags = tagAdapter.currentList.filter { it != Tag.ADD_TAG }
-        TagStorage.saveTags(requireContext(), tags)
+        TagStorage.saveTags(requireContext(), tagAdapter.currentList)
         super.onStop()
     }
 
@@ -147,6 +147,7 @@ class HomeFragment : Fragment() {
         tags.removeAll { it == Tag.ADD_TAG } // Remove existing addTag if present
         tags.add(Tag.ADD_TAG) // Add addTag
         tagAdapter.submitList(tags)
+        TagStorage.saveTags(requireContext(), tags)
     }
 
 

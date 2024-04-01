@@ -18,6 +18,8 @@ import com.example.trainingtracker.databinding.FragmentStatusBinding
 import com.example.trainingtracker.ui.tag.Tag
 import com.example.trainingtracker.ui.tag.TagAdapter
 import com.example.trainingtracker.ui.tag.TagStorage
+import java.time.LocalDateTime
+import java.util.UUID
 
 class StatusFragment : Fragment() {
 
@@ -48,23 +50,69 @@ class StatusFragment : Fragment() {
 
       }
 
+
       tagAdapter = TagAdapter(requireContext()) { clickedTag ->
+          if (clickedTag.name == "+") {
+              // Ask for user input and change "+" to it
+              val inputDialog = AlertDialog.Builder(requireContext())
+              val inputEditText = EditText(requireContext())
+              inputDialog.setView(inputEditText)
+              inputDialog.setTitle("Enter a new tag")
+
+              inputDialog.setPositiveButton("OK") { dialog, _ ->
+                  val newTagString = inputEditText.text.toString().trim()
+                  if (newTagString.isNotEmpty()) {
+                      var uniqueId: UUID
+                      do {
+                          uniqueId = UUID.randomUUID()
+                      } while (CardStorage.isIdInUse(requireContext(), uniqueId))
+
+                      // Add the new tag to your data source and notify the adapter
+
+                      val newTag = Tag(
+                          id = uniqueId,
+                          timeAdded = LocalDateTime.now(),
+                          name = newTagString)
+
+                      val updatedTags = mutableListOf<Tag>()
+                      updatedTags.addAll(tagAdapter.currentList.filter { it != Tag.ADD_TAG })
+                      updatedTags.add(newTag)
+                      updatedTags.add(Tag.ADD_TAG)
+                      tagAdapter.submitList(updatedTags)
+                  }
+                  dialog.dismiss()
+              }
+
+              inputDialog.setNegativeButton("Cancel") { dialog, _ ->
+                  dialog.dismiss()
+              }
+
+              inputDialog.show()
+          } else {
+              // Change the recyclerView item background color
+          }
       }
 
 
       val exerciseRecyclerView = binding.exerciseRecyclerView
       exerciseRecyclerView.layoutManager = LinearLayoutManager(requireContext())
       exerciseRecyclerView.adapter = cardAdapter
+      exerciseRecyclerView.itemAnimator = DefaultItemAnimator()
+      statusViewModel.cardRecyclerViewData.observe(viewLifecycleOwner) { newData ->
+          cardAdapter.submitList(newData)
+          statusViewModel.updateCardRecyclerViewData(newData)
+      }
 
       val tagRecyclerView = binding.filterBar.tagRecyclerView
       tagRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
       tagRecyclerView.adapter = tagAdapter
       tagRecyclerView.itemAnimator = DefaultItemAnimator()
       statusViewModel.tagRecyclerViewData.observe(viewLifecycleOwner) { newData ->
+          val tags = tagAdapter.currentList.filter { it != Tag.ADD_TAG }
+          TagStorage.saveTags(requireContext(), tags)
           tagAdapter.submitList(newData)
           statusViewModel.updateTagRecyclerViewData(newData)
       }
-
 
       val addCardButton = binding.addCardButton
       addCardButton.setOnClickListener {
@@ -72,20 +120,12 @@ class StatusFragment : Fragment() {
           startActivity(intent)
       }
 
-
       return root
   }
 
     override fun onResume() {
-        super.onResume()
         refresh()
-    }
-
-    override fun onStop() {
-        val tags = mutableListOf<Tag>()
-        tags.addAll(tagAdapter.currentList)
-        TagStorage.saveTags(requireContext(), tags)
-        super.onStop()
+        super.onResume()
     }
 
     override fun onDestroyView() {
@@ -93,10 +133,21 @@ class StatusFragment : Fragment() {
         _binding = null
     }
 
+    override fun onStop() {
+        val tags = tagAdapter.currentList.filter { it != Tag.ADD_TAG }
+        TagStorage.saveTags(requireContext(), tags)
+        super.onStop()
+    }
+
     private fun refresh() {
         val cards = CardStorage.loadCards(requireContext())
         cardAdapter.submitList(cards)
-        tagAdapter.submitList(TagStorage.loadTags(requireContext()))
+
+        // Load tags and remove existing addTag if present, then add it again
+        val tags: MutableList<Tag> = TagStorage.loadTags(requireContext()).toMutableList()
+        tags.removeAll { it == Tag.ADD_TAG } // Remove existing addTag if present
+        tags.add(Tag.ADD_TAG) // Add addTag
+        tagAdapter.submitList(tags)
     }
 
 }
