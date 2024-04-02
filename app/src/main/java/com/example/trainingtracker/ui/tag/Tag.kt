@@ -8,6 +8,7 @@ data class Tag(
     val id: UUID = UUID.randomUUID(),
     val timeAdded: LocalDateTime,
     val name: String,
+    var isSelected: Boolean = false
 ): Serializable {
     companion object {
         val ADD_TAG = Tag(

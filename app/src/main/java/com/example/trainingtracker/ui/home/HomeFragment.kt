@@ -102,7 +102,6 @@ class HomeFragment : Fragment() {
                 } else {
                     selectedTags.add(clickedTag)
                 }
-                tagAdapter.setSelectedTags(selectedTags)
             }
         }
 

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingtracker.R
@@ -14,8 +15,6 @@ import com.example.trainingtracker.R
 class TagAdapter(private val context: Context, private val onItemClick: (Tag) -> Unit) :
     ListAdapter<Tag, TagAdapter.TagViewHolder>(TagDiffCallback()) {
     // Create new views (invoked by the layout manager)
-
-    private var selectedTags: MutableList<Tag> = mutableListOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TagViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.item_tag, parent, false)
@@ -55,24 +54,12 @@ class TagAdapter(private val context: Context, private val onItemClick: (Tag) ->
         submitList(updatedList)
     }
 
-    fun setSelectedTags(tags: List<Tag>) {
-        selectedTags.clear()
-        selectedTags.addAll(tags)
-        notifyDataSetChanged()
-    }
-
     inner class TagViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)  {
+        private val tagCard : CardView = itemView.findViewById(R.id.tagCard)
         private val tagName : TextView = itemView.findViewById(R.id.tagName)
 
         fun bind(tag : Tag, position: Int) {
             tagName.text = tag.name
-            if (selectedTags.contains(tag)) {
-                // Change background color for selected tag
-                itemView.setBackgroundColor(context.getColor(R.color.tag_color_selector))
-            } else {
-                // Reset background color for unselected tag
-                itemView.setBackgroundColor(context.getColor(R.color.tag_color_selector))
-            }
 
             if (tag != Tag.ADD_TAG) {
                 itemView.setOnLongClickListener {
@@ -81,6 +68,12 @@ class TagAdapter(private val context: Context, private val onItemClick: (Tag) ->
                 }
                 itemView.setOnClickListener {
                     onItemClick(tag) // TODO : what does it do?
+                }
+            } else {
+                tagCard.isSelected = tag.isSelected
+                tagCard.setOnClickListener{
+                    tag.isSelected = !tag.isSelected
+                    notifyDataSetChanged()
                 }
             }
         }

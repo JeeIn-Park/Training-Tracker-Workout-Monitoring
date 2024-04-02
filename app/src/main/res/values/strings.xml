@@ -7,15 +7,21 @@
 
     <string name="general_deletion_warning">Are you sure you want to delete this item?</string>
 
+    <!--    exercise    -->
+    <string name="event_exercise">exercise</string>
     <string name="exercise_add">Add a new exercise</string>
     <string name="exercise_enter_weight">Enter weight</string>
     <string name="exercise_enter_rep">Enter reps</string>
     <string name="exercise_deletion_warning">All records will be deleted. Once deleted, they cannot be recovered. </string>
 
+    <!--    tag    -->
+    <string name="event_tag">tag</string>
     <string name="tag_select">Select tag</string>
     <string name="tag_enter_name">Enter a tag name</string>
     <string name="tag_deletion_warning">All records will be deleted. Once deleted, they cannot be recovered. This action will not delete exercises or remove tags associated with exercises.</string>
 
+    <!--    muscle    -->
+    <string name="event_muscle">muscle</string>
     <string name="muscle_select">Select muscle</string>
 
 
