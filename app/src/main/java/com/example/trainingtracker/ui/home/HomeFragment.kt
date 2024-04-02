@@ -79,7 +79,12 @@ class HomeFragment : Fragment() {
                             timeAdded = LocalDateTime.now(),
                             name = newTagString)
 
-                        tagAdapter.addItem(newTag)
+                        var newTags : MutableList<Tag> = TagStorage.loadTags(requireContext()).toMutableList()
+                        newTags.add(newTag)
+                        newTags.removeAll { it == Tag.ADD_TAG }
+                        newTags.add(Tag.ADD_TAG)
+                        TagStorage.saveTags(requireContext(), newTags)
+                        tagAdapter.submitList(newTags)
                     }
                     dialog.dismiss()
                 }
@@ -139,11 +144,13 @@ class HomeFragment : Fragment() {
         val cards = CardStorage.loadCards(requireContext())
         cardAdapter.submitList(cards)
 
+        // Load tags
         val tags: MutableList<Tag> = TagStorage.loadTags(requireContext()).toMutableList()
-        tags.removeAll { it == Tag.ADD_TAG } // Remove existing addTag if present
-        tags.add(Tag.ADD_TAG) // Add addTag
+        tags.removeAll { it == Tag.ADD_TAG }
+        tags.add(Tag.ADD_TAG)
         tagAdapter.submitList(tags)
     }
+
 
 
 }
