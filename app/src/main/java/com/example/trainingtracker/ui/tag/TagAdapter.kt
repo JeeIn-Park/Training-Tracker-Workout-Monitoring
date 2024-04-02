@@ -2,7 +2,6 @@ package com.example.trainingtracker.ui.tag
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,12 +10,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingtracker.R
-import com.example.trainingtracker.ui.exerciseCard.AddCardActivity
-import com.example.trainingtracker.ui.exerciseCard.CardStorage
-import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
-import com.example.trainingtracker.ui.exerciseLog.LogStorage
-import java.time.LocalDateTime
-import java.util.UUID
 
 class TagAdapter(private val context: Context, private val onItemClick: (Tag) -> Unit) :
     ListAdapter<Tag, TagAdapter.TagViewHolder>(TagDiffCallback()) {
@@ -103,7 +96,7 @@ class TagAdapter(private val context: Context, private val onItemClick: (Tag) ->
                             val inputEditText = EditText(context)
                             inputEditText.setText(tag.name)
                             inputDialog.setView(inputEditText)
-                            inputDialog.setTitle(context.getString(R.string.enter_tag_title))
+                            inputDialog.setTitle(context.getString(R.string.tag_enter_name))
 
                             inputDialog.setPositiveButton("OK") { dialog, _ ->
                                 val newTagString = inputEditText.text.toString().trim()

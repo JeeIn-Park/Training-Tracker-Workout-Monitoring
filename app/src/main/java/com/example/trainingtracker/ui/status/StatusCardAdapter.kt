@@ -61,7 +61,7 @@ class StatusCardAdapter(private val context: Context, private val onItemClick: (
         fun bind(cardItem: ExerciseCard) {
             exerciseName.text = cardItem.name
 
-            val tagText = if (cardItem.tag[0].name != context.getString(R.string.select_tag)) {
+            val tagText = if (cardItem.tag[0].name != context.getString(R.string.tag_select)) {
                 cardItem.tag[0].name
             } else {
                 ""
@@ -86,7 +86,7 @@ class StatusCardAdapter(private val context: Context, private val onItemClick: (
             }
 
 
-            if (cardItem.mainMuscles[0] == context.getString(R.string.select_muscle)) {
+            if (cardItem.mainMuscles[0] == context.getString(R.string.muscle_select)) {
                 mainMuscle.visibility = View.INVISIBLE
             } else {
                 mainMuscle.visibility = View.VISIBLE
@@ -97,7 +97,7 @@ class StatusCardAdapter(private val context: Context, private val onItemClick: (
                 }
             }
 
-            if (cardItem.subMuscles[0] == context.getString(R.string.select_muscle)) {
+            if (cardItem.subMuscles[0] == context.getString(R.string.muscle_select)) {
                 subMuscle.visibility = View.INVISIBLE
             } else {
                 subMuscle.visibility = View.VISIBLE
@@ -108,7 +108,7 @@ class StatusCardAdapter(private val context: Context, private val onItemClick: (
                 }
             }
 
-            personalRecord.text = context.getString(R.string.one_rep_max_title)
+            personalRecord.text = context.getString(R.string.title_one_rep_max)
             // need to check the whole cards
             // Set long click listener
             itemView.setOnLongClickListener {

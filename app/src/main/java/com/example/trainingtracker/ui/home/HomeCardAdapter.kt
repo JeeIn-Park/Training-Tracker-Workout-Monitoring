@@ -14,7 +14,6 @@ import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
 import com.example.trainingtracker.ui.exerciseCard.ExerciseCardDiffCallback
 import com.example.trainingtracker.R
 import com.example.trainingtracker.ui.exerciseCard.AddCardActivity
-import com.example.trainingtracker.ui.exerciseLog.AddLogActivity
 import com.example.trainingtracker.ui.exerciseLog.LogStorage
 import java.time.Duration
 import java.time.LocalDateTime
@@ -65,7 +64,7 @@ class HomeCardAdapter(
         fun bind(cardItem: ExerciseCard) {
             exerciseName.text = cardItem.name
 
-            val tagText = if (cardItem.tag[0].name != context.getString(R.string.select_tag)) {
+            val tagText = if (cardItem.tag[0].name != context.getString(R.string.tag_select)) {
                 cardItem.tag[0].name
             } else {
                 ""
@@ -90,7 +89,7 @@ class HomeCardAdapter(
             }
 
 
-            if (cardItem.mainMuscles[0] == context.getString(R.string.select_muscle)) {
+            if (cardItem.mainMuscles[0] == context.getString(R.string.muscle_select)) {
                 mainMuscle.visibility = View.INVISIBLE
             } else {
                 mainMuscle.visibility = View.VISIBLE
@@ -101,7 +100,7 @@ class HomeCardAdapter(
                 }
             }
 
-            if (cardItem.subMuscles[0] == context.getString(R.string.select_muscle)) {
+            if (cardItem.subMuscles[0] == context.getString(R.string.muscle_select)) {
                 subMuscle.visibility = View.INVISIBLE
             } else {
                 subMuscle.visibility = View.VISIBLE
@@ -112,7 +111,7 @@ class HomeCardAdapter(
                 }
             }
 
-            personalRecord.text = context.getString(R.string.one_rep_max_title)
+            personalRecord.text = context.getString(R.string.title_one_rep_max)
             // need to check the whole cards
             // Set long click listener
             itemView.setOnLongClickListener {

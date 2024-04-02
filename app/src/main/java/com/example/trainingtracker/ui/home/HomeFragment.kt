@@ -64,7 +64,7 @@ class HomeFragment : Fragment() {
                 val inputDialog = AlertDialog.Builder(requireContext())
                 val inputEditText = EditText(requireContext())
                 inputDialog.setView(inputEditText)
-                inputDialog.setTitle(getString(R.string.enter_tag_title))
+                inputDialog.setTitle(getString(R.string.tag_enter_name))
 
                 inputDialog.setPositiveButton("OK") { dialog, _ ->
                     val newTagString = inputEditText.text.toString().trim()

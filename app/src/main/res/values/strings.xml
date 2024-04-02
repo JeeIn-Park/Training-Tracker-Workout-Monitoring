@@ -1,23 +1,22 @@
 <resources>
-    <string name="app_name">TrainingTracker</string>
+    <string name="title_app_name">TrainingTracker</string>
     <string name="title_home">Home</string>
     <string name="title_status">Status</string>
     <string name="title_setting">Setting</string>
-
-    <string name="add_a_new_exercise">Add a new exercise</string>
-    <string name="kg_entering_description">Enter weight</string>
-    <string name="rep_entering_description">Enter reps</string>
+    <string name="title_one_rep_max">One Rep Max</string>
 
     <string name="general_deletion_warning">Are you sure you want to delete this item?</string>
 
-
-    <string name="select_tag">Select tag</string>
-    <string name="enter_tag_title">Enter a tag name</string>
-    <string name="tag_deletion_warning">All records will be deleted. Once deleted, they cannot be recovered. This action will not delete exercises or remove tags associated with exercises.</string>
+    <string name="exercise_add">Add a new exercise</string>
+    <string name="exercise_enter_weight">Enter weight</string>
+    <string name="exercise_enter_rep">Enter reps</string>
     <string name="exercise_deletion_warning">All records will be deleted. Once deleted, they cannot be recovered. </string>
 
-    <string name="select_muscle">Select muscle</string>
-    <string name="one_rep_max_title">One Rep Max</string>
+    <string name="tag_select">Select tag</string>
+    <string name="tag_enter_name">Enter a tag name</string>
+    <string name="tag_deletion_warning">All records will be deleted. Once deleted, they cannot be recovered. This action will not delete exercises or remove tags associated with exercises.</string>
+
+    <string name="muscle_select">Select muscle</string>
 
 
     <string-array name="muscles_array">

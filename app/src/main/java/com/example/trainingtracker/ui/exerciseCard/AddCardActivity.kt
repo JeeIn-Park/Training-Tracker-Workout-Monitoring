@@ -23,12 +23,12 @@ class AddCardActivity : AppCompatActivity() {
 
         val cardItem = intent.getSerializableExtra("EXTRA_CARD_ITEM") as ExerciseCard?
 
-        val musclesArray = (listOf<String>(getString(R.string.select_tag))
+        val musclesArray = (listOf<String>(getString(R.string.tag_select))
                 + resources.getStringArray(R.array.muscles_array)).toTypedArray()
         val selectTag = Tag(
         id = UUID.randomUUID(),
         timeAdded = LocalDateTime.now(),
-        name = getString(R.string.select_tag))
+        name = getString(R.string.tag_select))
         val tagArray = (listOf(selectTag)
                 + TagStorage.loadTags(this)).toTypedArray()
 
