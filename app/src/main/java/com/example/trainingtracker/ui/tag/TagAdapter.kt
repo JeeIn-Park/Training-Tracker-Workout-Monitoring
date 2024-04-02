@@ -61,21 +61,21 @@ class TagAdapter(private val context: Context, private val onItemClick: (Tag) ->
         fun bind(tag : Tag, position: Int) {
             tagName.text = tag.name
 
-            if (tag != Tag.ADD_TAG) {
-                itemView.setOnLongClickListener {
-                    showEditDeleteOptions(tag, position)
-                    true // Consume the long click
-                }
-                itemView.setOnClickListener {
-                    onItemClick(tag) // TODO : what does it do?
-                }
-            } else {
-                tagCard.isSelected = tag.isSelected
-                tagCard.setOnClickListener{
-                    tag.isSelected = !tag.isSelected
-                    notifyDataSetChanged()
-                }
-            }
+//            if (tag != Tag.ADD_TAG) {
+//                itemView.setOnLongClickListener {
+//                    showEditDeleteOptions(tag, position)
+//                    true // Consume the long click
+//                }
+//                itemView.setOnClickListener {
+//                    onItemClick(tag) // TODO : what does it do?
+//                }
+//            } else {
+//                tagCard.isSelected = tag.isSelected
+//                tagCard.setOnClickListener{
+//                    tag.isSelected = !tag.isSelected
+//                    notifyDataSetChanged()
+//                }
+//            }
         }
 
         private fun showEditDeleteOptions(tag: Tag, position: Int) {

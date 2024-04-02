@@ -57,10 +57,8 @@ class HomeFragment : Fragment() {
         }
         // todo : study intent, put extra?
 
-        var selectedTags: MutableList<Tag> = mutableListOf()
         tagAdapter = TagAdapter(requireContext()) { clickedTag ->
-            if (clickedTag.name == "+") {
-                // Ask for user input and change "+" to it
+            if (clickedTag.name == Tag.ADD_TAG.name) {
                 val inputDialog = AlertDialog.Builder(requireContext())
                 val inputEditText = EditText(requireContext())
                 inputDialog.setView(inputEditText)
@@ -81,12 +79,7 @@ class HomeFragment : Fragment() {
                             timeAdded = LocalDateTime.now(),
                             name = newTagString)
 
-                        val updatedTags = mutableListOf<Tag>()
-                        updatedTags.addAll(tagAdapter.currentList.filter { it != Tag.ADD_TAG })
-                        updatedTags.add(newTag)
-                        updatedTags.add(Tag.ADD_TAG)
-                        tagAdapter.submitList(updatedTags)
-                        TagStorage.saveTags(requireContext(), updatedTags)
+                        tagAdapter.addItem(newTag)
                     }
                     dialog.dismiss()
                 }
@@ -97,11 +90,9 @@ class HomeFragment : Fragment() {
 
                 inputDialog.show()
             } else {
-                if (selectedTags.contains(clickedTag)) {
-                    selectedTags.remove(clickedTag)
-                } else {
-                    selectedTags.add(clickedTag)
-                }
+                var newTag = clickedTag
+                newTag.isSelected = !clickedTag.isSelected
+                tagAdapter.editItem(clickedTag, newTag)
             }
         }
 
@@ -148,12 +139,10 @@ class HomeFragment : Fragment() {
         val cards = CardStorage.loadCards(requireContext())
         cardAdapter.submitList(cards)
 
-        // Load tags and remove existing addTag if present, then add it again
         val tags: MutableList<Tag> = TagStorage.loadTags(requireContext()).toMutableList()
         tags.removeAll { it == Tag.ADD_TAG } // Remove existing addTag if present
         tags.add(Tag.ADD_TAG) // Add addTag
         tagAdapter.submitList(tags)
-        TagStorage.saveTags(requireContext(), tags)
     }
 
 

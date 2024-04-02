@@ -12,7 +12,6 @@ data class Tag(
 ): Serializable {
     companion object {
         val ADD_TAG = Tag(
-            id = UUID.randomUUID(),
             timeAdded = LocalDateTime.now(),
             name = "+"
         )
