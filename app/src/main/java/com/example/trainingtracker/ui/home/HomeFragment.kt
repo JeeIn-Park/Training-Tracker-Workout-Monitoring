@@ -70,7 +70,7 @@ class HomeFragment : Fragment() {
                         var uniqueId: UUID
                         do {
                             uniqueId = UUID.randomUUID()
-                        } while (CardStorage.isIdInUse(requireContext(), uniqueId))
+                        } while (TagStorage.isIdInUse(requireContext(), uniqueId))
 
                         // Add the new tag to your data source and notify the adapter
 
@@ -140,28 +140,25 @@ class HomeFragment : Fragment() {
 
 
     override fun onStop() {
-        TagStorage.saveTags(requireContext(), tagAdapter.currentList)
+        // reset all the select boolean and save
+//        TagStorage.saveTags(requireContext(), tagAdapter.currentList)
         super.onStop()
     }
 
     private fun refresh() {
-        val cards = CardStorage.loadCards(requireContext())
-        cardAdapter.submitList(cards)
-
-        // Load tags
         val tags: MutableList<Tag> = TagStorage.loadTags(requireContext()).toMutableList()
         tags.removeAll { it == Tag.ADD_TAG }
         tags.add(Tag.ADD_TAG)
         tagAdapter.submitList(tags)
-    }
 
-    private fun findTagIndex(item: Tag, resourceArray: List<Tag>) : Int {
-        for (i in resourceArray.indices) {
-            if (resourceArray[i] == item) {
-                return i
-            }
+        val selectedTags = TagStorage.getSelectedTags(requireContext())
+        if (selectedTags.isEmpty()) {
+            val cards = CardStorage.loadCards(requireContext())
+            cardAdapter.submitList(cards)
+        } else {
+            val cards = CardStorage.getFilteredCard(requireContext(), selectedTags)
+            cardAdapter.submitList(cards)
         }
-        return 0
     }
 
 

@@ -1,7 +1,6 @@
 package com.example.trainingtracker.ui.tag
 
 import android.content.Context
-import com.example.trainingtracker.ui.exerciseCard.CardStorage
 import java.io.FileNotFoundException
 import java.io.IOException
 import java.io.ObjectInputStream
@@ -62,9 +61,23 @@ object TagStorage {
     }
 
     fun isIdInUse(context: Context, id: UUID): Boolean {
-        val currentCards = CardStorage.loadCards(context)
-        return currentCards.any { it.id == id }
+        val currentTags = TagStorage.loadTags(context)
+        return currentTags.any { it.id == id }
     }
 
+    fun getSelectedTags(context: Context) : List<Tag>{
+        val tags = TagStorage.loadTags(context)
+        val selectedTags: MutableList<Tag> = mutableListOf()
+        for (tag in tags) {
+            if (tag.isSelected) {
+                selectedTags.add(tag)
+            }
+        }
+        return selectedTags
+    }
+
+    fun resetSelection(){
+
+    }
 
 }

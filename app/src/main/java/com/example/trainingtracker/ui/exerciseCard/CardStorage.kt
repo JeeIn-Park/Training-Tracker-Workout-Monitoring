@@ -1,6 +1,7 @@
 package com.example.trainingtracker.ui.exerciseCard
 
 import android.content.Context
+import com.example.trainingtracker.ui.tag.Tag
 import java.io.FileNotFoundException
 import java.io.IOException
 import java.io.ObjectInputStream
@@ -63,6 +64,23 @@ object CardStorage {
     fun isIdInUse(context: Context, id: UUID): Boolean {
         val currentCards = loadCards(context)
         return currentCards.any { it.id == id }
+    }
+
+    fun getFilteredCard(context: Context, tags: List<Tag>) : List<ExerciseCard> {
+        val cards : MutableList<ExerciseCard> = loadCards(context).toMutableList()
+        val updateCards : MutableList<ExerciseCard> = cards.toMutableList()
+        for (card in cards) {
+            var selected : Boolean = false
+            for (tag in tags) {
+                if (card.tag.contains(tag)) {
+                    selected = true
+                }
+            }
+            if (!selected) {
+                updateCards.remove(card)
+            }
+        }
+        return updateCards
     }
 
 
