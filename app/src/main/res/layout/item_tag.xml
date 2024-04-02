@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:padding="6dp"
         app:cardBackgroundColor="?attr/colorSecondary"
-        app:cardCornerRadius="16dp"
+        app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,15 +21,15 @@
         <!--        todo : outline-->
         <TextView
             android:id="@+id/tagName"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:paddingHorizontal="12dp"
-            android:paddingVertical="6dp"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="8dp"
 
             android:text="Tag"
             android:textColor="?attr/colorOnBackground"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
     </androidx.cardview.widget.CardView>
 

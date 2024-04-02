@@ -60,18 +60,16 @@ class TagAdapter(private val context: Context, private val onItemClick: (Tag) ->
         private val tagName : TextView = itemView.findViewById(R.id.tagName)
 
         fun bind(tag : Tag, position: Int) {
-            println(tag.isSelected)
+            if(tag.isSelected){
+                tagCard.setCardBackgroundColor(context.getColor(R.color.turquoise))
+            }else{
+                tagCard.setCardBackgroundColor(context.getColor(R.color.brighter_turquoise))
+            }
             tagName.text = tag.name
             if (tag != Tag.ADD_TAG) {
                 itemView.setOnLongClickListener {
                     showEditDeleteOptions(tag, position)
                     true // Consume the long click
-                }
-            } else {
-                if(tag.isSelected){
-                    tagCard.setCardBackgroundColor(context.getColor(R.color.turquoise))
-                }else{
-                    tagCard.setCardBackgroundColor(context.getColor(R.color.brighter_turquoise))
                 }
             }
         }
