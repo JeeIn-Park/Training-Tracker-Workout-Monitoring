@@ -95,17 +95,13 @@ class HomeFragment : Fragment() {
 
                 inputDialog.show()
             } else {
-                val newTags : MutableList<Tag> = TagStorage.loadTags(requireContext()).toMutableList()
-                val newTag : Tag = clickedTag
-                newTag.isSelected = !clickedTag.isSelected
-                TagStorage.saveTags(requireContext(), newTags)
-                println(newTag.isSelected)
+                val newTag = Tag(
+                    id = clickedTag.id,
+                    timeAdded = clickedTag.timeAdded,
+                    name = clickedTag.name,
+                    isSelected = !clickedTag.isSelected
+                )
                 tagAdapter.editItem(clickedTag, newTag)
-
-//                clickedTag.isSelected = !clickedTag.isSelected
-//                tagAdapter.notifyItemChanged(findTagIndex(clickedTag, TagStorage.loadTags(requireContext())))
-//                TagStorage.saveTags(requireContext(), TagStorage.loadTags(requireContext()).toMutableList())
-//                println(clickedTag.isSelected)
             }
         }
 

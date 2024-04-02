@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingtracker.R
@@ -54,15 +56,22 @@ class TagAdapter(private val context: Context, private val onItemClick: (Tag) ->
     }
 
     inner class TagViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)  {
+        private val tagCard : CardView = itemView.findViewById(R.id.tagCard)
         private val tagName : TextView = itemView.findViewById(R.id.tagName)
 
         fun bind(tag : Tag, position: Int) {
+            println(tag.isSelected)
             tagName.text = tag.name
-
             if (tag != Tag.ADD_TAG) {
                 itemView.setOnLongClickListener {
                     showEditDeleteOptions(tag, position)
                     true // Consume the long click
+                }
+            } else {
+                if(tag.isSelected){
+                    tagCard.setCardBackgroundColor(context.getColor(R.color.turquoise))
+                }else{
+                    tagCard.setCardBackgroundColor(context.getColor(R.color.brighter_turquoise))
                 }
             }
         }
