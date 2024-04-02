@@ -8,13 +8,17 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/tagCard"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:padding="6dp"
         app:cardBackgroundColor="@color/tag_color_selector"
-        app:cardCornerRadius="16dp">
+        app:cardCornerRadius="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-<!--        todo : outline-->
+        <!--        todo : outline-->
         <TextView
             android:id="@+id/tagName"
             android:layout_width="match_parent"

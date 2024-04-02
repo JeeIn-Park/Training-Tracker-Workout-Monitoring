@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingtracker.R
@@ -55,7 +54,6 @@ class TagAdapter(private val context: Context, private val onItemClick: (Tag) ->
     }
 
     inner class TagViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)  {
-        private val tagCard : CardView = itemView.findViewById(R.id.tagCard)
         private val tagName : TextView = itemView.findViewById(R.id.tagName)
 
         fun bind(tag : Tag, position: Int) {

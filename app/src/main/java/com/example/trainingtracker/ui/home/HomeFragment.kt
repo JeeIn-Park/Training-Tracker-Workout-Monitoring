@@ -79,7 +79,7 @@ class HomeFragment : Fragment() {
                             timeAdded = LocalDateTime.now(),
                             name = newTagString)
 
-                        var newTags : MutableList<Tag> = TagStorage.loadTags(requireContext()).toMutableList()
+                        val newTags : MutableList<Tag> = TagStorage.loadTags(requireContext()).toMutableList()
                         newTags.add(newTag)
                         newTags.removeAll { it == Tag.ADD_TAG }
                         newTags.add(Tag.ADD_TAG)
@@ -95,9 +95,17 @@ class HomeFragment : Fragment() {
 
                 inputDialog.show()
             } else {
-                var newTag = clickedTag
+                val newTags : MutableList<Tag> = TagStorage.loadTags(requireContext()).toMutableList()
+                val newTag : Tag = clickedTag
                 newTag.isSelected = !clickedTag.isSelected
+                TagStorage.saveTags(requireContext(), newTags)
+                println(newTag.isSelected)
                 tagAdapter.editItem(clickedTag, newTag)
+
+//                clickedTag.isSelected = !clickedTag.isSelected
+//                tagAdapter.notifyItemChanged(findTagIndex(clickedTag, TagStorage.loadTags(requireContext())))
+//                TagStorage.saveTags(requireContext(), TagStorage.loadTags(requireContext()).toMutableList())
+//                println(clickedTag.isSelected)
             }
         }
 
@@ -149,6 +157,15 @@ class HomeFragment : Fragment() {
         tags.removeAll { it == Tag.ADD_TAG }
         tags.add(Tag.ADD_TAG)
         tagAdapter.submitList(tags)
+    }
+
+    private fun findTagIndex(item: Tag, resourceArray: List<Tag>) : Int {
+        for (i in resourceArray.indices) {
+            if (resourceArray[i] == item) {
+                return i
+            }
+        }
+        return 0
     }
 
 
