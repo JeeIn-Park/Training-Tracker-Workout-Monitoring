@@ -84,8 +84,7 @@ class HomeFragment : Fragment() {
                         newTags.removeAll { it == Tag.ADD_TAG }
                         newTags.add(Tag.ADD_TAG)
                         TagStorage.saveTags(requireContext(), newTags)
-                        tagAdapter.submitList(newTags)
-                        // TODO : use refresh
+                        refresh()
                     }
                     dialog.dismiss()
                 }
@@ -103,6 +102,7 @@ class HomeFragment : Fragment() {
                     isSelected = !clickedTag.isSelected
                 )
                 tagAdapter.editItem(clickedTag, newTag)
+                refresh()
             }
         }
 
