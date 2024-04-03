@@ -66,21 +66,26 @@ object CardStorage {
         return currentCards.any { it.id == id }
     }
 
-    fun getFilteredCard(context: Context, tags: List<Tag>) : List<ExerciseCard> {
+    fun getSelectedCard(context: Context, tags: List<Tag>) : List<ExerciseCard> {
         val cards : MutableList<ExerciseCard> = loadCards(context).toMutableList()
-        val updateCards : MutableList<ExerciseCard> = cards.toMutableList()
-        for (card in cards) {
-            var selected : Boolean = false
-            for (tag in tags) {
-                if (card.tag.contains(tag)) {
-                    selected = true
+        if (tags.isEmpty()) {
+            return cards
+        } else {
+            val updateCards : MutableList<ExerciseCard> = cards.toMutableList()
+            for (card in cards) {
+                var selected = false
+                for (tag in tags) {
+                    if (card.tag.contains(tag)) {
+                        selected = true
+                        println("${card} card is selected")
+                    }
+                }
+                if (!selected) {
+                    updateCards.remove(card)
                 }
             }
-            if (!selected) {
-                updateCards.remove(card)
-            }
+            return updateCards
         }
-        return updateCards
     }
 
 

@@ -83,7 +83,16 @@ class AddCardActivity : AppCompatActivity() {
             val exerciseName = exerciseNameEditText.text.toString()
             val mainMuscle = listOf(mainMusclesSpinner.selectedItem.toString())
             val subMuscle = listOf(subMusclesSpinner.selectedItem.toString())
-            val tag = listOf(tagArray[tagArray.indexOfFirst { it.name == tagSpinner.selectedItem.toString() }])
+            val singleTag = tagArray[tagArray.indexOfFirst { it.name == tagSpinner.selectedItem.toString() }]
+            val tag = listOf(Tag(
+                id = singleTag.id,
+                timeAdded = singleTag.timeAdded,
+                name = singleTag.name,
+                isSelected = true
+            ))
+            // TODO : deal with multiple tags
+            // TODO : if there is card stored with false tag, needs to change it to true.
+            // TODO : data migrain when start app, need to update all the data as well
             val timeAdded = LocalDateTime.now()
 
             if (cardItem != null) {

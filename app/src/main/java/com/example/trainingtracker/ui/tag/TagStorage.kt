@@ -11,29 +11,29 @@ object TagStorage {
 
     private const val FILE_NAME = "tags.dat"
 
-    fun saveTags(context: Context, tags : List<Tag>) {
+    fun saveTags(context: Context, tags: List<Tag>) {
         try {
             val filteredTags = tags.filter { it != Tag.ADD_TAG }
             ObjectOutputStream(context.openFileOutput(FILE_NAME, Context.MODE_PRIVATE)).use {
                 it.writeObject(filteredTags)
             }
-        } catch (e : IOException) {
+        } catch (e: IOException) {
             e.printStackTrace()
         }
     }
 
     // TODO : when not match the type
-    fun loadTags(context: Context) : List<Tag> {
+    fun loadTags(context: Context): List<Tag> {
         try {
             ObjectInputStream(context.openFileInput(FILE_NAME)).use {
                 return it.readObject() as? List<Tag> ?: emptyList()
             }
-        } catch (e : FileNotFoundException) {
+        } catch (e: FileNotFoundException) {
             return emptyList()
-        } catch (e : IOException) {
+        } catch (e: IOException) {
             e.printStackTrace()
             return emptyList()
-        } catch (e : ClassNotFoundException) {
+        } catch (e: ClassNotFoundException) {
             e.printStackTrace()
             return emptyList()
         }
@@ -65,7 +65,7 @@ object TagStorage {
         return currentTags.any { it.id == id }
     }
 
-    fun getSelectedTags(context: Context) : List<Tag>{
+    fun getSelectedTags(context: Context): List<Tag> {
         val tags = TagStorage.loadTags(context)
         val selectedTags: MutableList<Tag> = mutableListOf()
         for (tag in tags) {
@@ -73,11 +73,26 @@ object TagStorage {
                 selectedTags.add(tag)
             }
         }
+        println(selectedTags)
         return selectedTags
     }
 
-    fun resetSelection(){
-
+    fun resetSelection(context: Context) {
+        val tags = TagStorage.loadTags(context)
+        val updatedTags: MutableList<Tag> = mutableListOf()
+        for (tag in tags) {
+            updatedTags.add(
+                Tag(
+                    id = tag.id,
+                    timeAdded = tag.timeAdded,
+                    name = tag.name,
+                    isSelected = false
+                )
+            )
+        }
+        if (tags.size != updatedTags.size) {
+            throw error("error while resetting tag selections") // TODO : check if this throws error
+        } else saveTags(context, updatedTags)
     }
 
 }

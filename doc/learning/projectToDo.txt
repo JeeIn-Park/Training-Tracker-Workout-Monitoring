@@ -1,0 +1,5 @@
+reset tag selection when stoped
+check if tags are filtered well
+check if cards are filtered well
+
+get index function -> find first 

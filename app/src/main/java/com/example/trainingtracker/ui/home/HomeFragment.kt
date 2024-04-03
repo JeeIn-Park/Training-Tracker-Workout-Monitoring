@@ -85,6 +85,7 @@ class HomeFragment : Fragment() {
                         newTags.add(Tag.ADD_TAG)
                         TagStorage.saveTags(requireContext(), newTags)
                         tagAdapter.submitList(newTags)
+                        // TODO : use refresh
                     }
                     dialog.dismiss()
                 }
@@ -146,21 +147,12 @@ class HomeFragment : Fragment() {
     }
 
     private fun refresh() {
-        val tags: MutableList<Tag> = TagStorage.loadTags(requireContext()).toMutableList()
+        val tags : MutableList<Tag> = TagStorage.loadTags(requireContext()).toMutableList()
         tags.removeAll { it == Tag.ADD_TAG }
         tags.add(Tag.ADD_TAG)
         tagAdapter.submitList(tags)
-
         val selectedTags = TagStorage.getSelectedTags(requireContext())
-        if (selectedTags.isEmpty()) {
-            val cards = CardStorage.loadCards(requireContext())
-            cardAdapter.submitList(cards)
-        } else {
-            val cards = CardStorage.getFilteredCard(requireContext(), selectedTags)
-            cardAdapter.submitList(cards)
-        }
+        val cards = CardStorage.getSelectedCard(requireContext(), selectedTags)
+        cardAdapter.submitList(cards)
     }
-
-
-
 }
