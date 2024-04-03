@@ -141,8 +141,8 @@ class HomeFragment : Fragment() {
 
 
     override fun onStop() {
-        // reset all the select boolean and save
-//        TagStorage.saveTags(requireContext(), tagAdapter.currentList)
+//        TagStorage.resetSelection(requireContext())
+        // TODO : reset tag selection when stop the app
         super.onStop()
     }
 

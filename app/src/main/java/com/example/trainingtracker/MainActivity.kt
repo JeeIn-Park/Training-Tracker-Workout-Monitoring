@@ -10,6 +10,7 @@ import androidx.navigation.ui.setupWithNavController
 //import androidx.recyclerview.widget.LinearLayoutManager
 //import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingtracker.databinding.ActivityMainBinding
+import com.example.trainingtracker.ui.tag.TagStorage
 
 class MainActivity : AppCompatActivity() {
 
@@ -36,5 +37,10 @@ private lateinit var binding: ActivityMainBinding
         //TODO : deal with data sync
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    override fun onStop() {
+        TagStorage.resetSelection(this)
+        super.onStop()
     }
 }
