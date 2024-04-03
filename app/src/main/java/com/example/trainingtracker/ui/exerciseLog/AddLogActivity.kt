@@ -47,7 +47,6 @@ class AddLogActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        println(pastLog)
 
         // layout binding
         setContentView(R.layout.activity_add_log)
@@ -193,8 +192,6 @@ class AddLogActivity : AppCompatActivity() {
             totalWeight = null // TODO : implement this algorithm
         )
         logStorage.addLog(this, log)
-
-        println(updatedCard)
     }
 
 }

@@ -73,7 +73,6 @@ object TagStorage {
                 selectedTags.add(tag)
             }
         }
-        println(selectedTags)
         return selectedTags
     }
 

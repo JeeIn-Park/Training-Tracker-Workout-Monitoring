@@ -77,7 +77,6 @@ object CardStorage {
                 for (tag in tags) {
                     if (card.tag.contains(tag)) {
                         selected = true
-                        println("${card} card is selected")
                     }
                 }
                 if (!selected) {

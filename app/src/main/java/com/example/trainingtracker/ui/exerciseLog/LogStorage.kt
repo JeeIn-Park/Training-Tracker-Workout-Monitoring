@@ -45,7 +45,6 @@ class LogStorage(id : UUID) {
     fun addLog(context: Context, log: ExerciseLog) {
         val currentLogs = loadLogs(context).toMutableList()
         currentLogs.add(log)
-        println(currentLogs)
         saveLogs(context, currentLogs)
     }
 
