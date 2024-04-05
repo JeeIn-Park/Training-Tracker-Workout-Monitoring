@@ -89,7 +89,7 @@ class HomeCardAdapter(
             }
 
 
-            if (cardItem.mainMuscles[0] == context.getString(R.string.muscle_select)) {
+            if (cardItem.mainMuscles[0].name == context.getString(R.string.muscle_select)) {
                 mainMuscle.visibility = View.INVISIBLE
             } else {
                 mainMuscle.visibility = View.VISIBLE
@@ -100,7 +100,7 @@ class HomeCardAdapter(
                 }
             }
 
-            if (cardItem.subMuscles[0] == context.getString(R.string.muscle_select)) {
+            if (cardItem.subMuscles[0].name == context.getString(R.string.muscle_select)) {
                 subMuscle.visibility = View.INVISIBLE
             } else {
                 subMuscle.visibility = View.VISIBLE

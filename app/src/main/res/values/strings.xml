@@ -24,29 +24,4 @@
     <string name="event_muscle">muscle</string>
     <string name="muscle_select">Select muscle</string>
 
-
-    <string-array name="muscles_array">
-        <item>Neck / Traps</item>
-        <item>Shoulder</item>
-        <item>Chest</item>
-        <item>Arm</item>
-        <item>Biceps</item>
-        <item>Triceps</item>
-        <item>Forearms</item>
-        <item>Abs</item>
-        <item>Obliques</item>
-        <item>Back</item>
-        <item>Upper Back</item>
-        <item>Lower Back</item>
-        <item>Leg</item>
-        <item>Inner thigh</item>
-        <item>Glutes / buttocks</item>
-        <item>Quadriceps</item>
-        <item>Hamstrings</item>
-        <item>Calves</item>
-
-
-
-    </string-array>
-<!--    TODO : connect muscle to the button-->
 </resources>

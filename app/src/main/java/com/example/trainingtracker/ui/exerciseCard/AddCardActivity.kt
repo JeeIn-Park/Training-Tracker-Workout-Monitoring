@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import com.example.trainingtracker.R
+import com.example.trainingtracker.ui.muscles.MuscleStatusAlgorithm
 import com.example.trainingtracker.ui.tag.Tag
 import com.example.trainingtracker.ui.tag.TagStorage
 import java.time.LocalDateTime
@@ -22,12 +23,9 @@ class AddCardActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_card)
 
         val cardItem = intent.getSerializableExtra("EXTRA_CARD_ITEM") as ExerciseCard?
-        val musclesArray = (listOf(getString(R.string.muscle_select))
-                + resources.getStringArray(R.array.muscles_array)).toTypedArray()
-        val selectTag = Tag(
-        id = UUID.randomUUID(),
-        timeAdded = LocalDateTime.now(),
-        name = getString(R.string.tag_select))
+        val musclesArray = MuscleStatusAlgorithm.loadMuscles(this).toTypedArray()
+        println("muscles loaded")
+        val selectTag = Tag( UUID.randomUUID(), LocalDateTime.now(), getString(R.string.tag_select))
         val tagArray = (listOf(selectTag)
                 + TagStorage.loadTags(this)).toTypedArray()
 
@@ -39,11 +37,12 @@ class AddCardActivity : AppCompatActivity() {
         val addButton: Button = findViewById(R.id.add_button)
 
         val mainMusclesAdapter =
-            ArrayAdapter(this, android.R.layout.simple_spinner_item, musclesArray)
+            ArrayAdapter(this, android.R.layout.simple_spinner_item, musclesArray.map { it.name })
         val subMusclesAdapter =
-            ArrayAdapter(this, android.R.layout.simple_spinner_item, musclesArray)
+            ArrayAdapter(this, android.R.layout.simple_spinner_item, musclesArray.map { it.name })
         val tagAdapter =
             ArrayAdapter(this, android.R.layout.simple_spinner_item, tagArray.map { it.name })
+        println("adapter loaded")
 
         // Set dropdown layout style
         mainMusclesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -68,11 +67,11 @@ class AddCardActivity : AppCompatActivity() {
         if (cardItem != null) {
             supportActionBar?.title = cardItem.name
             exerciseNameEditText.setText(cardItem.name)
-            val mainMuscleIndex = findMuscleIndex(cardItem.mainMuscles[0], musclesArray)
+            val mainMuscleIndex = musclesArray.indexOfFirst { it == cardItem.mainMuscles[0] }
             mainMusclesSpinner.setSelection(mainMuscleIndex)
-            val subMuscleIndex = findMuscleIndex(cardItem.subMuscles[0], musclesArray)
+            val subMuscleIndex = musclesArray.indexOfFirst { it == cardItem.subMuscles[0] }
             subMusclesSpinner.setSelection(subMuscleIndex)
-            val tagIndex = findTagIndex(cardItem.tag[0], tagArray)
+            val tagIndex = tagArray.indexOfFirst { it == cardItem.tag[0] }
             tagSpinner.setSelection(tagIndex)
             addButton.text = "SAVE"
         }
@@ -80,8 +79,8 @@ class AddCardActivity : AppCompatActivity() {
         // Set click listener for add/edit button
         addButton.setOnClickListener {
             val exerciseName = exerciseNameEditText.text.toString()
-            val mainMuscle = listOf(mainMusclesSpinner.selectedItem.toString())
-            val subMuscle = listOf(subMusclesSpinner.selectedItem.toString())
+            val mainMuscle = listOf( musclesArray[musclesArray.indexOfFirst { it == mainMusclesSpinner.selectedItem }] )
+            val subMuscle = listOf( musclesArray[musclesArray.indexOfFirst { it == subMusclesSpinner.selectedItem }] )
             val singleTag = tagArray[tagArray.indexOfFirst { it.name == tagSpinner.selectedItem.toString() }]
             val tag = listOf(Tag(
                 id = singleTag.id,
@@ -139,26 +138,6 @@ class AddCardActivity : AppCompatActivity() {
     }
 
     // TODO : back press warning, on stop
-
-
-    // TODO : make general
-    private fun findMuscleIndex(item: String, resourceArray: Array<String>) : Int {
-        for (i in resourceArray.indices) {
-            if (resourceArray[i] == item) {
-                return i
-            }
-        }
-        return 0
-    }
-
-    private fun findTagIndex(item: Tag, resourceArray: Array<Tag>) : Int {
-        for (i in resourceArray.indices) {
-            if (resourceArray[i] == item) {
-                return i
-            }
-        }
-        return 0
-    }
 
 }
 
