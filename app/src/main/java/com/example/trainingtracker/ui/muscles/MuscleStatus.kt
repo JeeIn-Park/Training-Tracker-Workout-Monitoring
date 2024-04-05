@@ -31,43 +31,33 @@ object MuscleStatus {
         return RECOVERED
     }
 
-    fun getMuscleColour(){}
-
-
     private fun restingTime(lastActivity: LocalDateTime?, mode: Int) : Long {
         val currentDateTime = LocalDateTime.now()
         val duration = Duration.between(lastActivity, currentDateTime)
-
-//        if (mode == IN_SECONDS) {
-//            return duration.seconds
-//        } else if (mode == IN_MINUTES) {
-//            return  duration.toMinutes()
-//        } else if (mode == IN_HOURS) {
-//            return duration.toHours()
-//        } else if (mode == IN_DAYS) {
-//            return duration.toDays()
-//        }
-//        return -1
-
         return when (mode) {
-            IN_SECONDS -> {
-                duration.seconds
-            }
-
-            IN_MINUTES -> {
-                duration.toMinutes()
-            }
-
-            IN_HOURS -> {
-                duration.toHours()
-            }
-
-            IN_DAYS -> {
-                duration.toDays()
-            }
-
+            IN_SECONDS -> { duration.seconds }
+            IN_MINUTES -> { duration.toMinutes() }
+            IN_HOURS -> { duration.toHours() }
+            IN_DAYS -> { duration.toDays() }
             else -> -1
         }
+    }
+
+    fun refreshMuscle(context : Context){
+        val muscleList = MuscleStorage.loadMuscles(context)
+        var updatedMuscleList : MutableList<Muscle> = listOf<Muscle>().toMutableList()
+
+        for(muscle in muscleList) {
+            updatedMuscleList.add(
+                Muscle(
+                    muscle.lastActivity,
+                    muscleState(muscle),
+                    muscle.name,
+                    muscle.layout
+                )
+            )
+        }
+        MuscleStorage.saveMuscles(context, updatedMuscleList)
     }
 
     fun logExercise(
@@ -117,7 +107,9 @@ object MuscleStatus {
             )
             MuscleStorage.updateMuscle(context, muscle, updatedMuscle)
         }
-
     }
 
+    fun setMuscleColour(){
+
+    }
 }

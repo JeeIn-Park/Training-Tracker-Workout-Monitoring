@@ -1,6 +1,9 @@
 package com.example.trainingtracker.ui.muscles
 
 import android.content.Context
+import com.example.trainingtracker.Event
+import com.example.trainingtracker.EventManager
+import com.example.trainingtracker.R
 import java.io.IOException
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
@@ -41,6 +44,12 @@ object MuscleStorage {
         if (index != -1) {
             currentMuscles[index] = newMuscle
             saveMuscles(context, currentMuscles)
+            EventManager.publish(
+                Event(
+                    context.getString(R.string.event_muscle),
+                    loadMuscles(context)
+                )
+            )
         }
     }
 

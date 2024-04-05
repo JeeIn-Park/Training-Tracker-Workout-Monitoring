@@ -10,6 +10,7 @@
     <!--    exercise    -->
     <string name="event_exercise">exercise</string>
     <string name="exercise_add">Add a new exercise</string>
+    <string name="event_log">log</string>
     <string name="exercise_enter_weight">Enter weight</string>
     <string name="exercise_enter_rep">Enter reps</string>
     <string name="exercise_deletion_warning">All records will be deleted. Once deleted, they cannot be recovered. </string>

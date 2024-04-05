@@ -137,8 +137,6 @@ class AddCardActivity : AppCompatActivity() {
         val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
     }
-
     // TODO : back press warning, on stop
-
 }
 
