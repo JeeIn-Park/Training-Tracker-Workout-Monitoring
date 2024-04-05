@@ -34,14 +34,12 @@ object MuscleStatusAlgorithm {
                 val loadedMuscles = inputStream.readObject()
                 if (loadedMuscles is List<*>) {
                     @Suppress("UNCHECKED_CAST")
-                    println("muscles loaded - try succeed")
                     return loadedMuscles as List<Muscle>
                 }
             }
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        println("muscles loaded - try fail")
         return loadDefaultMuscles()
     }
 
@@ -67,7 +65,6 @@ object MuscleStatusAlgorithm {
 
     private fun loadDefaultMuscles(): List<Muscle> {
         var uuidList : MutableList<UUID> = listOf<UUID>().toMutableList()
-        println("muscles loaded - default muscles")
         return listOf(
             Muscle(null, 0, "Neck / Traps", listOf("muscle_front_neck_traps", "muscle_back_neck_traps")),
             Muscle(null, 0, "Shoulder", listOf("muscle_front_shoulder", "muscle_back_shoulder")),
