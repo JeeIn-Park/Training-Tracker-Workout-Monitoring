@@ -9,6 +9,9 @@ data class Muscle(
     val name : String,
     val layout : List<String>,
 ) {
+    val RECOVERED = 0
+    val RECOVERING = 1
+    val NEED_EXERCISE = 2
 
     fun updateLastActivity(newDate: LocalDateTime) {
         lastActivity = newDate

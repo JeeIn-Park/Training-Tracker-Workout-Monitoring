@@ -10,7 +10,7 @@ import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import com.example.trainingtracker.R
 import com.example.trainingtracker.ui.muscles.Muscle
-import com.example.trainingtracker.ui.muscles.MuscleStatusAlgorithm
+import com.example.trainingtracker.ui.muscles.MuscleStorage
 import com.example.trainingtracker.ui.tag.Tag
 import com.example.trainingtracker.ui.tag.TagStorage
 import java.time.LocalDateTime
@@ -26,7 +26,7 @@ class AddCardActivity : AppCompatActivity() {
         val cardItem = intent.getSerializableExtra("EXTRA_CARD_ITEM") as ExerciseCard?
         val selectMuscle = Muscle(null, 0, getString(R.string.muscle_select), listOf())
         val musclesArray = (listOf(selectMuscle)
-                + MuscleStatusAlgorithm.loadMuscles(this).toTypedArray())
+                + MuscleStorage.loadMuscles(this).toTypedArray())
         val selectTag = Tag( UUID.randomUUID(), LocalDateTime.now(), getString(R.string.tag_select))
         val tagArray = (listOf(selectTag)
                 + TagStorage.loadTags(this)).toTypedArray()

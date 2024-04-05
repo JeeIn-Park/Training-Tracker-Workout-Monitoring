@@ -1,8 +1,6 @@
-package com.example.trainingtracker
+package com.example.trainingtracker.ui.exerciseLog
 
-import com.example.trainingtracker.ui.exerciseLog.ExerciseLog
-
-object OneRepMaxAlgorithm {
+object OneRepMax {
 
     fun oneRepMaxRecord_pb(logs : List<ExerciseLog>) : Float {
         var finalOneRepMax : Float = 0F

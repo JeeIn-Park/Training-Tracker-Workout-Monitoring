@@ -6,16 +6,8 @@ import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
 import java.util.UUID
 
-object MuscleStatusAlgorithm {
+object MuscleStorage {
     private const val FILE_NAME = "muscles.dat"
-
-    const val RECOVERED = 0
-    const val RECOVERING = 1
-    const val NEED_EXERCISE = 2
-
-    fun initialiseMuscles(){}
-    fun muscleStatus(){}
-    fun getMuscleColour(){}
 
     fun saveMuscles(context: Context, muscles: List<Muscle>) {
         try {
