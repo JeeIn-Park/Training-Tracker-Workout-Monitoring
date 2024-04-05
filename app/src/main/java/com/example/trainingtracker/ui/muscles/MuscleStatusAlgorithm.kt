@@ -67,15 +67,6 @@ object MuscleStatusAlgorithm {
 
     private fun loadDefaultMuscles(): List<Muscle> {
         var uuidList : MutableList<UUID> = listOf<UUID>().toMutableList()
-
-        fun uniqueUUID() : UUID {
-            var uniqueId: UUID
-            do {
-                uniqueId = UUID.randomUUID()
-            } while (!uuidList.contains(uniqueId))
-            uuidList.add(uniqueId)
-            return uniqueId
-        }
         println("muscles loaded - default muscles")
         return listOf(
             Muscle(null, 0, "Neck / Traps", listOf("muscle_front_neck_traps", "muscle_back_neck_traps")),
@@ -86,16 +77,16 @@ object MuscleStatusAlgorithm {
             Muscle(null, 0, "Triceps", listOf("muscle_back_triceps")),
             Muscle(null, 0, "Forearms", listOf("muscle_front_forearm", "muscle_back_forearm")),
             Muscle(null, 0, "Abs", listOf("muscle_front_abs")),
-            Muscle(uniqueUUID(), null, 0, "Obliques", listOf("muscle_front_obliques", "muscle_back_obliques")),
-            Muscle(uniqueUUID(), null, 0, "Back", listOf("muscle_back_upper_back", "muscle_back_lower_back")),
-            Muscle(uniqueUUID(), null, 0, "Upper Back", listOf("muscle_back_upper_back")),
-            Muscle(uniqueUUID(), null, 0, "Lower Back", listOf("muscle_back_lower_back")),
-            Muscle(uniqueUUID(), null, 0, "Leg", listOf("muscle_front_inner_thigh", "muscle_front_quadriceps", "muscle_back_hamstrings", "muscle_front_calves", "muscle_back_calves")),
-            Muscle(uniqueUUID(), null, 0, "Inner Thigh", listOf("muscle_front_inner_thigh")),
-            Muscle(uniqueUUID(), null, 0, "Glutes / Buttocks", listOf("muscle_back_glutes_buttocks")),
-            Muscle(uniqueUUID(), null, 0, "Quadriceps", listOf("muscle_front_quadriceps")),
-            Muscle(uniqueUUID(), null, 0, "Hamstrings", listOf("muscle_back_hamstrings")),
-            Muscle(uniqueUUID(), null, 0, "Calves", listOf("muscle_front_calves", "muscle_back_calves")),
+            Muscle(null, 0, "Obliques", listOf("muscle_front_obliques", "muscle_back_obliques")),
+            Muscle(null, 0, "Back", listOf("muscle_back_upper_back", "muscle_back_lower_back")),
+            Muscle(null, 0, "Upper Back", listOf("muscle_back_upper_back")),
+            Muscle(null, 0, "Lower Back", listOf("muscle_back_lower_back")),
+            Muscle(null, 0, "Leg", listOf("muscle_front_inner_thigh", "muscle_front_quadriceps", "muscle_back_hamstrings", "muscle_front_calves", "muscle_back_calves")),
+            Muscle(null, 0, "Inner Thigh", listOf("muscle_front_inner_thigh")),
+            Muscle(null, 0, "Glutes / Buttocks", listOf("muscle_back_glutes_buttocks")),
+            Muscle(null, 0, "Quadriceps", listOf("muscle_front_quadriceps")),
+            Muscle(null, 0, "Hamstrings", listOf("muscle_back_hamstrings")),
+            Muscle(null, 0, "Calves", listOf("muscle_front_calves", "muscle_back_calves")),
         )
 
     }
