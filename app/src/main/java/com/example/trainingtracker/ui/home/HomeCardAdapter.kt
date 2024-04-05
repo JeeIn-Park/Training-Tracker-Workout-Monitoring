@@ -96,7 +96,7 @@ class HomeCardAdapter(
                 mainMuscle.text = if (cardItem.mainMuscles == null) {
                     "Main muscle : N/A"
                 } else {
-                    "Main muscle : ${cardItem.mainMuscles.toString()}"
+                    "Main muscle : ${cardItem.mainMuscles[0].name}"
                 }
             }
 
@@ -107,7 +107,7 @@ class HomeCardAdapter(
                 subMuscle.text = if (cardItem.subMuscles == null) {
                     "Main muscle : N/A"
                 } else {
-                    "Sub muscle : ${cardItem.subMuscles.toString()}"
+                    "Sub muscle : ${cardItem.subMuscles[0].name}"
                 }
             }
 

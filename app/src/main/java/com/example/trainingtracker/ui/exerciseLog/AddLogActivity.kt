@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingtracker.R
 import com.example.trainingtracker.ui.exerciseCard.CardStorage
 import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
+import com.example.trainingtracker.ui.muscles.MuscleStatus
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
 import kotlin.math.roundToInt
@@ -96,9 +97,6 @@ class AddLogActivity : AppCompatActivity() {
             contentTextView2.text = content
         }
 
-
-
-        var setNum: Int?
         logButton.setOnClickListener {
             val dateTime = LocalDateTime.now()
             val massString = kgEditText.text.toString()
@@ -164,32 +162,14 @@ class AddLogActivity : AppCompatActivity() {
 
     override fun onStop() {
         if (exerciseSetList.isNotEmpty()) {
-            saveLog()
+            MuscleStatus.logExercise(
+                this,
+                exerciseSetList,
+                cardItem,
+                exerciseDate,
+                logStorage)
         }
         super.onStop()
-    }
-
-    private fun saveLog() {
-        val updatedCard = ExerciseCard(
-            id = cardItem.id,
-            lastActivity = exerciseDate,
-            timeAdded = cardItem.timeAdded,
-            name = cardItem.name,
-            mainMuscles = cardItem.mainMuscles,
-            subMuscles = cardItem.subMuscles,
-            tag = cardItem.tag,
-            oneRepMax = null
-        )
-        CardStorage.editCard(this, cardItem, updatedCard)
-
-        val log = ExerciseLog(
-            dateTime = exerciseDate,
-            exerciseCard = cardItem.id,
-            exerciseSetList = exerciseSetList,
-            totalSet = currentSetCount,
-            totalWeight = null // TODO : implement this algorithm
-        )
-        logStorage.addLog(this, log)
     }
 
 }

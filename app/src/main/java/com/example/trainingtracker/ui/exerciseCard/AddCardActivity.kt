@@ -80,8 +80,8 @@ class AddCardActivity : AppCompatActivity() {
         // Set click listener for add/edit button
         addButton.setOnClickListener {
             val exerciseName = exerciseNameEditText.text.toString()
-            val mainMuscle = listOf( musclesArray[musclesArray.indexOfFirst { it == mainMusclesSpinner.selectedItem }] )
-            val subMuscle = listOf( musclesArray[musclesArray.indexOfFirst { it == subMusclesSpinner.selectedItem }] )
+            val mainMuscle = listOf( musclesArray[musclesArray.indexOfFirst { it.name == mainMusclesSpinner.selectedItem }] )
+            val subMuscle = listOf( musclesArray[musclesArray.indexOfFirst { it.name == subMusclesSpinner.selectedItem }] )
             val singleTag = tagArray[tagArray.indexOfFirst { it.name == tagSpinner.selectedItem.toString() }]
             val tag = listOf(Tag(
                 id = singleTag.id,
