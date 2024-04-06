@@ -16,6 +16,7 @@ import com.example.trainingtracker.databinding.FragmentHomeBinding
 import com.example.trainingtracker.ui.exerciseCard.AddCardActivity
 import com.example.trainingtracker.ui.exerciseCard.CardStorage
 import com.example.trainingtracker.ui.exerciseLog.AddLogActivity
+import com.example.trainingtracker.ui.muscles.MuscleStatus
 import com.example.trainingtracker.ui.tag.Tag
 import com.example.trainingtracker.ui.tag.TagAdapter
 import com.example.trainingtracker.ui.tag.TagStorage
@@ -125,6 +126,10 @@ class HomeFragment : Fragment() {
             tagAdapter.submitList(newData)
             homeViewModel.updateTagRecyclerViewData(newData)
         }
+
+        val frontMuscleView = binding.muscleFront
+        val backMuscleView = binding.muscleBack
+        MuscleStatus.setMuscleColor(requireContext(), frontMuscleView, backMuscleView)
 
         return root
     }
