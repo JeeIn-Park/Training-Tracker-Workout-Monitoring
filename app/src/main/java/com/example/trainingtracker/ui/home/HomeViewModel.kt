@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
+import com.example.trainingtracker.ui.muscles.Muscle
 import com.example.trainingtracker.ui.tag.Tag
 
 class HomeViewModel : ViewModel() {
@@ -27,6 +28,13 @@ class HomeViewModel : ViewModel() {
     val tagRecyclerViewData : LiveData<List<Tag>> = _tagRecyclerViewData
     fun updateTagRecyclerViewData(data : List<Tag>) {
         _tagRecyclerViewData.value = data
+    }
+
+    // muscle
+    private val _muscleViewData = MutableLiveData<List<Muscle>>()
+    val muscleViewData : LiveData<List<Muscle>> = _muscleViewData
+    fun updateMuscleViewData(data : List<Muscle>){
+        _muscleViewData.value = data
     }
 
 }

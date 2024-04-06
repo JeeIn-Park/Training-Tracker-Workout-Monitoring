@@ -127,10 +127,6 @@ class HomeFragment : Fragment() {
             homeViewModel.updateTagRecyclerViewData(newData)
         }
 
-        val frontMuscleView = binding.muscleFront
-        val backMuscleView = binding.muscleBack
-        MuscleStatus.setMuscleColor(requireContext(), frontMuscleView, backMuscleView)
-
         return root
     }
 
