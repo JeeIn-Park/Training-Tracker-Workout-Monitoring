@@ -135,27 +135,23 @@ class HomeFragment : Fragment() {
         }
 
 
-        val muscleFrontBinding = binding.muscleFront
-        val muscleBackBinding = binding.muscleBack
         homeViewModel.muscleViewData.observe(viewLifecycleOwner) { muscles ->
             muscles.forEach { muscle ->
                 val buttons = getButtonsByMuscleName(muscle.name)
-                buttons.forEach { button ->
-                    val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.muscle_front_neck_traps)?.mutate() as VectorDrawable
-                    val color = when (muscle.status) {
-                        MuscleStatus.RECOVERED -> R.color.turquoise
-                        MuscleStatus.RECOVERING -> R.color.grey
-                        MuscleStatus.NEED_EXERCISE -> R.color.cafeLatte
-                        else -> R.color.red
+                val drawableIds = getDrawableIdsByMuscleName(muscle.name)
+                buttons.zip(drawableIds).forEach { (button, drawableId) ->
+                    val drawable = ContextCompat.getDrawable(requireContext(), drawableId)?.mutate() as? VectorDrawable
+                    drawable?.let {
+                        val color = getColorByStatus(muscle.status)
+                        DrawableCompat.setTint(it, ContextCompat.getColor(requireContext(), color))
+                        button.setImageDrawable(it)
                     }
-                    DrawableCompat.setTint(drawable, ContextCompat.getColor(requireContext(), color))
-                    button.setImageDrawable(drawable)
                 }
             }
         }
-
         return root
     }
+
 
     override fun onResume() {
         refresh()
@@ -184,8 +180,42 @@ class HomeFragment : Fragment() {
         cardAdapter.submitList(cards)
     }
 
+    private fun getColorByStatus(status: Int): Int {
+        return when (status) {
+            MuscleStatus.RECOVERED -> R.color.turquoise
+            MuscleStatus.RECOVERING -> R.color.grey
+            MuscleStatus.NEED_EXERCISE -> R.color.cafeLatte
+            else -> R.color.red
+        }
+    }
+
+    private fun getDrawableIdsByMuscleName(name: String): List<Int> {
+        return when (name) {
+            "Neck / Traps" -> listOf(R.drawable.muscle_front_neck_traps, R.drawable.muscle_back_neck_traps)
+            "Shoulder" -> listOf(R.drawable.muscle_front_shoulder, R.drawable.muscle_back_shoulder)
+            "Chest" -> listOf(R.drawable.muscle_front_chest)
+            "Arm" -> listOf(R.drawable.muscle_front_biceps, R.drawable.muscle_back_triceps, R.drawable.muscle_front_forearm, R.drawable.muscle_back_forearm)
+            "Biceps" -> listOf(R.drawable.muscle_front_biceps)
+            "Triceps" -> listOf(R.drawable.muscle_back_triceps)
+            "Forearms" -> listOf(R.drawable.muscle_front_forearm, R.drawable.muscle_back_forearm)
+            "Abs" -> listOf(R.drawable.muscle_front_abs)
+            "Obliques" -> listOf(R.drawable.muscle_front_obliques, R.drawable.muscle_back_obliques)
+            "Back" -> listOf(R.drawable.muscle_back_upper_back, R.drawable.muscle_back_lower_back)
+            "Upper Back" -> listOf(R.drawable.muscle_back_upper_back)
+            "Lower Back" -> listOf(R.drawable.muscle_back_lower_back)
+            "Leg" -> listOf(R.drawable.muscle_front_inner_thigh, R.drawable.muscle_front_quadriceps, R.drawable.muscle_back_hamstrings, R.drawable.muscle_front_calves, R.drawable.muscle_back_calves)
+            "Inner Thigh" -> listOf(R.drawable.muscle_front_inner_thigh)
+            "Glutes / Buttocks" -> listOf(R.drawable.muscle_back_glutes_buttocks)
+            "Quadriceps" -> listOf(R.drawable.muscle_front_quadriceps)
+            "Hamstrings" -> listOf(R.drawable.muscle_back_hamstrings)
+            "Calves" -> listOf(R.drawable.muscle_front_calves, R.drawable.muscle_back_calves)
+            else -> listOf(R.drawable.muscle_front_calves, R.drawable.muscle_back_calves)
+        }
+    }
+
+
+
     private fun getButtonsByMuscleName(name: String): List<ImageButton> {
-        // Mapping from muscle name to button IDs
         val muscleToButtonIds = mapOf(
             "Neck / Traps" to listOf(R.id.muscle_front_neck_traps, R.id.muscle_back_neck_traps),
             "Shoulder" to listOf(R.id.muscle_front_shoulder, R.id.muscle_back_shoulder),
@@ -207,13 +237,9 @@ class HomeFragment : Fragment() {
             "Calves" to listOf(R.id.muscle_front_calves, R.id.muscle_back_calves)
         )
 
-        // Fetching the button IDs for the given muscle name
         val buttonIds = muscleToButtonIds[name] ?: emptyList()
-
-        // Returning the list of ImageButtons
-        return buttonIds.mapNotNull { id ->
-            view?.findViewById<ImageButton>(id)
-        }
+        return buttonIds.mapNotNull { id -> view?.findViewById<ImageButton>(id) }
     }
+
 
 }
