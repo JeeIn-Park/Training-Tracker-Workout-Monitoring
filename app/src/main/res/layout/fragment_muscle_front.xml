@@ -7,7 +7,7 @@
 
     <!--  front muscle  -->
 
-    <Button
+    <ImageButton
         android:id="@+id/muscle_front_neck_traps"
         android:layout_width="27pt"
         android:layout_height="27pt"
@@ -18,7 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <ImageButton
         android:id="@+id/muscle_front_chest"
         android:layout_width="29pt"
         android:layout_height="29pt"
@@ -29,7 +29,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <ImageButton
         android:id="@+id/muscle_front_shoulder"
         android:layout_width="45pt"
         android:layout_height="45pt"
@@ -40,7 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <ImageButton
         android:id="@+id/muscle_front_biceps"
         android:layout_width="48pt"
         android:layout_height="46pt"
@@ -51,7 +51,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <ImageButton
         android:id="@+id/muscle_front_forearm"
         android:layout_width="55pt"
         android:layout_height="55pt"
@@ -63,7 +63,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <Button
+    <ImageButton
         android:id="@+id/muscle_front_abs"
         android:layout_width="27pt"
         android:layout_height="27pt"
@@ -74,7 +74,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <ImageButton
         android:id="@+id/muscle_front_obliques"
         android:layout_width="30pt"
         android:layout_height="30pt"
@@ -86,7 +86,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <Button
+    <ImageButton
         android:id="@+id/muscle_front_inner_thigh"
         android:background="@drawable/muscle_front_inner_thigh"
         android:layout_width="17pt"
@@ -98,7 +98,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <Button
+    <ImageButton
         android:id="@+id/muscle_front_quadriceps"
         android:background="@drawable/muscle_front_quadriceps"
         android:layout_width="40pt"
@@ -111,7 +111,7 @@
 
 
 
-    <Button
+    <ImageButton
         android:id="@+id/muscle_front_calves"
         android:layout_width="48pt"
         android:layout_height="48pt"

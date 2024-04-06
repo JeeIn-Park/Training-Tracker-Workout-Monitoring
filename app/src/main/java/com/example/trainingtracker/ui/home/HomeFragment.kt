@@ -7,6 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ImageButton
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -132,6 +135,21 @@ class HomeFragment : Fragment() {
 
         val muscleFrontBinding = binding.muscleFront
         val muscleBackBinding = binding.muscleBack
+        homeViewModel.muscleViewData.observe(viewLifecycleOwner) { muscles ->
+            muscles.forEach { muscle ->
+                val buttons = getButtonsByMuscleName(muscle.name)
+                buttons.forEach { button ->
+                    val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.muscle_front_neck_traps)?.mutate() as VectorDrawable
+                    val color = when (muscle.status) {
+                        1 -> R.color.muscle_active
+                        2 -> R.color.muscle_recent
+                        else -> R.color.muscle_inactive
+                    }
+                    DrawableCompat.setTint(drawable, ContextCompat.getColor(requireContext(), color))
+                    button.setImageDrawable(drawable)
+                }
+            }
+        }
 
         return root
     }
@@ -161,5 +179,14 @@ class HomeFragment : Fragment() {
         val selectedTags = TagStorage.getSelectedTags(requireContext())
         val cards = CardStorage.getSelectedCard(requireContext(), selectedTags)
         cardAdapter.submitList(cards)
+    }
+
+    private fun getButtonsByMuscleName(name: String): List<ImageButton> {
+        return when (name) {
+            "muscle_front_neck_traps" -> listOf(binding.muscleFront.muscleFrontNeckTraps, binding.muscleBack.muscleBackNeckTraps)
+            // Example: Assume 'muscle_front_neck_traps' has two buttons on front and back views
+            // Add similar lines for other muscles with their respective buttons
+            else -> emptyList()
+        }
     }
 }
