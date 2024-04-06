@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingtracker.R
@@ -30,6 +29,7 @@ class TagAdapter(private val context: Context, private val onItemClick: (Tag) ->
         }
     }
 
+    // TODO : manual to addItem
     fun addItem(tag: Tag) {
         val updatedList = currentList.toMutableList()
         updatedList.add(tag)
@@ -54,6 +54,7 @@ class TagAdapter(private val context: Context, private val onItemClick: (Tag) ->
         TagStorage.editTag(context, oldTag, newTag)
         submitList(updatedList)
     }
+
 
     inner class TagViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)  {
         private val tagCard : CardView = itemView.findViewById(R.id.tagCard)
@@ -108,7 +109,7 @@ class TagAdapter(private val context: Context, private val onItemClick: (Tag) ->
                         }
                         // Delete
                         1 -> {
-                            showDeleteWarning(tag, position)
+                            showDeleteWarning(position)
                         }
                     }
                     dialog.dismiss()
@@ -116,7 +117,7 @@ class TagAdapter(private val context: Context, private val onItemClick: (Tag) ->
                 .show()
         }
 
-        private fun showDeleteWarning(tag: Tag, position: Int) {
+        private fun showDeleteWarning(position: Int) {
             AlertDialog.Builder(context)
                 .setTitle(context.getString(R.string.general_deletion_warning))
                 .setMessage(context.getString(R.string.tag_deletion_warning))

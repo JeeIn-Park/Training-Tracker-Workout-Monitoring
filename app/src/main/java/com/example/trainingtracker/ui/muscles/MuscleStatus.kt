@@ -136,7 +136,7 @@ object MuscleStatus {
 //        backMuscleView.muscleBackCalves.setBackgroundColor(getMuscleColor(context, muscleList[17]))
 //    }
 
-    private fun getMuscleColor(context: Context, muscle: Muscle) : Int {
+    fun getMuscleColor(context: Context, muscle: Muscle) : Int {
         return when (muscle.status) {
             RECOVERED     -> context.getColor(R.color.turquoise)
             RECOVERING    -> context.getColor(R.color.grey)

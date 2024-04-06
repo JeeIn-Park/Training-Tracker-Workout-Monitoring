@@ -16,7 +16,6 @@ import com.example.trainingtracker.databinding.FragmentHomeBinding
 import com.example.trainingtracker.ui.exerciseCard.AddCardActivity
 import com.example.trainingtracker.ui.exerciseCard.CardStorage
 import com.example.trainingtracker.ui.exerciseLog.AddLogActivity
-import com.example.trainingtracker.ui.muscles.MuscleStatus
 import com.example.trainingtracker.ui.tag.Tag
 import com.example.trainingtracker.ui.tag.TagAdapter
 import com.example.trainingtracker.ui.tag.TagStorage
@@ -44,11 +43,13 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val addCardButton = binding.addCardButton
-        addCardButton.setOnClickListener {
+
+        val addCardButtonBinding = binding.addCardButton
+        addCardButtonBinding.setOnClickListener {
             val intent = Intent(activity, AddCardActivity::class.java)
             startActivity(intent)
         }
+
 
         cardAdapter = HomeCardAdapter(requireContext()) { clickedCard ->
             val intent = Intent(context, AddLogActivity::class.java).apply {
@@ -57,6 +58,7 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
         // todo : study intent, put extra?
+
 
         tagAdapter = TagAdapter(requireContext()) { clickedTag ->
             if (clickedTag.name == Tag.ADD_TAG.name) {
@@ -126,6 +128,10 @@ class HomeFragment : Fragment() {
             tagAdapter.submitList(newData)
             homeViewModel.updateTagRecyclerViewData(newData)
         }
+
+
+        val muscleFrontBinding = binding.muscleFront
+        val muscleBackBinding = binding.muscleBack
 
         return root
     }
