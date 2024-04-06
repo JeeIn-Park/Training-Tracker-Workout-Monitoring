@@ -117,20 +117,20 @@ class HomeFragment : Fragment() {
         }
 
 
-        val exerciseRecyclerView = binding.exerciseRecyclerView
-        exerciseRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        exerciseRecyclerView.adapter = cardAdapter
-        exerciseRecyclerView.itemAnimator = DefaultItemAnimator()
+        val exerciseRecyclerViewBinding = binding.exerciseRecyclerView
+        exerciseRecyclerViewBinding.layoutManager = LinearLayoutManager(requireContext())
+        exerciseRecyclerViewBinding.adapter = cardAdapter
+        exerciseRecyclerViewBinding.itemAnimator = DefaultItemAnimator()
         //todo : better animator
         homeViewModel.cardRecyclerViewData.observe(viewLifecycleOwner) { newData ->
             cardAdapter.submitList(newData)
             homeViewModel.updateCardRecyclerViewData(newData)
         }
 
-        val tagRecyclerView = binding.filterBar.tagRecyclerView
-        tagRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        tagRecyclerView.adapter = tagAdapter
-        tagRecyclerView.itemAnimator = DefaultItemAnimator()
+        val tagRecyclerViewBinding = binding.filterBar.tagRecyclerView
+        tagRecyclerViewBinding.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        tagRecyclerViewBinding.adapter = tagAdapter
+        tagRecyclerViewBinding.itemAnimator = DefaultItemAnimator()
         homeViewModel.tagRecyclerViewData.observe(viewLifecycleOwner) { newData ->
             tagAdapter.submitList(newData)
             homeViewModel.updateTagRecyclerViewData(newData)
