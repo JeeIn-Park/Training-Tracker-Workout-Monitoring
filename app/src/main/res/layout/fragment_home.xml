@@ -86,7 +86,7 @@
 
         <include
             android:id="@+id/filterBar"
-            layout="@layout/fragment_home_tag_bar" />
+            layout="@layout/item_tag_bar" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView

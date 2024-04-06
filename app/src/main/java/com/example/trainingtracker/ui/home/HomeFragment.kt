@@ -2,6 +2,7 @@ package com.example.trainingtracker.ui.home
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.drawable.VectorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,7 @@ import com.example.trainingtracker.databinding.FragmentHomeBinding
 import com.example.trainingtracker.ui.exerciseCard.AddCardActivity
 import com.example.trainingtracker.ui.exerciseCard.CardStorage
 import com.example.trainingtracker.ui.exerciseLog.AddLogActivity
+import com.example.trainingtracker.ui.muscles.MuscleStatus
 import com.example.trainingtracker.ui.tag.Tag
 import com.example.trainingtracker.ui.tag.TagAdapter
 import com.example.trainingtracker.ui.tag.TagStorage
@@ -141,9 +143,10 @@ class HomeFragment : Fragment() {
                 buttons.forEach { button ->
                     val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.muscle_front_neck_traps)?.mutate() as VectorDrawable
                     val color = when (muscle.status) {
-                        1 -> R.color.muscle_active
-                        2 -> R.color.muscle_recent
-                        else -> R.color.muscle_inactive
+                        MuscleStatus.RECOVERED -> R.color.turquoise
+                        MuscleStatus.RECOVERING -> R.color.grey
+                        MuscleStatus.NEED_EXERCISE -> R.color.cafeLatte
+                        else -> R.color.red
                     }
                     DrawableCompat.setTint(drawable, ContextCompat.getColor(requireContext(), color))
                     button.setImageDrawable(drawable)
@@ -182,11 +185,35 @@ class HomeFragment : Fragment() {
     }
 
     private fun getButtonsByMuscleName(name: String): List<ImageButton> {
-        return when (name) {
-            "muscle_front_neck_traps" -> listOf(binding.muscleFront.muscleFrontNeckTraps, binding.muscleBack.muscleBackNeckTraps)
-            // Example: Assume 'muscle_front_neck_traps' has two buttons on front and back views
-            // Add similar lines for other muscles with their respective buttons
-            else -> emptyList()
+        // Mapping from muscle name to button IDs
+        val muscleToButtonIds = mapOf(
+            "Neck / Traps" to listOf(R.id.muscle_front_neck_traps, R.id.muscle_back_neck_traps),
+            "Shoulder" to listOf(R.id.muscle_front_shoulder, R.id.muscle_back_shoulder),
+            "Chest" to listOf(R.id.muscle_front_chest),
+            "Arm" to listOf(R.id.muscle_front_biceps, R.id.muscle_back_triceps, R.id.muscle_front_forearm, R.id.muscle_back_forearm),
+            "Biceps" to listOf(R.id.muscle_front_biceps),
+            "Triceps" to listOf(R.id.muscle_back_triceps),
+            "Forearms" to listOf(R.id.muscle_front_forearm, R.id.muscle_back_forearm),
+            "Abs" to listOf(R.id.muscle_front_abs),
+            "Obliques" to listOf(R.id.muscle_front_obliques, R.id.muscle_back_obliques),
+            "Back" to listOf(R.id.muscle_back_upper_back, R.id.muscle_back_lower_back),
+            "Upper Back" to listOf(R.id.muscle_back_upper_back),
+            "Lower Back" to listOf(R.id.muscle_back_lower_back),
+            "Leg" to listOf(R.id.muscle_front_inner_thigh, R.id.muscle_front_quadriceps, R.id.muscle_back_hamstrings, R.id.muscle_front_calves, R.id.muscle_back_calves),
+            "Inner Thigh" to listOf(R.id.muscle_front_inner_thigh),
+            "Glutes / Buttocks" to listOf(R.id.muscle_back_glutes_buttocks),
+            "Quadriceps" to listOf(R.id.muscle_front_quadriceps),
+            "Hamstrings" to listOf(R.id.muscle_back_hamstrings),
+            "Calves" to listOf(R.id.muscle_front_calves, R.id.muscle_back_calves)
+        )
+
+        // Fetching the button IDs for the given muscle name
+        val buttonIds = muscleToButtonIds[name] ?: emptyList()
+
+        // Returning the list of ImageButtons
+        return buttonIds.mapNotNull { id ->
+            view?.findViewById<ImageButton>(id)
         }
     }
+
 }
