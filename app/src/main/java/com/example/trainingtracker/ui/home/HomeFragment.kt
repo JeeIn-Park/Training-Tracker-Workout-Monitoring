@@ -136,6 +136,8 @@ class HomeFragment : Fragment() {
             homeViewModel.updateTagRecyclerViewData(newData)
         }
 
+        val frontMuscleBinding = binding.muscleFront
+        val backMuscleBinding = binding.muscleBack
 
         homeViewModel.muscleViewData.observe(viewLifecycleOwner) { muscles ->
             muscles.forEach { muscle ->
@@ -154,20 +156,12 @@ class HomeFragment : Fragment() {
         // Initialize or refresh muscle data when the view is created
         homeViewModel.updateMuscleViewData(MuscleStorage.loadMuscles(requireContext()))
         // Setup UI interactions and LiveData observers
-        setupUI(homeViewModel)
-
+        homeViewModel.muscleViewData.observe(viewLifecycleOwner) { muscles ->
+            updateMuscleUI(muscles)
+        }
         return root
     }
 
-
-    private fun setupUI(viewModel: HomeViewModel) {
-        // Setup buttons, recycler views, adapters, etc.
-        // Existing setup code...
-
-        viewModel.muscleViewData.observe(viewLifecycleOwner) { muscles ->
-            updateMuscleUI(muscles)
-        }
-    }
 
     private fun updateMuscleUI(muscles: List<Muscle>) {
         muscles.forEach { muscle ->

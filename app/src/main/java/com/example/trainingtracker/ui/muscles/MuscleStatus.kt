@@ -114,36 +114,4 @@ object MuscleStatus {
         }
     }
 
-    fun setMuscleColor(context: Context, frontMuscleView: FragmentMuscleFrontBinding, backMuscleView: FragmentMuscleBackBinding){
-        val muscleList = MuscleStorage.loadMuscles(context)
-        frontMuscleView.muscleFrontNeckTraps.setBackgroundColor(getMuscleColor(context, muscleList[0]))
-        backMuscleView.muscleBackNeckTraps.setBackgroundColor(getMuscleColor(context, muscleList[0]))
-        frontMuscleView.muscleFrontShoulder.setBackgroundColor(getMuscleColor(context, muscleList[1]))
-        backMuscleView.muscleBackShoulder.setBackgroundColor(getMuscleColor(context, muscleList[1]))
-        frontMuscleView.muscleFrontChest.setBackgroundColor(getMuscleColor(context, muscleList[2]))
-        frontMuscleView.muscleFrontBiceps.setBackgroundColor(getMuscleColor(context, muscleList[4]))
-        backMuscleView.muscleBackTriceps.setBackgroundColor(getMuscleColor(context, muscleList[5]))
-        frontMuscleView.muscleFrontForearm.setBackgroundColor(getMuscleColor(context, muscleList[6]))
-        backMuscleView.muscleBackForearm.setBackgroundColor(getMuscleColor(context, muscleList[6]))
-        frontMuscleView.muscleFrontAbs.setBackgroundColor(getMuscleColor(context, muscleList[7]))
-        frontMuscleView.muscleFrontObliques.setBackgroundColor(getMuscleColor(context, muscleList[8]))
-        backMuscleView.muscleBackObliques.setBackgroundColor(getMuscleColor(context, muscleList[8]))
-        backMuscleView.muscleBackUpperBack.setBackgroundColor(getMuscleColor(context, muscleList[10]))
-        backMuscleView.muscleBackLowerBack.setBackgroundColor(getMuscleColor(context, muscleList[11]))
-        frontMuscleView.muscleFrontInnerThigh.setBackgroundColor(getMuscleColor(context, muscleList[13]))
-        backMuscleView.muscleBackGlutesButtocks.setBackgroundColor(getMuscleColor(context, muscleList[14]))
-        frontMuscleView.muscleFrontQuadriceps.setBackgroundColor(getMuscleColor(context, muscleList[15]))
-        backMuscleView.muscleBackHamstrings.setBackgroundColor(getMuscleColor(context, muscleList[16]))
-        frontMuscleView.muscleFrontCalves.setBackgroundColor(getMuscleColor(context, muscleList[17]))
-        backMuscleView.muscleBackCalves.setBackgroundColor(getMuscleColor(context, muscleList[17]))
-    }
-
-    fun getMuscleColor(context: Context, muscle: Muscle) : Int {
-        return when (muscle.status) {
-            RECOVERED     -> context.getColor(R.color.turquoise)
-            RECOVERING    -> context.getColor(R.color.grey)
-            NEED_EXERCISE -> context.getColor(R.color.cafeLatte)
-            else -> {context.getColor(R.color.red)}
-        }
-    }
 }
