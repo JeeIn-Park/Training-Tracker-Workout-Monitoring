@@ -20,7 +20,9 @@ import com.example.trainingtracker.databinding.FragmentHomeBinding
 import com.example.trainingtracker.ui.exerciseCard.AddCardActivity
 import com.example.trainingtracker.ui.exerciseCard.CardStorage
 import com.example.trainingtracker.ui.exerciseLog.AddLogActivity
+import com.example.trainingtracker.ui.muscles.Muscle
 import com.example.trainingtracker.ui.muscles.MuscleStatus
+import com.example.trainingtracker.ui.muscles.MuscleStorage
 import com.example.trainingtracker.ui.tag.Tag
 import com.example.trainingtracker.ui.tag.TagAdapter
 import com.example.trainingtracker.ui.tag.TagStorage
@@ -149,7 +151,37 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+        // Initialize or refresh muscle data when the view is created
+        homeViewModel.updateMuscleViewData(MuscleStorage.loadMuscles(requireContext()))
+        // Setup UI interactions and LiveData observers
+        setupUI(homeViewModel)
+
         return root
+    }
+
+
+    private fun setupUI(viewModel: HomeViewModel) {
+        // Setup buttons, recycler views, adapters, etc.
+        // Existing setup code...
+
+        viewModel.muscleViewData.observe(viewLifecycleOwner) { muscles ->
+            updateMuscleUI(muscles)
+        }
+    }
+
+    private fun updateMuscleUI(muscles: List<Muscle>) {
+        muscles.forEach { muscle ->
+            val buttons = getButtonsByMuscleName(muscle.name)
+            val drawableIds = getDrawableIdsByMuscleName(muscle.name)
+            buttons.zip(drawableIds).forEach { (button, drawableId) ->
+                val drawable = ContextCompat.getDrawable(requireContext(), drawableId)?.mutate() as? VectorDrawable
+                drawable?.let {
+                    val color = getColorByStatus(muscle.status)
+                    DrawableCompat.setTint(it, ContextCompat.getColor(requireContext(), color))
+                    button.setImageDrawable(it)
+                }
+            }
+        }
     }
 
 
