@@ -38,9 +38,9 @@ object CardStorage {
     }
 
     fun addCard(context: Context, card: ExerciseCard) {
-        val currentCards = loadCards(context).toMutableList()
-        currentCards.add(card)
-        saveCards(context, currentCards)
+        val currentCards = loadCards(context)
+        val updatedCards = listOf(card) + currentCards
+        saveCards(context, updatedCards)
     }
 
     fun removeCard(context: Context, card: ExerciseCard) {
