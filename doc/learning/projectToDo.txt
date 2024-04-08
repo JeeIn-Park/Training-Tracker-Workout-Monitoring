@@ -1,5 +1,25 @@
-reset tag selection when stoped
-check if tags are filtered well
-check if cards are filtered well
+global data storage
+(if null store the time when the user downloaded the app,
+if non-null it means user has opened the app before)
+
+update muscle status when open the app
+only change muscle status when <50/15>
+when it's null -> find when the user downloaded the app and if the time and use it as the last activity
+
+change the status screen
+
+
+
+
 
 get index function -> find first 
+
+delete all the tags in card if tag is deleted
+update tag deletion warning 
+
+if muscle is select muscle, discard it
+
+implement observer pattern
+
+sort changable
+
