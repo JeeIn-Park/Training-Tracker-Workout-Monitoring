@@ -25,7 +25,7 @@ object MuscleStatus {
     private const val IN_HOURS = 2
     private const val IN_DAYS = 3
 
-    fun muscleState(muscle: Muscle) : Int{
+    fun muscleState(context: Context, muscle: Muscle) : Int{
         if (muscle.lastActivity == null) {
             return RECOVERED
         } else if (restingTime(muscle.lastActivity, IN_HOURS) < 50) {
@@ -56,7 +56,7 @@ object MuscleStatus {
             updatedMuscleList.add(
                 Muscle(
                     muscle.lastActivity,
-                    muscleState(muscle),
+                    muscleState(context, muscle),
                     muscle.name,
                     muscle.layout
                 )

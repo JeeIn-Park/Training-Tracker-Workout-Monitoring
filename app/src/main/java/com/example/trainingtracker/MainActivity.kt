@@ -12,6 +12,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.trainingtracker.databinding.ActivityMainBinding
 import com.example.trainingtracker.ui.muscles.MuscleStatus
 import com.example.trainingtracker.ui.tag.TagStorage
+import java.time.LocalDateTime
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,6 +40,12 @@ private lateinit var binding: ActivityMainBinding
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+        val appData = AppDataStorage.loadData(this)
+        if (appData[getString(R.string.download_date)] ==  null) {
+            val downloadDate = emptyMap<String, LocalDateTime>().toMutableMap()
+            downloadDate.put(getString(R.string.download_date), LocalDateTime.now())
+            AppDataStorage.addData(this, downloadDate)
+        }
         MuscleStatus.refreshMuscle(this)
     }
 
