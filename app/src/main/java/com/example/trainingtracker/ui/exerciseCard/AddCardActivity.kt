@@ -68,11 +68,11 @@ class AddCardActivity : AppCompatActivity() {
         if (cardItem != null) {
             supportActionBar?.title = cardItem.name
             exerciseNameEditText.setText(cardItem.name)
-            val mainMuscleIndex = musclesArray.indexOfFirst { it == cardItem.mainMuscles[0] }
+            val mainMuscleIndex = musclesArray.indexOfFirst { it.name == cardItem.mainMuscles[0].name }
             mainMusclesSpinner.setSelection(mainMuscleIndex)
-            val subMuscleIndex = musclesArray.indexOfFirst { it == cardItem.subMuscles[0] }
+            val subMuscleIndex = musclesArray.indexOfFirst { it.name == cardItem.subMuscles[0].name }
             subMusclesSpinner.setSelection(subMuscleIndex)
-            val tagIndex = tagArray.indexOfFirst { it == cardItem.tag[0] }
+            val tagIndex = tagArray.indexOfFirst { it.id == cardItem.tag[0].id }
             tagSpinner.setSelection(tagIndex)
             addButton.text = "SAVE"
         }

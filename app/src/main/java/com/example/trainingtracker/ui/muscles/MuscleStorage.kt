@@ -39,8 +39,8 @@ object MuscleStorage {
     }
 
     fun updateMuscle(context: Context, oldMuscle: Muscle, newMuscle: Muscle) {
-        val currentMuscles = loadMuscles(context).toMutableList()
-        val index = currentMuscles.indexOfFirst { it == oldMuscle }
+        var currentMuscles = loadMuscles(context).toMutableList()
+        val index = currentMuscles.indexOfFirst { it.name == oldMuscle.name }
         if (index != -1) {
             currentMuscles[index] = newMuscle
             saveMuscles(context, currentMuscles)
@@ -50,6 +50,7 @@ object MuscleStorage {
                     loadMuscles(context)
                 )
             )
+            // TODO : when publish muscle update it should refresh muscle colour
         }
     }
 

@@ -157,6 +157,7 @@ class HomeFragment : Fragment() {
         homeViewModel.updateMuscleViewData(MuscleStorage.loadMuscles(requireContext()))
         // Setup UI interactions and LiveData observers
         homeViewModel.muscleViewData.observe(viewLifecycleOwner) { muscles ->
+            // TODO : how to submit?
             updateMuscleUI(muscles)
         }
         return root
@@ -204,6 +205,7 @@ class HomeFragment : Fragment() {
         val selectedTags = TagStorage.getSelectedTags(requireContext())
         val cards = CardStorage.getSelectedCard(requireContext(), selectedTags)
         cardAdapter.submitList(cards)
+        updateMuscleUI(MuscleStorage.loadMuscles(requireContext()))
     }
 
     private fun getColorByStatus(status: Int): Int {

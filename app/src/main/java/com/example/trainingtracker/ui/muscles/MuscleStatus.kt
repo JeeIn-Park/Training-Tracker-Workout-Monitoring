@@ -63,7 +63,6 @@ object MuscleStatus {
         exerciseDate: LocalDateTime,
         logStorage: LogStorage) {
 
-        var muscles : MutableList<Muscle> = MuscleStorage.loadMuscles(context).toMutableList()
         val log = ExerciseLog(
             dateTime = exerciseDate,
             exerciseCard = exerciseCard.id,
@@ -86,22 +85,11 @@ object MuscleStatus {
         CardStorage.editCard(context, exerciseCard, updatedCard)
 
         for (muscle in exerciseCard.mainMuscles) {
-            val updatedMuscle = Muscle(
-                exerciseDate,
-                RECOVERING,
-                muscle.name,
-                muscle.layout
-            )
-            MuscleStorage.updateMuscle(context, muscle, updatedMuscle)
+//            val muscleIndex = muscles.indexOfFirst { it.name == muscle.name }
+            MuscleStorage.updateMuscle(context, muscle, Muscle( exerciseDate, RECOVERING, muscle.name, muscle.layout))
         }
         for (muscle in exerciseCard.subMuscles) {
-            val updatedMuscle = Muscle(
-                exerciseDate,
-                RECOVERING,
-                muscle.name,
-                muscle.layout
-            )
-            MuscleStorage.updateMuscle(context, muscle, updatedMuscle)
+            MuscleStorage.updateMuscle(context, muscle, Muscle( exerciseDate, RECOVERING, muscle.name, muscle.layout))
         }
     }
 
