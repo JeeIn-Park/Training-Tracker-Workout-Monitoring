@@ -1,9 +1,6 @@
 package com.example.trainingtracker.ui.muscles
 
 import android.content.Context
-import com.example.trainingtracker.R
-import com.example.trainingtracker.databinding.FragmentMuscleBackBinding
-import com.example.trainingtracker.databinding.FragmentMuscleFrontBinding
 //import com.example.trainingtracker.databinding.FragmentMuscleBackBinding
 //import com.example.trainingtracker.databinding.FragmentMuscleFrontBinding
 import com.example.trainingtracker.ui.exerciseCard.CardStorage
@@ -25,15 +22,16 @@ object MuscleStatus {
     private const val IN_HOURS = 2
     private const val IN_DAYS = 3
 
-    fun muscleState(context: Context, muscle: Muscle) : Int{
+    private fun muscleState(context: Context, muscle: Muscle): Muscle {
+        var updatedMuscle = muscle
         if (muscle.lastActivity == null) {
-            return RECOVERED
-        } else if (restingTime(muscle.lastActivity, IN_HOURS) < 50) {
-            return RECOVERING
+            updatedMuscle.lastActivity = LocalDateTime.now()
         } else if (10 < restingTime(muscle.lastActivity, IN_DAYS)) {
-            return NEED_EXERCISE
+            updatedMuscle.status = NEED_EXERCISE
+        } else if (50 < restingTime(muscle.lastActivity, IN_HOURS)) {
+            updatedMuscle.status = RECOVERED
         }
-        return RECOVERED
+        return updatedMuscle
     }
 
     private fun restingTime(lastActivity: LocalDateTime?, mode: Int) : Long {
@@ -53,14 +51,7 @@ object MuscleStatus {
         val updatedMuscleList : MutableList<Muscle> = listOf<Muscle>().toMutableList()
 
         for(muscle in muscleList) {
-            updatedMuscleList.add(
-                Muscle(
-                    muscle.lastActivity,
-                    muscleState(context, muscle),
-                    muscle.name,
-                    muscle.layout
-                )
-            )
+            updatedMuscleList.add( muscleState(context, muscle))
         }
         MuscleStorage.saveMuscles(context, updatedMuscleList)
     }

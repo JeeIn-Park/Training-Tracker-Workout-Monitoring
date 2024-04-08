@@ -40,12 +40,6 @@ private lateinit var binding: ActivityMainBinding
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        val appData = AppDataStorage.loadData(this)
-        if (appData[getString(R.string.download_date)] ==  null) {
-            val downloadDate = emptyMap<String, LocalDateTime>().toMutableMap()
-            downloadDate.put(getString(R.string.download_date), LocalDateTime.now())
-            AppDataStorage.addData(this, downloadDate)
-        }
         MuscleStatus.refreshMuscle(this)
     }
 
