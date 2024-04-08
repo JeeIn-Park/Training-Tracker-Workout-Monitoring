@@ -45,9 +45,9 @@
 
     <ImageButton
         android:id="@+id/muscle_front_biceps"
-        android:layout_width="48pt"
+        android:layout_width="49pt"
         android:layout_height="46pt"
-        android:layout_marginTop="4pt"
+        android:layout_marginTop="5pt"
         android:background="@drawable/muscle_front_biceps"
         android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +59,7 @@
         android:id="@+id/muscle_front_forearm"
         android:layout_width="55pt"
         android:layout_height="55pt"
-        android:layout_marginTop="13pt"
+        android:layout_marginTop="14pt"
         android:background="@drawable/muscle_front_forearm"
         android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
