@@ -31,6 +31,7 @@ object MuscleStorage {
     }
 
     fun loadMuscles(context: Context): List<Muscle> {
+
         try {
             // Attempt to open the file and read a List<Muscle> object
             context.openFileInput(FILE_NAME).use { fileInputStream ->
