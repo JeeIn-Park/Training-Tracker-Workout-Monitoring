@@ -3,12 +3,6 @@ package com.example.trainingtracker.ui.muscles
 import android.content.Context
 //import com.example.trainingtracker.databinding.FragmentMuscleBackBinding
 //import com.example.trainingtracker.databinding.FragmentMuscleFrontBinding
-import com.example.trainingtracker.ui.exerciseCard.CardStorage
-import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
-import com.example.trainingtracker.ui.exerciseLog.ExerciseLog
-import com.example.trainingtracker.ui.exerciseLog.ExerciseSet
-import com.example.trainingtracker.ui.exerciseLog.LogStorage
-import com.example.trainingtracker.ui.exerciseLog.OneRepMax
 import java.time.LocalDateTime
 import java.time.Duration
 
@@ -58,45 +52,6 @@ object MuscleStatus {
             updatedMuscleList.add( muscleState(context, muscle))
         }
         MuscleStorage.saveMuscles(context, updatedMuscleList)
-    }
-
-    fun logExercise(
-        context: Context,
-        exerciseSetList: List<ExerciseSet>,
-        exerciseCard: ExerciseCard,
-        exerciseDate: LocalDateTime,
-        logStorage: LogStorage) {
-
-        val log = ExerciseLog(
-            dateTime = exerciseDate,
-            exerciseCard = exerciseCard.id,
-            exerciseSetList = exerciseSetList,
-            totalSet = null,
-            totalWeight = null
-        )
-        logStorage.addLog(context, log)
-
-        val updatedCard = ExerciseCard(
-            id = exerciseCard.id,
-            lastActivity = exerciseDate,
-            timeAdded = exerciseCard.timeAdded,
-            name = exerciseCard.name,
-            mainMuscles = exerciseCard.mainMuscles,
-            subMuscles = exerciseCard.subMuscles,
-            tag = exerciseCard.tag,
-            oneRepMax = OneRepMax.oneRepMaxRecord_pb(logStorage.loadLogs(context))
-        )
-        CardStorage.editCard(context, exerciseCard, updatedCard)
-
-        for (muscle in exerciseCard.mainMuscles) {
-            for (layout in muscle.layout) {
-
-            }
-            MuscleStorage.updateMuscle(context, muscle, Muscle( exerciseDate, RECOVERING, muscle.name, muscle.layout))
-        }
-        for (muscle in exerciseCard.subMuscles) {
-            MuscleStorage.updateMuscle(context, muscle, Muscle( exerciseDate, RECOVERING, muscle.name, muscle.layout))
-        }
     }
 
 }

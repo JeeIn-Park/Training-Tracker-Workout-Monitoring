@@ -17,9 +17,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingtracker.R
-import com.example.trainingtracker.ui.exerciseCard.CardStorage
 import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
-import com.example.trainingtracker.ui.muscles.MuscleStatus
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
 import kotlin.math.roundToInt
@@ -78,11 +76,11 @@ class AddLogActivity : AppCompatActivity() {
         if (pastLog.isEmpty()) { // todo : need better way to deal with it
             titleTextView1.text = ""
         } else {
-            val content = OneRepMax.oneRepMaxRecord(pastLog[pastLog.lastIndex]).roundToInt().toString()
+            val content = LogExercise.oneRepMaxRecord(pastLog[pastLog.lastIndex]).roundToInt().toString()
             titleTextView1.text = content
         }
 
-        val content1 = OneRepMax.oneRepMaxRecord_pb(pastLog).roundToInt().toString()
+        val content1 = LogExercise.oneRepMaxRecord_pb(pastLog).roundToInt().toString()
         contentTextView1.text = content1
 
         val boxView2: View = findViewById(R.id.box2)
@@ -93,7 +91,7 @@ class AddLogActivity : AppCompatActivity() {
         if (pastLog.isEmpty()) {
             contentTextView2.text = ""
         } else {
-            val content = OneRepMax.oneRepMaxRecord(pastLog[pastLog.lastIndex]).roundToInt().toString()
+            val content = LogExercise.oneRepMaxRecord(pastLog[pastLog.lastIndex]).roundToInt().toString()
             contentTextView2.text = content
         }
 
@@ -162,7 +160,7 @@ class AddLogActivity : AppCompatActivity() {
 
     override fun onStop() {
         if (exerciseSetList.isNotEmpty()) {
-            MuscleStatus.logExercise(
+            LogExercise.logExercise(
                 this,
                 exerciseSetList,
                 cardItem,
