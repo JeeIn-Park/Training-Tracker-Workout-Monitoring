@@ -24,11 +24,11 @@ class AddCardActivity : AppCompatActivity() {
 
         val cardItem = intent.getSerializableExtra("EXTRA_CARD_ITEM") as ExerciseCard?
         val selectMuscle = Muscle(null, 0, getString(R.string.muscle_select), listOf())
-        val musclesArray = (listOf(selectMuscle)
-                + MuscleStorage.loadMuscles(this).toTypedArray())
+        val muscleList = (listOf(selectMuscle)
+                + MuscleStorage.loadMuscles(this))
         val selectTag = Tag( UUID.randomUUID(), LocalDateTime.now(), getString(R.string.tag_select))
-        val tagArray = (listOf(selectTag)
-                + TagStorage.loadTags(this)).toTypedArray()
+        val tagList = (listOf(selectTag)
+                + TagStorage.loadTags(this))
 
         // Initialize views
         val exerciseNameEditText: EditText = findViewById(R.id.exercise_name)
@@ -37,9 +37,9 @@ class AddCardActivity : AppCompatActivity() {
         val tagSpinner: MultiSelectionSpinner = findViewById(R.id.select_tag)
         val addButton: Button = findViewById(R.id.add_button)
 
-        mainMusclesSpinner.setItems(musclesArray.map { it.name })
-        subMusclesSpinner.setItems(musclesArray.map { it.name })
-        tagSpinner.setItems(tagArray.map { it.name })
+        mainMusclesSpinner.setItems(muscleList.map { it.name })
+        subMusclesSpinner.setItems(muscleList.map { it.name })
+        tagSpinner.setItems(tagList.map { it.name })
 
         // Set key listener for exercise name EditText
         exerciseNameEditText.setOnKeyListener { _, keyCode, event ->
@@ -54,11 +54,11 @@ class AddCardActivity : AppCompatActivity() {
         if (cardItem != null) {
             supportActionBar?.title = cardItem.name
             exerciseNameEditText.setText(cardItem.name)
-            val mainMuscleIndex = musclesArray.indexOfFirst { it.name == cardItem.mainMuscles[0].name }
+            val mainMuscleIndex = muscleList.indexOfFirst { it.name == cardItem.mainMuscles[0].name }
             mainMusclesSpinner.setSelection(mainMuscleIndex)
-            val subMuscleIndex = musclesArray.indexOfFirst { it.name == cardItem.subMuscles[0].name }
+            val subMuscleIndex = muscleList.indexOfFirst { it.name == cardItem.subMuscles[0].name }
             subMusclesSpinner.setSelection(subMuscleIndex)
-            val tagIndex = tagArray.indexOfFirst { it.id == cardItem.tag[0].id }
+            val tagIndex = tagList.indexOfFirst { it.id == cardItem.tag[0].id }
             tagSpinner.setSelection(tagIndex)
             addButton.text = "SAVE"
         }
@@ -66,29 +66,24 @@ class AddCardActivity : AppCompatActivity() {
         // Set click listener for add/edit button
         addButton.setOnClickListener {
             val exerciseName = exerciseNameEditText.text.toString()
-            val mainMuscle = listOf( musclesArray[musclesArray.indexOfFirst { it.name == mainMusclesSpinner.selectedItem.toString().trim() }] )
-            val subMuscle = listOf( musclesArray[musclesArray.indexOfFirst { it.name == subMusclesSpinner.selectedItem.toString().trim() }] )
-            val singleTag = tagArray[tagArray.indexOfFirst { it.name == tagSpinner.selectedItem.toString().trim() }]
-            val tag = listOf(Tag(
-                id = singleTag.id,
-                timeAdded = singleTag.timeAdded,
-                name = singleTag.name,
-                isSelected = true
-            ))
-            // TODO : deal with multiple tags
-            // TODO : if there is card stored with false tag, needs to change it to true.
-            // TODO : data migrain when start app, need to update all the data as well
+            val mainMuscles = getSelectedMuscles(mainMusclesSpinner.getSelectedIndices(), muscleList)
+            val subMuscles = getSelectedMuscles(subMusclesSpinner.getSelectedIndices(), muscleList)
+            val tags = getSelectedTags(tagSpinner.getSelectedIndices(), tagList)
             val timeAdded = LocalDateTime.now()
 
+            // TODO : if there is card stored with false tag, needs to change it to true.
+            // TODO : data migrain when start app, need to update all the data as well
+
+            // TODO : edit card to select multiple muscles and tags
             if (cardItem != null) {
                 val card = ExerciseCard(
                     id = cardItem.id,
                     lastActivity = cardItem.lastActivity,
                     timeAdded = timeAdded,
                     name = exerciseName,
-                    mainMuscles = mainMuscle,
-                    subMuscles = subMuscle,
-                    tag = tag,
+                    mainMuscles = mainMuscles,
+                    subMuscles = subMuscles,
+                    tag = tags,
                     oneRepMax = cardItem.oneRepMax
                 )
 
@@ -106,9 +101,9 @@ class AddCardActivity : AppCompatActivity() {
                     lastActivity = null,
                     timeAdded = timeAdded,
                     name = exerciseName,
-                    mainMuscles = mainMuscle,
-                    subMuscles = subMuscle,
-                    tag = tag,
+                    mainMuscles = mainMuscles,
+                    subMuscles = subMuscles,
+                    tag = tags,
                     oneRepMax = null
                 )
 
@@ -118,6 +113,33 @@ class AddCardActivity : AppCompatActivity() {
         }
 
     }
+
+    private fun getSelectedMuscles(indices : List<Int>, muscleArray: List<Muscle>) : List<Muscle> {
+        val muscles = emptyList<Muscle>().toMutableList()
+        for (index in indices) {
+            if (index != 0) {
+                muscles.add(muscleArray[index-1])
+            }
+        }
+        return muscles
+    }
+
+    private fun getSelectedTags(indices : List<Int>, tagArray: List<Tag>) : List<Tag> {
+        val tags = emptyList<Tag>().toMutableList()
+        for (index in indices) {
+            if (index != 0) {
+                val singleTag = tagArray[index-1]
+                tags.add(Tag(
+                    id = singleTag.id,
+                    timeAdded = singleTag.timeAdded,
+                    name = singleTag.name,
+                    isSelected = true
+                ))
+            }
+        }
+        return tags
+    }
+
 
     private fun hideKeyboard() {
         val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
