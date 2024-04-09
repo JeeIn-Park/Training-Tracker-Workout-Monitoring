@@ -3,6 +3,7 @@ package com.example.trainingtracker.ui.home
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -62,14 +63,11 @@ class HomeCardAdapter(
 
         // reference (each parts in a card layout)
         fun bind(cardItem: ExerciseCard) {
-            exerciseName.text = cardItem.name
+            if (cardItem.name == "") {
+                exerciseName.text = "N/A"
+            } else exerciseName.text = cardItem.name
 
-            val tagText = if (cardItem.tag[0].name != context.getString(R.string.tag_select)) {
-                cardItem.tag[0].name
-            } else {
-                ""
-            }
-            tag.text = tagText
+            tag.text = cardItem.tag.joinToString(separator = ", ") { it.name }
 
             if ( cardItem.lastActivity != null ) {
                 val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault())
@@ -85,38 +83,27 @@ class HomeCardAdapter(
                     lastExercise.text = dateStringWithDaysAgo
                 }
             } else {
-                lastExercise.text =  ""
+                lastExercise.visibility = View.GONE
             }
 
-
-            if (cardItem.mainMuscles[0].name == context.getString(R.string.muscle_select)) {
-                mainMuscle.visibility = View.INVISIBLE
+            if (cardItem.mainMuscles.isEmpty()){
+                mainMuscle.visibility = View.GONE
             } else {
-                mainMuscle.visibility = View.VISIBLE
-                mainMuscle.text = if (cardItem.mainMuscles == null) {
-                    "Main muscle : N/A"
-                } else {
-                    "Main muscle : ${cardItem.mainMuscles[0].name}"
-                }
+                mainMuscle.text = "Main muscle : ${cardItem.mainMuscles.joinToString(separator = ", ") { it.name }}"
             }
 
-            if (cardItem.subMuscles[0].name == context.getString(R.string.muscle_select)) {
-                subMuscle.visibility = View.INVISIBLE
+            if (cardItem.subMuscles.isEmpty()){
+                subMuscle.visibility = View.GONE
             } else {
-                subMuscle.visibility = View.VISIBLE
-                subMuscle.text = if (cardItem.subMuscles == null) {
-                    "Main muscle : N/A"
-                } else {
-                    "Sub muscle : ${cardItem.subMuscles[0].name}"
-                }
+                subMuscle.text = "Sub muscle : ${cardItem.subMuscles.joinToString(separator = ", ") { it.name }}"
             }
 
             personalRecord.text = context.getString(R.string.title_one_rep_max)
-            // need to check the whole cards
-            // Set long click listener
+
+
             itemView.setOnLongClickListener {
                 showEditDeleteOptions(cardItem)
-                true // Consume the long click
+                true
             }
 
         }

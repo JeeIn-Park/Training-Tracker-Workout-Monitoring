@@ -54,12 +54,9 @@ class AddCardActivity : AppCompatActivity() {
         if (cardItem != null) {
             supportActionBar?.title = cardItem.name
             exerciseNameEditText.setText(cardItem.name)
-            val mainMuscleIndex = muscleList.indexOfFirst { it.name == cardItem.mainMuscles[0].name }
-            mainMusclesSpinner.setSelection(mainMuscleIndex)
-            val subMuscleIndex = muscleList.indexOfFirst { it.name == cardItem.subMuscles[0].name }
-            subMusclesSpinner.setSelection(subMuscleIndex)
-            val tagIndex = tagList.indexOfFirst { it.id == cardItem.tag[0].id }
-            tagSpinner.setSelection(tagIndex)
+            mainMusclesSpinner.setSelection(cardItem.mainMuscles.map { it.name })
+            subMusclesSpinner.setSelection(cardItem.subMuscles.map { it.name })
+            tagSpinner.setSelection(cardItem.tag.map { it.name })
             addButton.text = "SAVE"
         }
 
@@ -118,7 +115,7 @@ class AddCardActivity : AppCompatActivity() {
         val muscles = emptyList<Muscle>().toMutableList()
         for (index in indices) {
             if (index != 0) {
-                muscles.add(muscleArray[index-1])
+                muscles.add(muscleArray[index])
             }
         }
         return muscles
@@ -128,7 +125,7 @@ class AddCardActivity : AppCompatActivity() {
         val tags = emptyList<Tag>().toMutableList()
         for (index in indices) {
             if (index != 0) {
-                val singleTag = tagArray[index-1]
+                val singleTag = tagArray[index]
                 tags.add(Tag(
                     id = singleTag.id,
                     timeAdded = singleTag.timeAdded,
