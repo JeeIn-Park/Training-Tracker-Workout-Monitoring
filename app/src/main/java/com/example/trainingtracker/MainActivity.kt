@@ -12,7 +12,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.trainingtracker.databinding.ActivityMainBinding
 import com.example.trainingtracker.ui.muscles.MuscleStatus
 import com.example.trainingtracker.ui.tag.TagStorage
-import java.time.LocalDateTime
 
 class MainActivity : AppCompatActivity() {
 

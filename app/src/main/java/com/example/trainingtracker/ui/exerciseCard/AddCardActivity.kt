@@ -3,16 +3,15 @@ package com.example.trainingtracker.ui.exerciseCard
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.inputmethod.InputMethodManager
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import com.example.trainingtracker.R
 import com.example.trainingtracker.ui.muscles.Muscle
 import com.example.trainingtracker.ui.muscles.MuscleStorage
 import com.example.trainingtracker.ui.tag.Tag
 import com.example.trainingtracker.ui.tag.TagStorage
+import com.example.trainingtracker.views.MultiSelectionSpinner
 import java.time.LocalDateTime
 import java.util.UUID
 
@@ -33,27 +32,14 @@ class AddCardActivity : AppCompatActivity() {
 
         // Initialize views
         val exerciseNameEditText: EditText = findViewById(R.id.exercise_name)
-        val mainMusclesSpinner: Spinner = findViewById(R.id.main_muscles)
-        val subMusclesSpinner: Spinner = findViewById(R.id.sub_muscles)
-        val tagSpinner: Spinner = findViewById(R.id.select_tag)
+        val mainMusclesSpinner: MultiSelectionSpinner = findViewById(R.id.main_muscles)
+        val subMusclesSpinner: MultiSelectionSpinner = findViewById(R.id.sub_muscles)
+        val tagSpinner: MultiSelectionSpinner = findViewById(R.id.select_tag)
         val addButton: Button = findViewById(R.id.add_button)
 
-        val mainMusclesAdapter =
-            ArrayAdapter(this, android.R.layout.simple_spinner_item, musclesArray.map { it.name })
-        val subMusclesAdapter =
-            ArrayAdapter(this, android.R.layout.simple_spinner_item, musclesArray.map { it.name })
-        val tagAdapter =
-            ArrayAdapter(this, android.R.layout.simple_spinner_item, tagArray.map { it.name })
-
-        // Set dropdown layout style
-        mainMusclesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        subMusclesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        tagAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
-        // Set adapters to spinners
-        mainMusclesSpinner.adapter = mainMusclesAdapter
-        subMusclesSpinner.adapter = subMusclesAdapter
-        tagSpinner.adapter = tagAdapter
+        mainMusclesSpinner.setItems(musclesArray.map { it.name })
+        subMusclesSpinner.setItems(musclesArray.map { it.name })
+        tagSpinner.setItems(tagArray.map { it.name })
 
         // Set key listener for exercise name EditText
         exerciseNameEditText.setOnKeyListener { _, keyCode, event ->

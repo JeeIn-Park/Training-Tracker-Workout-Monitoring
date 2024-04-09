@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <Spinner
+    <com.example.trainingtracker.views.MultiSelectionSpinner
         android:id="@+id/main_muscles"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
         app:layout_constraintTop_toBottomOf="@+id/exercise_name" />
 
 
-    <Spinner
+    <com.example.trainingtracker.views.MultiSelectionSpinner
         android:id="@+id/sub_muscles"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
         app:layout_constraintTop_toBottomOf="@+id/main_muscles" />
 
 
-    <Spinner
+    <com.example.trainingtracker.views.MultiSelectionSpinner
         android:id="@+id/select_tag"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

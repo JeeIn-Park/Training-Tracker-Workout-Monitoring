@@ -22,17 +22,6 @@ object MuscleStatus {
     private const val IN_HOURS = 2
     private const val IN_DAYS = 3
 
-    private fun muscleState(context: Context, muscle: Muscle): Muscle {
-        var updatedMuscle = muscle
-        if (muscle.lastActivity == null) {
-            updatedMuscle.lastActivity = LocalDateTime.now()
-        } else if (10 < restingTime(muscle.lastActivity, IN_DAYS)) {
-            updatedMuscle.status = NEED_EXERCISE
-        } else if (50 < restingTime(muscle.lastActivity, IN_HOURS)) {
-            updatedMuscle.status = RECOVERED
-        }
-        return updatedMuscle
-    }
 
     private fun restingTime(lastActivity: LocalDateTime?, mode: Int) : Long {
         val currentDateTime = LocalDateTime.now()
@@ -44,6 +33,21 @@ object MuscleStatus {
             IN_DAYS -> { duration.toDays() }
             else -> -1
         }
+    }
+
+
+    private fun muscleState(context: Context, muscle: Muscle): Muscle {
+        var updatedMuscle = muscle
+        return if (muscle.lastActivity == null) {
+            updatedMuscle.lastActivity = LocalDateTime.now()
+            updatedMuscle
+        } else if (10 < restingTime(muscle.lastActivity, IN_DAYS)) {
+            updatedMuscle.status = NEED_EXERCISE
+            updatedMuscle
+        } else if (50 < restingTime(muscle.lastActivity, IN_HOURS)) {
+            updatedMuscle.status = RECOVERED
+            updatedMuscle
+        } else updatedMuscle
     }
 
     fun refreshMuscle(context : Context){
@@ -85,7 +89,9 @@ object MuscleStatus {
         CardStorage.editCard(context, exerciseCard, updatedCard)
 
         for (muscle in exerciseCard.mainMuscles) {
-//            val muscleIndex = muscles.indexOfFirst { it.name == muscle.name }
+            for (layout in muscle.layout) {
+
+            }
             MuscleStorage.updateMuscle(context, muscle, Muscle( exerciseDate, RECOVERING, muscle.name, muscle.layout))
         }
         for (muscle in exerciseCard.subMuscles) {

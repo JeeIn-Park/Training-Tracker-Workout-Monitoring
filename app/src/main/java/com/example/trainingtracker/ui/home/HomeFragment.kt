@@ -139,6 +139,7 @@ class HomeFragment : Fragment() {
         val frontMuscleBinding = binding.muscleFront
         val backMuscleBinding = binding.muscleBack
 
+        // TODO : how to submit?
         homeViewModel.muscleViewData.observe(viewLifecycleOwner) { muscles ->
             muscles.forEach { muscle ->
                 val buttons = getButtonsByMuscleName(muscle.name)
@@ -152,13 +153,9 @@ class HomeFragment : Fragment() {
                     }
                 }
             }
-        }
-        // Initialize or refresh muscle data when the view is created
-        homeViewModel.updateMuscleViewData(MuscleStorage.loadMuscles(requireContext()))
-        // Setup UI interactions and LiveData observers
-        homeViewModel.muscleViewData.observe(viewLifecycleOwner) { muscles ->
-            // TODO : how to submit?
+            homeViewModel.updateMuscleViewData(muscles)
             updateMuscleUI(muscles)
+
         }
         return root
     }
