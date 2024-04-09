@@ -4,6 +4,7 @@ import android.content.Context
 import com.example.trainingtracker.Event
 import com.example.trainingtracker.EventManager
 import com.example.trainingtracker.R
+import java.io.FileNotFoundException
 import java.io.IOException
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
@@ -17,25 +18,49 @@ object MuscleStorage {
             ObjectOutputStream(context.openFileOutput(FILE_NAME, Context.MODE_PRIVATE)).use {
                 it.writeObject(muscles)
             }
+            EventManager.publish(
+                Event(
+                    context.getString(R.string.event_muscle),
+                    muscles
+                )
+            )
+            // TODO : when publish muscle update it should refresh muscle colour
         } catch (e: IOException) {
             e.printStackTrace()
         }
     }
 
-    // TODO : when not match the type, file not found exception
     fun loadMuscles(context: Context): List<Muscle> {
         try {
-            ObjectInputStream(context.openFileInput(FILE_NAME)).use { inputStream ->
-                val loadedMuscles = inputStream.readObject()
-                if (loadedMuscles is List<*>) {
-                    @Suppress("UNCHECKED_CAST")
-                    return loadedMuscles as List<Muscle>
+            // Attempt to open the file and read a List<Muscle> object
+            context.openFileInput(FILE_NAME).use { fileInputStream ->
+                ObjectInputStream(fileInputStream).use { objectInputStream ->
+                    val loadedMuscles = objectInputStream.readObject()
+
+                    if (loadedMuscles is List<*>) {
+                        // Successfully casted to List<Muscle>, return it
+                        @Suppress("UNCHECKED_CAST")
+                        return loadedMuscles as List<Muscle>
+                    } else {
+                        // Data is not of the type List<*>, handle the type mismatch
+                        throw ClassCastException("Data in file '$FILE_NAME' is not of type List<Muscle>")
+                    }
                 }
             }
+        } catch (e: FileNotFoundException) {
+            // File not found, handle by loading default muscles
+            println("No existing file named '$FILE_NAME'. Loading default muscles.")
+            return loadDefaultMuscles()
+        } catch (e: ClassCastException) {
+            // Handle the case where the data does not match the expected type
+            println("Error casting data from file '$FILE_NAME'. Loading default muscles.")
+            return loadDefaultMuscles()
         } catch (e: Exception) {
+            // General exception handling, could be IOException, etc.
+            println("An error occurred while loading muscles from file '$FILE_NAME': ${e.message}")
             e.printStackTrace()
+            return loadDefaultMuscles()
         }
-        return loadDefaultMuscles()
     }
 
     fun updateMuscle(context: Context, oldMuscle: Muscle, newMuscle: Muscle) {
@@ -44,13 +69,6 @@ object MuscleStorage {
         if (index != -1) {
             currentMuscles[index] = newMuscle
             saveMuscles(context, currentMuscles)
-            EventManager.publish(
-                Event(
-                    context.getString(R.string.event_muscle),
-                    loadMuscles(context)
-                )
-            )
-            // TODO : when publish muscle update it should refresh muscle colour
         }
     }
 
