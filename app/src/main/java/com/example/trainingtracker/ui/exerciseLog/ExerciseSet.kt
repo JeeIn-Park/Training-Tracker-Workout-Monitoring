@@ -7,10 +7,10 @@ import java.util.UUID
 // TODO : need serialisable?
 
 data class ExerciseSet(
-    val dateTime: LocalDateTime,
+    val dateTime: LocalDateTime = LocalDateTime.now(),
     val exerciseCard: UUID,
-    val mass: Float?,
-    val set: Int?,
-    val rep: Int?,
-    val oneRepMax: Float?
+    val mass: Float? = null,
+    val set: Int? = null,
+    val rep: Int? = null,
+    val oneRepMax: Float? = null
 ) : Serializable

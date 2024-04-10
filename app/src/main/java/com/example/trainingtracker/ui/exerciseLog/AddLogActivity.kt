@@ -7,7 +7,6 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import java.time.LocalDateTime
 import android.view.Gravity
-import android.view.View
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
@@ -16,15 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingtracker.R
 import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
-import com.jjoe64.graphview.GraphView
-import com.jjoe64.graphview.series.LineGraphSeries
-import com.jjoe64.graphview.series.DataPoint
-import java.lang.String.format
-import java.time.Duration
-import java.time.format.DateTimeFormatter
-import java.util.Locale
-import kotlin.math.roundToInt
-import kotlin.math.roundToLong
 
 class AddLogActivity : AppCompatActivity() {
     // past log
@@ -123,14 +113,7 @@ class AddLogActivity : AppCompatActivity() {
                 setNum = currentSetCount
             }
 
-            val set = ExerciseSet(
-                dateTime = dateTime,
-                exerciseCard = cardItem.id,
-                mass = mass,
-                set = setNum,
-                rep = rep
-            )
-            exerciseSetList.add(set)
+            exerciseSetList.add(ExerciseSetFactory.createExerciseSet(cardItem, mass, setNum, rep))
 
             val midLeftLayout = findViewById<ConstraintLayout>(R.id.midLeft)
             val tableLayout = midLeftLayout.findViewById<TableLayout>(R.id.todaySetTable)
@@ -173,7 +156,7 @@ class AddLogActivity : AppCompatActivity() {
 
     override fun onStop() {
         if (exerciseSetList.isNotEmpty()) {
-            LogExercise.logExercise(
+            OneRepMax.logExercise(
                 this,
                 exerciseSetList,
                 cardItem,

@@ -1,6 +1,5 @@
 package com.example.trainingtracker.ui.exerciseCard
 
-import android.content.Context
 import com.example.trainingtracker.ui.muscles.Muscle
 import com.example.trainingtracker.ui.tag.Tag
 import java.io.Serializable
