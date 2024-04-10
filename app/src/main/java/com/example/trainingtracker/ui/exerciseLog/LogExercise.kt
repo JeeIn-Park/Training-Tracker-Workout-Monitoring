@@ -34,7 +34,7 @@ object LogExercise {
             mainMuscles = exerciseCard.mainMuscles,
             subMuscles = exerciseCard.subMuscles,
             tag = exerciseCard.tag,
-            oneRepMax = oneRepMaxRecord_pb(logStorage.loadLogs(context))
+            oneRepMaxRecord = oneRepMaxRecord_pb(logStorage.loadLogs(context))
         )
         CardStorage.editCard(context, exerciseCard, updatedCard)
 

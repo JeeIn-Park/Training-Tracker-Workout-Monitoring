@@ -66,25 +66,13 @@ class AddCardActivity : AppCompatActivity() {
             val mainMuscles = getSelectedMuscles(mainMusclesSpinner.getSelectedIndices(), muscleList)
             val subMuscles = getSelectedMuscles(subMusclesSpinner.getSelectedIndices(), muscleList)
             val tags = getSelectedTags(tagSpinner.getSelectedIndices(), tagList)
-            val timeAdded = LocalDateTime.now()
 
             // TODO : if there is card stored with false tag, needs to change it to true.
             // TODO : data migrain when start app, need to update all the data as well
 
             // TODO : edit card to select multiple muscles and tags
             if (cardItem != null) {
-                val card = ExerciseCard(
-                    id = cardItem.id,
-                    lastActivity = cardItem.lastActivity,
-                    timeAdded = timeAdded,
-                    name = exerciseName,
-                    mainMuscles = mainMuscles,
-                    subMuscles = subMuscles,
-                    tag = tags,
-                    oneRepMax = cardItem.oneRepMax
-                )
-
-                CardStorage.editCard(this, cardItem, card)
+                CardStorage.editCard(this, cardItem, ExerciseCardFactory.updateExerciseCard(cardItem, exerciseName, mainMuscles, subMuscles, tags))
                 finish()
 
             } else {
@@ -93,17 +81,10 @@ class AddCardActivity : AppCompatActivity() {
                     uniqueId = UUID.randomUUID()
                 } while (CardStorage.isIdInUse(this, uniqueId))
 
-                val card = ExerciseCard(
-                    id = uniqueId,
-                    lastActivity = null,
-                    timeAdded = timeAdded,
-                    name = exerciseName,
-                    mainMuscles = mainMuscles,
-                    subMuscles = subMuscles,
-                    tag = tags,
-                    oneRepMax = null
-                )
-
+                val card = ExerciseCardFactory.createExerciseCard(this, exerciseName)
+                card.mainMuscles = mainMuscles
+                card.subMuscles = subMuscles
+                card.tag = tags
                 CardStorage.addCard(this, card)
                 finish()
             }

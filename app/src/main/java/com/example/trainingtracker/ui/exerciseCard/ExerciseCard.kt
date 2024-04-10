@@ -1,5 +1,6 @@
 package com.example.trainingtracker.ui.exerciseCard
 
+import android.content.Context
 import com.example.trainingtracker.ui.muscles.Muscle
 import com.example.trainingtracker.ui.tag.Tag
 import java.io.Serializable
@@ -8,13 +9,12 @@ import java.util.UUID
 
 data class ExerciseCard(
     val id : UUID,
-    val lastActivity: LocalDateTime?,
-    val timeAdded : LocalDateTime,
-    val name : String,
-    val mainMuscles : List<Muscle>,
-    val subMuscles : List<Muscle>,
-    val tag : List<Tag>,
-    val oneRepMax : Float?
-    // TODO: maybe it's better to save tag for each card rather than make muscle class
-    // TODO : maybe I can use muscle library
+    val timeAdded : LocalDateTime = LocalDateTime.now(),
+    var lastActivity: LocalDateTime? = null,
+    var name : String,
+    var mainMuscles : List<Muscle> = emptyList(),
+    var subMuscles : List<Muscle> = emptyList(),
+    var tag : List<Tag> = emptyList(),
+    var oneRepMaxRecord : Float? = null,
+    var oneRepMaxRecordDate: LocalDateTime? = null,
 ) : Serializable

@@ -11,5 +11,6 @@ data class ExerciseSet(
     val exerciseCard: UUID,
     val mass: Float?,
     val set: Int?,
-    val rep: Int?
+    val rep: Int?,
+    val oneRepMax: Float?
 ) : Serializable
