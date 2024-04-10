@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="4dp"
     android:layout_gravity="center">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/tagCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="6dp"
         app:cardBackgroundColor="?attr/colorSecondary"
-        app:cardCornerRadius="20dp"
+        android:layout_marginVertical="6sp"
+        android:layout_marginHorizontal="3sp"
+        app:cardCornerRadius="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,12 +24,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:paddingHorizontal="14dp"
-            android:paddingVertical="8dp"
-
+            android:paddingHorizontal="14sp"
+            android:paddingVertical="8sp"
             android:text="Tag"
             android:textColor="?attr/colorOnBackground"
-            android:textSize="14sp" />
+            android:textSize="12sp" />
 
     </androidx.cardview.widget.CardView>
 

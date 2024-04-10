@@ -68,7 +68,7 @@ class HomeCardAdapter(
             } else exerciseName.text = cardItem.name
 
             if (cardItem.tag.isNotEmpty()){
-                tag.text = cardItem.tag.joinToString(prefix = "# ", separator = ", ") { it.name }
+                tag.text = cardItem.tag.joinToString(prefix = "# ", separator = " ") { it.name }
             } else tag.text = ""
 
             if ( cardItem.lastActivity != null ) {
