@@ -7,7 +7,7 @@
     tools:context=".ui.status.StatusFragment" >
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/filterBarContainter"
+        android:id="@+id/statusFilterBarContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,31 +19,18 @@
             layout="@layout/item_tag_bar" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Button
-        android:id="@+id/addCardButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:backgroundTint="?attr/buttonStyle"
-        android:text="@string/exercise_add"
-        android:textColor="?attr/colorOnBackground"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/filterBarContainter" />
-
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/exerciseRecyclerView"
-        android:scrollbars="vertical"
-        android:scrollbarThumbVertical="@drawable/style_scroll_bar"
-        android:layout_width="0dp"
+        android:id="@+id/spreadSheetRecyclerView"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:paddingVertical="4dp"
-        android:paddingHorizontal="4dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="horizontal"
+        android:paddingHorizontal="3dp"
+        app:layout_constraintTop_toBottomOf="@+id/statusFilterBarContainer"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addCardButton" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
