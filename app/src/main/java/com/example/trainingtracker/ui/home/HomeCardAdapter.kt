@@ -67,7 +67,9 @@ class HomeCardAdapter(
                 exerciseName.text = "N/A"
             } else exerciseName.text = cardItem.name
 
-            tag.text = cardItem.tag.joinToString(separator = ", ") { it.name }
+            if (cardItem.tag.isNotEmpty()){
+                tag.text = cardItem.tag.joinToString(prefix = "# ", separator = ", ") { it.name }
+            } else tag.text = ""
 
             if ( cardItem.lastActivity != null ) {
                 val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault())

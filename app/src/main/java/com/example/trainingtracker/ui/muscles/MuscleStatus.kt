@@ -44,6 +44,7 @@ object MuscleStatus {
         } else updatedMuscle
     }
 
+
     fun refreshMuscle(context : Context){
         val muscleList = MuscleStorage.loadMuscles(context)
         val updatedMuscleList : MutableList<Muscle> = listOf<Muscle>().toMutableList()
