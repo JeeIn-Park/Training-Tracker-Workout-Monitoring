@@ -6,8 +6,6 @@ import android.widget.CheckBox
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import java.time.LocalDateTime
-import android.os.Handler
-import android.os.Looper
 import android.view.Gravity
 import android.view.View
 import android.widget.TableLayout
@@ -66,7 +64,7 @@ class AddLogActivity : AppCompatActivity() {
         if (pastLog.isEmpty()) {
             contentTextView.text = "N/A"
         } else {
-            contentTextView.text = cardItem.oneRepMax.toString()
+            contentTextView.text = "${String.format("%.2f", cardItem.oneRepMax).toString()} kg"
         }
 
                 //date
