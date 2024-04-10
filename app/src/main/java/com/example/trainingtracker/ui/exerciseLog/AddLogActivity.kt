@@ -18,20 +18,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingtracker.R
 import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
-import com.jjoe64.graphview.series.DataPoint
+import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.series.LineGraphSeries
+import com.jjoe64.graphview.series.DataPoint
+import java.lang.String.format
+import java.time.Duration
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 import kotlin.math.roundToInt
+import kotlin.math.roundToLong
 
 class AddLogActivity : AppCompatActivity() {
-    // check box
-    private lateinit var warmUpCheckBox: CheckBox
-
-    // graph
-    private val mHandler = Handler(Looper.getMainLooper())
-    private lateinit var mTimer1: Runnable
-    private lateinit var mSeries1: LineGraphSeries<DataPoint>
-    private var graph2LastXValue = 5.0
-
     // past log
     private lateinit var pastLogTableAdapter: PastLogTableAdapter
     private var exerciseSetList: MutableList<ExerciseSet> = mutableListOf()
@@ -45,11 +42,66 @@ class AddLogActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // layout binding
+        // binding
         setContentView(R.layout.activity_add_log)
         cardItem = intent.getSerializableExtra("EXTRA_CARD_ITEM") as ExerciseCard
         logStorage = LogStorage(cardItem.id)
         val pastLog: List<ExerciseLog> = logStorage.loadLogs(this)
+        supportActionBar?.title = cardItem.name
+
+
+        // Mid left
+
+            // today's workout
+
+            // one rep max box
+        val boxView: View = findViewById(R.id.box)
+
+                //title
+        val titleTextView: TextView = boxView.findViewById(R.id.title)
+        titleTextView.text = getString(R.string.one_rep_max_pb)
+
+                //content
+        val contentTextView: TextView = boxView.findViewById(R.id.content)
+        if (pastLog.isEmpty()) {
+            contentTextView.text = "N/A"
+        } else {
+            contentTextView.text = cardItem.oneRepMax.toString()
+        }
+
+                //date
+        // TODO : need to find the date of one rep max
+        // TODO : each set store one rep max
+        // TODO : each log store one rep max
+        // TODO : each card store one rep max date
+        val dateTextView: TextView = boxView.findViewById(R.id.date)
+        if ( cardItem.lastActivity != null ) {
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault())
+            val formattedDate = cardItem.lastActivity!!.format(formatter)
+            val currentDate = LocalDateTime.now()
+            val daysAgo = Duration.between(cardItem.lastActivity, currentDate).toDays()
+            if (daysAgo == 0.toLong()) {
+                dateTextView.text = formattedDate
+            } else if (daysAgo == 1.toLong()) {
+                dateTextView.text = "$formattedDate (1 day ago)"
+            } else {
+                val dateStringWithDaysAgo = "$formattedDate ($daysAgo days ago)"
+                dateTextView.text = dateStringWithDaysAgo
+            }
+        }
+
+
+
+        // Mid Right
+
+                // past logs
+        val pastLogRecyclerView: RecyclerView = findViewById(R.id.pastRecords)
+        pastLogRecyclerView.layoutManager = LinearLayoutManager(this)
+        pastLogTableAdapter = PastLogTableAdapter(pastLog)
+        pastLogRecyclerView.adapter = pastLogTableAdapter
+
+                // graph
+
 
 
         // bottom
@@ -58,42 +110,6 @@ class AddLogActivity : AppCompatActivity() {
         val warmUpCheckBox: CheckBox = findViewById(R.id.warmUpCheck)
         val logButton: Button = findViewById(R.id.logButton)
 
-        // Mid left
-        val pastLogRecyclerView: RecyclerView = findViewById(R.id.pastRecords)
-        pastLogRecyclerView.layoutManager = LinearLayoutManager(this)
-        pastLogTableAdapter = PastLogTableAdapter(pastLog)
-        pastLogRecyclerView.adapter = pastLogTableAdapter
-
-        // title with selected card
-        supportActionBar?.title = cardItem.name
-
-        val boxView1: View = findViewById(R.id.box1)
-        val titleTextView1: TextView = boxView1.findViewById(R.id.title)
-        // todo : title disappeared
-        val contentTextView1: TextView = boxView1.findViewById(R.id.content)
-        val dateTextView1: TextView = boxView1.findViewById(R.id.date)
-        titleTextView1.text = "ONE REP MAX, PB"
-        if (pastLog.isEmpty()) { // todo : need better way to deal with it
-            titleTextView1.text = ""
-        } else {
-            val content = LogExercise.oneRepMaxRecord(pastLog[pastLog.lastIndex]).roundToInt().toString()
-            titleTextView1.text = content
-        }
-
-        val content1 = LogExercise.oneRepMaxRecord_pb(pastLog).roundToInt().toString()
-        contentTextView1.text = content1
-
-        val boxView2: View = findViewById(R.id.box2)
-        val titleTextView2: TextView = boxView2.findViewById(R.id.title)
-        val contentTextView2: TextView = boxView2.findViewById(R.id.content)
-        val dateTextView2: TextView = boxView2.findViewById(R.id.date)
-        titleTextView2.text =  "ONE REP MAX, last session"
-        if (pastLog.isEmpty()) {
-            contentTextView2.text = ""
-        } else {
-            val content = LogExercise.oneRepMaxRecord(pastLog[pastLog.lastIndex]).roundToInt().toString()
-            contentTextView2.text = content
-        }
 
         logButton.setOnClickListener {
             val dateTime = LocalDateTime.now()
@@ -117,7 +133,6 @@ class AddLogActivity : AppCompatActivity() {
                 rep = rep
             )
             exerciseSetList.add(set)
-
 
             val midLeftLayout = findViewById<ConstraintLayout>(R.id.midLeft)
             val tableLayout = midLeftLayout.findViewById<TableLayout>(R.id.todaySetTable)

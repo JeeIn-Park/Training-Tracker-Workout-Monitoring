@@ -24,5 +24,7 @@
     <!--    muscle    -->
     <string name="event_muscle">muscle</string>
     <string name="muscle_select">Select muscle</string>
+    <string name="discard_set_count">discard set count</string>
+    <string name="one_rep_max_pb">ONE REP MAX, PB</string>
 
 </resources>

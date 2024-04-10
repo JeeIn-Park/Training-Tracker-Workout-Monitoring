@@ -9,5 +9,5 @@ data class ExerciseLog(
     val exerciseCard: UUID,
     val exerciseSetList: List<ExerciseSet>,
     val totalSet: Int?,
-    val totalWeight: Float?
+    val oneRepMax: Float?
 ): Serializable

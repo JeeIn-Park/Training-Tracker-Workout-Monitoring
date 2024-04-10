@@ -95,31 +95,31 @@ class StatusFragment : Fragment() {
       }
 
 
-      val exerciseRecyclerView = binding.exerciseRecyclerView
-      exerciseRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-      exerciseRecyclerView.adapter = cardAdapter
-      exerciseRecyclerView.itemAnimator = DefaultItemAnimator()
-      statusViewModel.cardRecyclerViewData.observe(viewLifecycleOwner) { newData ->
-          cardAdapter.submitList(newData)
-          statusViewModel.updateCardRecyclerViewData(newData)
-      }
+//      val exerciseRecyclerView = binding.exerciseRecyclerView
+//      exerciseRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+//      exerciseRecyclerView.adapter = cardAdapter
+//      exerciseRecyclerView.itemAnimator = DefaultItemAnimator()
+//      statusViewModel.cardRecyclerViewData.observe(viewLifecycleOwner) { newData ->
+//          cardAdapter.submitList(newData)
+//          statusViewModel.updateCardRecyclerViewData(newData)
+//      }
 
-      val tagRecyclerView = binding.filterBar.tagRecyclerView
-      tagRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-      tagRecyclerView.adapter = tagAdapter
-      tagRecyclerView.itemAnimator = DefaultItemAnimator()
-      statusViewModel.tagRecyclerViewData.observe(viewLifecycleOwner) { newData ->
-          val tags = tagAdapter.currentList.filter { it != Tag.ADD_TAG }
-          TagStorage.saveTags(requireContext(), tags)
-          tagAdapter.submitList(newData)
-          statusViewModel.updateTagRecyclerViewData(newData)
-      }
-
-      val addCardButton = binding.addCardButton
-      addCardButton.setOnClickListener {
-          val intent = Intent(activity, AddCardActivity::class.java)
-          startActivity(intent)
-      }
+//      val tagRecyclerView = binding.filterBar.tagRecyclerView
+//      tagRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+//      tagRecyclerView.adapter = tagAdapter
+//      tagRecyclerView.itemAnimator = DefaultItemAnimator()
+//      statusViewModel.tagRecyclerViewData.observe(viewLifecycleOwner) { newData ->
+//          val tags = tagAdapter.currentList.filter { it != Tag.ADD_TAG }
+//          TagStorage.saveTags(requireContext(), tags)
+//          tagAdapter.submitList(newData)
+//          statusViewModel.updateTagRecyclerViewData(newData)
+//      }
+//
+//      val addCardButton = binding.addCardButton
+//      addCardButton.setOnClickListener {
+//          val intent = Intent(activity, AddCardActivity::class.java)
+//          startActivity(intent)
+//      }
 
       return root
   }

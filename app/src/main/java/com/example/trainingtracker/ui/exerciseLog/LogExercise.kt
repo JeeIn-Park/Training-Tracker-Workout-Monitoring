@@ -22,7 +22,7 @@ object LogExercise {
             exerciseCard = exerciseCard.id,
             exerciseSetList = exerciseSetList,
             totalSet = null,
-            totalWeight = null
+            oneRepMax = null
         )
         logStorage.addLog(context, log)
 
