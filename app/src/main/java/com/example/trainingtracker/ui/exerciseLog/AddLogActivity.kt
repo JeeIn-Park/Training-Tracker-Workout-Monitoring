@@ -52,42 +52,42 @@ class AddLogActivity : AppCompatActivity() {
 
             // today's workout
 
-            // one rep max box
-        val boxView: View = findViewById(R.id.box)
-
-                //title
-        val titleTextView: TextView = boxView.findViewById(R.id.title)
-        titleTextView.text = getString(R.string.one_rep_max_pb)
-
-                //content
-        val contentTextView: TextView = boxView.findViewById(R.id.content)
-        if (pastLog.isEmpty()) {
-            contentTextView.text = "N/A"
-        } else {
-            contentTextView.text = "${String.format("%.2f", cardItem.oneRepMax).toString()} kg"
-        }
-
-                //date
-        // TODO : need to find the date of one rep max
-        // TODO : each set store one rep max
-        // TODO : each log store one rep max
-        // TODO : each card store one rep max date
-        val dateTextView: TextView = boxView.findViewById(R.id.date)
-        if ( cardItem.lastActivity != null ) {
-            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault())
-            val formattedDate = cardItem.lastActivity!!.format(formatter)
-            val currentDate = LocalDateTime.now()
-            val daysAgo = Duration.between(cardItem.lastActivity, currentDate).toDays()
-            if (daysAgo == 0.toLong()) {
-                dateTextView.text = formattedDate
-            } else if (daysAgo == 1.toLong()) {
-                dateTextView.text = "$formattedDate (1 day ago)"
-            } else {
-                val dateStringWithDaysAgo = "$formattedDate ($daysAgo days ago)"
-                dateTextView.text = dateStringWithDaysAgo
-            }
-        }
-
+//            // one rep max box
+//        val boxView: View = findViewById(R.id.box)
+//
+//                //title
+//        val titleTextView: TextView = boxView.findViewById(R.id.title)
+//        titleTextView.text = getString(R.string.one_rep_max_pb)
+//
+//                //content
+//        val contentTextView: TextView = boxView.findViewById(R.id.content)
+//        if (pastLog.isEmpty()) {
+//            contentTextView.text = "N/A"
+//        } else {
+//            contentTextView.text = "${String.format("%.2f", cardItem.oneRepMax).toString()} kg"
+//        }
+//
+//                //date
+//        // TODO : need to find the date of one rep max
+//        // TODO : each set store one rep max
+//        // TODO : each log store one rep max
+//        // TODO : each card store one rep max date
+//        val dateTextView: TextView = boxView.findViewById(R.id.date)
+//        if ( cardItem.lastActivity != null ) {
+//            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault())
+//            val formattedDate = cardItem.lastActivity!!.format(formatter)
+//            val currentDate = LocalDateTime.now()
+//            val daysAgo = Duration.between(cardItem.lastActivity, currentDate).toDays()
+//            if (daysAgo == 0.toLong()) {
+//                dateTextView.text = formattedDate
+//            } else if (daysAgo == 1.toLong()) {
+//                dateTextView.text = "$formattedDate (1 day ago)"
+//            } else {
+//                val dateStringWithDaysAgo = "$formattedDate ($daysAgo days ago)"
+//                dateTextView.text = dateStringWithDaysAgo
+//            }
+//        }
+//
 
 
         // Mid Right
