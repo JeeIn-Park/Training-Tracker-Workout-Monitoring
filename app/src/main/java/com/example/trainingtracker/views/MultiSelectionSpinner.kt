@@ -5,6 +5,7 @@ import android.content.DialogInterface
 import android.util.AttributeSet
 import android.widget.ArrayAdapter
 import android.widget.SpinnerAdapter
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatSpinner
 import java.util.Arrays
@@ -15,14 +16,27 @@ class MultiSelectionSpinner : AppCompatSpinner, DialogInterface.OnMultiChoiceCli
     private val simpleAdapter: ArrayAdapter<String>
 
     constructor(context: Context) : super(context) {
-        simpleAdapter = ArrayAdapter(context, android.R.layout.simple_spinner_item)
+        simpleAdapter = object : ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, android.R.id.text1) {
+            override fun getView(position: Int, convertView: android.view.View?, parent: android.view.ViewGroup): android.view.View {
+                val view = super.getView(position, convertView, parent) as TextView
+                view.textSize = 12f // Adjust text size for the spinner view
+                return view
+            }
+        }
         super.setAdapter(simpleAdapter)
     }
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        simpleAdapter = ArrayAdapter(context, android.R.layout.simple_spinner_item)
+        simpleAdapter = object : ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, android.R.id.text1) {
+            override fun getView(position: Int, convertView: android.view.View?, parent: android.view.ViewGroup): android.view.View {
+                val view = super.getView(position, convertView, parent) as TextView
+                view.textSize = 12f // Adjust text size for the spinner view
+                return view
+            }
+        }
         super.setAdapter(simpleAdapter)
     }
+
 
     override fun onClick(dialog: DialogInterface, which: Int, isChecked: Boolean) {
         mSelection?.let {
