@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingtracker.R
 import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
+import com.jjoe64.graphview.DefaultLabelFormatter
 import java.time.Duration
 import java.time.format.DateTimeFormatter
 import java.util.Locale
@@ -171,24 +172,39 @@ class AddLogActivity : AppCompatActivity() {
 
     private fun setupGraphView(graph: GraphView, logs: List<ExerciseLog>) {
         val series = LineGraphSeries<DataPoint>()
-        logs.sortedBy { it.dateTime }.forEach { log ->
+        logs.mapIndexed { index, log ->  // Use index as x-value
             if (log.oneRepMax != null) {
-                val x = log.dateTime.toEpochSecond(ZoneOffset.UTC).toDouble()
-                val y = log.oneRepMax.toDouble()
-                series.appendData(DataPoint(x, y), true, 100)
+                DataPoint(index.toDouble(), log.oneRepMax.toDouble())
+            } else {
+                null
             }
-        }
+        }.filterNotNull().forEach { series.appendData(it, true, logs.size) }
 
-//        graph.title = "Change of OneRepMax Over Time"
         graph.addSeries(series)
         graph.viewport.isXAxisBoundsManual = true
         graph.viewport.setMinX(series.lowestValueX)
         graph.viewport.setMaxX(series.highestValueX)
         graph.viewport.isScalable = true
         graph.viewport.isScrollable = true
-        graph.gridLabelRenderer.labelFormatter = DateAsXAxisLabelFormatter(this)
-        graph.gridLabelRenderer.numHorizontalLabels = 4  // just a few horizontal labels to avoid cluttering
 
+        // Custom label formatter to display month and day
+        graph.gridLabelRenderer.labelFormatter = object : DefaultLabelFormatter() {
+            override fun formatLabel(value: Double, isValueX: Boolean): String {
+                if (isValueX) {
+                    val index = value.toInt()
+                    if (index < logs.size) {
+                        val dateTime = logs[index].dateTime
+                        return "${dateTime.dayOfMonth}/${dateTime.monthValue}"  // Format as "Day/Month"
+                    }
+                }
+                return super.formatLabel(value, isValueX)
+            }
+        }
+
+        graph.gridLabelRenderer.numHorizontalLabels = logs.size  // Set to number of logs for a label at each point
+
+//        graph.title = "Change of OneRepMax Over Time"
     }
+
 
 }
