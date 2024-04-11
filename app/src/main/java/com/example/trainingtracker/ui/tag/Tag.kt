@@ -6,15 +6,15 @@ import java.util.UUID
 
 data class Tag(
     val id: UUID,
-    val timeAdded: LocalDateTime,
-    val name: String,
+    val timeAdded: LocalDateTime = LocalDateTime.now(),
+    val name: String = "",
     var isSelected: Boolean = false
 ): Serializable {
     companion object {
         val ADD_TAG = Tag(
             id = UUID.randomUUID(),
-            timeAdded = LocalDateTime.now(),
-            name = "+"
+            name = "+",
+            isSelected = false
         )
     }
 }

@@ -39,6 +39,10 @@ object TagStorage {
         }
     }
 
+//    fun loadTagBarTags(context: Context): List<Tag> {
+//
+//    }
+
     fun addTag(context: Context, tag: Tag) {
         val currentTags = loadTags(context).toMutableList()
         currentTags.add(tag)

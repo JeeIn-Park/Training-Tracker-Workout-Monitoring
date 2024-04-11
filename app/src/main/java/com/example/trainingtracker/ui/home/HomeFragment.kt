@@ -2,15 +2,11 @@ package com.example.trainingtracker.ui.home
 
 import android.app.AlertDialog
 import android.content.Intent
-import android.graphics.drawable.VectorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.ImageButton
-import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -20,11 +16,10 @@ import com.example.trainingtracker.databinding.FragmentHomeBinding
 import com.example.trainingtracker.ui.exerciseCard.AddCardActivity
 import com.example.trainingtracker.ui.exerciseCard.CardStorage
 import com.example.trainingtracker.ui.exerciseLog.AddLogActivity
-import com.example.trainingtracker.ui.muscles.Muscle
 import com.example.trainingtracker.ui.muscles.MuscleStatus
-import com.example.trainingtracker.ui.muscles.MuscleStorage
 import com.example.trainingtracker.ui.tag.Tag
 import com.example.trainingtracker.ui.tag.TagAdapter
+import com.example.trainingtracker.ui.tag.TagFactory
 import com.example.trainingtracker.ui.tag.TagStorage
 import java.time.LocalDateTime
 import java.util.UUID
@@ -84,11 +79,7 @@ class HomeFragment : Fragment() {
 
                         // Add the new tag to your data source and notify the adapter
 
-                        val newTag = Tag(
-                            id = uniqueId,
-                            timeAdded = LocalDateTime.now(),
-                            name = newTagString)
-
+                        val newTag = TagFactory.createTag(requireContext(), newTagString)
                         val newTags : MutableList<Tag> = TagStorage.loadTags(requireContext()).toMutableList()
                         newTags.add(newTag)
                         newTags.removeAll { it == Tag.ADD_TAG }
@@ -140,47 +131,12 @@ class HomeFragment : Fragment() {
         val frontMuscleBinding = binding.muscleFront
         val backMuscleBinding = binding.muscleBack
 
-        // TODO : how to submit?
-        homeViewModel.muscleViewData.observe(viewLifecycleOwner) { muscles ->
-            muscles.forEach { muscle ->
-                val buttons = getButtonsByMuscleName(muscle.name)
-                val drawableIds = getDrawableIdsByMuscleName(muscle.name)
-                buttons.zip(drawableIds).forEach { (button, drawableId) ->
-                    val drawable = ContextCompat.getDrawable(requireContext(), drawableId)?.mutate() as? VectorDrawable
-                    drawable?.let {
-                        val color = getColorByStatus(muscle.status)
-                        DrawableCompat.setTint(it, ContextCompat.getColor(requireContext(), color))
-                        button.setImageDrawable(it)
-                    }
-                }
-            }
-            homeViewModel.updateMuscleViewData(muscles)
-            updateMuscleUI(muscles)
-
-        }
         return root
     }
 
-
-    private fun updateMuscleUI(muscles: List<Muscle>) {
-        muscles.forEach { muscle ->
-            val buttons = getButtonsByMuscleName(muscle.name)
-            val drawableIds = getDrawableIdsByMuscleName(muscle.name)
-            buttons.zip(drawableIds).forEach { (button, drawableId) ->
-                val drawable = ContextCompat.getDrawable(requireContext(), drawableId)?.mutate() as? VectorDrawable
-                drawable?.let {
-                    val color = getColorByStatus(muscle.status)
-                    DrawableCompat.setTint(it, ContextCompat.getColor(requireContext(), color))
-                    button.setImageDrawable(it)
-                }
-            }
-        }
-    }
-
-
     override fun onResume() {
-        refresh()
         super.onResume()
+        refresh()
     }
 
     override fun onDestroyView() {
@@ -189,11 +145,7 @@ class HomeFragment : Fragment() {
     }
 
 
-    override fun onStop() {
-        super.onStop()
-//        TagStorage.resetSelection(requireContext())
-        // TODO : reset tag selection when stop the app
-    }
+    // TODO : reset tag selection when stop the app
 
     private fun refresh() {
         val tags : MutableList<Tag> = TagStorage.loadTags(requireContext()).toMutableList()
@@ -203,7 +155,6 @@ class HomeFragment : Fragment() {
         val selectedTags = TagStorage.getSelectedTags(requireContext())
         val cards = CardStorage.getSelectedCard(requireContext(), selectedTags)
         cardAdapter.submitList(cards)
-        updateMuscleUI(MuscleStorage.loadMuscles(requireContext()))
     }
 
     private fun getColorByStatus(status: Int): Int {
@@ -214,58 +165,5 @@ class HomeFragment : Fragment() {
             else -> R.color.red
         }
     }
-
-    private fun getDrawableIdsByMuscleName(name: String): List<Int> {
-        return when (name) {
-            "Neck / Traps" -> listOf(R.drawable.muscle_front_neck_traps, R.drawable.muscle_back_neck_traps)
-            "Shoulder" -> listOf(R.drawable.muscle_front_shoulder, R.drawable.muscle_back_shoulder)
-            "Chest" -> listOf(R.drawable.muscle_front_chest)
-            "Arm" -> listOf(R.drawable.muscle_front_biceps, R.drawable.muscle_back_triceps, R.drawable.muscle_front_forearm, R.drawable.muscle_back_forearm)
-            "Biceps" -> listOf(R.drawable.muscle_front_biceps)
-            "Triceps" -> listOf(R.drawable.muscle_back_triceps)
-            "Forearms" -> listOf(R.drawable.muscle_front_forearm, R.drawable.muscle_back_forearm)
-            "Abs" -> listOf(R.drawable.muscle_front_abs)
-            "Obliques" -> listOf(R.drawable.muscle_front_obliques, R.drawable.muscle_back_obliques)
-            "Back" -> listOf(R.drawable.muscle_back_upper_back, R.drawable.muscle_back_lower_back)
-            "Upper Back" -> listOf(R.drawable.muscle_back_upper_back)
-            "Lower Back" -> listOf(R.drawable.muscle_back_lower_back)
-            "Leg" -> listOf(R.drawable.muscle_front_inner_thigh, R.drawable.muscle_front_quadriceps, R.drawable.muscle_back_hamstrings, R.drawable.muscle_front_calves, R.drawable.muscle_back_calves)
-            "Inner Thigh" -> listOf(R.drawable.muscle_front_inner_thigh)
-            "Glutes / Buttocks" -> listOf(R.drawable.muscle_back_glutes_buttocks)
-            "Quadriceps" -> listOf(R.drawable.muscle_front_quadriceps)
-            "Hamstrings" -> listOf(R.drawable.muscle_back_hamstrings)
-            "Calves" -> listOf(R.drawable.muscle_front_calves, R.drawable.muscle_back_calves)
-            else -> listOf(R.drawable.muscle_front_calves, R.drawable.muscle_back_calves)
-        }
-    }
-
-
-
-    private fun getButtonsByMuscleName(name: String): List<ImageButton> {
-        val muscleToButtonIds = mapOf(
-            "Neck / Traps" to listOf(R.id.muscle_front_neck_traps, R.id.muscle_back_neck_traps),
-            "Shoulder" to listOf(R.id.muscle_front_shoulder, R.id.muscle_back_shoulder),
-            "Chest" to listOf(R.id.muscle_front_chest),
-            "Arm" to listOf(R.id.muscle_front_biceps, R.id.muscle_back_triceps, R.id.muscle_front_forearm, R.id.muscle_back_forearm),
-            "Biceps" to listOf(R.id.muscle_front_biceps),
-            "Triceps" to listOf(R.id.muscle_back_triceps),
-            "Forearms" to listOf(R.id.muscle_front_forearm, R.id.muscle_back_forearm),
-            "Abs" to listOf(R.id.muscle_front_abs),
-            "Obliques" to listOf(R.id.muscle_front_obliques, R.id.muscle_back_obliques),
-            "Back" to listOf(R.id.muscle_back_upper_back, R.id.muscle_back_lower_back),
-            "Upper Back" to listOf(R.id.muscle_back_upper_back),
-            "Lower Back" to listOf(R.id.muscle_back_lower_back),
-            "Leg" to listOf(R.id.muscle_front_inner_thigh, R.id.muscle_front_quadriceps, R.id.muscle_back_hamstrings, R.id.muscle_front_calves, R.id.muscle_back_calves),
-            "Inner Thigh" to listOf(R.id.muscle_front_inner_thigh),
-            "Glutes / Buttocks" to listOf(R.id.muscle_back_glutes_buttocks),
-            "Quadriceps" to listOf(R.id.muscle_front_quadriceps),
-            "Hamstrings" to listOf(R.id.muscle_back_hamstrings),
-            "Calves" to listOf(R.id.muscle_front_calves, R.id.muscle_back_calves)
-        )
-
-        val buttonIds = muscleToButtonIds[name] ?: emptyList()
-        return buttonIds.mapNotNull { id -> view?.findViewById<ImageButton>(id) }
-    }
-
 
 }
