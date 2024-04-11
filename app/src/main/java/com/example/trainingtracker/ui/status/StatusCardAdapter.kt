@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingtracker.ui.exerciseCard.CardStorage
@@ -13,6 +14,7 @@ import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
 import com.example.trainingtracker.ui.exerciseCard.ExerciseCardDiffCallback
 import com.example.trainingtracker.R
 import com.example.trainingtracker.ui.exerciseLog.LogStorage
+import com.example.trainingtracker.ui.exerciseLog.PastLogTableAdapter
 import com.example.trainingtracker.views.GraphViewAdapter
 import com.jjoe64.graphview.GraphView
 
@@ -53,14 +55,22 @@ class StatusCardAdapter(private val context: Context, private val onItemClick: (
         private val subMuscleTextView: TextView = itemView.findViewById(R.id.StatusCard_SubMuscle_TextView)
         private val oneRepMaxTextView: TextView = itemView.findViewById(R.id.StatusCard_OneRepMax_TextView)
         private val graphView: GraphView = itemView.findViewById(R.id.StatusCard_GraphView)
+        private val pastLogRecyclerView: RecyclerView = itemView.findViewById(R.id.StatusCard_PastLogs_RecyclerView)
+        private lateinit var pastLogTableAdapter: PastLogTableAdapter
 
         fun bind(cardItem: ExerciseCard) {
 
             val logStorage = LogStorage(cardItem.id)
+            val pastLog = logStorage.loadLogs(context)
             exerciseNameTextView.text = cardItem.name
             mainMuscleTextView.text = cardItem.mainMuscles.map { it.name }.toString()
             subMuscleTextView.text = cardItem.subMuscles.map { it.name }.toString()
-            GraphViewAdapter.setupGraphView(graphView, logStorage.loadLogs(context))
+            GraphViewAdapter.setupGraphView(graphView, pastLog)
+
+            pastLogRecyclerView.layoutManager = LinearLayoutManager(context)
+            pastLogTableAdapter = PastLogTableAdapter(pastLog)
+            pastLogRecyclerView.adapter = pastLogTableAdapter
+
 
             itemView.setOnLongClickListener {
                 showEditDeleteOptions(cardItem)
