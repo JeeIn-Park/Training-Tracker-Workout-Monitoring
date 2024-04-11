@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupWithNavController
 //import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingtracker.databinding.ActivityMainBinding
 import com.example.trainingtracker.ui.muscles.MuscleStatus
+import com.example.trainingtracker.ui.tag.TagFactory
 import com.example.trainingtracker.ui.tag.TagStorage
 
 class MainActivity : AppCompatActivity() {
@@ -44,6 +45,6 @@ private lateinit var binding: ActivityMainBinding
 
     override fun onStop() {
         super.onStop()
-        TagStorage.resetSelection(this)
+        TagFactory.resetSelection(this)
     }
 }

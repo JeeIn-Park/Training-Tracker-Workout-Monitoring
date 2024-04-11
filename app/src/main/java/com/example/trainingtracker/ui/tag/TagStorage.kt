@@ -80,22 +80,4 @@ object TagStorage {
         return selectedTags
     }
 
-    fun resetSelection(context: Context) {
-        val tags = TagStorage.loadTags(context)
-        val updatedTags: MutableList<Tag> = mutableListOf()
-        for (tag in tags) {
-            updatedTags.add(
-                Tag(
-                    id = tag.id,
-                    timeAdded = tag.timeAdded,
-                    name = tag.name,
-                    isSelected = false
-                )
-            )
-        }
-        if (tags.size != updatedTags.size) {
-            throw error("error while resetting tag selections") // TODO : check if this throws error
-        } else saveTags(context, updatedTags)
-    }
-
 }

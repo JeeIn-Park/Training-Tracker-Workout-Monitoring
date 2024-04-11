@@ -12,7 +12,6 @@ import com.example.trainingtracker.ui.muscles.MuscleStorage
 import com.example.trainingtracker.ui.tag.Tag
 import com.example.trainingtracker.ui.tag.TagStorage
 import com.example.trainingtracker.views.MultiSelectionSpinner
-import java.time.LocalDateTime
 import java.util.UUID
 
 
@@ -26,8 +25,7 @@ class AddCardActivity : AppCompatActivity() {
         val selectMuscle = Muscle(null, 0, getString(R.string.muscle_select), listOf())
         val muscleList = (listOf(selectMuscle)
                 + MuscleStorage.loadMuscles(this))
-        val selectTag = Tag( UUID.randomUUID(), LocalDateTime.now(), getString(R.string.tag_select))
-        val tagList = (listOf(selectTag)
+        val tagList = (listOf(Tag.SELECT_TAG)
                 + TagStorage.loadTags(this))
 
         // Initialize views

@@ -61,12 +61,12 @@ class StatusCardAdapter(private val context: Context, private val onItemClick: (
         fun bind(cardItem: ExerciseCard) {
             exerciseName.text = cardItem.name
 
-            val tagText = if (cardItem.tag[0].name != context.getString(R.string.tag_select)) {
-                cardItem.tag[0].name
-            } else {
-                ""
-            }
-            tag.text = tagText
+//            val tagText = if (cardItem.tag[0].name != context.getString(R.string.tag_select)) {
+//                cardItem.tag[0].name
+//            } else {
+//                ""
+//            }
+//            tag.text = tagText
 //
 //            if ( cardItem.lastActivity != null ) {
 //                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault())

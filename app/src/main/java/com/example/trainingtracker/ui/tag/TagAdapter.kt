@@ -89,14 +89,9 @@ class TagAdapter(private val context: Context, private val onItemClick: (Tag) ->
                             inputDialog.setTitle(context.getString(R.string.tag_enter_name))
 
                             inputDialog.setPositiveButton("OK") { dialog, _ ->
-                                val newTagString = inputEditText.text.toString().trim()
-                                if (newTagString.isNotEmpty()) {
-                                    val newTag = Tag(
-                                        id = tag.id,
-                                        timeAdded = tag.timeAdded,
-                                        name = newTagString)
-
-                                    editItem(tag, newTag)
+                                val newTagName = inputEditText.text.toString().trim()
+                                if (newTagName.isNotEmpty()) {
+                                    editItem(tag, TagFactory.editTag(tag, newTagName))
                                 }
                                 dialog.dismiss()
                             }
