@@ -10,6 +10,14 @@ object TagFactory {
         return Tag(id = id, name = name)
     }
 
+    fun clickTag(clickedTag: Tag): Tag {
+        return Tag(
+            id = clickedTag.id,
+            timeAdded = clickedTag.timeAdded,
+            name = clickedTag.name,
+            isSelected = !clickedTag.isSelected
+        )
+    }
 
     private fun generateUniqueId(context: Context): UUID {
         var uniqueId: UUID
