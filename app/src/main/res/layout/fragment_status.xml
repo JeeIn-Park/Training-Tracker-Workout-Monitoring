@@ -19,7 +19,6 @@
             layout="@layout/item_tag_bar" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/spreadSheetRecyclerView"
         android:layout_width="match_parent"
