@@ -3,7 +3,11 @@ package com.example.trainingtracker.ui.home
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.Typeface
 import android.opengl.Visibility
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -102,8 +106,34 @@ class HomeCardAdapter(
                 subMuscle.text = "Sub muscle : ${cardItem.subMuscles.joinToString(separator = ", ") { it.name }}"
             }
 
-            personalRecord.text = context.getString(R.string.title_one_rep_max)
 
+            var formattedDateText: String
+            val oneRepMaxRecordDate = cardItem.oneRepMaxRecordDate
+
+            if (oneRepMaxRecordDate != null) {
+                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault())
+                val formattedDate = oneRepMaxRecordDate.format(formatter)
+                val currentDate = LocalDateTime.now()
+                val daysAgo = Duration.between(oneRepMaxRecordDate, currentDate).toDays()
+
+                formattedDateText = when {
+                    daysAgo == 0L -> formattedDate
+                    daysAgo == 1L -> "$formattedDate (1 day ago)"
+                    else -> "$formattedDate ($daysAgo days ago)"
+                }
+
+                val oneRepMaxRecordFormatted = "%.2f".format(cardItem.oneRepMaxRecord)
+                val textToShow = "${context.getString(R.string.one_rep_max_pb)}\n$oneRepMaxRecordFormatted kg\n($formattedDateText)"
+                val spannable = SpannableString(textToShow)
+                val start = textToShow.indexOf(oneRepMaxRecordFormatted)
+                val end = start + oneRepMaxRecordFormatted.length + 3 // +3 for " kg"
+
+                spannable.setSpan(StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+                personalRecord.text = spannable
+
+            } else {
+                personalRecord.visibility = View.GONE
+            }
 
             itemView.setOnLongClickListener {
                 showEditDeleteOptions(cardItem)
