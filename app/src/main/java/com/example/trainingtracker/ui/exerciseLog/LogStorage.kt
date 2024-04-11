@@ -12,7 +12,7 @@ class LogStorage(id : UUID) {
 
     // TODO: make storage for muscles and list
 
-    fun saveLogs(context: Context, logs :List<ExerciseLog>) {
+    private fun saveLogs(context: Context, logs :List<ExerciseLog>) {
         try {
             ObjectOutputStream(context.openFileOutput(fileName, Context.MODE_PRIVATE)).use {
                 it.writeObject(logs)

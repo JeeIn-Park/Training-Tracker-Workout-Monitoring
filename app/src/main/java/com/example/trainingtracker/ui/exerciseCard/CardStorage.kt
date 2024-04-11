@@ -11,7 +11,7 @@ import java.util.UUID
 object CardStorage {
     private const val FILE_NAME = "exercise_cards.dat"
 
-    fun saveCards(context: Context, cards : List<ExerciseCard>) {
+    private fun saveCards(context: Context, cards : List<ExerciseCard>) {
         try {
             ObjectOutputStream(context.openFileOutput(FILE_NAME, Context.MODE_PRIVATE)).use {
                 it.writeObject(cards)

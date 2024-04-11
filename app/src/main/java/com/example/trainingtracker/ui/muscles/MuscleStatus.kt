@@ -52,7 +52,7 @@ object MuscleStatus {
         for(muscle in muscleList) {
             updatedMuscleList.add( muscleState(context, muscle))
         }
-        MuscleStorage.saveMuscles(context, updatedMuscleList)
+        MuscleStorage.updateMuscles(context, updatedMuscleList)
     }
 
 }

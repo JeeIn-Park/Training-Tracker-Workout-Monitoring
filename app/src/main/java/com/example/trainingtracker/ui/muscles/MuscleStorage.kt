@@ -13,7 +13,7 @@ import java.util.UUID
 object MuscleStorage {
     private const val FILE_NAME = "muscles.dat"
 
-    fun saveMuscles(context: Context, muscles: List<Muscle>) {
+    private fun saveMuscles(context: Context, muscles: List<Muscle>) {
         try {
             ObjectOutputStream(context.openFileOutput(FILE_NAME, Context.MODE_PRIVATE)).use {
                 it.writeObject(muscles)
@@ -71,6 +71,10 @@ object MuscleStorage {
             currentMuscles[index] = newMuscle
             saveMuscles(context, currentMuscles)
         }
+    }
+
+    fun updateMuscles(context: Context, newMuscles: List<Muscle>) {
+        saveMuscles(context, newMuscles)
     }
 
 //    fun getSelectedTags(context: Context): List<Tag> {

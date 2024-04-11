@@ -93,6 +93,7 @@ class HomeFragment : Fragment() {
                         newTags.add(newTag)
                         newTags.removeAll { it == Tag.ADD_TAG }
                         newTags.add(Tag.ADD_TAG)
+                        // TODO : not do it manually, it is risky
                         TagStorage.saveTags(requireContext(), newTags)
                         refresh()
                     }
