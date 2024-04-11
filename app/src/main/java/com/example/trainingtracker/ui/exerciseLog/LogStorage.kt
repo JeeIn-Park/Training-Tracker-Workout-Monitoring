@@ -10,8 +10,6 @@ import java.util.UUID
 class LogStorage(id : UUID) {
     private val fileName = "log_${id}.dat"
 
-    // TODO: make storage for muscles and list
-
     private fun saveLogs(context: Context, logs :List<ExerciseLog>) {
         try {
             ObjectOutputStream(context.openFileOutput(fileName, Context.MODE_PRIVATE)).use {

@@ -11,7 +11,6 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import java.time.LocalDateTime
 import android.view.Gravity
-import android.view.View
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
@@ -23,6 +22,13 @@ import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
 import java.time.Duration
 import java.time.format.DateTimeFormatter
 import java.util.Locale
+import com.jjoe64.graphview.GraphView
+import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter
+import com.jjoe64.graphview.series.DataPoint
+import com.jjoe64.graphview.series.LineGraphSeries
+import java.time.ZoneOffset
+import java.util.UUID
+
 
 class AddLogActivity : AppCompatActivity() {
     // past log
@@ -75,14 +81,6 @@ class AddLogActivity : AppCompatActivity() {
         // Mid left
 
 
-//
-//                //date
-//        // TODO : need to find the date of one rep max
-//        // TODO : each set store one rep max
-//        // TODO : each log store one rep max
-//        // TODO : each card store one rep max date
-
-//
 
 
         // Mid Right
@@ -94,8 +92,8 @@ class AddLogActivity : AppCompatActivity() {
         pastLogRecyclerView.adapter = pastLogTableAdapter
 
                 // graph
-
-
+        val graphView = findViewById<GraphView>(R.id.graphView)
+        setupGraphView(graphView, pastLog)
 
         // bottom
         val kgEditText: EditText = findViewById(R.id.kgEnterText)
@@ -169,6 +167,28 @@ class AddLogActivity : AppCompatActivity() {
                 exerciseDate,
                 logStorage)
         }
+    }
+
+    private fun setupGraphView(graph: GraphView, logs: List<ExerciseLog>) {
+        val series = LineGraphSeries<DataPoint>()
+        logs.sortedBy { it.dateTime }.forEach { log ->
+            if (log.oneRepMax != null) {
+                val x = log.dateTime.toEpochSecond(ZoneOffset.UTC).toDouble()
+                val y = log.oneRepMax.toDouble()
+                series.appendData(DataPoint(x, y), true, 100)
+            }
+        }
+
+//        graph.title = "Change of OneRepMax Over Time"
+        graph.addSeries(series)
+        graph.viewport.isXAxisBoundsManual = true
+        graph.viewport.setMinX(series.lowestValueX)
+        graph.viewport.setMaxX(series.highestValueX)
+        graph.viewport.isScalable = true
+        graph.viewport.isScrollable = true
+        graph.gridLabelRenderer.labelFormatter = DateAsXAxisLabelFormatter(this)
+        graph.gridLabelRenderer.numHorizontalLabels = 4  // just a few horizontal labels to avoid cluttering
+
     }
 
 }
