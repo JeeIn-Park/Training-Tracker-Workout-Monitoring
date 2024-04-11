@@ -1,6 +1,10 @@
 package com.example.trainingtracker.ui.exerciseLog
 
+import android.graphics.Typeface
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.StyleSpan
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
@@ -55,7 +59,13 @@ class AddLogActivity : AppCompatActivity() {
                 daysAgo == 1L -> formattedDateText = "$formattedDate (1 day ago)"
                 else -> formattedDateText = "$formattedDate ($daysAgo days ago)"
             }
-            oneRepMaxBar.text = "${this.getString(R.string.one_rep_max_pb)} : ${"%.2f".format(cardItem.oneRepMaxRecord)} kg ( ${formattedDateText} )"
+            val oneRepMaxRecordFormatted = "%.2f".format(cardItem.oneRepMaxRecord)
+            val textToShow = "${this.getString(R.string.one_rep_max_pb)} : $oneRepMaxRecordFormatted kg ( ${formattedDateText} )"
+            val spannable = SpannableString(textToShow)
+            val start = textToShow.indexOf(oneRepMaxRecordFormatted)
+            val end = start + oneRepMaxRecordFormatted.length + 3
+            spannable.setSpan(StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+            oneRepMaxBar.text = spannable
         } else {
             oneRepMaxBar.text = this.getString(R.string.one_rep_max_pb)
         }
