@@ -171,14 +171,17 @@ class AddLogActivity : AppCompatActivity() {
     }
 
     private fun setupGraphView(graph: GraphView, logs: List<ExerciseLog>) {
+        // Reverse the list so that it goes from oldest to most recent
+        val reversedLogs = logs.reversed()
+
         val series = LineGraphSeries<DataPoint>()
-        logs.mapIndexed { index, log ->  // Use index as x-value
+        reversedLogs.mapIndexed { index, log ->  // Use index as x-value
             if (log.oneRepMax != null) {
                 DataPoint(index.toDouble(), log.oneRepMax.toDouble())
             } else {
                 null
             }
-        }.filterNotNull().forEach { series.appendData(it, true, logs.size) }
+        }.filterNotNull().forEach { series.appendData(it, true, reversedLogs.size) }
 
         graph.addSeries(series)
         graph.viewport.isXAxisBoundsManual = true
@@ -192,8 +195,8 @@ class AddLogActivity : AppCompatActivity() {
             override fun formatLabel(value: Double, isValueX: Boolean): String {
                 if (isValueX) {
                     val index = value.toInt()
-                    if (index < logs.size) {
-                        val dateTime = logs[index].dateTime
+                    if (index < reversedLogs.size) {
+                        val dateTime = reversedLogs[index].dateTime
                         return "${dateTime.dayOfMonth}/${dateTime.monthValue}"  // Format as "Day/Month"
                     }
                 }
@@ -201,10 +204,11 @@ class AddLogActivity : AppCompatActivity() {
             }
         }
 
-        graph.gridLabelRenderer.numHorizontalLabels = logs.size  // Set to number of logs for a label at each point
+        graph.gridLabelRenderer.numHorizontalLabels = reversedLogs.size  // Set to number of logs for a label at each point
 
 //        graph.title = "Change of OneRepMax Over Time"
     }
+
 
 
 }
