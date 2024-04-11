@@ -171,32 +171,32 @@ class AddLogActivity : AppCompatActivity() {
     }
 
     private fun setupGraphView(graph: GraphView, logs: List<ExerciseLog>) {
-        // Reverse the list so that it goes from oldest to most recent
-        val reversedLogs = logs.reversed()
+        // Reverse the list so that it goes from oldest to most recent and take the last 8 entries
+        val relevantLogs = logs.reversed().take(8)
 
         val series = LineGraphSeries<DataPoint>()
-        reversedLogs.mapIndexed { index, log ->  // Use index as x-value
+        relevantLogs.mapIndexed { index, log ->  // Use index as x-value
             if (log.oneRepMax != null) {
                 DataPoint(index.toDouble(), log.oneRepMax.toDouble())
             } else {
                 null
             }
-        }.filterNotNull().forEach { series.appendData(it, true, reversedLogs.size) }
+        }.filterNotNull().forEach { series.appendData(it, true, relevantLogs.size) }
 
         graph.addSeries(series)
         graph.viewport.isXAxisBoundsManual = true
-        graph.viewport.setMinX(series.lowestValueX)
-        graph.viewport.setMaxX(series.highestValueX)
-        graph.viewport.isScalable = true
-        graph.viewport.isScrollable = true
+        graph.viewport.setMinX(0.0)  // Start at 0 since we are only showing up to 8 points
+        graph.viewport.setMaxX(relevantLogs.size - 1.toDouble())  // Set max to the size of relevantLogs minus one for proper indexing
+        graph.viewport.isScalable = false  // You may want to disable scaling to keep the view fixed on these 8 points
+        graph.viewport.isScrollable = false  // You may want to disable scrolling to keep the view fixed
 
         // Custom label formatter to display month and day
         graph.gridLabelRenderer.labelFormatter = object : DefaultLabelFormatter() {
             override fun formatLabel(value: Double, isValueX: Boolean): String {
                 if (isValueX) {
                     val index = value.toInt()
-                    if (index < reversedLogs.size) {
-                        val dateTime = reversedLogs[index].dateTime
+                    if (index < relevantLogs.size) {
+                        val dateTime = relevantLogs[index].dateTime
                         return "${dateTime.dayOfMonth}/${dateTime.monthValue}"  // Format as "Day/Month"
                     }
                 }
@@ -204,11 +204,7 @@ class AddLogActivity : AppCompatActivity() {
             }
         }
 
-        graph.gridLabelRenderer.numHorizontalLabels = reversedLogs.size  // Set to number of logs for a label at each point
-
-//        graph.title = "Change of OneRepMax Over Time"
+        graph.gridLabelRenderer.numHorizontalLabels = relevantLogs.size  // One label for each point
     }
-
-
 
 }
