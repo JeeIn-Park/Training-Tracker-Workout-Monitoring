@@ -135,9 +135,9 @@ class StatusFragment : Fragment() {
     }
 
     override fun onStop() {
+        super.onStop()
         val tags = tagAdapter.currentList.filter { it != Tag.ADD_TAG }
         TagStorage.saveTags(requireContext(), tags)
-        super.onStop()
     }
 
     private fun refresh() {

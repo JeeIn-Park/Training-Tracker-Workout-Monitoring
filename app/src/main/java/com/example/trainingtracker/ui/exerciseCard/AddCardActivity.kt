@@ -72,7 +72,7 @@ class AddCardActivity : AppCompatActivity() {
 
             // TODO : edit card to select multiple muscles and tags
             if (cardItem != null) {
-                CardStorage.editCard(this, cardItem, ExerciseCardFactory.updateExerciseCard(cardItem, exerciseName, mainMuscles, subMuscles, tags))
+                CardStorage.editCard(this, cardItem, ExerciseCardFactory.editExerciseCard(cardItem, exerciseName, mainMuscles, subMuscles, tags))
                 finish()
 
             } else {

@@ -67,23 +67,23 @@ class StatusCardAdapter(private val context: Context, private val onItemClick: (
                 ""
             }
             tag.text = tagText
-
-            if ( cardItem.lastActivity != null ) {
-                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault())
-                val formattedDate = cardItem.lastActivity.format(formatter)
-                val currentDate = LocalDateTime.now()
-                val daysAgo = Duration.between(cardItem.lastActivity, currentDate).toDays()
-                if (daysAgo == 0.toLong()) {
-                    lastExercise.text = formattedDate
-                } else if (daysAgo == 1.toLong()) {
-                    lastExercise.text = "$formattedDate (1 day ago)"
-                } else {
-                    val dateStringWithDaysAgo = "$formattedDate ($daysAgo days ago)"
-                    lastExercise.text = dateStringWithDaysAgo
-                }
-            } else {
-                lastExercise.text =  ""
-            }
+//
+//            if ( cardItem.lastActivity != null ) {
+//                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault())
+//                val formattedDate = cardItem.lastActivity.format(formatter)
+//                val currentDate = LocalDateTime.now()
+//                val daysAgo = Duration.between(cardItem.lastActivity, currentDate).toDays()
+//                if (daysAgo == 0.toLong()) {
+//                    lastExercise.text = formattedDate
+//                } else if (daysAgo == 1.toLong()) {
+//                    lastExercise.text = "$formattedDate (1 day ago)"
+//                } else {
+//                    val dateStringWithDaysAgo = "$formattedDate ($daysAgo days ago)"
+//                    lastExercise.text = dateStringWithDaysAgo
+//                }
+//            } else {
+//                lastExercise.text =  ""
+//            }
 
 
             if (cardItem.mainMuscles[0].name == context.getString(R.string.muscle_select)) {

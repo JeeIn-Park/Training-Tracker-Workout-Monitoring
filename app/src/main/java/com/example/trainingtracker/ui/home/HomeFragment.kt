@@ -189,9 +189,9 @@ class HomeFragment : Fragment() {
 
 
     override fun onStop() {
+        super.onStop()
 //        TagStorage.resetSelection(requireContext())
         // TODO : reset tag selection when stop the app
-        super.onStop()
     }
 
     private fun refresh() {

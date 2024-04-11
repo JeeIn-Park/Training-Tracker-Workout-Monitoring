@@ -5,9 +5,8 @@ import java.io.Serializable
 import java.util.UUID
 
 data class ExerciseLog(
-    val dateTime: LocalDateTime,
+    val dateTime: LocalDateTime = LocalDateTime.now(),
     val exerciseCard: UUID,
-    val exerciseSetList: List<ExerciseSet>,
-    val totalSet: Int?,
-    val oneRepMax: Float?
+    val exerciseSetList: List<ExerciseSet> = emptyList(),
+    val oneRepMax: Float? = null
 ): Serializable

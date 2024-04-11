@@ -155,15 +155,15 @@ class AddLogActivity : AppCompatActivity() {
 //    }
 
     override fun onStop() {
+        super.onStop()
         if (exerciseSetList.isNotEmpty()) {
-            OneRepMax.logExercise(
+            ExerciseLogFactory.logExercise(
                 this,
                 exerciseSetList,
                 cardItem,
                 exerciseDate,
                 logStorage)
         }
-        super.onStop()
     }
 
 }

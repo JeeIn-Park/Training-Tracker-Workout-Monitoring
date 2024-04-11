@@ -71,22 +71,24 @@ class HomeCardAdapter(
                 tag.text = cardItem.tag.joinToString(prefix = "# ", separator = " ") { it.name }
             } else tag.text = ""
 
-            if ( cardItem.lastActivity != null ) {
+            // Create a local immutable copy of lastActivity
+            val lastActivity = cardItem.lastActivity
+
+            if (lastActivity != null) {
                 val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault())
-                val formattedDate = cardItem.lastActivity.format(formatter)
+                val formattedDate = lastActivity.format(formatter) // Use local variable here
                 val currentDate = LocalDateTime.now()
-                val daysAgo = Duration.between(cardItem.lastActivity, currentDate).toDays()
-                if (daysAgo == 0.toLong()) {
-                    lastExercise.text = formattedDate
-                } else if (daysAgo == 1.toLong()) {
-                    lastExercise.text = "$formattedDate (1 day ago)"
-                } else {
-                    val dateStringWithDaysAgo = "$formattedDate ($daysAgo days ago)"
-                    lastExercise.text = dateStringWithDaysAgo
+                val daysAgo = Duration.between(lastActivity, currentDate).toDays() // Use local variable here
+
+                when {
+                    daysAgo == 0L -> lastExercise.text = formattedDate
+                    daysAgo == 1L -> lastExercise.text = "$formattedDate (1 day ago)"
+                    else -> lastExercise.text = "$formattedDate ($daysAgo days ago)"
                 }
             } else {
                 lastExercise.visibility = View.GONE
             }
+
 
             if (cardItem.mainMuscles.isEmpty()){
                 mainMuscle.visibility = View.GONE

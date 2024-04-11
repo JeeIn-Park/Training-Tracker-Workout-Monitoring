@@ -43,7 +43,7 @@ private lateinit var binding: ActivityMainBinding
     }
 
     override fun onStop() {
-        TagStorage.resetSelection(this)
         super.onStop()
+        TagStorage.resetSelection(this)
     }
 }
