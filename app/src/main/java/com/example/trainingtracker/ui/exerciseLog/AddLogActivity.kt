@@ -60,12 +60,13 @@ class AddLogActivity : AppCompatActivity() {
                 else -> formattedDateText = "$formattedDate ($daysAgo days ago)"
             }
             val oneRepMaxRecordFormatted = "%.2f".format(cardItem.oneRepMaxRecord)
-            val textToShow = "${this.getString(R.string.one_rep_max_pb)} : $oneRepMaxRecordFormatted kg ( ${formattedDateText} )"
+            val textToShow = "${this.getString(R.string.one_rep_max_pb)}\n$oneRepMaxRecordFormatted kg ( ${formattedDateText} )"
             val spannable = SpannableString(textToShow)
             val start = textToShow.indexOf(oneRepMaxRecordFormatted)
-            val end = start + oneRepMaxRecordFormatted.length + 3
+            val end = start + oneRepMaxRecordFormatted.length + 3 // Include " kg" in the bold span (+3 for the space and "kg")
             spannable.setSpan(StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
             oneRepMaxBar.text = spannable
+
         } else {
             oneRepMaxBar.text = this.getString(R.string.one_rep_max_pb)
         }
