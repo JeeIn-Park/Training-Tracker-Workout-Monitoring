@@ -1,86 +1,91 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_gravity="center">
+
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginVertical="4dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
+        android:id="@+id/nameAndMuscleContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
         android:foregroundGravity="center"
         app:cardBackgroundColor="?attr/colorPrimary"
-        app:cardCornerRadius="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:cardCornerRadius="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/ExerciseName"
+                android:id="@+id/exercise_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:text="ExerciseName"
+                android:padding="4sp"
+                android:textSize="12sp"
                 android:textColor="?attr/colorOnBackground"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                android:text="Exercise Name" />
 
             <TextView
-                android:id="@+id/Tag"
+                android:id="@+id/main_muscles"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="8dp"
-                android:text="Tag"
+                android:padding="4sp"
+                android:textSize="12sp"
                 android:textColor="?attr/colorPrimaryVariant"
-                app:layout_constraintStart_toEndOf="@+id/ExerciseName"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:text="Main Muscles" />
 
             <TextView
-                android:id="@+id/MainMuscle"
+                android:id="@+id/sub_muscles"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="MainMuscle"
-                android:textColor="?attr/colorOnBackground"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/PersonalRecord"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:text="PersonalRecord"
+                android:padding="4sp"
+                android:textSize="12sp"
                 android:textColor="?attr/colorPrimaryVariant"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:id="@+id/SubMuscle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="SubMuscle"
-            android:textColor="?attr/colorOnBackground" />
+                android:text="Sub Muscles" />
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
+    <TextView
+        android:id="@+id/oneRepMax"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:textSize="12sp"
+        android:text="One Rep Max"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameAndMuscleContainer"
+        />
+
+    <com.jjoe64.graphview.GraphView
+        android:id="@+id/graphView"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="3dp"
+        app:layout_constraintTop_toBottomOf="@+id/oneRepMax"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/pastRecords"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="3dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/graphView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
