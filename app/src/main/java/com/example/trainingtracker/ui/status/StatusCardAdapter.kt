@@ -13,6 +13,8 @@ import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
 import com.example.trainingtracker.ui.exerciseCard.ExerciseCardDiffCallback
 import com.example.trainingtracker.R
 import com.example.trainingtracker.ui.exerciseLog.LogStorage
+import com.example.trainingtracker.views.GraphViewAdapter
+import com.jjoe64.graphview.GraphView
 
 class StatusCardAdapter(private val context: Context, private val onItemClick: (ExerciseCard) -> Unit) :
     ListAdapter<ExerciseCard, StatusCardAdapter.CardViewHolder>(ExerciseCardDiffCallback()) {
@@ -50,12 +52,15 @@ class StatusCardAdapter(private val context: Context, private val onItemClick: (
         private val mainMuscleTextView: TextView = itemView.findViewById(R.id.StatusCard_MainMuscle_TextView)
         private val subMuscleTextView: TextView = itemView.findViewById(R.id.StatusCard_SubMuscle_TextView)
         private val oneRepMaxTextView: TextView = itemView.findViewById(R.id.StatusCard_OneRepMax_TextView)
+        private val graphView: GraphView = itemView.findViewById(R.id.StatusCard_GraphView)
 
         fun bind(cardItem: ExerciseCard) {
 
+            val logStorage = LogStorage(cardItem.id)
             exerciseNameTextView.text = cardItem.name
             mainMuscleTextView.text = cardItem.mainMuscles.map { it.name }.toString()
             subMuscleTextView.text = cardItem.subMuscles.map { it.name }.toString()
+            GraphViewAdapter.setupGraphView(graphView, logStorage.loadLogs(context))
 
             itemView.setOnLongClickListener {
                 showEditDeleteOptions(cardItem)
