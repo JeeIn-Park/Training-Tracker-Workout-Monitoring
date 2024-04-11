@@ -34,7 +34,8 @@ object ExerciseCardFactory {
             originalCard.mainMuscles,
             originalCard.subMuscles,
             originalCard.tag,
-            exerciseLog.oneRepMax
+            exerciseLog.oneRepMax,
+            exerciseLog.dateTime
         )
         } else return ExerciseCard(
             originalCard.id,
@@ -44,7 +45,8 @@ object ExerciseCardFactory {
             originalCard.mainMuscles,
             originalCard.subMuscles,
             originalCard.tag,
-            originalCard.oneRepMaxRecord
+            originalCard.oneRepMaxRecord,
+            originalCard.oneRepMaxRecordDate
         )
     }
 

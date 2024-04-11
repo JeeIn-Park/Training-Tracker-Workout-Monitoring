@@ -7,6 +7,7 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import java.time.LocalDateTime
 import android.view.Gravity
+import android.view.View
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
@@ -15,6 +16,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingtracker.R
 import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
+import java.time.Duration
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 class AddLogActivity : AppCompatActivity() {
     // past log
@@ -37,46 +41,36 @@ class AddLogActivity : AppCompatActivity() {
         val pastLog: List<ExerciseLog> = logStorage.loadLogs(this)
         supportActionBar?.title = cardItem.name
 
+        val oneRepMaxBar: TextView = findViewById(R.id.oneRepMaxBar)
+        var formattedDateText : String
+        val oneRepMaxRecordDate = cardItem.oneRepMaxRecordDate
+        if (oneRepMaxRecordDate != null) {
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault())
+            val formattedDate = oneRepMaxRecordDate.format(formatter) // Use local variable here
+            val currentDate = LocalDateTime.now()
+            val daysAgo = Duration.between(oneRepMaxRecordDate, currentDate).toDays() // Use local variable here
+
+            when {
+                daysAgo == 0L -> formattedDateText = formattedDate
+                daysAgo == 1L -> formattedDateText = "$formattedDate (1 day ago)"
+                else -> formattedDateText = "$formattedDate ($daysAgo days ago)"
+            }
+            oneRepMaxBar.text = "${this.getString(R.string.one_rep_max_pb)} : ${"%.2f".format(cardItem.oneRepMaxRecord)} kg ( ${formattedDateText} )"
+        } else {
+            oneRepMaxBar.text = this.getString(R.string.one_rep_max_pb)
+        }
+
 
         // Mid left
 
-            // today's workout
 
-//            // one rep max box
-//        val boxView: View = findViewById(R.id.box)
-//
-//                //title
-//        val titleTextView: TextView = boxView.findViewById(R.id.title)
-//        titleTextView.text = getString(R.string.one_rep_max_pb)
-//
-//                //content
-//        val contentTextView: TextView = boxView.findViewById(R.id.content)
-//        if (pastLog.isEmpty()) {
-//            contentTextView.text = "N/A"
-//        } else {
-//            contentTextView.text = "${String.format("%.2f", cardItem.oneRepMax).toString()} kg"
-//        }
 //
 //                //date
 //        // TODO : need to find the date of one rep max
 //        // TODO : each set store one rep max
 //        // TODO : each log store one rep max
 //        // TODO : each card store one rep max date
-//        val dateTextView: TextView = boxView.findViewById(R.id.date)
-//        if ( cardItem.lastActivity != null ) {
-//            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault())
-//            val formattedDate = cardItem.lastActivity!!.format(formatter)
-//            val currentDate = LocalDateTime.now()
-//            val daysAgo = Duration.between(cardItem.lastActivity, currentDate).toDays()
-//            if (daysAgo == 0.toLong()) {
-//                dateTextView.text = formattedDate
-//            } else if (daysAgo == 1.toLong()) {
-//                dateTextView.text = "$formattedDate (1 day ago)"
-//            } else {
-//                val dateStringWithDaysAgo = "$formattedDate ($daysAgo days ago)"
-//                dateTextView.text = dateStringWithDaysAgo
-//            }
-//        }
+
 //
 
 

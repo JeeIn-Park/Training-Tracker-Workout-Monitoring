@@ -14,6 +14,7 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/oneRepMaxBarContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/graphView"
@@ -22,11 +23,12 @@
         >
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/oneRepMaxBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/one_rep_max_pb"
+            android:textSize="12sp"
             android:background="@color/cafeLatte"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -141,7 +143,7 @@
                 android:id="@+id/warmUpCheck"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="12sp"
+                android:paddingRight="12sp"
                 android:text="@string/discard_set_count"
                 android:textSize="12sp" />
 
@@ -164,7 +166,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="10sp"
-        app:layout_constraintBottom_toTopOf="@+id/graphView"
+        app:layout_constraintBottom_toTopOf="@+id/oneRepMaxBarContainer"
         app:layout_constraintEnd_toStartOf="@+id/middle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -188,7 +190,7 @@
         android:layout_height="0dp"
         android:layout_margin="10sp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/graphView"
+        app:layout_constraintBottom_toTopOf="@+id/oneRepMaxBarContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/middle">
 
