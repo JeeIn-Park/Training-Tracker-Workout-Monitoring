@@ -78,12 +78,6 @@ class AddLogActivity : AppCompatActivity() {
             oneRepMaxBar.text = this.getString(R.string.one_rep_max_pb)
         }
 
-
-        // Mid left
-
-
-
-
         // Mid Right
 
                 // past logs

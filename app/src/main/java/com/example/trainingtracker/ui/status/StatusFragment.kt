@@ -1,6 +1,7 @@
 package com.example.trainingtracker.ui.status
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.trainingtracker.R
 import com.example.trainingtracker.ui.exerciseCard.CardStorage
 import com.example.trainingtracker.databinding.FragmentStatusBinding
+import com.example.trainingtracker.ui.exerciseLog.AddLogActivity
+import com.example.trainingtracker.ui.home.HomeCardAdapter
 import com.example.trainingtracker.ui.tag.Tag
 import com.example.trainingtracker.ui.tag.TagAdapter
 import com.example.trainingtracker.ui.tag.TagFactory
@@ -22,6 +25,7 @@ class StatusFragment : Fragment() {
 
     private var _binding: FragmentStatusBinding? = null
     private val binding get() = _binding!!
+    private lateinit var cardAdapter: StatusCardAdapter
     private lateinit var tagAdapter: TagAdapter
 
   override fun onCreateView(
@@ -33,6 +37,13 @@ class StatusFragment : Fragment() {
           ViewModelProvider(this).get(StatusViewModel::class.java)
       _binding = FragmentStatusBinding.inflate(inflater, container, false)
       val root: View = binding.root
+
+      cardAdapter = StatusCardAdapter(requireContext()) { clickedCard ->
+          val intent = Intent(context, AddLogActivity::class.java).apply {
+              putExtra("EXTRA_CARD_ITEM", clickedCard)
+          }
+          startActivity(intent)
+      }
 
       tagAdapter = TagAdapter(requireContext()) { clickedTag ->
           if (clickedTag.name == Tag.ADD_TAG.name) {
@@ -59,6 +70,15 @@ class StatusFragment : Fragment() {
               tagAdapter.editItem(clickedTag, TagFactory.clickTag(clickedTag))
               refresh()
           }
+      }
+
+      val exerciseRecyclerViewBinding = binding.spreadSheetRecyclerView
+      exerciseRecyclerViewBinding.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+      exerciseRecyclerViewBinding.adapter = cardAdapter
+      exerciseRecyclerViewBinding.itemAnimator = DefaultItemAnimator()
+      statusViewModel.cardRecyclerViewData.observe(viewLifecycleOwner) { newData ->
+          cardAdapter.submitList(newData)
+          statusViewModel.updateCardRecyclerViewData(newData)
       }
 
       val tagRecyclerViewBinding = binding.filterBar.tagRecyclerView
@@ -90,6 +110,7 @@ class StatusFragment : Fragment() {
         tagAdapter.submitList(tags)
         val selectedTags = TagStorage.getSelectedTags(requireContext())
         val cards = CardStorage.getSelectedCard(requireContext(), selectedTags)
+        cardAdapter.submitList(cards)
     }
 
 }

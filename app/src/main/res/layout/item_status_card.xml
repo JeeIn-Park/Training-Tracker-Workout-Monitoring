@@ -4,9 +4,8 @@
     android:layout_height="match_parent"
     android:layout_gravity="center">
 
-
     <androidx.cardview.widget.CardView
-        android:id="@+id/nameAndMuscleContainer"
+        android:id="@+id/StatusCard_NameAndMuscleContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
@@ -24,7 +23,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/exercise_name"
+                android:id="@+id/StatusCard_ExerciseName_TextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10sp"
@@ -34,20 +33,22 @@
                 android:text="Exercise Name" />
 
             <TextView
-                android:id="@+id/main_muscles"
+                android:id="@+id/StatusCard_MainMuscle_TextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="4sp"
+                android:paddingHorizontal="4sp"
+                android:paddingBottom="4sp"
                 android:textSize="12sp"
                 android:layout_marginStart="10sp"
                 android:textColor="?attr/colorPrimaryVariant"
                 android:text="Main Muscles" />
 
             <TextView
-                android:id="@+id/sub_muscles"
+                android:id="@+id/StatusCard_SubMuscle_TextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="4sp"
+                android:paddingHorizontal="4sp"
+                android:paddingBottom="4sp"
                 android:textSize="12sp"
                 android:layout_marginStart="10sp"
                 android:textColor="?attr/colorPrimaryVariant"
@@ -57,8 +58,8 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/oneRepMax"
-        android:layout_width="0dp"
+        android:id="@+id/StatusCard_OneRepMax_TextView"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
         android:textSize="12sp"
@@ -66,29 +67,29 @@
         android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameAndMuscleContainer"
+        app:layout_constraintTop_toBottomOf="@+id/StatusCard_NameAndMuscleContainer"
         />
 
     <com.jjoe64.graphview.GraphView
-        android:id="@+id/graphView"
+        android:id="@+id/StatusCard_GraphView"
         android:layout_width="200dp"
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_margin="3dp"
-        app:layout_constraintTop_toBottomOf="@+id/oneRepMax"
+        app:layout_constraintTop_toBottomOf="@+id/StatusCard_OneRepMax_TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/pastRecords"
+        android:id="@+id/StatusCard_PastLogs_RecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/graphView" />
+        app:layout_constraintTop_toBottomOf="@id/StatusCard_GraphView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
