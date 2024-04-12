@@ -18,12 +18,13 @@ object MuscleStorage {
             ObjectOutputStream(context.openFileOutput(FILE_NAME, Context.MODE_PRIVATE)).use {
                 it.writeObject(muscles)
             }
-            EventManager.publish(
-                Event(
-                    context.getString(R.string.event_muscle),
-                    muscles
-                )
-            )
+            // TODO : observer pattern
+//            EventManager.publish(
+//                Event(
+//                    context.getString(R.string.event_muscle),
+//                    muscles
+//                )
+//            )
             // TODO : when publish muscle update it should refresh muscle colour
         } catch (e: IOException) {
             e.printStackTrace()

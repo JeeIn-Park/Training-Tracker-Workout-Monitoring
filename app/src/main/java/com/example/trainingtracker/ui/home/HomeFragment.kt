@@ -1,22 +1,29 @@
 package com.example.trainingtracker.ui.home
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ImageButton
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.trainingtracker.R
 import com.example.trainingtracker.databinding.FragmentHomeBinding
+import com.example.trainingtracker.databinding.FragmentMuscleFrontBinding
 import com.example.trainingtracker.ui.exerciseCard.AddCardActivity
 import com.example.trainingtracker.ui.exerciseCard.CardStorage
 import com.example.trainingtracker.ui.exerciseLog.AddLogActivity
+import com.example.trainingtracker.ui.muscles.Muscle
 import com.example.trainingtracker.ui.muscles.MuscleStatus
+import com.example.trainingtracker.ui.muscles.MuscleStorage
 import com.example.trainingtracker.ui.tag.Tag
 import com.example.trainingtracker.ui.tag.TagAdapter
 import com.example.trainingtracker.ui.tag.TagFactory
@@ -117,6 +124,19 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
+
+    private fun updateMuscleColors(context: Context, muscles: List<Muscle>) {
+        muscles.forEach { muscle ->
+            val colorId = MuscleStatus.getColorByStatus(muscle.status)
+            val color = ContextCompat.getColor(context, colorId)
+            muscle.layout.forEach { drawableName ->
+                val resourceId = context.resources.getIdentifier(drawableName, "id", context.packageName)
+                val muscleView = view?.findViewById<ImageButton>(resourceId)
+                muscleView?.setColorFilter(color, PorterDuff.Mode.SRC_ATOP)
+            }
+        }
+    }
+
     private fun refresh() {
         val tags : MutableList<Tag> = TagStorage.loadTags(requireContext()).toMutableList()
         tags.removeAll { it == Tag.ADD_TAG }
@@ -125,16 +145,7 @@ class HomeFragment : Fragment() {
         val selectedTags = TagStorage.getSelectedTags(requireContext())
         val cards = CardStorage.getSelectedCard(requireContext(), selectedTags)
         homeViewModel.updateCardRecyclerViewData(cards)
+        updateMuscleColors(requireContext(), MuscleStorage.loadMuscles(requireContext()))
 
     }
-
-    private fun getColorByStatus(status: Int): Int {
-        return when (status) {
-            MuscleStatus.RECOVERED -> R.color.turquoise
-            MuscleStatus.RECOVERING -> R.color.grey
-            MuscleStatus.NEED_EXERCISE -> R.color.cafeLatte
-            else -> R.color.red
-        }
-    }
-
 }

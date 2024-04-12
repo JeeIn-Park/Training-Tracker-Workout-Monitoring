@@ -1,6 +1,8 @@
 package com.example.trainingtracker.ui.muscles
 
 import android.content.Context
+import android.widget.ImageButton
+import com.example.trainingtracker.R
 //import com.example.trainingtracker.databinding.FragmentMuscleBackBinding
 //import com.example.trainingtracker.databinding.FragmentMuscleFrontBinding
 import java.time.LocalDateTime
@@ -54,5 +56,16 @@ object MuscleStatus {
         }
         MuscleStorage.updateMuscles(context, updatedMuscleList)
     }
+
+
+    fun getColorByStatus(status: Int): Int {
+        return when (status) {
+            MuscleStatus.RECOVERED -> R.color.turquoise
+            MuscleStatus.RECOVERING -> R.color.grey
+            MuscleStatus.NEED_EXERCISE -> R.color.cafeLatte
+            else -> R.color.red
+        }
+    }
+
 
 }
