@@ -1,9 +1,6 @@
 package com.example.trainingtracker.ui.muscles
 
 import android.content.Context
-import com.example.trainingtracker.Event
-import com.example.trainingtracker.EventManager
-import com.example.trainingtracker.R
 import java.io.FileNotFoundException
 import java.io.IOException
 import java.io.ObjectInputStream
@@ -65,7 +62,7 @@ object MuscleStorage {
         }
     }
 
-    fun updateMuscle(context: Context, oldMuscle: Muscle, newMuscle: Muscle) {
+    fun editMuscle(context: Context, oldMuscle: Muscle, newMuscle: Muscle) {
         var currentMuscles = loadMuscles(context).toMutableList()
         val index = currentMuscles.indexOfFirst { it.name == oldMuscle.name }
         if (index != -1) {

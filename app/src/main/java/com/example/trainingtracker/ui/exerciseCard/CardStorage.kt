@@ -71,13 +71,8 @@ object CardStorage {
             context,
             card,
             ExerciseCardFactory.updateExerciseCard(card, log))
-//        // TODO : muscle factory
-//        for (muscle in exerciseCard.mainMuscles) {
-//            MuscleStorage.updateMuscle(context, muscle, Muscle( exerciseDate, MuscleStatus.RECOVERING, muscle.name, muscle.layout))
-//        }
-//        for (muscle in exerciseCard.subMuscles) {
-//            MuscleStorage.updateMuscle(context, muscle, Muscle( exerciseDate, MuscleStatus.RECOVERING, muscle.name, muscle.layout))
-//        }
+        // TODO : muscle factory
+        MuscleStatus.updateMuscle(context, card)
     }
 
     fun isIdInUse(context: Context, id: UUID): Boolean {

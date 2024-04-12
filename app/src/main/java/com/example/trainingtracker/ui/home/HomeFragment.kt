@@ -128,16 +128,20 @@ class HomeFragment : Fragment() {
     private fun updateMuscleColors(context: Context, muscles: List<Muscle>) {
         muscles.forEach { muscle ->
             muscle.layout.forEach { drawableName ->
-                val resourceId = context.resources.getIdentifier(drawableName, "id", context.packageName)
-                val muscleView = view?.findViewById<ImageButton>(resourceId)
+                // Getting the correct resource ID for the drawable, not the ImageButton
+                val drawableResId = context.resources.getIdentifier(drawableName, "drawable", context.packageName)
+                val muscleView = view?.findViewById<ImageButton>(drawableResId)
                 muscleView?.let {
-                    val drawable = ContextCompat.getDrawable(context, id)?.mutate()
+                    // Should use drawableResId to get the drawable
+                    val drawable = ContextCompat.getDrawable(context, drawableResId)?.mutate()
                     drawable?.setColorFilter(MuscleStatus.getColorByStatus(muscle.status), PorterDuff.Mode.SRC_IN)  // Apply the color filter directly to the vector drawable
                     it.setImageDrawable(drawable)
                 }
+                println(muscles)
             }
         }
     }
+
 
     private fun refresh() {
         val tags : MutableList<Tag> = TagStorage.loadTags(requireContext()).toMutableList()
@@ -148,6 +152,5 @@ class HomeFragment : Fragment() {
         val cards = CardStorage.getSelectedCard(requireContext(), selectedTags)
         homeViewModel.updateCardRecyclerViewData(cards)
         updateMuscleColors(requireContext(), MuscleStorage.loadMuscles(requireContext()))
-
     }
 }
