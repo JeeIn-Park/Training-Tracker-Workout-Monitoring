@@ -33,13 +33,14 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var cardAdapter: HomeCardAdapter
     private lateinit var tagAdapter: TagAdapter
+    private lateinit var homeViewModel: HomeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
+        homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -93,7 +94,6 @@ class HomeFragment : Fragment() {
         //todo : better animator
         homeViewModel.cardRecyclerViewData.observe(viewLifecycleOwner) { newData ->
             cardAdapter.submitList(newData)
-            homeViewModel.updateCardRecyclerViewData(newData)
         }
 
         val tagRecyclerViewBinding = binding.filterBar.tagRecyclerView
@@ -102,15 +102,14 @@ class HomeFragment : Fragment() {
         tagRecyclerViewBinding.itemAnimator = DefaultItemAnimator()
         homeViewModel.tagRecyclerViewData.observe(viewLifecycleOwner) { newData ->
             tagAdapter.submitList(newData)
-            homeViewModel.updateTagRecyclerViewData(newData)
         }
 
         return root
     }
 
     override fun onResume() {
-        super.onResume()
         refresh()
+        super.onResume()
     }
 
     override fun onDestroyView() {
@@ -122,10 +121,11 @@ class HomeFragment : Fragment() {
         val tags : MutableList<Tag> = TagStorage.loadTags(requireContext()).toMutableList()
         tags.removeAll { it == Tag.ADD_TAG }
         tags.add(Tag.ADD_TAG)
-        tagAdapter.submitList(tags)
+        homeViewModel.updateTagRecyclerViewData(tags)
         val selectedTags = TagStorage.getSelectedTags(requireContext())
         val cards = CardStorage.getSelectedCard(requireContext(), selectedTags)
-        cardAdapter.submitList(cards)
+        homeViewModel.updateCardRecyclerViewData(cards)
+
     }
 
     private fun getColorByStatus(status: Int): Int {

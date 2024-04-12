@@ -1,6 +1,9 @@
 package com.example.trainingtracker.ui.exerciseLog
 
 import android.content.Context
+import com.example.trainingtracker.Event
+import com.example.trainingtracker.EventManager
+import com.example.trainingtracker.R
 import java.io.FileNotFoundException
 import java.io.IOException
 import java.io.ObjectInputStream
@@ -15,6 +18,12 @@ class LogStorage(id : UUID) {
             ObjectOutputStream(context.openFileOutput(fileName, Context.MODE_PRIVATE)).use {
                 it.writeObject(logs)
             }
+            EventManager.publish(
+                Event(
+                    context.getString(R.string.event_log),
+                    logs
+                )
+            )
         } catch (e : IOException) {
             e.printStackTrace()
         }

@@ -8,6 +8,7 @@
     <string name="general_deletion_warning">Are you sure you want to delete this item?</string>
 
     <!--    exercise    -->
+    <string name="event_log">log</string>
     <string name="exercise_add">Add a new exercise</string>
     <string name="exercise_enter_weight">Enter weight</string>
     <string name="exercise_enter_rep">Enter reps</string>

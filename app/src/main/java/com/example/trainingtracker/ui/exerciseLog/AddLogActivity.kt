@@ -154,7 +154,6 @@ class AddLogActivity : AppCompatActivity() {
 //    }
 
     override fun onStop() {
-        super.onStop()
         if (exerciseSetList.isNotEmpty()) {
             ExerciseLogFactory.logExercise(
                 this,
@@ -163,6 +162,7 @@ class AddLogActivity : AppCompatActivity() {
                 exerciseDate,
                 logStorage)
         }
+        super.onStop()
     }
 
 }
