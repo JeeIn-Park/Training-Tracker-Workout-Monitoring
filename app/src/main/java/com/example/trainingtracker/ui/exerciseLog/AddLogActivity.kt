@@ -18,6 +18,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingtracker.R
+import com.example.trainingtracker.StringFormatter
 import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
 import com.example.trainingtracker.views.GraphViewAdapter.setupGraphView
 import com.jjoe64.graphview.DefaultLabelFormatter
@@ -54,26 +55,10 @@ class AddLogActivity : AppCompatActivity() {
         supportActionBar?.title = cardItem.name
 
         val oneRepMaxBar: TextView = findViewById(R.id.oneRepMaxBar)
-        var formattedDateText : String
         val oneRepMaxRecordDate = cardItem.oneRepMaxRecordDate
         if (oneRepMaxRecordDate != null) {
-            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault())
-            val formattedDate = oneRepMaxRecordDate.format(formatter) // Use local variable here
-            val currentDate = LocalDateTime.now()
-            val daysAgo = Duration.between(oneRepMaxRecordDate, currentDate).toDays() // Use local variable here
-
-            when {
-                daysAgo == 0L -> formattedDateText = formattedDate
-                daysAgo == 1L -> formattedDateText = "$formattedDate (1 day ago)"
-                else -> formattedDateText = "$formattedDate ($daysAgo days ago)"
-            }
-            val oneRepMaxRecordFormatted = "%.2f".format(cardItem.oneRepMaxRecord)
-            val textToShow = "${this.getString(R.string.one_rep_max_pb)}\n$oneRepMaxRecordFormatted kg ( ${formattedDateText} )"
-            val spannable = SpannableString(textToShow)
-            val start = textToShow.indexOf(oneRepMaxRecordFormatted)
-            val end = start + oneRepMaxRecordFormatted.length + 3 // Include " kg" in the bold span (+3 for the space and "kg")
-            spannable.setSpan(StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
-            oneRepMaxBar.text = spannable
+            val formattedDateText : String = StringFormatter.getFormatDateTimeWithDiff(oneRepMaxRecordDate, LocalDateTime.now())
+            oneRepMaxBar.text = StringFormatter.getFormattedOneRepMaxRecordWithDate(cardItem.oneRepMaxRecord ?:0F, formattedDateText)
 
         } else {
             oneRepMaxBar.text = this.getString(R.string.one_rep_max_pb)
