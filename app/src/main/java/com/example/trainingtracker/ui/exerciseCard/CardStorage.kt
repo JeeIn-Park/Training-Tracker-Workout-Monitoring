@@ -1,6 +1,10 @@
 package com.example.trainingtracker.ui.exerciseCard
 
 import android.content.Context
+import com.example.trainingtracker.ui.exerciseLog.ExerciseLog
+import com.example.trainingtracker.ui.muscles.Muscle
+import com.example.trainingtracker.ui.muscles.MuscleStatus
+import com.example.trainingtracker.ui.muscles.MuscleStorage
 import com.example.trainingtracker.ui.tag.Tag
 import java.io.FileNotFoundException
 import java.io.IOException
@@ -61,9 +65,33 @@ object CardStorage {
         }
     }
 
+    fun updateCard(context: Context, log: ExerciseLog) {
+        val card = getCard(context, log.exerciseCard)
+        editCard(
+            context,
+            card,
+            ExerciseCardFactory.updateExerciseCard(card, log))
+//        // TODO : muscle factory
+//        for (muscle in exerciseCard.mainMuscles) {
+//            MuscleStorage.updateMuscle(context, muscle, Muscle( exerciseDate, MuscleStatus.RECOVERING, muscle.name, muscle.layout))
+//        }
+//        for (muscle in exerciseCard.subMuscles) {
+//            MuscleStorage.updateMuscle(context, muscle, Muscle( exerciseDate, MuscleStatus.RECOVERING, muscle.name, muscle.layout))
+//        }
+    }
+
     fun isIdInUse(context: Context, id: UUID): Boolean {
         val currentCards = loadCards(context)
         return currentCards.any { it.id == id }
+    }
+
+    fun getCard(context: Context, id: UUID): ExerciseCard{
+        val cards  = loadCards(context)
+        val index = cards.indexOfFirst { it.id == id }
+        if (index != -1) {
+            return cards[index]
+        }
+        return ExerciseCardFactory.createExerciseCard(context, "")
     }
 
     fun getSelectedCard(context: Context, tags: List<Tag>) : List<ExerciseCard> {

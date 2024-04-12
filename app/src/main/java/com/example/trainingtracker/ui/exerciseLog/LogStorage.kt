@@ -4,6 +4,11 @@ import android.content.Context
 import com.example.trainingtracker.Event
 import com.example.trainingtracker.EventManager
 import com.example.trainingtracker.R
+import com.example.trainingtracker.ui.exerciseCard.CardStorage
+import com.example.trainingtracker.ui.exerciseCard.ExerciseCardFactory
+import com.example.trainingtracker.ui.muscles.Muscle
+import com.example.trainingtracker.ui.muscles.MuscleStatus
+import com.example.trainingtracker.ui.muscles.MuscleStorage
 import java.io.FileNotFoundException
 import java.io.IOException
 import java.io.ObjectInputStream
@@ -70,16 +75,18 @@ class LogStorage(id : UUID) {
         }
     }
 
-    fun updateLog(context: Context, log: ExerciseLog, sets: List<ExerciseSet>) {
+    fun updateLog(context: Context, log: ExerciseLog, sets: List<ExerciseSet>) : ExerciseLog {
         val currentLogs = loadLogs(context).toMutableList()
         val index = currentLogs.indexOfFirst { it == log }
+        var updatedLog = log
         if (index != -1) {
-            val updatedLog = log
             updatedLog.exerciseSetList = sets
             updatedLog.oneRepMax = OneRepMax.oneRepMaxRecord(sets)
             currentLogs[index] = updatedLog
             saveLogs(context, currentLogs)
+            CardStorage.updateCard(context, log)
         }
+        return updatedLog
     }
 
 }

@@ -33,8 +33,8 @@ import java.util.UUID
 class AddLogActivity : AppCompatActivity() {
     // past log
     private lateinit var pastLogTableAdapter: PastLogTableAdapter
+    private lateinit var log: ExerciseLog
     private var exerciseSetList: MutableList<ExerciseSet> = mutableListOf()
-    private val exerciseDate = LocalDateTime.now()
     private var currentSetCount: Int = 0
 
     // get selected card
@@ -49,12 +49,14 @@ class AddLogActivity : AppCompatActivity() {
         cardItem = intent.getSerializableExtra("EXTRA_CARD_ITEM") as ExerciseCard
         logStorage = LogStorage(cardItem.id)
         val pastLog: List<ExerciseLog> = logStorage.loadLogs(this)
+        log = ExerciseLogFactory.createEmptyExerciseLog(cardItem)
+        logStorage.addLog(this, log)
         supportActionBar?.title = cardItem.name
 
         val oneRepMaxBar: TextView = findViewById(R.id.oneRepMaxBar)
         val oneRepMaxRecordDate = cardItem.oneRepMaxRecordDate
         if (oneRepMaxRecordDate != null) {
-            oneRepMaxBar.text = StringFormatter.getFormattedOneRepMaxRecordWithDate(cardItem, exerciseDate)
+            oneRepMaxBar.text = StringFormatter.getFormattedOneRepMaxRecordWithDate(cardItem, log.dateTime)
 
         } else {
             oneRepMaxBar.text = this.getString(R.string.one_rep_max_pb)
@@ -94,6 +96,7 @@ class AddLogActivity : AppCompatActivity() {
             }
 
             exerciseSetList.add(ExerciseSetFactory.createExerciseSet(cardItem, mass, setNum, rep))
+            log = logStorage.updateLog(this, log, exerciseSetList)
 
             val midLeftLayout = findViewById<ConstraintLayout>(R.id.midLeft)
             val tableLayout = midLeftLayout.findViewById<TableLayout>(R.id.todaySetTable)
@@ -104,13 +107,8 @@ class AddLogActivity : AppCompatActivity() {
 
     override fun onStop() {
         if (exerciseSetList.isNotEmpty()) {
-            ExerciseLogFactory.logExercise(
-                this,
-                exerciseSetList,
-                cardItem,
-                exerciseDate,
-                logStorage)
-        }
+            logStorage.updateLog(this, log, exerciseSetList)
+        } else logStorage.removeLog(this, log)
         super.onStop()
     }
 

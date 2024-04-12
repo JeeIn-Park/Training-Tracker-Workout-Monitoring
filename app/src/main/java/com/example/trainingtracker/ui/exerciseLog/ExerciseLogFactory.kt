@@ -11,40 +11,19 @@ import java.time.LocalDateTime
 
 object ExerciseLogFactory {
 
-//    fun createEmptyExerciseLog(card: ExerciseCard): ExerciseLog{
-//        return ExerciseLog(
-//            dateTime = exerciseSetList[exerciseSetList.lastIndex].dateTime,
-//            exerciseCard = exerciseSetList[0].exerciseCard,
-//            exerciseSetList = exerciseSetList,
-//            oneRepMax = (exerciseSetList.maxBy { it.oneRepMax ?: Float.MIN_VALUE }.oneRepMax))
-//    }
+    fun createEmptyExerciseLog(card: ExerciseCard): ExerciseLog{
+        return ExerciseLog(
+            dateTime = LocalDateTime.now(),
+            exerciseCard = card.id,
+            exerciseSetList = emptyList(),
+            oneRepMax = null)
+    }
+
     fun createExerciseLog(exerciseSetList: List<ExerciseSet>) : ExerciseLog{
         return ExerciseLog(
             dateTime = exerciseSetList[exerciseSetList.lastIndex].dateTime,
             exerciseCard = exerciseSetList[0].exerciseCard,
             exerciseSetList = exerciseSetList,
             oneRepMax = (exerciseSetList.maxBy { it.oneRepMax ?: Float.MIN_VALUE }.oneRepMax))
-    }
-
-    fun logExercise(
-        context: Context,
-        exerciseSetList: List<ExerciseSet>,
-        exerciseCard: ExerciseCard,
-        exerciseDate: LocalDateTime,
-        logStorage: LogStorage) {
-
-        val exerciseLog = createExerciseLog(exerciseSetList)
-        logStorage.addLog(context, exerciseLog)
-
-        CardStorage.editCard(
-            context, exerciseCard, ExerciseCardFactory.updateExerciseCard(exerciseCard, exerciseLog, exerciseDate))
-
-        // TODO : muscle factory
-        for (muscle in exerciseCard.mainMuscles) {
-            MuscleStorage.updateMuscle(context, muscle, Muscle( exerciseDate, MuscleStatus.RECOVERING, muscle.name, muscle.layout))
-        }
-        for (muscle in exerciseCard.subMuscles) {
-            MuscleStorage.updateMuscle(context, muscle, Muscle( exerciseDate, MuscleStatus.RECOVERING, muscle.name, muscle.layout))
-        }
     }
 }
