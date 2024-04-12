@@ -10,6 +10,7 @@
         <item name="colorOnPrimary">@color/damp</item>  <!--    how is this used    -->-
         <item name="colorOnBackground">@color/white</item>
         <item name="android:windowBackground">@color/damp</item>
+        <item name="colorOnSurface">@color/grey</item>
 
         <!-- Custom button style -->
         <item name="buttonStyle">?attr/colorPrimaryVariant</item>

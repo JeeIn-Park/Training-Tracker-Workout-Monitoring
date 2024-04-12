@@ -29,6 +29,7 @@ import com.example.trainingtracker.ui.tag.TagAdapter
 import com.example.trainingtracker.ui.tag.TagFactory
 import com.example.trainingtracker.ui.tag.TagStorage
 import java.time.LocalDateTime
+import java.util.Locale
 import java.util.UUID
 
 
@@ -122,6 +123,29 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+
+    private fun updateMuscleImages(context: Context, muscles: List<Muscle>) {
+        muscles.forEach { muscle ->
+            muscle.layout.forEach{ drawable ->
+                val muscleView = view?.findViewById<ImageButton>(
+                    context.resources.getIdentifier(drawable, "id", context.packageName)
+                )
+                muscleView?.setImageResource(getDrawableResourceIdForMuscle(context, muscle))
+            }
+        }
+    }
+
+    private fun getDrawableResourceIdForMuscle(context: Context, muscle: Muscle): Int {
+        val statusString = when (muscle.status) {
+            MuscleStatus.RECOVERED -> "recovered"
+            MuscleStatus.RECOVERING -> "recovering"
+            MuscleStatus.NEED_EXERCISE -> "need_exercise"
+            else -> "default"
+        }
+        val resourceName = "muscle_${muscle.name.toLowerCase(Locale.ROOT)}_$statusString"
+        return context.resources.getIdentifier(resourceName, "drawable", context.packageName)
     }
 
 
