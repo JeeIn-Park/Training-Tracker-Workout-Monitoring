@@ -127,12 +127,14 @@ class HomeFragment : Fragment() {
 
     private fun updateMuscleColors(context: Context, muscles: List<Muscle>) {
         muscles.forEach { muscle ->
-            val colorId = MuscleStatus.getColorByStatus(muscle.status)
-            val color = ContextCompat.getColor(context, colorId)
             muscle.layout.forEach { drawableName ->
                 val resourceId = context.resources.getIdentifier(drawableName, "id", context.packageName)
                 val muscleView = view?.findViewById<ImageButton>(resourceId)
-                muscleView?.setColorFilter(color, PorterDuff.Mode.SRC_ATOP)
+                muscleView?.let {
+                    val drawable = ContextCompat.getDrawable(context, id)?.mutate()
+                    drawable?.setColorFilter(MuscleStatus.getColorByStatus(muscle.status), PorterDuff.Mode.SRC_IN)  // Apply the color filter directly to the vector drawable
+                    it.setImageDrawable(drawable)
+                }
             }
         }
     }
