@@ -57,8 +57,7 @@ class AddLogActivity : AppCompatActivity() {
         val oneRepMaxBar: TextView = findViewById(R.id.oneRepMaxBar)
         val oneRepMaxRecordDate = cardItem.oneRepMaxRecordDate
         if (oneRepMaxRecordDate != null) {
-            val formattedDateText : String = StringFormatter.getFormatDateTimeWithDiff(oneRepMaxRecordDate, LocalDateTime.now())
-            oneRepMaxBar.text = StringFormatter.getFormattedOneRepMaxRecordWithDate(cardItem.oneRepMaxRecord ?:0F, formattedDateText)
+            oneRepMaxBar.text = StringFormatter.getFormattedOneRepMaxRecordWithDate(cardItem, exerciseDate)
 
         } else {
             oneRepMaxBar.text = this.getString(R.string.one_rep_max_pb)
@@ -84,7 +83,6 @@ class AddLogActivity : AppCompatActivity() {
 
 
         logButton.setOnClickListener {
-            val dateTime = LocalDateTime.now()
             val massString = kgEditText.text.toString()
             val mass = massString.toFloatOrNull()
             val repString = repEditText.text.toString()

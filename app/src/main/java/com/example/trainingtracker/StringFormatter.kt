@@ -48,4 +48,11 @@ object StringFormatter {
         return spannable
     }
 
+    fun getFormattedOneRepMaxRecordWithDate(card: ExerciseCard, newDate: LocalDateTime): SpannableString {
+        return getFormattedOneRepMaxRecordWithDate(
+            card.oneRepMaxRecord ?:0F,
+            getFormatDateTimeWithDiff(card.oneRepMaxRecordDate ?: LocalDateTime.now(), newDate)
+            )
+    }
+
 }
