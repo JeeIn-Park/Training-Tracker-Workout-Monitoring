@@ -1,10 +1,6 @@
 package com.example.trainingtracker.ui.exerciseLog
 
-import android.graphics.Typeface
 import android.os.Bundle
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.style.StyleSpan
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
@@ -19,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingtracker.R
 import com.example.trainingtracker.StringFormatter
+import com.example.trainingtracker.TableSetup
 import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
 import com.example.trainingtracker.views.GraphViewAdapter.setupGraphView
 import com.jjoe64.graphview.DefaultLabelFormatter
@@ -88,6 +85,7 @@ class AddLogActivity : AppCompatActivity() {
             val repString = repEditText.text.toString()
             val rep = repString.toIntOrNull()
             val setNum: Int?
+
             if (warmUpCheckBox.isChecked) {
                 setNum = null
             } else {
@@ -99,42 +97,10 @@ class AddLogActivity : AppCompatActivity() {
 
             val midLeftLayout = findViewById<ConstraintLayout>(R.id.midLeft)
             val tableLayout = midLeftLayout.findViewById<TableLayout>(R.id.todaySetTable)
+            tableLayout.addView(TableSetup.setKgRepTableRow(this, setNum, massString, repString))
 
-            // Create a new TableRow
-            val tableRow = TableRow(this)
-            val setCountTextView = TextView(this)
-            val kgAndRepTextView = TextView(this)
-
-            setCountTextView.text = if (setNum != null) {
-                "${setNum?.toString()} set"
-            } else { "" }
-            val setCountParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT)
-            setCountTextView.layoutParams = setCountParams
-
-            kgAndRepTextView.text = "${massString} kg * ${repString}"
-            val kgAndRepParams = TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT)
-            kgAndRepTextView.layoutParams = kgAndRepParams
-
-            setCountTextView.setPadding(16, 8, 16, 8)
-            kgAndRepTextView.setPadding(16, 8, 16, 8)
-            setCountTextView.gravity = Gravity.CENTER_VERTICAL
-            kgAndRepTextView.gravity = Gravity.RIGHT
-            setCountTextView.setBackgroundResource(R.drawable.style_textview_outline)
-
-            tableRow.addView(setCountTextView)
-            tableRow.addView(kgAndRepTextView)
-            tableRow.setBackgroundResource(R.drawable.style_textview_outline)
-            tableLayout.addView(tableRow)
         }
-
-        // todo :
-        // date - today
-        // kg * reps
     }
-//    override fun onBackPressed() {
-//        saveLog()
-//        super.onBackPressed()
-//    }
 
     override fun onStop() {
         if (exerciseSetList.isNotEmpty()) {

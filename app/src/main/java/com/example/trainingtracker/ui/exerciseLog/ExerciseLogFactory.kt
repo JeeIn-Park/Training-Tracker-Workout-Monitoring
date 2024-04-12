@@ -11,6 +11,13 @@ import java.time.LocalDateTime
 
 object ExerciseLogFactory {
 
+//    fun createEmptyExerciseLog(card: ExerciseCard): ExerciseLog{
+//        return ExerciseLog(
+//            dateTime = exerciseSetList[exerciseSetList.lastIndex].dateTime,
+//            exerciseCard = exerciseSetList[0].exerciseCard,
+//            exerciseSetList = exerciseSetList,
+//            oneRepMax = (exerciseSetList.maxBy { it.oneRepMax ?: Float.MIN_VALUE }.oneRepMax))
+//    }
     fun createExerciseLog(exerciseSetList: List<ExerciseSet>) : ExerciseLog{
         return ExerciseLog(
             dateTime = exerciseSetList[exerciseSetList.lastIndex].dateTime,

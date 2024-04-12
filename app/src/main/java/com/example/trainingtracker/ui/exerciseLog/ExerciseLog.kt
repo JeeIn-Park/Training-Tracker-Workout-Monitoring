@@ -7,6 +7,6 @@ import java.util.UUID
 data class ExerciseLog(
     val dateTime: LocalDateTime = LocalDateTime.now(),
     val exerciseCard: UUID,
-    val exerciseSetList: List<ExerciseSet> = emptyList(),
-    val oneRepMax: Float? = null
+    var exerciseSetList: List<ExerciseSet> = emptyList(),
+    var oneRepMax: Float? = null
 ): Serializable

@@ -14,7 +14,8 @@ object GraphViewAdapter {
         val series = LineGraphSeries<DataPoint>()
         relevantLogs.mapIndexed { index, log ->  // Use index as x-value
             if (log.oneRepMax != null) {
-                DataPoint(index.toDouble(), log.oneRepMax.toDouble())
+                val oneRepMax = log.oneRepMax ?:0F
+                DataPoint(index.toDouble(), oneRepMax.toDouble())
             } else {
                 null
             }

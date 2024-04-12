@@ -61,13 +61,25 @@ class LogStorage(id : UUID) {
         saveLogs(context, currentLogs)
     }
 
-//    TODO : edit log
-//    fun editCard(context: Context, oldCard: ExerciseCard, newCard: ExerciseCard) {
-//        val currentCards = CardStorage.loadCards(context).toMutableList()
-//        val index = currentCards.indexOfFirst { it == oldCard }
-//        if (index != -1) {
-//            currentCards[index] = newCard
-//            CardStorage.saveCards(context, currentCards)
-//        }
-//    }
+    fun editLog(context: Context, oldLog: ExerciseLog, newLog: ExerciseLog) {
+        val currentLogs = loadLogs(context).toMutableList()
+        val index = currentLogs.indexOfFirst { it == oldLog }
+        if (index != -1) {
+            currentLogs[index] = newLog
+            saveLogs(context, currentLogs)
+        }
+    }
+
+    fun updateLog(context: Context, log: ExerciseLog, sets: List<ExerciseSet>) {
+        val currentLogs = loadLogs(context).toMutableList()
+        val index = currentLogs.indexOfFirst { it == log }
+        if (index != -1) {
+            val updatedLog = log
+            updatedLog.exerciseSetList = sets
+            updatedLog.oneRepMax = OneRepMax.oneRepMaxRecord(sets)
+            currentLogs[index] = updatedLog
+            saveLogs(context, currentLogs)
+        }
+    }
+
 }
