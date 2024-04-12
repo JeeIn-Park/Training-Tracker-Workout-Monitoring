@@ -75,16 +75,6 @@ object MuscleStorage {
         saveMuscles(context, newMuscles)
     }
 
-//    fun getSelectedTags(context: Context): List<Tag> {
-//        val tags = TagStorage.loadTags(context)
-//        val selectedTags: MutableList<Tag> = mutableListOf()
-//        for (tag in tags) {
-//            if (tag.isSelected) {
-//                selectedTags.add(tag)
-//            }
-//        }
-//        return selectedTags
-//    }
 
     private fun loadDefaultMuscles(): List<Muscle> {
         var uuidList : MutableList<UUID> = listOf<UUID>().toMutableList()
