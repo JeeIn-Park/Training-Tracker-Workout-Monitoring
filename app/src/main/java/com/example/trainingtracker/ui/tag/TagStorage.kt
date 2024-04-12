@@ -65,7 +65,7 @@ object TagStorage {
     }
 
     fun isIdInUse(context: Context, id: UUID): Boolean {
-        val currentTags = TagStorage.loadTags(context)
+        val currentTags = loadTags(context)
         return currentTags.any { it.id == id }
     }
 

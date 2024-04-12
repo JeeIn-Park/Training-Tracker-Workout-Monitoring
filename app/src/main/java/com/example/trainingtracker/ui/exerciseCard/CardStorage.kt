@@ -21,7 +21,7 @@ object CardStorage {
         }
     }
 
-    fun loadCards(context: Context) : List<ExerciseCard> {
+    private fun loadCards(context: Context) : List<ExerciseCard> {
         try {
             ObjectInputStream(context.openFileInput(FILE_NAME)).use {
                 return it.readObject() as? List<ExerciseCard> ?: emptyList()

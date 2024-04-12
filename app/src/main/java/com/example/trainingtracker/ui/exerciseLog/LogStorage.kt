@@ -51,4 +51,14 @@ class LogStorage(id : UUID) {
         currentLogs.remove(log)
         saveLogs(context, currentLogs)
     }
+
+//    TODO : edit log
+//    fun editCard(context: Context, oldCard: ExerciseCard, newCard: ExerciseCard) {
+//        val currentCards = CardStorage.loadCards(context).toMutableList()
+//        val index = currentCards.indexOfFirst { it == oldCard }
+//        if (index != -1) {
+//            currentCards[index] = newCard
+//            CardStorage.saveCards(context, currentCards)
+//        }
+//    }
 }
