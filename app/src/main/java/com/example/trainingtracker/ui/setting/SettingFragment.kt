@@ -10,8 +10,12 @@ import com.example.trainingtracker.R
 import com.example.trainingtracker.databinding.FragmentSettingBinding
 import android.app.AlertDialog
 import android.content.Intent
+import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
+import java.io.BufferedReader
+import java.io.IOException
+import java.io.InputStreamReader
 
 class SettingFragment : Fragment() {
 
@@ -39,6 +43,11 @@ class SettingFragment : Fragment() {
         // Setup for the Send Feedback button
         binding.SettingSendFeedbackButton.setOnClickListener {
             showFeedbackDialog()
+        }
+
+        // Setup for the Report Error button
+        binding.SettingReportErrorButton.setOnClickListener {
+            showReportErrorDialog()
         }
     }
 
@@ -69,6 +78,66 @@ class SettingFragment : Fragment() {
             Toast.makeText(context, "No email clients installed.", Toast.LENGTH_SHORT).show()
         }
     }
+
+    private fun showReportErrorDialog() {
+        val editText = EditText(context)
+        AlertDialog.Builder(context)
+            .setTitle("Report Error")
+            .setMessage("Please describe the error, including steps to reproduce it. By submitting, you agree to our Privacy Policy.")
+            .setView(editText)
+            .setPositiveButton("Submit") { dialog, which ->
+                val description = editText.text.toString()
+                collectDataAndSendEmail(description)
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
+    private fun collectDataAndSendEmail(description: String) {
+        val logcatData = getLogcatData()
+        val userData = getUserData()
+
+        val emailBody = "Error Description: $description\n\nLogcat Data:\n$logcatData\n\nUser Data: $userData"
+        sendReportByEmail(emailBody)
+    }
+
+    private fun getLogcatData(): String {
+        try {
+            val process = Runtime.getRuntime().exec("logcat -d -v time MyAppTag:* *:S")
+            val bufferedReader = BufferedReader(InputStreamReader(process.inputStream))
+
+            val log = StringBuilder()
+            var line: String?
+            while (bufferedReader.readLine().also { line = it } != null) {
+                log.append(line).append("\n")
+            }
+            return log.toString()
+        } catch (ex: IOException) {
+            Log.e("SettingFragment", "Error reading logcat", ex)
+        }
+        return "Unable to collect Logcat data."
+    }
+
+
+    private fun getUserData(): String {
+        // Collect user data. Ensure compliance with privacy laws.
+        return "User data here" // Replace this with actual user data collection logic.
+    }
+
+    private fun sendReportByEmail(emailBody: String) {
+        val intent = Intent(Intent.ACTION_SEND).apply {
+            type = "message/rfc822"
+            putExtra(Intent.EXTRA_EMAIL, arrayOf(getString(R.string.feedback_mail)))
+            putExtra(Intent.EXTRA_SUBJECT, "Error Report from App")
+            putExtra(Intent.EXTRA_TEXT, emailBody)
+        }
+        try {
+            startActivity(Intent.createChooser(intent, "Send email using..."))
+        } catch (ex: android.content.ActivityNotFoundException) {
+            Toast.makeText(context, "No email clients installed.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
