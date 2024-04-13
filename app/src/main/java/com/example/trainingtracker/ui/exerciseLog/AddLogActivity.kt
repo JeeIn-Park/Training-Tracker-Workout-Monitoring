@@ -49,7 +49,7 @@ class AddLogActivity : AppCompatActivity() {
             oneRepMaxBar.text = FormattedStringGetter.oneRepMaxRecordWithDate(cardItem, log.dateTime)
 
         } else {
-            oneRepMaxBar.text = this.getString(R.string.one_rep_max_pb)
+            oneRepMaxBar.visibility = View.GONE
         }
 
         // Mid Right
