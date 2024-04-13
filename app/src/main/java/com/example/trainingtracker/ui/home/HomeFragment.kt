@@ -31,6 +31,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import android.os.Handler
 import android.os.Looper
 import android.animation.ObjectAnimator
+import com.example.trainingtracker.ui.muscles.MuscleFactory.getDrawableResourceIdByStatus
 
 class HomeFragment : Fragment() {
 
@@ -104,7 +105,6 @@ class HomeFragment : Fragment() {
         exerciseRecyclerViewBinding.layoutManager = LinearLayoutManager(requireContext())
         exerciseRecyclerViewBinding.adapter = cardAdapter
         exerciseRecyclerViewBinding.itemAnimator = DefaultItemAnimator()
-        //todo : better animator
         homeViewModel.cardRecyclerViewData.observe(viewLifecycleOwner) { newData ->
             cardAdapter.submitList(newData)
         }
@@ -125,7 +125,6 @@ class HomeFragment : Fragment() {
         super.onResume()
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupDraggableFAB(binding.addCardButton)
@@ -140,7 +139,7 @@ class HomeFragment : Fragment() {
         fab.setOnTouchListener { view, event ->
             handler.removeCallbacks(fadeOutRunnable)
             if (event.action == MotionEvent.ACTION_DOWN || event.action == MotionEvent.ACTION_MOVE) {
-                view.alpha = 1.0f  // Make FAB fully opaque when touched or moved
+                view.alpha = 1.0f
             }
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
@@ -176,10 +175,9 @@ class HomeFragment : Fragment() {
 
         fab.setOnClickListener {
             performFabClick()
-            handler.postDelayed(fadeOutRunnable, 300)  // Reset the fade out delay when clicked
+            handler.postDelayed(fadeOutRunnable, 300)
         }
 
-        // Start with the FAB visible and schedule the first fade out
         fab.alpha = 1.0f
         handler.postDelayed(fadeOutRunnable, 300)
     }
@@ -189,23 +187,13 @@ class HomeFragment : Fragment() {
         startActivity(intent)
     }
 
-
     private fun updateMuscleImages(context: Context, muscles: List<Muscle>) {
         muscles.forEach { muscle ->
             for (drawableName in muscle.layout){
                 val viewId = context.resources.getIdentifier(drawableName, "id", context.packageName)
                 val muscleView = view?.findViewById<ImageButton>(viewId)
-                muscleView?.setBackgroundResource(getDrawableResourceIdForMuscle(muscle.status, drawableName))
+                muscleView?.setBackgroundResource(getDrawableResourceIdByStatus(requireContext(), muscle.status, drawableName))
             }
-        }
-    }
-
-    private fun getDrawableResourceIdForMuscle(status: Int, drawableName: String): Int {
-        return when (status) {
-            MuscleFactory.RECOVERED -> requireContext().resources.getIdentifier("${drawableName}_recovered", "drawable", requireContext().packageName)
-            MuscleFactory.RECOVERING -> requireContext().resources.getIdentifier("${drawableName}_recovering", "drawable", requireContext().packageName)
-            MuscleFactory.NEED_EXERCISE -> requireContext().resources.getIdentifier("${drawableName}_need_exercise", "drawable", requireContext().packageName)
-            else -> requireContext().resources.getIdentifier(drawableName, "drawable", requireContext().packageName)
         }
     }
 
@@ -224,7 +212,7 @@ class HomeFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        handler.removeCallbacks(fadeOutRunnable)  // Clean up to avoid memory leaks
+        handler.removeCallbacks(fadeOutRunnable)
         _binding = null
     }
 

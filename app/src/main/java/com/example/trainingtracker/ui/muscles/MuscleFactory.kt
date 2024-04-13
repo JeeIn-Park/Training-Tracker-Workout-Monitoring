@@ -1,6 +1,7 @@
 package com.example.trainingtracker.ui.muscles
 
 import android.content.Context
+import android.widget.ImageButton
 import com.example.trainingtracker.R
 import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
 //import com.example.trainingtracker.databinding.FragmentMuscleBackBinding
@@ -73,4 +74,13 @@ object MuscleFactory {
         MuscleStorage.updateMuscles(context, updatedMuscleList)
     }
 
+
+    fun getDrawableResourceIdByStatus(context: Context, status: Int, drawableName: String): Int {
+        return when (status) {
+            RECOVERED -> context.resources.getIdentifier("${drawableName}_recovered", "drawable", context.packageName)
+            RECOVERING -> context.resources.getIdentifier("${drawableName}_recovering", "drawable", context.packageName)
+            NEED_EXERCISE -> context.resources.getIdentifier("${drawableName}_need_exercise", "drawable", context.packageName)
+            else -> context.resources.getIdentifier(drawableName, "drawable", context.packageName)
+        }
+    }
 }
