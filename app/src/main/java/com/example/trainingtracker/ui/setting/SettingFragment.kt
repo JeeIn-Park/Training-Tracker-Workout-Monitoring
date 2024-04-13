@@ -59,7 +59,7 @@ class SettingFragment : Fragment() {
     private fun sendFeedbackByEmail(feedback: String) {
         val intent = Intent(Intent.ACTION_SEND).apply {
             type = "message/rfc822"
-            putExtra(Intent.EXTRA_EMAIL, arrayOf("trainingtrackermailbox@gmail.com"))
+            putExtra(Intent.EXTRA_EMAIL, arrayOf(getString(R.string.feedback_mail)))
             putExtra(Intent.EXTRA_SUBJECT, "Feedback from App")
             putExtra(Intent.EXTRA_TEXT, feedback)
         }

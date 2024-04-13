@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
@@ -25,6 +26,7 @@ import com.example.trainingtracker.ui.tag.Tag
 import com.example.trainingtracker.ui.tag.TagAdapter
 import com.example.trainingtracker.ui.tag.TagFactory
 import com.example.trainingtracker.ui.tag.TagStorage
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class HomeFragment : Fragment() {
@@ -114,6 +116,47 @@ class HomeFragment : Fragment() {
         super.onResume()
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setupDraggableFAB(binding.addCardButton)
+        // Continue with your existing setup...
+    }
+
+    private fun setupDraggableFAB(fab: FloatingActionButton) {
+        var dX: Float = 0f
+        var dY: Float = 0f
+        fab.setOnTouchListener { view, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    dX = view.x - event.rawX
+                    dY = view.y - event.rawY
+                    true
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    view.animate()
+                        .x(event.rawX + dX)
+                        .y(event.rawY + dY)
+                        .setDuration(0)
+                        .start()
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+
+//    MotionEvent.ACTION_MOVE -> {
+//        val newX = event.rawX + dX
+//        val newY = event.rawY + dY
+//        // Check bounds here, for example:
+//        // newX > 0 && newX < parentWidth - view.width
+//        // newY > 0 && newY < parentHeight - view.height
+//        if (valid(newX, newY)) {
+//            view.animate().x(newX).y(newY).setDuration(0).start()
+//        }
+//        true
+//    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
