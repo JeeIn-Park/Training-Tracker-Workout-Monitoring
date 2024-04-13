@@ -12,11 +12,11 @@
         tools:layout="@layout/fragment_setting">
         <action
             android:id="@+id/action_settingFragment_to_privacyPolicyFragment"
-            app:destination="@id/PrivacyPolicyFragment" />
+            app:destination="@id/privacyPolicyFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/PrivacyPolicyFragment"
+        android:id="@+id/privacyPolicyFragment"
         android:name="com.example.trainingtracker.ui.setting.PrivacyPolicyFragment"
         android:label="Privacy Policy"
         tools:layout="@layout/fragment_setting_privacy_policy" />

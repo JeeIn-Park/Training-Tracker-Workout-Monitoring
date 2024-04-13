@@ -19,10 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            android:text="@string/terms_and_conditions_html"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="12sp"
-            tools:context=".ui.setting.SettingFragment" />
+            tools:context=".ui.setting.PrivacyPolicyFragment" />
 
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

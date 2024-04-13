@@ -4,33 +4,34 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.example.trainingtracker.R
 import com.example.trainingtracker.databinding.FragmentSettingBinding
 
 class SettingFragment : Fragment() {
 
-private var _binding: FragmentSettingBinding? = null
-  // This property is only valid between onCreateView and onDestroyView.
-  private val binding get() = _binding!!
+    private var _binding: FragmentSettingBinding? = null
+    private val binding get() = _binding!!
 
-  override fun onCreateView(
-    inflater: LayoutInflater,
-    container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View {
-    val settingViewModel =
-            ViewModelProvider(this).get(SettingViewModel::class.java)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentSettingBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-    _binding = FragmentSettingBinding.inflate(inflater, container, false)
-    val root: View = binding.root
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        binding.SettingPrivacyPolicyButton.setOnClickListener {
+            findNavController().navigate(R.id.action_settingFragment_to_privacyPolicyFragment)
+        }
+    }
 
-      return root
-  }
-
-override fun onDestroyView() {
+    override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
