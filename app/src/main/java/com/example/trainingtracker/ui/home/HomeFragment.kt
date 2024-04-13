@@ -45,7 +45,7 @@ class HomeFragment : Fragment() {
     private val handler = Handler(Looper.getMainLooper())
     private val fadeOutRunnable = Runnable {
         val animator = ObjectAnimator.ofFloat(binding.addCardButton, "alpha", 0.5f)
-        animator.duration = 500  // Duration of the fade effect
+        animator.duration = 200
         animator.start()
     }
 
@@ -172,10 +172,14 @@ class HomeFragment : Fragment() {
                     val parentWidth = (view.parent as View).width.toFloat()
                     val toRight = view.x + view.width / 2 > parentWidth / 2
                     val finalPosition = if (toRight) parentWidth - view.width else 0f
-                    view.animate()
-                        .x(finalPosition)
-                        .setDuration(300)
-                        .start()
+                    if (lastAction == MotionEvent.ACTION_MOVE) {
+                        view.animate()
+                            .x(finalPosition)
+                            .setDuration(300)
+                            .start()
+                    } else {
+                        performFabClick()
+                    }
                     true
                 }
                 else -> false
