@@ -122,41 +122,52 @@ class HomeFragment : Fragment() {
         setupDraggableFAB(binding.addCardButton)
         // Continue with your existing setup...
     }
-
     private fun setupDraggableFAB(fab: FloatingActionButton) {
         var dX: Float = 0f
         var dY: Float = 0f
+        var lastAction: Int = MotionEvent.ACTION_CANCEL
+
         fab.setOnTouchListener { view, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     dX = view.x - event.rawX
                     dY = view.y - event.rawY
+                    lastAction = MotionEvent.ACTION_DOWN
                     true
                 }
                 MotionEvent.ACTION_MOVE -> {
+                    val newX = event.rawX + dX
+                    val newY = event.rawY + dY
                     view.animate()
-                        .x(event.rawX + dX)
-                        .y(event.rawY + dY)
+                        .x(newX)
+                        .y(newY)
                         .setDuration(0)
                         .start()
+                    lastAction = MotionEvent.ACTION_MOVE
+                    true
+                }
+                MotionEvent.ACTION_UP -> {
+                    if (lastAction == MotionEvent.ACTION_DOWN) {
+                        view.performClick() // Correct use here, calling performClick() on the view
+                    }
                     true
                 }
                 else -> false
             }
         }
+
+        fab.setOnClickListener {
+            // Handle what happens when the fab is actually clicked
+            performFabClick()
+        }
     }
 
-//    MotionEvent.ACTION_MOVE -> {
-//        val newX = event.rawX + dX
-//        val newY = event.rawY + dY
-//        // Check bounds here, for example:
-//        // newX > 0 && newX < parentWidth - view.width
-//        // newY > 0 && newY < parentHeight - view.height
-//        if (valid(newX, newY)) {
-//            view.animate().x(newX).y(newY).setDuration(0).start()
-//        }
-//        true
-//    }
+    private fun performFabClick() {
+        // Perform actions when the FAB is clicked, such as showing a dialog or navigating
+        val intent = Intent(activity, AddCardActivity::class.java)
+        startActivity(intent)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
