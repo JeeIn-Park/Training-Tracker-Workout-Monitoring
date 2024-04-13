@@ -73,6 +73,8 @@
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/LastExercise" />
+<!--TODO : width 0dp to date-->
+
 
             <TextView
                 android:id="@+id/SubMuscle"

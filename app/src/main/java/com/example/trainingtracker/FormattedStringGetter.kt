@@ -46,6 +46,17 @@ object FormattedStringGetter {
         return Duration.between(oldDate, newDate).toDays().toInt()
     }
 
+
+    fun dateDiffWithDaysAgo(oldDate: LocalDateTime, newDate: LocalDateTime): String {
+        var formattedDateText = ""
+        formattedDateText = when (val daysAgo = dateDiff(oldDate, newDate)) {
+            0 -> ""
+            1 -> "1 day ago"
+            else -> "$daysAgo days ago"
+        }
+        return formattedDateText
+    }
+
     fun oneRepMaxRecordWithDate(record: Float, formattedDateText: String): SpannableString {
         val recordString = "%.2f".format(record)
         val textToShow = "1RM: $recordString kg \n$formattedDateText"
@@ -62,6 +73,20 @@ object FormattedStringGetter {
             card.oneRepMaxRecord ?:0F,
             dateTimeWithDiff(card.oneRepMaxRecordDate ?: LocalDateTime.now(), newDate)
             )
+    }
+
+    fun oneRepMaxRecordWithDate_ShortPB(card: ExerciseCard, newDate: LocalDateTime): SpannableString {
+        val recordString = "%.2f".format(card.oneRepMaxRecord)
+        val dateText = dateTime(card.oneRepMaxRecordDate ?: LocalDateTime.now())
+        val dateDiff = dateDiffWithDaysAgo(card.oneRepMaxRecordDate ?: LocalDateTime.now(), newDate)
+        val textToShow : String = if (dateDiff == "") {
+            "1RM: $recordString kg \n$dateText"
+        } else "1RM: $recordString kg \n$dateText \n($dateDiff)"
+        val spannable = SpannableString(textToShow)
+        val start = textToShow.indexOf(recordString)
+        val end = start + recordString.length + 3
+        spannable.setSpan(StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+        return spannable
     }
 
 }

@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.trainingtracker.FormattedStringGetter
 import com.example.trainingtracker.ui.exerciseCard.CardStorage
 import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
 import com.example.trainingtracker.ui.exerciseCard.ExerciseCardDiffCallback
@@ -79,60 +80,27 @@ class HomeCardAdapter(
             val lastActivity = cardItem.lastActivity
 
             if (lastActivity != null) {
-                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault())
-                val formattedDate = lastActivity.format(formatter) // Use local variable here
-                val currentDate = LocalDateTime.now()
-                val daysAgo = Duration.between(lastActivity, currentDate).toDays() // Use local variable here
-
-                when {
-                    daysAgo == 0L -> lastExercise.text = formattedDate
-                    daysAgo == 1L -> lastExercise.text = "$formattedDate (1 day ago)"
-                    else -> lastExercise.text = "$formattedDate ($daysAgo days ago)"
-                }
+                lastExercise.text = FormattedStringGetter.dateTimeWithDiff(lastActivity, LocalDateTime.now())
             } else {
                 lastExercise.visibility = View.GONE
             }
 
-
             if (cardItem.mainMuscles.isEmpty()){
                 mainMuscle.visibility = View.GONE
             } else {
-                mainMuscle.text = "Main muscle : ${cardItem.mainMuscles.joinToString(separator = ", ") { it.name }}"
+                mainMuscle.text = FormattedStringGetter.mainMuscles(cardItem.mainMuscles)
             }
 
             if (cardItem.subMuscles.isEmpty()){
                 subMuscle.visibility = View.GONE
             } else {
-                subMuscle.text = "Sub muscle : ${cardItem.subMuscles.joinToString(separator = ", ") { it.name }}"
+                subMuscle.text = FormattedStringGetter.subMuscles(cardItem.subMuscles)
             }
 
 
-            var formattedDateText: String
             val oneRepMaxRecordDate = cardItem.oneRepMaxRecordDate
-
             if (oneRepMaxRecordDate != null) {
-                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault())
-                val formattedDate = oneRepMaxRecordDate.format(formatter)
-                val currentDate = LocalDateTime.now()
-                val daysAgo = Duration.between(oneRepMaxRecordDate, currentDate).toDays()
-
-                formattedDateText = when {
-                    daysAgo == 0L -> formattedDate
-                    daysAgo == 1L -> "$formattedDate (1 day ago)"
-                    else -> "$formattedDate ($daysAgo days ago)"
-                }
-
-                val oneRepMaxRecordFormatted = "%.2f".format(cardItem.oneRepMaxRecord)
-                val textToShow = "${context.getString(R.string.one_rep_max_pb)}\n$oneRepMaxRecordFormatted kg\n$formattedDateText"
-                val spannable = SpannableString(textToShow)
-                val start = textToShow.indexOf(oneRepMaxRecordFormatted)
-                val end = start + oneRepMaxRecordFormatted.length + 3 // +3 for " kg"
-// TODO : use formattedString getter
-
-
-                spannable.setSpan(StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
-                personalRecord.text = spannable
-
+                personalRecord.text = FormattedStringGetter.oneRepMaxRecordWithDate_ShortPB(cardItem, LocalDateTime.now())
             } else {
                 personalRecord.visibility = View.GONE
             }
