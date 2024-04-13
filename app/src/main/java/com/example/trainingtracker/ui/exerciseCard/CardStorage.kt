@@ -2,9 +2,7 @@ package com.example.trainingtracker.ui.exerciseCard
 
 import android.content.Context
 import com.example.trainingtracker.ui.exerciseLog.ExerciseLog
-import com.example.trainingtracker.ui.muscles.Muscle
-import com.example.trainingtracker.ui.muscles.MuscleStatus
-import com.example.trainingtracker.ui.muscles.MuscleStorage
+import com.example.trainingtracker.ui.muscles.MuscleFactory
 import com.example.trainingtracker.ui.tag.Tag
 import java.io.FileNotFoundException
 import java.io.IOException
@@ -72,7 +70,7 @@ object CardStorage {
             card,
             ExerciseCardFactory.updateExerciseCard(card, log))
         // TODO : muscle factory
-        MuscleStatus.updateMuscle(context, card)
+        MuscleFactory.updateMuscle(context, card)
     }
 
     fun isIdInUse(context: Context, id: UUID): Boolean {

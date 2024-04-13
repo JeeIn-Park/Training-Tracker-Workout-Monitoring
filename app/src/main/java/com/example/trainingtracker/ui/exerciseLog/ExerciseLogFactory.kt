@@ -1,12 +1,6 @@
 package com.example.trainingtracker.ui.exerciseLog
 
-import android.content.Context
-import com.example.trainingtracker.ui.exerciseCard.CardStorage
 import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
-import com.example.trainingtracker.ui.exerciseCard.ExerciseCardFactory
-import com.example.trainingtracker.ui.muscles.Muscle
-import com.example.trainingtracker.ui.muscles.MuscleStatus
-import com.example.trainingtracker.ui.muscles.MuscleStorage
 import java.time.LocalDateTime
 
 object ExerciseLogFactory {

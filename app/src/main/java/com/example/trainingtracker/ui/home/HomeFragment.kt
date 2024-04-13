@@ -3,35 +3,28 @@ package com.example.trainingtracker.ui.home
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
-import android.graphics.PorterDuff
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageButton
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.trainingtracker.R
 import com.example.trainingtracker.databinding.FragmentHomeBinding
-import com.example.trainingtracker.databinding.FragmentMuscleFrontBinding
 import com.example.trainingtracker.ui.exerciseCard.AddCardActivity
 import com.example.trainingtracker.ui.exerciseCard.CardStorage
 import com.example.trainingtracker.ui.exerciseLog.AddLogActivity
 import com.example.trainingtracker.ui.muscles.Muscle
-import com.example.trainingtracker.ui.muscles.MuscleStatus
+import com.example.trainingtracker.ui.muscles.MuscleFactory
 import com.example.trainingtracker.ui.muscles.MuscleStorage
 import com.example.trainingtracker.ui.tag.Tag
 import com.example.trainingtracker.ui.tag.TagAdapter
 import com.example.trainingtracker.ui.tag.TagFactory
 import com.example.trainingtracker.ui.tag.TagStorage
-import java.time.LocalDateTime
-import java.util.Locale
-import java.util.UUID
 
 
 class HomeFragment : Fragment() {
@@ -128,20 +121,20 @@ class HomeFragment : Fragment() {
 
     private fun updateMuscleImages(context: Context, muscles: List<Muscle>) {
         muscles.forEach { muscle ->
-            muscle.layout.forEach { drawableName ->
+            for (drawableName in muscle.layout){
                 val viewId = context.resources.getIdentifier(drawableName, "id", context.packageName)
                 val muscleView = view?.findViewById<ImageButton>(viewId)
-                muscleView?.setBackgroundResource(getDrawableResourceIdForMuscle(muscle))
+                muscleView?.setBackgroundResource(getDrawableResourceIdForMuscle(muscle.status, drawableName))
             }
         }
     }
 
-    private fun getDrawableResourceIdForMuscle(muscle: Muscle): Int {
-        return when (muscle.status) {
-            MuscleStatus.RECOVERED -> requireContext().resources.getIdentifier("${muscle.layout[0]}_recovered", "drawable", null)
-            MuscleStatus.RECOVERING -> requireContext().resources.getIdentifier("${muscle.layout[0]}_recovering", "drawable", requireContext().packageName)
-            MuscleStatus.NEED_EXERCISE -> requireContext().resources.getIdentifier("${muscle.layout[0]}_need_exercise", "drawable", requireContext().packageName)
-            else -> requireContext().resources.getIdentifier("muscle.name", "drawable", requireContext().packageName)
+    private fun getDrawableResourceIdForMuscle(status: Int, drawableName: String): Int {
+        return when (status) {
+            MuscleFactory.RECOVERED -> requireContext().resources.getIdentifier("${drawableName}_recovered", "drawable", requireContext().packageName)
+            MuscleFactory.RECOVERING -> requireContext().resources.getIdentifier("${drawableName}_recovering", "drawable", requireContext().packageName)
+            MuscleFactory.NEED_EXERCISE -> requireContext().resources.getIdentifier("${drawableName}_need_exercise", "drawable", requireContext().packageName)
+            else -> requireContext().resources.getIdentifier(drawableName, "drawable", requireContext().packageName)
         }
     }
 

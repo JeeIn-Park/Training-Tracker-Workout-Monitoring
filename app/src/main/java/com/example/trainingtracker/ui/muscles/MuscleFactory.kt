@@ -8,7 +8,7 @@ import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
 import java.time.LocalDateTime
 import java.time.Duration
 
-object MuscleStatus {
+object MuscleFactory {
     const val RECOVERED = 0
     const val RECOVERING = 1
     const val NEED_EXERCISE = 2
@@ -72,16 +72,5 @@ object MuscleStatus {
         }
         MuscleStorage.updateMuscles(context, updatedMuscleList)
     }
-
-
-    fun getColorByStatus(status: Int): Int {
-        return when (status) {
-            RECOVERED -> R.color.turquoise
-            RECOVERING -> R.color.grey
-            NEED_EXERCISE -> R.color.cafeLatte
-            else -> R.color.red
-        }
-    }
-
 
 }
