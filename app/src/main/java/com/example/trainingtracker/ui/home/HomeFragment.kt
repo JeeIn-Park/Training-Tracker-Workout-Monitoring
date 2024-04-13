@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.PorterDuff
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -128,25 +129,40 @@ class HomeFragment : Fragment() {
 
     private fun updateMuscleImages(context: Context, muscles: List<Muscle>) {
         muscles.forEach { muscle ->
-            muscle.layout.forEach{ drawable ->
-                val muscleView = view?.findViewById<ImageButton>(
-                    context.resources.getIdentifier(drawable, "id", context.packageName)
-                )
-                muscleView?.setImageResource(getDrawableResourceIdForMuscle(context, muscle))
+            muscle.layout.forEach { drawableName ->
+                // Get the ID of the ImageButton based on the drawableName
+                val viewId = context.resources.getIdentifier(drawableName, "id", context.packageName)
+                val muscleView = view?.findViewById<ImageButton>(viewId)
+                muscleView?.let {
+                    // Get the appropriate drawable resource ID based on the muscle status
+                    val drawableResId = getDrawableResourceIdForMuscle(context, drawableName, muscle.status)
+                    if (drawableResId != 0) {
+                        it.setImageResource(drawableResId)
+                    } else {
+                        Log.e("UpdateMuscleImages", "No drawable found for: $drawableName with status: ${muscle.status}")
+                    }
+                }
             }
         }
     }
 
-    private fun getDrawableResourceIdForMuscle(context: Context, muscle: Muscle): Int {
-        val statusString = when (muscle.status) {
+    private fun getDrawableResourceIdForMuscle(context: Context, drawableName: String, status: Int): Int {
+        val statusString = when (status) {
             MuscleStatus.RECOVERED -> "recovered"
             MuscleStatus.RECOVERING -> "recovering"
             MuscleStatus.NEED_EXERCISE -> "need_exercise"
-            else -> "default"
+            else -> ""
         }
-        val resourceName = "muscle_${muscle.name.toLowerCase(Locale.ROOT)}_$statusString"
-        return context.resources.getIdentifier(resourceName, "drawable", context.packageName)
+        // Ensure the resource name is properly formatted to match your drawable naming convention
+        val resourceName = "${drawableName}_$statusString"
+        var resId = context.resources.getIdentifier(resourceName, "drawable", context.packageName)
+        if (resId == 0) {
+            Log.e("getDrawableResourceIdForMuscle", "Resource not found: $resourceName")
+            resId = context.resources.getIdentifier(drawableName, "drawable", context.packageName)
+        }
+        return resId
     }
+
 
 
 
