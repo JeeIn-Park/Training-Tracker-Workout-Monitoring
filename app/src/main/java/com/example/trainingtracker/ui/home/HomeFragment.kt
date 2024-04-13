@@ -151,12 +151,21 @@ class HomeFragment : Fragment() {
                 MotionEvent.ACTION_MOVE -> {
                     val newX = event.rawX + dX
                     val newY = event.rawY + dY
-                    view.animate()
-                        .x(newX)
-                        .y(newY)
-                        .setDuration(0)
-                        .start()
-                    true
+                    val parentView = view.parent as View
+                    val actionBarHeight = resources.getDimension(R.dimen.action_bar_height)
+                    val bottomNavHeight = resources.getDimension(R.dimen.bottom_nav_height)
+                    if (newY + view.height > parentView.height - bottomNavHeight + view.height
+                        || newY < actionBarHeight - view.height) {
+                        true  // Still consume the event but don't move the view
+                    } else {
+                        view.animate()
+                            .x(newX)
+                            .y(newY)
+                            .setDuration(0)
+                            .start()
+                        lastAction = MotionEvent.ACTION_MOVE
+                        true
+                    }
                 }
                 MotionEvent.ACTION_UP -> {
                     handler.postDelayed(fadeOutRunnable, 300)
