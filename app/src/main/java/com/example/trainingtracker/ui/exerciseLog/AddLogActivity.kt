@@ -47,10 +47,8 @@ class AddLogActivity : AppCompatActivity() {
         val oneRepMaxRecordDate = cardItem.oneRepMaxRecordDate
         if (oneRepMaxRecordDate != null) {
             oneRepMaxBar.text = FormattedStringGetter.oneRepMaxRecordWithDate(cardItem, log.dateTime)
+        } else oneRepMaxBar.visibility = View.GONE
 
-        } else {
-            oneRepMaxBar.visibility = View.GONE
-        }
 
         // Mid Right
 

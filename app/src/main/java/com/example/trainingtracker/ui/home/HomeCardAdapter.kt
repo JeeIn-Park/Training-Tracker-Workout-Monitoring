@@ -70,7 +70,11 @@ class HomeCardAdapter(
         fun bind(cardItem: ExerciseCard) {
             if (cardItem.name == "") {
                 exerciseName.text = "N/A"
-            } else exerciseName.text = cardItem.name
+                exerciseName.setTypeface(null, Typeface.BOLD)
+            } else {
+                exerciseName.text = cardItem.name
+                exerciseName.setTypeface(null, Typeface.BOLD)
+            }
 
             if (cardItem.tag.isNotEmpty()){
                 tag.text = cardItem.tag.joinToString(prefix = "# ", separator = " ") { it.name }
