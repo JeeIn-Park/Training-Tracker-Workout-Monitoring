@@ -1,6 +1,7 @@
 package com.example.trainingtracker.ui.exerciseLog
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
@@ -14,6 +15,7 @@ import com.example.trainingtracker.R
 import com.example.trainingtracker.FormattedStringGetter
 import com.example.trainingtracker.TableSetup
 import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
+import com.example.trainingtracker.views.GraphViewAdapter
 import com.example.trainingtracker.views.GraphViewAdapter.setupGraphView
 import com.jjoe64.graphview.GraphView
 
@@ -60,7 +62,10 @@ class AddLogActivity : AppCompatActivity() {
 
                 // graph
         val graphView = findViewById<GraphView>(R.id.graphView)
-        setupGraphView(graphView, pastLog)
+        if (pastLog.size > 1) {
+            setupGraphView(graphView, pastLog)
+        } else graphView.visibility = View.GONE
+
 
         // bottom
         val kgEditText: EditText = findViewById(R.id.kgEnterText)

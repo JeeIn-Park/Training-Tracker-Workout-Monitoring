@@ -65,7 +65,9 @@ class StatusCardAdapter(private val context: Context, private val onItemClick: (
             exerciseNameTextView.text = cardItem.name
             mainMuscleTextView.text = cardItem.mainMuscles.map { it.name }.toString()
             subMuscleTextView.text = cardItem.subMuscles.map { it.name }.toString()
-            GraphViewAdapter.setupGraphView(graphView, pastLog)
+            if (pastLog.size > 1) {
+                GraphViewAdapter.setupGraphView(graphView, pastLog)
+            } else graphView.visibility = View.GONE
 
             pastLogRecyclerView.layoutManager = LinearLayoutManager(context)
             pastLogTableAdapter = PastLogTableAdapter(pastLog)
