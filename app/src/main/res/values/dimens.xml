@@ -2,4 +2,8 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- Custom dimensions for app components -->
+    <dimen name="action_bar_height">56dp</dimen> <!-- Typical action bar height -->
+    <dimen name="bottom_nav_height">56dp</dimen> <!-- Typical bottom navigation height -->
 </resources>

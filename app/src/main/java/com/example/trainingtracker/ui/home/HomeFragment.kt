@@ -116,12 +116,15 @@ class HomeFragment : Fragment() {
         super.onResume()
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setupDraggableFAB(binding.addCardButton)
         // Continue with your existing setup...
     }
+
+
     private fun setupDraggableFAB(fab: FloatingActionButton) {
         var dX = 0f
         var dY = 0f
@@ -140,19 +143,13 @@ class HomeFragment : Fragment() {
                     val newY = event.rawY + dY
                     val parentView = view.parent as View
 
-                    // Calculate boundaries, replace "actionBarHeight" and "bottomNavHeight" with actual measurements
-                    val actionBarHeight = resources.getDimension(
-                        androidx.transition.R.dimen.abc_action_bar_default_height_material).toInt()  // define this in your dimens.xml
-                    val bottomNavHeight = resources.getDimension(
-                        com.google.android.material.R.dimen.design_bottom_navigation_height).toInt()  // define this in your dimens.xml
+                    // Using resources.getDimension which returns a Float, hence convert to Float if necessary
+                    val actionBarHeight = resources.getDimension(R.dimen.action_bar_height)
+                    val bottomNavHeight = resources.getDimension(R.dimen.bottom_nav_height)
 
-                    // Ensure the FAB doesn't go above the bottom of the ActionBar or below the top of the Bottom Navigation
-                    if (newY + view.height > parentView.height - bottomNavHeight + view.height
-                        || newY < actionBarHeight - view.height) {
-                        lastAction = MotionEvent.ACTION_MOVE
+                    if (newY + view.height > parentView.height - bottomNavHeight || newY < actionBarHeight) {
                         true  // Still consume the event but don't move the view
                     } else {
-                        // Apply new coordinates within bounds
                         view.animate()
                             .x(newX)
                             .y(newY)
@@ -163,9 +160,13 @@ class HomeFragment : Fragment() {
                     }
                 }
                 MotionEvent.ACTION_UP -> {
-                    if (lastAction == MotionEvent.ACTION_DOWN) {
-                        view.performClick()
-                    }
+                    val parentWidth = (view.parent as View).width.toFloat() // Ensure this is a Float
+                    val toRight = view.x + view.width / 2 > parentWidth / 2
+                    val finalPosition = if (toRight) parentWidth - view.width else 0f
+                    view.animate()
+                        .x(finalPosition)
+                        .setDuration(300)
+                        .start()
                     true
                 }
                 else -> false
@@ -173,13 +174,11 @@ class HomeFragment : Fragment() {
         }
 
         fab.setOnClickListener {
-            // Handle what happens when the fab is actually clicked
             performFabClick()
         }
     }
 
     private fun performFabClick() {
-        // Perform actions when the FAB is clicked, such as showing a dialog or navigating
         val intent = Intent(activity, AddCardActivity::class.java)
         startActivity(intent)
     }
