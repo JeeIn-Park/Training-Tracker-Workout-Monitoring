@@ -9,6 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
+        android:layout_margin="4dp"
+        android:scrollbarThumbVertical="@drawable/style_scroll_bar"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,8 +20,8 @@
             android:id="@+id/Setting_PrivacyPolicy_PrivacyPolicyTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
             android:textSize="12sp"
+            android:padding="10dp"
             tools:context=".ui.setting.PrivacyPolicyFragment" />
 
     </ScrollView>
