@@ -5,29 +5,17 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import java.time.LocalDateTime
-import android.view.Gravity
 import android.widget.TableLayout
-import android.widget.TableRow
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingtracker.R
-import com.example.trainingtracker.StringFormatter
+import com.example.trainingtracker.FormattedStringGetter
 import com.example.trainingtracker.TableSetup
 import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
 import com.example.trainingtracker.views.GraphViewAdapter.setupGraphView
-import com.jjoe64.graphview.DefaultLabelFormatter
-import java.time.Duration
-import java.time.format.DateTimeFormatter
-import java.util.Locale
 import com.jjoe64.graphview.GraphView
-import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter
-import com.jjoe64.graphview.series.DataPoint
-import com.jjoe64.graphview.series.LineGraphSeries
-import java.time.ZoneOffset
-import java.util.UUID
 
 
 class AddLogActivity : AppCompatActivity() {
@@ -56,7 +44,7 @@ class AddLogActivity : AppCompatActivity() {
         val oneRepMaxBar: TextView = findViewById(R.id.oneRepMaxBar)
         val oneRepMaxRecordDate = cardItem.oneRepMaxRecordDate
         if (oneRepMaxRecordDate != null) {
-            oneRepMaxBar.text = StringFormatter.getFormattedOneRepMaxRecordWithDate(cardItem, log.dateTime)
+            oneRepMaxBar.text = FormattedStringGetter.oneRepMaxRecordWithDate(cardItem, log.dateTime)
 
         } else {
             oneRepMaxBar.text = this.getString(R.string.one_rep_max_pb)

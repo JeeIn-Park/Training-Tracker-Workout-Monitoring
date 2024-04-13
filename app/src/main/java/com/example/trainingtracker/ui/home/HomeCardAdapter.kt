@@ -123,10 +123,12 @@ class HomeCardAdapter(
                 }
 
                 val oneRepMaxRecordFormatted = "%.2f".format(cardItem.oneRepMaxRecord)
-                val textToShow = "${context.getString(R.string.one_rep_max_pb)}\n$oneRepMaxRecordFormatted kg\n($formattedDateText)"
+                val textToShow = "${context.getString(R.string.one_rep_max_pb)}\n$oneRepMaxRecordFormatted kg\n$formattedDateText"
                 val spannable = SpannableString(textToShow)
                 val start = textToShow.indexOf(oneRepMaxRecordFormatted)
                 val end = start + oneRepMaxRecordFormatted.length + 3 // +3 for " kg"
+// TODO : use formattedString getter
+
 
                 spannable.setSpan(StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
                 personalRecord.text = spannable

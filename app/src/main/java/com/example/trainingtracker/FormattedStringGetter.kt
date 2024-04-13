@@ -5,18 +5,27 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.StyleSpan
 import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
+import com.example.trainingtracker.ui.muscles.Muscle
 import java.time.Duration
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-object StringFormatter {
+object FormattedStringGetter {
 
-    fun getFormatDateTimeWithDiff(oldDate: LocalDateTime, newDate: LocalDateTime): String {
+    fun mainMuscles(mainMuscles: List<Muscle>) : String{
+        return  "Main muscle : ${mainMuscles.joinToString(separator = ", ") { it.name }}"
+    }
+
+    fun subMuscles(subMuscles: List<Muscle>) : String{
+        return "Sub muscle : ${subMuscles.joinToString(separator = ", ") { it.name }}"
+    }
+
+    fun dateTimeWithDiff(oldDate: LocalDateTime, newDate: LocalDateTime): String {
         var formattedDateText = ""
-        val formattedDate = getFormattedDateTime(oldDate)
+        val formattedDate = dateTime(oldDate)
 
-        formattedDateText = when (val daysAgo = getFormattedDateDiff(oldDate, newDate)) {
+        formattedDateText = when (val daysAgo = dateDiff(oldDate, newDate)) {
             0 -> formattedDate
             1 -> "$formattedDate (1 day ago)"
             else -> "$formattedDate ($daysAgo days ago)"
@@ -24,7 +33,7 @@ object StringFormatter {
         return formattedDateText
     }
 
-    fun getFormattedDateTime(
+    fun dateTime(
         dateTime: LocalDateTime,
         pattern: String = "yyyy-MM-dd",
         locale: Locale = Locale.getDefault()
@@ -33,11 +42,11 @@ object StringFormatter {
         return dateTime.format(formatter)
     }
 
-    fun getFormattedDateDiff(oldDate: LocalDateTime, newDate: LocalDateTime): Int {
+    fun dateDiff(oldDate: LocalDateTime, newDate: LocalDateTime): Int {
         return Duration.between(oldDate, newDate).toDays().toInt()
     }
 
-    fun getFormattedOneRepMaxRecordWithDate(record: Float, formattedDateText: String): SpannableString {
+    fun oneRepMaxRecordWithDate(record: Float, formattedDateText: String): SpannableString {
         val recordString = "%.2f".format(record)
         val textToShow = "1RM: $recordString kg \n$formattedDateText"
         val spannable = SpannableString(textToShow)
@@ -48,10 +57,10 @@ object StringFormatter {
         return spannable
     }
 
-    fun getFormattedOneRepMaxRecordWithDate(card: ExerciseCard, newDate: LocalDateTime): SpannableString {
-        return getFormattedOneRepMaxRecordWithDate(
+    fun oneRepMaxRecordWithDate(card: ExerciseCard, newDate: LocalDateTime): SpannableString {
+        return oneRepMaxRecordWithDate(
             card.oneRepMaxRecord ?:0F,
-            getFormatDateTimeWithDiff(card.oneRepMaxRecordDate ?: LocalDateTime.now(), newDate)
+            dateTimeWithDiff(card.oneRepMaxRecordDate ?: LocalDateTime.now(), newDate)
             )
     }
 
