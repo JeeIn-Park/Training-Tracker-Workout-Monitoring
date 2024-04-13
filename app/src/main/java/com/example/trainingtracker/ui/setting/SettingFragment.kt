@@ -10,6 +10,8 @@ import com.example.trainingtracker.R
 import com.example.trainingtracker.databinding.FragmentSettingBinding
 import android.app.AlertDialog
 import android.widget.EditText
+import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 
 
 class SettingFragment : Fragment() {
@@ -22,13 +24,20 @@ class SettingFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        val settingViewModel =
+            ViewModelProvider(this).get(SettingViewModel::class.java)
         _binding = FragmentSettingBinding.inflate(inflater, container, false)
+
+        val settingAppVersionTextView: TextView = binding.SettingAppVersionTextView
+        settingViewModel.text.observe(viewLifecycleOwner) {
+            settingAppVersionTextView.text = it
+        }
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         // Existing Privacy Policy button setup
         binding.SettingPrivacyPolicyButton.setOnClickListener {
