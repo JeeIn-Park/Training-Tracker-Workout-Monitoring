@@ -69,7 +69,7 @@ class SettingFragment : Fragment() {
             .setView(editText)
             .setPositiveButton("Submit") { dialog, which ->
                 val description = editText.text.toString()
-                ReportingHandler.collectDataAndSendEmail(requireContext(), description)
+                ReportingHandler.sendReportByEmail(requireContext(), description)
             }
             .setNegativeButton("Cancel", null)
             .show()
