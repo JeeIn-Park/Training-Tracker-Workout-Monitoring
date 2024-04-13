@@ -126,45 +126,24 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-
     private fun updateMuscleImages(context: Context, muscles: List<Muscle>) {
         muscles.forEach { muscle ->
             muscle.layout.forEach { drawableName ->
-                // Get the ID of the ImageButton based on the drawableName
                 val viewId = context.resources.getIdentifier(drawableName, "id", context.packageName)
                 val muscleView = view?.findViewById<ImageButton>(viewId)
-                muscleView?.let {
-                    // Get the appropriate drawable resource ID based on the muscle status
-                    val drawableResId = getDrawableResourceIdForMuscle(context, drawableName, muscle.status)
-                    if (drawableResId != 0) {
-                        it.setImageResource(drawableResId)
-                    } else {
-                        Log.e("UpdateMuscleImages", "No drawable found for: $drawableName with status: ${muscle.status}")
-                    }
-                }
+                muscleView?.setBackgroundResource(getDrawableResourceIdForMuscle(muscle))
             }
         }
     }
 
-    private fun getDrawableResourceIdForMuscle(context: Context, drawableName: String, status: Int): Int {
-        val statusString = when (status) {
-            MuscleStatus.RECOVERED -> "recovered"
-            MuscleStatus.RECOVERING -> "recovering"
-            MuscleStatus.NEED_EXERCISE -> "need_exercise"
-            else -> ""
+    private fun getDrawableResourceIdForMuscle(muscle: Muscle): Int {
+        return when (muscle.status) {
+            MuscleStatus.RECOVERED -> requireContext().resources.getIdentifier("${muscle.layout[0]}_recovered", "drawable", null)
+            MuscleStatus.RECOVERING -> requireContext().resources.getIdentifier("${muscle.layout[0]}_recovering", "drawable", requireContext().packageName)
+            MuscleStatus.NEED_EXERCISE -> requireContext().resources.getIdentifier("${muscle.layout[0]}_need_exercise", "drawable", requireContext().packageName)
+            else -> requireContext().resources.getIdentifier("muscle.name", "drawable", requireContext().packageName)
         }
-        // Ensure the resource name is properly formatted to match your drawable naming convention
-        val resourceName = "${drawableName}_$statusString"
-        var resId = context.resources.getIdentifier(resourceName, "drawable", context.packageName)
-        if (resId == 0) {
-            Log.e("getDrawableResourceIdForMuscle", "Resource not found: $resourceName")
-            resId = context.resources.getIdentifier(drawableName, "drawable", context.packageName)
-        }
-        return resId
     }
-
-
-
 
     private fun refresh() {
         val tags : MutableList<Tag> = TagStorage.loadTags(requireContext()).toMutableList()
@@ -174,5 +153,8 @@ class HomeFragment : Fragment() {
         val selectedTags = TagStorage.getSelectedTags(requireContext())
         val cards = CardStorage.getSelectedCard(requireContext(), selectedTags)
         homeViewModel.updateCardRecyclerViewData(cards)
+        val muscles =  MuscleStorage.loadMuscles(requireContext())
+        println(muscles)
+        updateMuscleImages(requireContext(),muscles)
     }
 }
