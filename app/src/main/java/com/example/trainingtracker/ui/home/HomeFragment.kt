@@ -1,5 +1,6 @@
 package com.example.trainingtracker.ui.home
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
@@ -27,17 +28,25 @@ import com.example.trainingtracker.ui.tag.TagAdapter
 import com.example.trainingtracker.ui.tag.TagFactory
 import com.example.trainingtracker.ui.tag.TagStorage
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-
+import android.os.Handler
+import android.os.Looper
+import android.animation.ObjectAnimator
 
 class HomeFragment : Fragment() {
 
-    // TODO : should I store requireContext()
     private var _binding: FragmentHomeBinding? = null
-
     private val binding get() = _binding!!
+
     private lateinit var cardAdapter: HomeCardAdapter
     private lateinit var tagAdapter: TagAdapter
     private lateinit var homeViewModel: HomeViewModel
+
+    private val handler = Handler(Looper.getMainLooper())
+    private val fadeOutRunnable = Runnable {
+        val animator = ObjectAnimator.ofFloat(binding.addCardButton, "alpha", 0.5f)
+        animator.duration = 500  // Duration of the fade effect
+        animator.start()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -119,18 +128,20 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setupDraggableFAB(binding.addCardButton)
-        // Continue with your existing setup...
     }
 
-
+    @SuppressLint("ClickableViewAccessibility")
     private fun setupDraggableFAB(fab: FloatingActionButton) {
         var dX = 0f
         var dY = 0f
         var lastAction: Int = MotionEvent.ACTION_CANCEL
 
         fab.setOnTouchListener { view, event ->
+            handler.removeCallbacks(fadeOutRunnable)
+            if (event.action == MotionEvent.ACTION_DOWN || event.action == MotionEvent.ACTION_MOVE) {
+                view.alpha = 1.0f  // Make FAB fully opaque when touched or moved
+            }
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     dX = view.x - event.rawX
@@ -141,26 +152,16 @@ class HomeFragment : Fragment() {
                 MotionEvent.ACTION_MOVE -> {
                     val newX = event.rawX + dX
                     val newY = event.rawY + dY
-                    val parentView = view.parent as View
-
-                    // Using resources.getDimension which returns a Float, hence convert to Float if necessary
-                    val actionBarHeight = resources.getDimension(R.dimen.action_bar_height)
-                    val bottomNavHeight = resources.getDimension(R.dimen.bottom_nav_height)
-
-                    if (newY + view.height > parentView.height - bottomNavHeight || newY < actionBarHeight) {
-                        true  // Still consume the event but don't move the view
-                    } else {
-                        view.animate()
-                            .x(newX)
-                            .y(newY)
-                            .setDuration(0)
-                            .start()
-                        lastAction = MotionEvent.ACTION_MOVE
-                        true
-                    }
+                    view.animate()
+                        .x(newX)
+                        .y(newY)
+                        .setDuration(0)
+                        .start()
+                    true
                 }
                 MotionEvent.ACTION_UP -> {
-                    val parentWidth = (view.parent as View).width.toFloat() // Ensure this is a Float
+                    handler.postDelayed(fadeOutRunnable, 300)
+                    val parentWidth = (view.parent as View).width.toFloat()
                     val toRight = view.x + view.width / 2 > parentWidth / 2
                     val finalPosition = if (toRight) parentWidth - view.width else 0f
                     view.animate()
@@ -175,7 +176,12 @@ class HomeFragment : Fragment() {
 
         fab.setOnClickListener {
             performFabClick()
+            handler.postDelayed(fadeOutRunnable, 300)  // Reset the fade out delay when clicked
         }
+
+        // Start with the FAB visible and schedule the first fade out
+        fab.alpha = 1.0f
+        handler.postDelayed(fadeOutRunnable, 300)
     }
 
     private fun performFabClick() {
@@ -183,10 +189,6 @@ class HomeFragment : Fragment() {
         startActivity(intent)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 
     private fun updateMuscleImages(context: Context, muscles: List<Muscle>) {
         muscles.forEach { muscle ->
@@ -219,4 +221,11 @@ class HomeFragment : Fragment() {
         println(muscles)
         updateMuscleImages(requireContext(),muscles)
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        handler.removeCallbacks(fadeOutRunnable)  // Clean up to avoid memory leaks
+        _binding = null
+    }
+
 }
