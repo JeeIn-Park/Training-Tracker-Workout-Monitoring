@@ -8,21 +8,21 @@
     tools:context=".ui.setting.SettingFragment" >
 
     <TextView
-        android:id="@+id/text_setting"
+        android:id="@+id/Setting_AppVersionTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/personalInformation"
+        android:id="@+id/Setting_ReportErrorButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -30,27 +30,13 @@
         android:layout_marginEnd="16dp"
         android:backgroundTint="?attr/buttonStyle"
         android:textColor="?attr/colorOnBackground"
-        android:text="Personal Information"
+        android:text="Report error"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/appVersion"
-        android:backgroundTint="?attr/buttonStyle"
-        android:textColor="?attr/colorOnBackground"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="16dp"
-        android:text="App Version"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/personalInformation" />
-
-    <Button
-        android:id="@+id/sendFeedback"
+        android:id="@+id/Setting_SendFeedbackButton"
         android:backgroundTint="?attr/buttonStyle"
         android:textColor="?attr/colorOnBackground"
         android:layout_width="0dp"
@@ -61,10 +47,10 @@
         android:text="Send Feedback"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appVersion" />
+        app:layout_constraintTop_toBottomOf="@+id/Setting_ReportErrorButton" />
 
     <Button
-        android:id="@+id/privacyPolicy"
+        android:id="@+id/Setting_PrivacyPolicyButton"
         android:backgroundTint="?attr/buttonStyle"
         android:textColor="?attr/colorOnBackground"
         android:layout_width="0dp"
@@ -75,6 +61,6 @@
         android:text="Privacy Policy"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sendFeedback" />
+        app:layout_constraintTop_toBottomOf="@+id/Setting_SendFeedbackButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

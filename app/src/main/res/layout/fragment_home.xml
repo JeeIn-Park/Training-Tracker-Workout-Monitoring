@@ -41,7 +41,7 @@
 
             <include
                 android:id="@+id/muscle_front"
-                layout="@layout/fragment_muscle_front"
+                layout="@layout/item_muscle_front"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +64,7 @@
 
             <include
                 android:id="@+id/muscle_back"
-                layout="@layout/fragment_muscle_back"
+                layout="@layout/item_muscle_back"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
