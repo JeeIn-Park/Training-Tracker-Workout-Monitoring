@@ -7,7 +7,7 @@
 
     <ImageButton
         android:id="@+id/muscle_back_neck_traps"
-        android:background="@drawable/muscle_back_neck_traps"
+        android:background="@drawable/muscle_back_neck_traps_recovered"
         android:layout_width="30pt"
         android:layout_height="30pt"
         android:layout_marginTop="0dp"
@@ -19,7 +19,7 @@
 
     <ImageButton
         android:id="@+id/muscle_back_shoulder"
-        android:background="@drawable/muscle_back_shoulder"
+        android:background="@drawable/muscle_back_shoulder_recovered"
         android:layout_width="45pt"
         android:layout_height="45pt"
         android:layout_marginTop="0dp"
@@ -30,7 +30,7 @@
         app:layout_constraintTop_toTopOf="parent" />
     <ImageButton
         android:id="@+id/muscle_back_triceps"
-        android:background="@drawable/muscle_back_triceps"
+        android:background="@drawable/muscle_back_triceps_recovered"
         android:layout_width="50pt"
         android:layout_height="50pt"
         android:layout_marginTop="4pt"
@@ -43,7 +43,7 @@
 
     <ImageButton
         android:id="@+id/muscle_back_forearm"
-        android:background="@drawable/muscle_back_forearm"
+        android:background="@drawable/muscle_back_forearm_recovered"
         android:layout_width="55pt"
         android:layout_height="55pt"
         android:layout_marginTop="21pt"
@@ -55,7 +55,7 @@
 
     <ImageButton
         android:id="@+id/muscle_back_upper_back"
-        android:background="@drawable/muscle_back_upper_back"
+        android:background="@drawable/muscle_back_upper_back_recovered"
         android:layout_width="30pt"
         android:layout_height="30pt"
         android:layout_marginTop="13pt"
@@ -67,7 +67,7 @@
 
     <ImageButton
         android:id="@+id/muscle_back_lower_back"
-        android:background="@drawable/muscle_back_lower_back"
+        android:background="@drawable/muscle_back_lower_back_recovered"
         android:layout_width="18pt"
         android:layout_height="20pt"
         android:layout_marginTop="30pt"
@@ -79,7 +79,7 @@
 
     <ImageButton
         android:id="@+id/muscle_back_obliques"
-        android:background="@drawable/muscle_back_obliques"
+        android:background="@drawable/muscle_back_obliques_recovered"
         android:layout_width="27pt"
         android:layout_height="27pt"
         android:layout_marginTop="27pt"
@@ -91,7 +91,7 @@
 
     <ImageButton
         android:id="@+id/muscle_back_glutes_buttocks"
-        android:background="@drawable/muscle_back_glutes_buttocks"
+        android:background="@drawable/muscle_back_glutes_buttocks_recovered"
         android:layout_width="28pt"
         android:layout_height="28pt"
         android:layout_marginTop="38pt"
@@ -103,7 +103,7 @@
 
     <ImageButton
         android:id="@+id/muscle_back_hamstrings"
-        android:background="@drawable/muscle_back_hamstrings"
+        android:background="@drawable/muscle_back_hamstrings_recovered"
         android:layout_width="40pt"
         android:layout_height="40pt"
         android:layout_marginTop="49pt"
