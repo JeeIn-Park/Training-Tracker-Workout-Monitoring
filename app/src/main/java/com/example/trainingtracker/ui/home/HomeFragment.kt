@@ -123,8 +123,8 @@ class HomeFragment : Fragment() {
         // Continue with your existing setup...
     }
     private fun setupDraggableFAB(fab: FloatingActionButton) {
-        var dX: Float = 0f
-        var dY: Float = 0f
+        var dX = 0f
+        var dY = 0f
         var lastAction: Int = MotionEvent.ACTION_CANCEL
 
         fab.setOnTouchListener { view, event ->
@@ -138,17 +138,33 @@ class HomeFragment : Fragment() {
                 MotionEvent.ACTION_MOVE -> {
                     val newX = event.rawX + dX
                     val newY = event.rawY + dY
-                    view.animate()
-                        .x(newX)
-                        .y(newY)
-                        .setDuration(0)
-                        .start()
-                    lastAction = MotionEvent.ACTION_MOVE
-                    true
+                    val parentView = view.parent as View
+
+                    // Calculate boundaries, replace "actionBarHeight" and "bottomNavHeight" with actual measurements
+                    val actionBarHeight = resources.getDimension(
+                        androidx.transition.R.dimen.abc_action_bar_default_height_material).toInt()  // define this in your dimens.xml
+                    val bottomNavHeight = resources.getDimension(
+                        com.google.android.material.R.dimen.design_bottom_navigation_height).toInt()  // define this in your dimens.xml
+
+                    // Ensure the FAB doesn't go above the bottom of the ActionBar or below the top of the Bottom Navigation
+                    if (newY + view.height > parentView.height - bottomNavHeight + view.height
+                        || newY < actionBarHeight - view.height) {
+                        lastAction = MotionEvent.ACTION_MOVE
+                        true  // Still consume the event but don't move the view
+                    } else {
+                        // Apply new coordinates within bounds
+                        view.animate()
+                            .x(newX)
+                            .y(newY)
+                            .setDuration(0)
+                            .start()
+                        lastAction = MotionEvent.ACTION_MOVE
+                        true
+                    }
                 }
                 MotionEvent.ACTION_UP -> {
                     if (lastAction == MotionEvent.ACTION_DOWN) {
-                        view.performClick() // Correct use here, calling performClick() on the view
+                        view.performClick()
                     }
                     true
                 }
