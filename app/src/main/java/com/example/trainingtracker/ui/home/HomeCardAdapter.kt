@@ -4,10 +4,6 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Typeface
-import android.opengl.Visibility
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,10 +17,7 @@ import com.example.trainingtracker.ui.exerciseCard.ExerciseCardDiffCallback
 import com.example.trainingtracker.R
 import com.example.trainingtracker.ui.exerciseCard.AddCardActivity
 import com.example.trainingtracker.ui.exerciseLog.LogStorage
-import java.time.Duration
 import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.util.Locale
 
 class HomeCardAdapter(
     private val context: Context, private val onItemClick: (ExerciseCard) -> Unit) :

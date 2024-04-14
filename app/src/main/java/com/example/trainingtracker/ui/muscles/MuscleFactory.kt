@@ -1,8 +1,6 @@
 package com.example.trainingtracker.ui.muscles
 
 import android.content.Context
-import android.widget.ImageButton
-import com.example.trainingtracker.R
 import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
 //import com.example.trainingtracker.databinding.FragmentMuscleBackBinding
 //import com.example.trainingtracker.databinding.FragmentMuscleFrontBinding

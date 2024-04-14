@@ -15,7 +15,6 @@ import com.example.trainingtracker.R
 import com.example.trainingtracker.ui.exerciseCard.CardStorage
 import com.example.trainingtracker.databinding.FragmentStatusBinding
 import com.example.trainingtracker.ui.exerciseLog.AddLogActivity
-import com.example.trainingtracker.ui.home.HomeCardAdapter
 import com.example.trainingtracker.ui.tag.Tag
 import com.example.trainingtracker.ui.tag.TagAdapter
 import com.example.trainingtracker.ui.tag.TagFactory

@@ -15,7 +15,6 @@ import com.example.trainingtracker.R
 import com.example.trainingtracker.FormattedStringGetter
 import com.example.trainingtracker.TableSetup
 import com.example.trainingtracker.ui.exerciseCard.ExerciseCard
-import com.example.trainingtracker.views.GraphViewAdapter
 import com.example.trainingtracker.views.GraphViewAdapter.setupGraphView
 import com.jjoe64.graphview.GraphView
 

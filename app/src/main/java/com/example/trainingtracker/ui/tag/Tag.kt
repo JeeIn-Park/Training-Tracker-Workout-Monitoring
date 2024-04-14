@@ -1,6 +1,5 @@
 package com.example.trainingtracker.ui.tag
 
-import com.example.trainingtracker.R
 import java.time.LocalDateTime
 import java.io.Serializable
 import java.util.UUID
