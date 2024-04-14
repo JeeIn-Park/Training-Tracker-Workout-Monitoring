@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.trainingtracker"
+    namespace = "com.jeein.trainingtracker"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.trainingtracker"
+        applicationId = "com.jeein.trainingtracker"
         minSdk = 26
         targetSdk = 34
         versionCode = 2

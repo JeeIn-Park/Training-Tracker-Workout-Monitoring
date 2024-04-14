@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.trainingtracker.ui.home.HomeFragment"
+        android:name="com.jeein.trainingtracker.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_status"
-        android:name="com.example.trainingtracker.ui.status.StatusFragment"
+        android:name="com.jeein.trainingtracker.ui.status.StatusFragment"
         android:label="@string/title_status"
         tools:layout="@layout/fragment_status" />
 
     <fragment
         android:id="@+id/navigation_setting"
-        android:name="com.example.trainingtracker.ui.setting.SettingFragment"
+        android:name="com.jeein.trainingtracker.ui.setting.SettingFragment"
         android:label="@string/title_setting"
         tools:layout="@layout/fragment_setting">
         <action
@@ -29,7 +29,7 @@
 
     <fragment
         android:id="@+id/privacyPolicyFragment"
-        android:name="com.example.trainingtracker.ui.setting.PrivacyPolicyFragment"
+        android:name="com.jeein.trainingtracker.ui.setting.PrivacyPolicyFragment"
         android:label="Privacy Policy"
         tools:layout="@layout/fragment_setting_privacy_policy" />
 </navigation>

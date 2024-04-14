@@ -22,7 +22,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.example.trainingtracker.views.MultiSelectionSpinner
+    <com.jeein.trainingtracker.views.MultiSelectionSpinner
         android:id="@+id/main_muscles"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
         app:layout_constraintTop_toBottomOf="@+id/exercise_name" />
 
 
-    <com.example.trainingtracker.views.MultiSelectionSpinner
+    <com.jeein.trainingtracker.views.MultiSelectionSpinner
         android:id="@+id/sub_muscles"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
         app:layout_constraintTop_toBottomOf="@+id/main_muscles" />
 
 
-    <com.example.trainingtracker.views.MultiSelectionSpinner
+    <com.jeein.trainingtracker.views.MultiSelectionSpinner
         android:id="@+id/select_tag"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
