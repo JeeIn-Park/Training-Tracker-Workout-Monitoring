@@ -5,6 +5,7 @@ Welcome to our Gym Training Tracker app ("TT"). This App is designed to help you
 ![Feature Graphic](https://github.com/JeeIn-Park/TrainingTracker/raw/main/doc/screenshots/featureGraphic.jpg)
 
 Download and try out the most recent version of our app by clicking on the link below:
+
 [Download Training Tracker APK](https://github.com/JeeIn-Park/TrainingTracker/blob/main/app/release/training-tracker.apk)
 
 # Terms and Conditions
