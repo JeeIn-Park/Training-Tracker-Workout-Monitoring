@@ -5,7 +5,7 @@
 # Terms and Conditions
 
 ## 1. Introduction
-Welcome to our Gym Training Tracker app ("App"). This App is designed to help you monitor and improve your fitness regimen by providing tools to track your workouts, achievements, and personal records. By using our App, you agree to these Terms and Conditions and our Privacy Policy, which cover your access and use of our services.
+Welcome to our Gym Training Tracker app ("TT"). This App is designed to help you monitor and improve your fitness regimen by providing tools to track your workouts, achievements, and personal records. By using our App, you agree to these Terms and Conditions and our Privacy Policy, which cover your access and use of our services.
 
 ## 2. User Consent
 By registering an account and utilizing the App, you explicitly consent to the collection, processing, and sharing of your data as described in these Terms and Conditions and our detailed Privacy Policy.
