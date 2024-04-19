@@ -1,6 +1,6 @@
 # TrainingTracker
 
-
+![Feature Graphic](https://github.com/JeeIn-Park/TrainingTracker/raw/main/doc/screenshots/featureGraphic.jpg)
 
 # Terms and Conditions
 
