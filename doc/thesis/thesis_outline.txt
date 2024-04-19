@@ -1,28 +1,43 @@
+- abstract
+
 - introduction
 
 - background
 
 focusing on muscles...
+1. muscle growth
+2. muscle loss
+3. 1RM
 
 
 - project execution
 
 1. Investigate factors that can extend user engagement and commitment to their physical goals and understand the role of the training tracking app in sustaining this motivation.
+	why is it important to understand roles of the app?
+	(what can it do?)
 	start from the role of the training tracking app, why do people use it? what are possible benefits which workingout traking apps can offer? / why do people not use it? what are possible shortcomings of workingout tracking apps -> keep the reasons why people use it and benefits, cover the reasons why do people not use it and shortcommings. 
 
 2. Design an application that addresses the possible shortcomings of workout apps, which can deter consistency, and enhance the benefits that such apps can offer to users.
 	smart goal planning
-	app development planning
-	app design
+	app development planning (rough goal of each version?)
+	app design (what features do I need to implement...)
 
 3. Implement the app by utilising technical resources to improve the user experience.
 	(1) MVP implementation - gitHub release
 		focus on key features of the app (quantifiable data)
+		can behave like standart trackers
 	(2) version 2 implementation
 		focus on user interface (logo design, ui improvement)
+		user friendly ui
 	(3) version 2.1 implementation - app deployment (app store release, gitHub release)
 		foduc on researched factors (user centered app)
 	(4) version 3 implementation
 		feedback agaile reflection
 
 4. Evaluate the app in terms of efficiency and user satisfaction and demonstrate that the proposed enhancements are beneficial.
+	smart goal evaluation
+	app reviews
+	what I can do better if I do it again next time?
+
+- conclusion 
+	what studies should follow
