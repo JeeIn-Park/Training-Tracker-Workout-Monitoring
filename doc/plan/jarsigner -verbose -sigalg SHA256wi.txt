@@ -1,0 +1,8 @@
+jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 -keystore "C:\Users\1700p\.android\my-release-key.keystore" -storepass pji30021007. training-tracker.aab alias_name
+
+
+alert when it's not worked out for long
+hash tag for each tag
+abstract data class
+when tag is assigned-> exercise dissapeared (home)
+when tag is clicked and not clicked -> exercise dissapeared (status)

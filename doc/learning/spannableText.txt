@@ -1,0 +1,34 @@
+import android.graphics.Color
+import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
+import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.your_layout.*
+
+class YourActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.your_layout)
+
+        val lines = listOf("First line", "Second line", "Third line")
+        val colors = listOf(Color.RED, Color.GREEN, Color.BLUE)  // Colors for each line
+
+        val combinedText = lines.joinToString(separator = "\n")
+        val spannableString = SpannableString(combinedText)
+        
+        var startPos = 0
+        lines.forEachIndexed { index, line ->
+            val endPos = startPos + line.length
+            spannableString.setSpan(
+                ForegroundColorSpan(colors[index]),
+                startPos,
+                endPos,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            startPos = endPos + 1  // Adjust for the newline character
+        }
+
+        personalRecord.text = spannableString
+    }
+}

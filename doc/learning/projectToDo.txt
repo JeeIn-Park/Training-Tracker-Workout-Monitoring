@@ -1,10 +1,15 @@
-global data storage
-(if null store the time when the user downloaded the app,
-if non-null it means user has opened the app before)
+implement observers
+update card
 
-update muscle status when open the app
-only change muscle status when <50/15>
-when it's null -> find when the user downloaded the app and if the time and use it as the last activity
+
+
+update tag
+update muscle
+update log
+update set
+
+
+refresh muscle colour when add exercise
 
 change the status screen
 
