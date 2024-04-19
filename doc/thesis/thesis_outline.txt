@@ -16,6 +16,11 @@ focusing on muscles...
 	why is it important to understand roles of the app?
 	(what can it do?)
 	start from the role of the training tracking app, why do people use it? what are possible benefits which workingout traking apps can offer? / why do people not use it? what are possible shortcomings of workingout tracking apps -> keep the reasons why people use it and benefits, cover the reasons why do people not use it and shortcommings. 
+	1. why is it important to understand the role of the app
+	2. what is the role of the workout tracking app / pros
+	3. cons
+	4. conclusion
+
 
 2. Design an application that addresses the possible shortcomings of workout apps, which can deter consistency, and enhance the benefits that such apps can offer to users.
 	smart goal planning
