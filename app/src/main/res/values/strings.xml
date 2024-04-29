@@ -9,6 +9,9 @@
 
     <!--    exercise    -->
     <string name="event_log">log</string>
+<!--    <string name="event_add_log">add log</string>-->
+<!--    <string name="event_delete_log">delete log</string>-->
+<!--    <string name="event_edit_log">edit log</string>-->
     <string name="exercise_add">Add a new exercise</string>
     <string name="exercise_enter_weight">Enter weight</string>
     <string name="exercise_enter_rep">Enter reps</string>
@@ -16,11 +19,17 @@
 
     <!--    tag    -->
     <string name="event_tag">tag</string>
+    <string name="event_add_tag">add tag</string>
+    <string name="event_delete_tag">delete tag</string>
+    <string name="event_edit_tag">edit tag</string>
     <string name="tag_enter_name">Enter a tag name</string>
     <string name="tag_deletion_warning">All records will be deleted. Once deleted, they cannot be recovered.</string>
 
     <!--    muscle    -->
     <string name="event_muscle">muscle</string>
+<!--    <string name="event_add_muscle">add muscle</string>-->
+<!--    <string name="event_delete_muscle">delete muscle</string>-->
+<!--    <string name="event_edit_muscle">edit muscle</string>-->
     <string name="muscle_select">Select muscle</string>
     <string name="discard_set_count">discard set count</string>
     <string name="one_rep_max_pb">ONE REP MAX(PB)</string>
