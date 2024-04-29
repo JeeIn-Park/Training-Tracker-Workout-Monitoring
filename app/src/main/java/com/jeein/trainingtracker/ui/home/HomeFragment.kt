@@ -3,7 +3,6 @@ package com.jeein.trainingtracker.ui.home
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -17,9 +16,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jeein.trainingtracker.R
 import com.jeein.trainingtracker.databinding.FragmentHomeBinding
-import com.jeein.trainingtracker.ui.exerciseCard.AddCardActivity
 import com.jeein.trainingtracker.ui.exerciseCard.CardStorage
-import com.jeein.trainingtracker.ui.exerciseLog.AddLogActivity
 import com.jeein.trainingtracker.ui.muscles.Muscle
 import com.jeein.trainingtracker.ui.muscles.MuscleStorage
 import com.jeein.trainingtracker.ui.tag.Tag
@@ -30,6 +27,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import android.os.Handler
 import android.os.Looper
 import android.animation.ObjectAnimator
+import androidx.navigation.fragment.findNavController
 import com.jeein.trainingtracker.ui.muscles.MuscleFactory.getDrawableResourceIdByStatus
 
 class HomeFragment : Fragment() {
@@ -60,15 +58,14 @@ class HomeFragment : Fragment() {
 
         val addCardButtonBinding = binding.addCardButton
         addCardButtonBinding.setOnClickListener {
-            val intent = Intent(activity, AddCardActivity::class.java)
-            startActivity(intent)
+            findNavController().navigate(R.id.action_homeFragment_to_addCardFragment)
         }
 
         cardAdapter = HomeCardAdapter(requireContext()) { clickedCard ->
-            val intent = Intent(context, AddLogActivity::class.java).apply {
-                putExtra("EXTRA_CARD_ITEM", clickedCard)
-            }
-            startActivity(intent)
+//            val intent = Intent(context, AddLogActivity::class.java).apply {
+//                putExtra("EXTRA_CARD_ITEM", clickedCard)
+//            }
+//            startActivity(intent)
         }
         // todo : study intent, put extra?
 
@@ -195,8 +192,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun performFabClick() {
-        val intent = Intent(activity, AddCardActivity::class.java)
-        startActivity(intent)
+        findNavController().navigate(R.id.action_homeFragment_to_addCardFragment)
     }
 
     private fun updateMuscleImages(context: Context, muscles: List<Muscle>) {

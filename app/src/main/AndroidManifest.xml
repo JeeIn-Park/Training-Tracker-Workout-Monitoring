@@ -24,7 +24,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.jeein.trainingtracker.ui.exerciseCard.AddCardActivity" />
         <activity android:name="com.jeein.trainingtracker.ui.exerciseLog.AddLogActivity" />
 
 

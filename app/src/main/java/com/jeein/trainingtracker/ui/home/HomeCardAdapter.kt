@@ -15,7 +15,7 @@ import com.jeein.trainingtracker.ui.exerciseCard.CardStorage
 import com.jeein.trainingtracker.ui.exerciseCard.ExerciseCard
 import com.jeein.trainingtracker.ui.exerciseCard.ExerciseCardDiffCallback
 import com.jeein.trainingtracker.R
-import com.jeein.trainingtracker.ui.exerciseCard.AddCardActivity
+import com.jeein.trainingtracker.ui.exerciseCard.AddCardFragment
 import com.jeein.trainingtracker.ui.exerciseLog.LogStorage
 import java.time.LocalDateTime
 
@@ -109,7 +109,7 @@ class HomeCardAdapter(
                     when (which) {
                         // Edit
                         0 -> {
-                            val intent = Intent(context, AddCardActivity::class.java).apply {
+                            val intent = Intent(context, AddCardFragment::class.java).apply {
                                 putExtra("EXTRA_CARD_ITEM", cardItem)
                             }
                             context.startActivity(intent)

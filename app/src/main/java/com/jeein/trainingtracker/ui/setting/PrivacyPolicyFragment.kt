@@ -21,7 +21,7 @@ class PrivacyPolicyFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true) // Enable this to handle menu events in the fragment.
+        setHasOptionsMenu(true)
     }
 
 
