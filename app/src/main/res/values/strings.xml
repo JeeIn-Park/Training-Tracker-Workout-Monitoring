@@ -15,8 +15,9 @@
     <string name="exercise_deletion_warning">All records will be deleted. Once deleted, they cannot be recovered. </string>
 
     <!--    tag    -->
+    <string name="event_tag">tag</string>
     <string name="tag_enter_name">Enter a tag name</string>
-    <string name="tag_deletion_warning">All records will be deleted. Once deleted, they cannot be recovered. This action will not delete exercises or remove tags associated with exercises.</string>
+    <string name="tag_deletion_warning">All records will be deleted. Once deleted, they cannot be recovered.</string>
 
     <!--    muscle    -->
     <string name="event_muscle">muscle</string>
