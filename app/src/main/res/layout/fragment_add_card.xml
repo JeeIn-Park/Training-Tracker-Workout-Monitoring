@@ -9,10 +9,11 @@
         android:id="@+id/exercise_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin = "16dp"
+        android:layout_margin="16dp"
         android:padding="4dp"
         android:gravity="center"
-        android:hint="  Exercise name  "
+        android:hint="Exercise name"
+        android:inputType="text"
         android:maxLength="30"
         android:minHeight="48dp"
         android:textSize="12sp"
@@ -21,6 +22,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <com.jeein.trainingtracker.views.MultiSelectionSpinner
         android:id="@+id/main_muscles"

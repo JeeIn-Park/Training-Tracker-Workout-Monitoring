@@ -55,13 +55,8 @@ class AddCardFragment : Fragment() {
         tagSpinner.setItems(tagList.map { it.name })
 
         // Set key listener for exercise name EditText
-        exerciseNameEditText.setOnKeyListener { _, keyCode, event ->
-            if (keyCode == KeyEvent.KEYCODE_ENTER) {
-                // Hide the keyboard
-                hideKeyboard()
-                return@setOnKeyListener true
-            }
-            return@setOnKeyListener false
+        exerciseNameEditText.setOnKeyListener { v, keyCode, event ->
+            event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER
         }
 
 //        if (cardItem != null) {
@@ -145,12 +140,5 @@ private fun getSelectedTags(indices: List<Int>, tagArray: List<Tag>): List<Tag> 
     }
     return tags
 }
-
-
-private fun hideKeyboard() {
-//    val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-//    inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
-}
-// TODO : back press warning, on stop
 
 
