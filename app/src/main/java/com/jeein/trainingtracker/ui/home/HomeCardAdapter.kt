@@ -37,13 +37,6 @@ class HomeCardAdapter(
         }
     }
 
-    fun addItem(cardItem: ExerciseCard) {
-        val updatedList = currentList.toMutableList()
-        updatedList.add(cardItem)
-        submitList(updatedList)
-        CardStorage.addCard(context, cardItem)
-    }
-
     fun removeItem(position: Int) {
         val updatedList = currentList.toMutableList()
         val removedCard = updatedList.removeAt(position)
