@@ -27,8 +27,13 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import android.os.Handler
 import android.os.Looper
 import android.animation.ObjectAnimator
+import android.content.Intent
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
+import com.jeein.trainingtracker.ui.exerciseCard.ExerciseCard
+import com.jeein.trainingtracker.ui.exerciseLog.AddLogActivity
 import com.jeein.trainingtracker.ui.muscles.MuscleFactory.getDrawableResourceIdByStatus
+import java.io.Serializable
 
 class HomeFragment : Fragment() {
 
@@ -61,12 +66,7 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_homeFragment_to_addCardFragment)
         }
 
-        cardAdapter = HomeCardAdapter(requireContext()) { clickedCard ->
-//            val intent = Intent(context, AddLogActivity::class.java).apply {
-//                putExtra("EXTRA_CARD_ITEM", clickedCard)
-//            }
-//            startActivity(intent)
-        }
+        cardAdapter = HomeCardAdapter(requireContext(), ::handleItemClick, ::navigateToEdit)
         // todo : study intent, put extra?
 
         tagAdapter = TagAdapter(requireContext()) { clickedTag ->
@@ -216,6 +216,18 @@ class HomeFragment : Fragment() {
         val muscles =  MuscleStorage.loadMuscles(requireContext())
         println(muscles)
         updateMuscleImages(requireContext(),muscles)
+    }
+
+    private fun handleItemClick(cardItem: ExerciseCard) {
+        val intent = Intent(context, AddLogActivity::class.java).apply {
+            putExtra("EXTRA_CARD_ITEM", cardItem)
+        }
+        startActivity(intent)
+    }
+
+    private fun navigateToEdit(cardItem: ExerciseCard) {
+        val bundle = bundleOf("exerciseCardArg" to cardItem)
+        findNavController().navigate(R.id.action_homeFragment_to_addCardFragment, bundle)
     }
 
     override fun onDestroyView() {

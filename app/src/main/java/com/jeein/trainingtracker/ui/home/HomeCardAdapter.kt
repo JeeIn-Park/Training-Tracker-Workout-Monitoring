@@ -2,12 +2,12 @@ package com.jeein.trainingtracker.ui.home
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.Intent
 import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.jeein.trainingtracker.FormattedStringGetter
@@ -15,13 +15,15 @@ import com.jeein.trainingtracker.ui.exerciseCard.CardStorage
 import com.jeein.trainingtracker.ui.exerciseCard.ExerciseCard
 import com.jeein.trainingtracker.ui.exerciseCard.ExerciseCardDiffCallback
 import com.jeein.trainingtracker.R
-import com.jeein.trainingtracker.ui.exerciseCard.AddCardFragment
 import com.jeein.trainingtracker.ui.exerciseLog.LogStorage
+import java.io.Serializable
 import java.time.LocalDateTime
 
 class HomeCardAdapter(
-    private val context: Context, private val onItemClick: (ExerciseCard) -> Unit) :
-    ListAdapter<ExerciseCard, HomeCardAdapter.CardViewHolder>(ExerciseCardDiffCallback()) {
+    private val context: Context,
+    private val onItemClick: (ExerciseCard) -> Unit,
+    private val navigateToEdit: (ExerciseCard) -> Unit
+) : ListAdapter<ExerciseCard, HomeCardAdapter.CardViewHolder>(ExerciseCardDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -109,10 +111,7 @@ class HomeCardAdapter(
                     when (which) {
                         // Edit
                         0 -> {
-                            val intent = Intent(context, AddCardFragment::class.java).apply {
-                                putExtra("EXTRA_CARD_ITEM", cardItem)
-                            }
-                            context.startActivity(intent)
+                            navigateToEdit(cardItem)
                         }
                         // Delete
                         1 -> {

@@ -10,9 +10,9 @@
         android:name="com.jeein.trainingtracker.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home">
-    <action
-        android:id="@+id/action_homeFragment_to_addCardFragment"
-        app:destination="@id/navigation_add_card" />
+        <action
+            android:id="@+id/action_homeFragment_to_addCardFragment"
+            app:destination="@id/navigation_add_card" />
     </fragment>
 
     <fragment
@@ -41,6 +41,11 @@
         android:id="@+id/navigation_add_card"
         android:name="com.jeein.trainingtracker.ui.exerciseCard.AddCardFragment"
         android:label="Add Exercise"
-        tools:layout="@layout/fragment_add_card" />
+        tools:layout="@layout/fragment_add_card">
+        <argument
+            android:name="exerciseCardArg"
+            app:argType="com.jeein.trainingtracker.ui.exerciseCard.ExerciseCard"
+            app:nullable="true"/>
+    </fragment>
 
 </navigation>

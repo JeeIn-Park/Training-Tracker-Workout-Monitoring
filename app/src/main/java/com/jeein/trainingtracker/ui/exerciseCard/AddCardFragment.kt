@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.jeein.trainingtracker.R
@@ -43,7 +44,7 @@ class AddCardFragment : Fragment() {
         val tagSpinner: MultiSelectionSpinner = binding.selectTag
         val addButton: Button = binding.addButton
 
-//        val cardItem = intent.getSerializableExtra("EXTRA_CARD_ITEM") as ExerciseCard?
+        val cardItem = arguments?.getSerializable("exerciseCardArg") as? ExerciseCard
         val selectMuscle = Muscle(null, 0, getString(R.string.muscle_select), listOf())
         val muscleList = (listOf(selectMuscle)
                 + MuscleStorage.loadMuscles(requireContext()))
@@ -59,14 +60,14 @@ class AddCardFragment : Fragment() {
             event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER
         }
 
-//        if (cardItem != null) {
-//            supportActionBar?.title = cardItem.name
-//            exerciseNameEditText.setText(cardItem.name)
-//            mainMusclesSpinner.setSelection(cardItem.mainMuscles.map { it.name })
-//            subMusclesSpinner.setSelection(cardItem.subMuscles.map { it.name })
-//            tagSpinner.setSelection(cardItem.tag.map { it.name })
-//            addButton.text = "SAVE"
-//        }
+        if (cardItem != null) {
+            (requireActivity() as AppCompatActivity).supportActionBar?.title = cardItem.name
+            exerciseNameEditText.setText(cardItem.name)
+            mainMusclesSpinner.setSelection(cardItem.mainMuscles.map { it.name })
+            subMusclesSpinner.setSelection(cardItem.subMuscles.map { it.name })
+            tagSpinner.setSelection(cardItem.tag.map { it.name })
+            addButton.text = "SAVE"
+        }
 
         addButton.setOnClickListener {
             val exerciseName = exerciseNameEditText.text.toString()
@@ -80,24 +81,34 @@ class AddCardFragment : Fragment() {
 
             // TODO : edit card to select multiple muscles and tags
 
-//            if (cardItem != null) {
-//                CardStorage.editCard(this, cardItem, ExerciseCardFactory.editExerciseCard(cardItem, exerciseName, mainMuscles, subMuscles, tags))
-//                finish()
-//
-//            } else {
-            var uniqueId: UUID
-            do {
-                uniqueId = UUID.randomUUID()
-            } while (CardStorage.isIdInUse(requireContext(), uniqueId))
+            if (cardItem != null) {
+                CardStorage.editCard(
+                    requireContext(),
+                    cardItem,
+                    ExerciseCardFactory.editExerciseCard(
+                        cardItem,
+                        exerciseName,
+                        mainMuscles,
+                        subMuscles,
+                        tags
+                    )
+                )
+                findNavController().navigateUp()
 
-            val card = ExerciseCardFactory.createExerciseCard(requireContext(), exerciseName)
-            card.mainMuscles = mainMuscles
-            card.subMuscles = subMuscles
-            card.tag = tags
-            CardStorage.addCard(requireContext(), card)
-            findNavController().navigateUp()
+            } else {
+                var uniqueId: UUID
+                do {
+                    uniqueId = UUID.randomUUID()
+                } while (CardStorage.isIdInUse(requireContext(), uniqueId))
+
+                val card = ExerciseCardFactory.createExerciseCard(requireContext(), exerciseName)
+                card.mainMuscles = mainMuscles
+                card.subMuscles = subMuscles
+                card.tag = tags
+                CardStorage.addCard(requireContext(), card)
+                findNavController().navigateUp()
+            }
         }
-
         return binding.root
     }
 
