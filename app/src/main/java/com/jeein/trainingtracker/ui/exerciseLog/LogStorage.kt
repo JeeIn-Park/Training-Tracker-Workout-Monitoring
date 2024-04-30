@@ -5,7 +5,8 @@ import com.jeein.trainingtracker.Event
 import com.jeein.trainingtracker.EventManager
 import com.jeein.trainingtracker.R
 import com.jeein.trainingtracker.ui.exerciseCard.CardStorage
-import com.jeein.trainingtracker.ui.exerciseLog.exerciseSet.ExerciseSet
+import com.jeein.trainingtracker.ui.exerciseSet.ExerciseSet
+import com.jeein.trainingtracker.ui.exerciseSet.OneRepMax
 import java.io.FileNotFoundException
 import java.io.IOException
 import java.io.ObjectInputStream

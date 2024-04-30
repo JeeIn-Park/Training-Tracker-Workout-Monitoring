@@ -1,4 +1,4 @@
-package com.jeein.trainingtracker.ui.exerciseLog.exerciseSet
+package com.jeein.trainingtracker.ui.exerciseSet
 
 import android.content.Context
 import java.io.FileNotFoundException

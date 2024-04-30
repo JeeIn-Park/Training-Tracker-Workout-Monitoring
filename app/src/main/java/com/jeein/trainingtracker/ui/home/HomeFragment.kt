@@ -196,7 +196,6 @@ class HomeFragment : Fragment() {
         val cards = CardStorage.getSelectedCard(requireContext(), selectedTags)
         homeViewModel.updateCardRecyclerViewData(cards)
         val muscles = MuscleStorage.loadMuscles(requireContext())
-        println(muscles)
         updateMuscleImages(requireContext(), muscles)
     }
 

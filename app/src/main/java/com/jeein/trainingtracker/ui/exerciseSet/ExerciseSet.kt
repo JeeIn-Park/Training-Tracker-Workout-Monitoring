@@ -1,4 +1,4 @@
-package com.jeein.trainingtracker.ui.exerciseLog.exerciseSet
+package com.jeein.trainingtracker.ui.exerciseSet
 
 import java.io.Serializable
 import java.time.LocalDateTime

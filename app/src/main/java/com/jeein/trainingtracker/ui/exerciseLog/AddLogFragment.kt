@@ -20,8 +20,8 @@ import com.jeein.trainingtracker.R
 import com.jeein.trainingtracker.TableSetup
 import com.jeein.trainingtracker.databinding.FragmentAddLogBinding
 import com.jeein.trainingtracker.ui.exerciseCard.ExerciseCard
-import com.jeein.trainingtracker.ui.exerciseLog.exerciseSet.ExerciseSetFactory
-import com.jeein.trainingtracker.ui.exerciseLog.exerciseSet.SetStorage
+import com.jeein.trainingtracker.ui.exerciseSet.ExerciseSetFactory
+import com.jeein.trainingtracker.ui.exerciseSet.SetStorage
 import com.jeein.trainingtracker.views.GraphViewAdapter
 
 
@@ -53,6 +53,7 @@ class AddLogFragment : Fragment() {
         (requireActivity() as AppCompatActivity).supportActionBar?.title = cardItem.name
         logStorage = LogStorage(cardItem.id)
         val pastLog: List<ExerciseLog> = logStorage.loadLogs(requireContext())
+        println(pastLog)
 
 
         val oneRepMaxBar: TextView = binding.oneRepMaxBar
@@ -97,7 +98,6 @@ class AddLogFragment : Fragment() {
             }
 
             SetStorage.addSet(requireContext(), ExerciseSetFactory.createExerciseSet(cardItem, mass, setNum, rep))
-            println(SetStorage.getSets(requireContext()))
             val midLeftLayout = binding.midLeft
             val tableLayout = midLeftLayout.findViewById<TableLayout>(R.id.todaySetTable)
             tableLayout.addView(
@@ -114,12 +114,6 @@ class AddLogFragment : Fragment() {
         return binding.root
     }
 
-    override fun onStop() {
-//        if (exerciseSetList.isNotEmpty()) {
-//            logStorage.updateLog(requireContext(), log, exerciseSetList)
-//        } else logStorage.removeLog(requireContext(), log)
-        super.onStop()
-    }
 
     @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
