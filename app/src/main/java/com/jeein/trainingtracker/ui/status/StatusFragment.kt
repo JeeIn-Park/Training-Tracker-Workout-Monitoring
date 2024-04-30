@@ -1,20 +1,20 @@
 package com.jeein.trainingtracker.ui.status
 
 import android.app.AlertDialog
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jeein.trainingtracker.R
 import com.jeein.trainingtracker.ui.exerciseCard.CardStorage
 import com.jeein.trainingtracker.databinding.FragmentStatusBinding
-import com.jeein.trainingtracker.ui.exerciseLog.AddLogActivity
 import com.jeein.trainingtracker.ui.tag.Tag
 import com.jeein.trainingtracker.ui.tag.TagAdapter
 import com.jeein.trainingtracker.ui.tag.TagFactory
@@ -38,10 +38,8 @@ class StatusFragment : Fragment() {
       val root: View = binding.root
 
       cardAdapter = StatusCardAdapter(requireContext()) { clickedCard ->
-          val intent = Intent(context, AddLogActivity::class.java).apply {
-              putExtra("EXTRA_CARD_ITEM", clickedCard)
-          }
-          startActivity(intent)
+//          val bundle = bundleOf("exerciseCardArg" to clickedCard)
+//          findNavController().navigate(R.id.action_statusFragment_to_addLogFragment, bundle)
       }
 
       tagAdapter = TagAdapter(requireContext()) { clickedTag ->

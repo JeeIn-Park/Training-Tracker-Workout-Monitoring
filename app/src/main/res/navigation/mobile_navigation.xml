@@ -13,13 +13,20 @@
         <action
             android:id="@+id/action_homeFragment_to_addCardFragment"
             app:destination="@id/navigation_add_card" />
+        <action
+            android:id="@+id/action_homeFragment_to_addLogFragment"
+            app:destination="@id/navigation_add_log" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_status"
         android:name="com.jeein.trainingtracker.ui.status.StatusFragment"
         android:label="@string/title_status"
-        tools:layout="@layout/fragment_status" />
+        tools:layout="@layout/fragment_status" >
+        <action
+            android:id="@+id/action_statusFragment_to_addLogFragment"
+            app:destination="@id/navigation_add_log" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_setting"
@@ -46,6 +53,16 @@
             android:name="exerciseCardArg"
             app:argType="com.jeein.trainingtracker.ui.exerciseCard.ExerciseCard"
             app:nullable="true"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_add_log"
+        android:name="com.jeein.trainingtracker.ui.exerciseLog.AddLogFragment"
+        android:label="Add Log"
+        tools:layout="@layout/fragment_add_log">
+        <argument
+            android:name="exerciseCardArg"
+            app:argType="com.jeein.trainingtracker.ui.exerciseCard.ExerciseCard"/>
     </fragment>
 
 </navigation>

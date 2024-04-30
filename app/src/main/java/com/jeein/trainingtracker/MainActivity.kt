@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
             when (destination.id) {
                 R.id.navigation_home -> navView.menu.findItem(R.id.navigation_home).isChecked = true
                 R.id.navigation_add_card -> navView.menu.findItem(R.id.navigation_home).isChecked = true
+                R.id.navigation_add_log -> navView.menu.findItem(R.id.navigation_home).isChecked = true
                 R.id.navigation_status -> navView.menu.findItem(R.id.navigation_status).isChecked = true
                 R.id.navigation_setting -> navView.menu.findItem(R.id.navigation_setting).isChecked = true
                 R.id.navigation_privacy_policy -> navView.menu.findItem(R.id.navigation_setting).isChecked = true

@@ -24,9 +24,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.jeein.trainingtracker.ui.exerciseLog.AddLogActivity" />
-
-
     </application>
 
 </manifest>

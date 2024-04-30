@@ -23,7 +23,6 @@ import java.util.UUID
 
 class AddCardFragment : Fragment() {
 
-
     private var _binding: FragmentAddCardBinding? = null
     private val binding get() = _binding!!
 
@@ -33,7 +32,8 @@ class AddCardFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAddCardBinding.inflate(inflater, container, false)

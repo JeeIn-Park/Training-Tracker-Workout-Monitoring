@@ -27,13 +27,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import android.os.Handler
 import android.os.Looper
 import android.animation.ObjectAnimator
-import android.content.Intent
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.jeein.trainingtracker.ui.exerciseCard.ExerciseCard
-import com.jeein.trainingtracker.ui.exerciseLog.AddLogActivity
 import com.jeein.trainingtracker.ui.muscles.MuscleFactory.getDrawableResourceIdByStatus
-import java.io.Serializable
 
 class HomeFragment : Fragment() {
 
@@ -219,10 +216,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun handleItemClick(cardItem: ExerciseCard) {
-        val intent = Intent(context, AddLogActivity::class.java).apply {
-            putExtra("EXTRA_CARD_ITEM", cardItem)
-        }
-        startActivity(intent)
+        val bundle = bundleOf("exerciseCardArg" to cardItem)
+        findNavController().navigate(R.id.action_homeFragment_to_addLogFragment, bundle)
     }
 
     private fun navigateToEdit(cardItem: ExerciseCard) {
