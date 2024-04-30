@@ -1,5 +1,7 @@
 package com.jeein.trainingtracker.ui.exerciseLog
 
+import com.jeein.trainingtracker.ui.exerciseLog.exerciseSet.ExerciseSet
+
 object OneRepMax {
 
 

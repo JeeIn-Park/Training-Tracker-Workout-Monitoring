@@ -20,6 +20,8 @@ import com.jeein.trainingtracker.R
 import com.jeein.trainingtracker.TableSetup
 import com.jeein.trainingtracker.databinding.FragmentAddLogBinding
 import com.jeein.trainingtracker.ui.exerciseCard.ExerciseCard
+import com.jeein.trainingtracker.ui.exerciseLog.exerciseSet.ExerciseSet
+import com.jeein.trainingtracker.ui.exerciseLog.exerciseSet.ExerciseSetFactory
 import com.jeein.trainingtracker.views.GraphViewAdapter
 
 

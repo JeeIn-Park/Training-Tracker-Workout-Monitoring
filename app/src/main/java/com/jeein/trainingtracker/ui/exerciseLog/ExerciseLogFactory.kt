@@ -1,6 +1,7 @@
 package com.jeein.trainingtracker.ui.exerciseLog
 
 import com.jeein.trainingtracker.ui.exerciseCard.ExerciseCard
+import com.jeein.trainingtracker.ui.exerciseLog.exerciseSet.ExerciseSet
 import java.time.LocalDateTime
 
 object ExerciseLogFactory {

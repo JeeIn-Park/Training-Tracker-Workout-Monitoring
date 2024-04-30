@@ -1,5 +1,6 @@
 package com.jeein.trainingtracker.ui.exerciseLog
 
+import com.jeein.trainingtracker.ui.exerciseLog.exerciseSet.ExerciseSet
 import java.io.Serializable
 import java.time.LocalDateTime
 import java.util.UUID
