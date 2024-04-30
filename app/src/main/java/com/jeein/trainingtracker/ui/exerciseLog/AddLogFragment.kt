@@ -19,6 +19,7 @@ import com.jeein.trainingtracker.FormattedStringGetter
 import com.jeein.trainingtracker.R
 import com.jeein.trainingtracker.TableSetup
 import com.jeein.trainingtracker.databinding.FragmentAddLogBinding
+import com.jeein.trainingtracker.ui.exerciseCard.CardStorage
 import com.jeein.trainingtracker.ui.exerciseCard.ExerciseCard
 import com.jeein.trainingtracker.ui.exerciseSet.ExerciseSetFactory
 import com.jeein.trainingtracker.ui.exerciseSet.SetStorage
@@ -50,6 +51,11 @@ class AddLogFragment : Fragment() {
         _binding = FragmentAddLogBinding.inflate(inflater, container, false)
 
         cardItem = arguments?.getSerializable("exerciseCardArg") as ExerciseCard
+        val currentExercise = SetStorage.getCurrentExercise(requireContext())
+        if ( (currentExercise != null) && (currentExercise != cardItem.id)) {
+            SetStorage.resetSets(requireContext(), currentExercise)
+        }
+
         (requireActivity() as AppCompatActivity).supportActionBar?.title = cardItem.name
         logStorage = LogStorage(cardItem.id)
         val pastLog: List<ExerciseLog> = logStorage.loadLogs(requireContext())

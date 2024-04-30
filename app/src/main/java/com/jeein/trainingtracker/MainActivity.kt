@@ -9,6 +9,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.jeein.trainingtracker.databinding.ActivityMainBinding
+import com.jeein.trainingtracker.ui.exerciseSet.SetStorage
 import com.jeein.trainingtracker.ui.muscles.MuscleFactory
 import com.jeein.trainingtracker.ui.tag.TagFactory
 
@@ -56,6 +57,10 @@ class MainActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         TagFactory.resetSelection(this)
+        val currentExercise = SetStorage.getCurrentExercise(this)
+        if (currentExercise != null) {
+            SetStorage.resetSets(this, currentExercise)
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
