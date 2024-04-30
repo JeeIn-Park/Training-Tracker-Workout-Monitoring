@@ -49,6 +49,7 @@ class StatusCardAdapter(private val context: Context, private val onItemClick: (
         private val exerciseNameTextView: TextView = itemView.findViewById(R.id.StatusCard_ExerciseName_TextView)
         private val mainMuscleTextView: TextView = itemView.findViewById(R.id.StatusCard_MainMuscle_TextView)
         private val subMuscleTextView: TextView = itemView.findViewById(R.id.StatusCard_SubMuscle_TextView)
+        private val tagTextView: TextView = itemView.findViewById(R.id.StatusCard_Tag_TextView)
         private val oneRepMaxTextView: TextView = itemView.findViewById(R.id.StatusCard_OneRepMax_TextView)
         private val graphView: GraphView = itemView.findViewById(R.id.StatusCard_GraphView)
         private val pastLogRecyclerView: RecyclerView = itemView.findViewById(R.id.StatusCard_PastLogs_RecyclerView)
@@ -76,6 +77,9 @@ class StatusCardAdapter(private val context: Context, private val onItemClick: (
                 subMuscleTextView.text = FormattedStringGetter.subMuscles(cardItem.subMuscles)
             } else subMuscleTextView.visibility = View.GONE
 
+            if (cardItem.tag.isNotEmpty()){
+                tagTextView.text = FormattedStringGetter.tags(cardItem.tag)
+            } else tagTextView.text = ""
 
             val oneRepMaxRecordDate = cardItem.oneRepMaxRecordDate
             if (oneRepMaxRecordDate != null) {

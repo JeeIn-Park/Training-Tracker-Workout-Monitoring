@@ -19,40 +19,58 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="left"
-            android:orientation="vertical">
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/StatusCard_ExerciseName_TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10sp"
+                    android:padding="4sp"
+                    android:text="Exercise Name"
+                    android:textColor="?attr/colorOnBackground"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/StatusCard_MainMuscle_TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10sp"
+                    android:paddingHorizontal="4sp"
+                    android:paddingBottom="4sp"
+                    android:text="Main Muscles"
+                    android:textColor="?attr/colorPrimaryVariant"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/StatusCard_SubMuscle_TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10sp"
+                    android:paddingHorizontal="4sp"
+                    android:paddingBottom="4sp"
+                    android:text="Sub Muscles"
+                    android:textColor="?attr/colorPrimaryVariant"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/StatusCard_ExerciseName_TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10sp"
+                android:id="@+id/StatusCard_Tag_TextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:padding="4sp"
                 android:textSize="12sp"
-                android:textColor="?attr/colorOnBackground"
-                android:text="Exercise Name" />
-
-            <TextView
-                android:id="@+id/StatusCard_MainMuscle_TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="4sp"
-                android:paddingBottom="4sp"
-                android:textSize="12sp"
-                android:layout_marginStart="10sp"
+                android:layout_marginEnd="10sp"
                 android:textColor="?attr/colorPrimaryVariant"
-                android:text="Main Muscles" />
+                android:text="Tag" />
 
-            <TextView
-                android:id="@+id/StatusCard_SubMuscle_TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="4sp"
-                android:paddingBottom="4sp"
-                android:textSize="12sp"
-                android:layout_marginStart="10sp"
-                android:textColor="?attr/colorPrimaryVariant"
-                android:text="Sub Muscles" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

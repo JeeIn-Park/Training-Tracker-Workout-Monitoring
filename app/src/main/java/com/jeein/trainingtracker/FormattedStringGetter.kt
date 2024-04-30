@@ -6,6 +6,7 @@ import android.text.SpannableString
 import android.text.style.StyleSpan
 import com.jeein.trainingtracker.ui.exerciseCard.ExerciseCard
 import com.jeein.trainingtracker.ui.muscles.Muscle
+import com.jeein.trainingtracker.ui.tag.Tag
 import java.time.Duration
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -19,6 +20,10 @@ object FormattedStringGetter {
 
     fun subMuscles(subMuscles: List<Muscle>) : String{
         return "Sub muscle : ${subMuscles.joinToString(separator = ", ") { it.name }}"
+    }
+
+    fun tags(tags: List<Tag>) : String{
+        return tags.joinToString(prefix = "# ", separator = " # ") { it.name }
     }
 
     fun dateTimeWithDiff(oldDate: LocalDateTime, newDate: LocalDateTime): String {

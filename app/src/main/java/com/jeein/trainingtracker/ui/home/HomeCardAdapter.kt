@@ -63,7 +63,7 @@ class HomeCardAdapter(
             }
 
             if (cardItem.tag.isNotEmpty()){
-                tag.text = cardItem.tag.joinToString(prefix = "# ", separator = " ") { it.name }
+                tag.text = FormattedStringGetter.tags(cardItem.tag)
             } else tag.text = ""
 
             // Create a local immutable copy of lastActivity
