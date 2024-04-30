@@ -29,13 +29,6 @@ class TagAdapter(private val context: Context, private val onItemClick: (Tag) ->
         }
     }
 
-    // TODO : manual to addItem
-    fun addItem(tag: Tag) {
-        val updatedList = currentList.toMutableList()
-        updatedList.add(tag)
-        submitList(updatedList)
-        TagStorage.addTag(context, tag)
-    }
 
     fun removeItem(position: Int) {
         val updatedList = currentList.toMutableList()

@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.jeein.trainingtracker.FormattedStringGetter
@@ -16,7 +15,6 @@ import com.jeein.trainingtracker.ui.exerciseCard.ExerciseCard
 import com.jeein.trainingtracker.ui.exerciseCard.ExerciseCardDiffCallback
 import com.jeein.trainingtracker.R
 import com.jeein.trainingtracker.ui.exerciseLog.LogStorage
-import java.io.Serializable
 import java.time.LocalDateTime
 
 class HomeCardAdapter(
@@ -138,7 +136,6 @@ class HomeCardAdapter(
                 .show()
         }
     }
-
 
 }
 

@@ -4,6 +4,7 @@ import android.content.Context
 import com.jeein.trainingtracker.ui.exerciseLog.ExerciseLog
 import com.jeein.trainingtracker.ui.muscles.MuscleFactory
 import com.jeein.trainingtracker.ui.tag.Tag
+import com.jeein.trainingtracker.ui.tag.TagFactory
 import java.io.FileNotFoundException
 import java.io.IOException
 import java.io.ObjectInputStream
@@ -68,6 +69,26 @@ object CardStorage {
             ExerciseCardFactory.updateExerciseCard(card, log))
         // TODO : muscle factory
         MuscleFactory.updateMuscle(context, card)
+    }
+
+    fun deleteTag(context: Context, t: Tag) {
+        val tag = TagFactory.clickTag(t)
+        val currentCards = loadCards(context).toMutableList()
+        for (i in currentCards.indices) {
+            val card = currentCards[i]
+            if (card.tag.contains(tag)){
+                val tags = card.tag.toMutableList()
+                tags.remove(tag)
+                currentCards[i] = ExerciseCardFactory.editExerciseCard(
+                    currentCards[i],
+                    card.name,
+                    card.mainMuscles,
+                    card.subMuscles,
+                    tags
+                    )
+            }
+        }
+        saveCards(context, currentCards)
     }
 
     fun isIdInUse(context: Context, id: UUID): Boolean {
