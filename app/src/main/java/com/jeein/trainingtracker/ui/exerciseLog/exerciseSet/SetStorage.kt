@@ -36,9 +36,9 @@ object SetStorage {
     }
 
     fun addSet(context: Context, set: ExerciseSet) {
-        val currentSets = loadSets(context)
-        val updatedSets = listOf(set) + currentSets
-        saveSets(context, updatedSets)
+        val currentSets : MutableList<ExerciseSet> = loadSets(context).toMutableList()
+        currentSets.add(set)
+        saveSets(context, currentSets)
     }
 
     fun removeSet(context: Context, set: ExerciseSet) {
@@ -73,34 +73,18 @@ object SetStorage {
 //        return currentSets.any { it.id == id }
 //    }
 
-//
-//    fun getSet(context: Context, id: UUID): ExerciseSet {
-//        val sets = loadSets(context)
-//        val index = sets.indexOfFirst { it.id == id }
-//        if (index != -1) {
-//            return sets[index]
-//        }
-//        return ExerciseSetFactory.createExerciseSet(context, "")
-//    }
 
-//    fun getSelectedSet(context: Context, tags: List<Tag>): List<ExerciseSet> {
-//        val sets: MutableList<ExerciseSet> = loadSets(context).toMutableList()
-//        if (tags.isEmpty()) {
-//            return sets
-//        } else {
-//            val updateSets: MutableList<ExerciseSet> = sets.toMutableList()
-//            for (set in sets) {
-//                var selected = false
-//                for (tag in tags) {
-//                    if (set.tag.contains(tag)) {
-//                        selected = true
-//                    }
-//                }
-//                if (!selected) {
-//                    updateSets.remove(set)
-//                }
-//            }
-//            return updateSets
-//        }
-//    }
+    fun getSets(context: Context): List<ExerciseSet> {
+        return loadSets(context)
+    }
+
+    fun getCurrentSetNum(context: Context): Int {
+        val currentSets = loadSets(context).toMutableList()
+        for (i in currentSets.indices.reversed()) {
+            val currentSetNum = currentSets[i].set
+            if (currentSetNum != null) return currentSetNum
+        }
+        return 0
+    }
+
 }

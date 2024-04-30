@@ -20,8 +20,8 @@ import com.jeein.trainingtracker.R
 import com.jeein.trainingtracker.TableSetup
 import com.jeein.trainingtracker.databinding.FragmentAddLogBinding
 import com.jeein.trainingtracker.ui.exerciseCard.ExerciseCard
-import com.jeein.trainingtracker.ui.exerciseLog.exerciseSet.ExerciseSet
 import com.jeein.trainingtracker.ui.exerciseLog.exerciseSet.ExerciseSetFactory
+import com.jeein.trainingtracker.ui.exerciseLog.exerciseSet.SetStorage
 import com.jeein.trainingtracker.views.GraphViewAdapter
 
 
@@ -32,9 +32,6 @@ class AddLogFragment : Fragment() {
 
     // past log
     private lateinit var pastLogTableAdapter: PastLogTableAdapter
-    private lateinit var log: ExerciseLog
-    private var exerciseSetList: MutableList<ExerciseSet> = mutableListOf()
-    private var currentSetCount: Int = 0
 
     // get selected card
     private lateinit var cardItem: ExerciseCard
@@ -56,15 +53,13 @@ class AddLogFragment : Fragment() {
         (requireActivity() as AppCompatActivity).supportActionBar?.title = cardItem.name
         logStorage = LogStorage(cardItem.id)
         val pastLog: List<ExerciseLog> = logStorage.loadLogs(requireContext())
-        log = ExerciseLogFactory.createEmptyExerciseLog(cardItem)
-        logStorage.addLog(requireContext(), log)
 
 
         val oneRepMaxBar: TextView = binding.oneRepMaxBar
         val oneRepMaxRecordDate = cardItem.oneRepMaxRecordDate
         if (oneRepMaxRecordDate != null) {
             oneRepMaxBar.text =
-                FormattedStringGetter.oneRepMaxRecordWithDate(cardItem, log.dateTime)
+                FormattedStringGetter.oneRepMaxRecordWithDate(cardItem, oneRepMaxRecordDate)
         } else oneRepMaxBar.visibility = View.GONE
 
 
@@ -95,18 +90,14 @@ class AddLogFragment : Fragment() {
             val mass = massString.toFloatOrNull()
             val repString = repEditText.text.toString()
             val rep = repString.toIntOrNull()
-            val setNum: Int?
-
-            if (warmUpCheckBox.isChecked) {
-                setNum = null
+            val setNum: Int? = if (warmUpCheckBox.isChecked) {
+                null
             } else {
-                currentSetCount += 1
-                setNum = currentSetCount
+                SetStorage.getCurrentSetNum(requireContext()) + 1
             }
 
-            exerciseSetList.add(ExerciseSetFactory.createExerciseSet(cardItem, mass, setNum, rep))
-            log = logStorage.updateLog(requireContext(), log, exerciseSetList)
-
+            SetStorage.addSet(requireContext(), ExerciseSetFactory.createExerciseSet(cardItem, mass, setNum, rep))
+            println(SetStorage.getSets(requireContext()))
             val midLeftLayout = binding.midLeft
             val tableLayout = midLeftLayout.findViewById<TableLayout>(R.id.todaySetTable)
             tableLayout.addView(
@@ -124,9 +115,9 @@ class AddLogFragment : Fragment() {
     }
 
     override fun onStop() {
-        if (exerciseSetList.isNotEmpty()) {
-            logStorage.updateLog(requireContext(), log, exerciseSetList)
-        } else logStorage.removeLog(requireContext(), log)
+//        if (exerciseSetList.isNotEmpty()) {
+//            logStorage.updateLog(requireContext(), log, exerciseSetList)
+//        } else logStorage.removeLog(requireContext(), log)
         super.onStop()
     }
 
