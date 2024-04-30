@@ -15,30 +15,47 @@ object ExerciseCardFactory {
     }
 
     fun editExerciseCard(
-        originalCard: ExerciseCard, name: String, mainMuscles: List<Muscle>, subMuscles: List<Muscle>, tags: List<Tag>)
-    : ExerciseCard{
+        originalCard: ExerciseCard,
+        name: String,
+        mainMuscles: List<Muscle>,
+        subMuscles: List<Muscle>,
+        tags: List<Tag>
+    )
+            : ExerciseCard {
         return ExerciseCard(
-            originalCard.id, originalCard.timeAdded, originalCard.lastActivity, name, mainMuscles, subMuscles, tags, originalCard.oneRepMaxRecord, originalCard.oneRepMaxRecordDate
+            originalCard.id,
+            originalCard.timeAdded,
+            originalCard.lastActivity,
+            name,
+            mainMuscles,
+            subMuscles,
+            tags,
+            originalCard.oneRepMaxRecord,
+            originalCard.oneRepMaxRecordDate
         )
     }
 
 
-    fun updateExerciseCard(originalCard: ExerciseCard, exerciseLog: ExerciseLog, exerciseDate: LocalDateTime) : ExerciseCard{
+    fun updateExerciseCard(
+        originalCard: ExerciseCard,
+        exerciseLog: ExerciseLog,
+        exerciseDate: LocalDateTime
+    ): ExerciseCard {
         if (
             (exerciseLog.oneRepMax ?: Float.MIN_VALUE) >= (originalCard.oneRepMaxRecord
                 ?: Float.MIN_VALUE)
-        )
-        { return ExerciseCard(
-            originalCard.id,
-            originalCard.timeAdded,
-            exerciseDate,
-            originalCard.name,
-            originalCard.mainMuscles,
-            originalCard.subMuscles,
-            originalCard.tag,
-            exerciseLog.oneRepMax,
-            exerciseLog.dateTime
-        )
+        ) {
+            return ExerciseCard(
+                originalCard.id,
+                originalCard.timeAdded,
+                exerciseDate,
+                originalCard.name,
+                originalCard.mainMuscles,
+                originalCard.subMuscles,
+                originalCard.tag,
+                exerciseLog.oneRepMax,
+                exerciseLog.dateTime
+            )
         } else return ExerciseCard(
             originalCard.id,
             originalCard.timeAdded,
@@ -52,22 +69,22 @@ object ExerciseCardFactory {
         )
     }
 
-    fun updateExerciseCard(originalCard: ExerciseCard, exerciseLog: ExerciseLog) : ExerciseCard{
+    fun updateExerciseCard(originalCard: ExerciseCard, exerciseLog: ExerciseLog): ExerciseCard {
         if (
             (exerciseLog.oneRepMax ?: Float.MIN_VALUE) >= (originalCard.oneRepMaxRecord
                 ?: Float.MIN_VALUE)
-        )
-        { return ExerciseCard(
-            originalCard.id,
-            originalCard.timeAdded,
-            exerciseLog.dateTime,
-            originalCard.name,
-            originalCard.mainMuscles,
-            originalCard.subMuscles,
-            originalCard.tag,
-            exerciseLog.oneRepMax,
-            exerciseLog.dateTime
-        )
+        ) {
+            return ExerciseCard(
+                originalCard.id,
+                originalCard.timeAdded,
+                exerciseLog.dateTime,
+                originalCard.name,
+                originalCard.mainMuscles,
+                originalCard.subMuscles,
+                originalCard.tag,
+                exerciseLog.oneRepMax,
+                exerciseLog.dateTime
+            )
         } else return ExerciseCard(
             originalCard.id,
             originalCard.timeAdded,

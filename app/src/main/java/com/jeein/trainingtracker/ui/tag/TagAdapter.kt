@@ -49,14 +49,14 @@ class TagAdapter(private val context: Context, private val onItemClick: (Tag) ->
     }
 
 
-    inner class TagViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)  {
-        private val tagCard : CardView = itemView.findViewById(R.id.tagCard)
-        private val tagName : TextView = itemView.findViewById(R.id.tagName)
+    inner class TagViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val tagCard: CardView = itemView.findViewById(R.id.tagCard)
+        private val tagName: TextView = itemView.findViewById(R.id.tagName)
 
-        fun bind(tag : Tag, position: Int) {
-            if(tag.isSelected){
+        fun bind(tag: Tag, position: Int) {
+            if (tag.isSelected) {
                 tagCard.setCardBackgroundColor(context.getColor(R.color.turquoise))
-            }else{
+            } else {
                 tagCard.setCardBackgroundColor(context.getColor(R.color.brighter_turquoise))
             }
             if (tag != Tag.ADD_TAG) {

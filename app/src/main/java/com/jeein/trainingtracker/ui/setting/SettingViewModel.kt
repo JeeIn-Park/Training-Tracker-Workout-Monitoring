@@ -13,7 +13,8 @@ class SettingViewModel(application: Application) : AndroidViewModel(application)
     // text
     private val _text = MutableLiveData<String>().apply {
         try {
-            val appVersion = application.packageManager.getPackageInfo(application.packageName, 0).versionName
+            val appVersion =
+                application.packageManager.getPackageInfo(application.packageName, 0).versionName
             value = "app version : $appVersion"
         } catch (e: PackageManager.NameNotFoundException) {
             e.printStackTrace()

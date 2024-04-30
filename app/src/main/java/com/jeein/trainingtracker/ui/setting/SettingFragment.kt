@@ -1,17 +1,17 @@
 package com.jeein.trainingtracker.ui.setting
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.jeein.trainingtracker.R
 import com.jeein.trainingtracker.databinding.FragmentSettingBinding
-import android.app.AlertDialog
-import android.widget.EditText
-import android.widget.TextView
-import androidx.lifecycle.ViewModelProvider
 
 
 class SettingFragment : Fragment() {

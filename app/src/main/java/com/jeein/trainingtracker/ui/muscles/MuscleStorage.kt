@@ -77,9 +77,14 @@ object MuscleStorage {
 
 
     private fun loadDefaultMuscles(): List<Muscle> {
-        var uuidList : MutableList<UUID> = listOf<UUID>().toMutableList()
+        var uuidList: MutableList<UUID> = listOf<UUID>().toMutableList()
         return listOf(
-            Muscle(null, 0, "Neck / Traps", listOf("muscle_front_neck_traps", "muscle_back_neck_traps")),
+            Muscle(
+                null,
+                0,
+                "Neck / Traps",
+                listOf("muscle_front_neck_traps", "muscle_back_neck_traps")
+            ),
             Muscle(null, 0, "Shoulder", listOf("muscle_front_shoulder", "muscle_back_shoulder")),
             Muscle(null, 0, "Chest", listOf("muscle_front_chest")),
             Muscle(null, 0, "Biceps", listOf("muscle_front_biceps")),

@@ -14,27 +14,27 @@ import java.util.UUID
 object CardStorage {
     private const val FILE_NAME = "exercise_cards.dat"
 
-    private fun saveCards(context: Context, cards : List<ExerciseCard>) {
+    private fun saveCards(context: Context, cards: List<ExerciseCard>) {
         try {
             ObjectOutputStream(context.openFileOutput(FILE_NAME, Context.MODE_PRIVATE)).use {
                 it.writeObject(cards)
             }
-        } catch (e : IOException) {
+        } catch (e: IOException) {
             e.printStackTrace()
         }
     }
 
-    private fun loadCards(context: Context) : List<ExerciseCard> {
+    private fun loadCards(context: Context): List<ExerciseCard> {
         try {
             ObjectInputStream(context.openFileInput(FILE_NAME)).use {
                 return it.readObject() as? List<ExerciseCard> ?: emptyList()
             }
-        } catch (e : FileNotFoundException) {
+        } catch (e: FileNotFoundException) {
             return emptyList()
-        } catch (e : IOException) {
+        } catch (e: IOException) {
             e.printStackTrace()
             return emptyList()
-        } catch (e : ClassNotFoundException) {
+        } catch (e: ClassNotFoundException) {
             e.printStackTrace()
             return emptyList()
         }
@@ -66,7 +66,8 @@ object CardStorage {
         editCard(
             context,
             card,
-            ExerciseCardFactory.updateExerciseCard(card, log))
+            ExerciseCardFactory.updateExerciseCard(card, log)
+        )
         // TODO : muscle factory
         MuscleFactory.updateMuscle(context, card)
     }
@@ -76,7 +77,7 @@ object CardStorage {
         val currentCards = loadCards(context).toMutableList()
         for (i in currentCards.indices) {
             val card = currentCards[i]
-            if (card.tag.contains(tag)){
+            if (card.tag.contains(tag)) {
                 val tags = card.tag.toMutableList()
                 tags.remove(tag)
                 currentCards[i] = ExerciseCardFactory.editExerciseCard(
@@ -85,7 +86,7 @@ object CardStorage {
                     card.mainMuscles,
                     card.subMuscles,
                     tags
-                    )
+                )
             }
         }
         saveCards(context, currentCards)
@@ -96,8 +97,8 @@ object CardStorage {
         return currentCards.any { it.id == id }
     }
 
-    fun getCard(context: Context, id: UUID): ExerciseCard{
-        val cards  = loadCards(context)
+    fun getCard(context: Context, id: UUID): ExerciseCard {
+        val cards = loadCards(context)
         val index = cards.indexOfFirst { it.id == id }
         if (index != -1) {
             return cards[index]
@@ -105,12 +106,12 @@ object CardStorage {
         return ExerciseCardFactory.createExerciseCard(context, "")
     }
 
-    fun getSelectedCard(context: Context, tags: List<Tag>) : List<ExerciseCard> {
-        val cards : MutableList<ExerciseCard> = loadCards(context).toMutableList()
+    fun getSelectedCard(context: Context, tags: List<Tag>): List<ExerciseCard> {
+        val cards: MutableList<ExerciseCard> = loadCards(context).toMutableList()
         if (tags.isEmpty()) {
             return cards
         } else {
-            val updateCards : MutableList<ExerciseCard> = cards.toMutableList()
+            val updateCards: MutableList<ExerciseCard> = cards.toMutableList()
             for (card in cards) {
                 var selected = false
                 for (tag in tags) {

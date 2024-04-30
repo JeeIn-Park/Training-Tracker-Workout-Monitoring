@@ -1,36 +1,36 @@
 package com.jeein.trainingtracker.ui.home
 
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageButton
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.jeein.trainingtracker.R
 import com.jeein.trainingtracker.databinding.FragmentHomeBinding
 import com.jeein.trainingtracker.ui.exerciseCard.CardStorage
+import com.jeein.trainingtracker.ui.exerciseCard.ExerciseCard
 import com.jeein.trainingtracker.ui.muscles.Muscle
+import com.jeein.trainingtracker.ui.muscles.MuscleFactory.getDrawableResourceIdByStatus
 import com.jeein.trainingtracker.ui.muscles.MuscleStorage
 import com.jeein.trainingtracker.ui.tag.Tag
 import com.jeein.trainingtracker.ui.tag.TagAdapter
 import com.jeein.trainingtracker.ui.tag.TagFactory
 import com.jeein.trainingtracker.ui.tag.TagStorage
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import android.os.Handler
-import android.os.Looper
-import android.animation.ObjectAnimator
-import androidx.core.os.bundleOf
-import androidx.navigation.fragment.findNavController
-import com.jeein.trainingtracker.ui.exerciseCard.ExerciseCard
-import com.jeein.trainingtracker.ui.muscles.MuscleFactory.getDrawableResourceIdByStatus
 
 class HomeFragment : Fragment() {
 
@@ -76,7 +76,10 @@ class HomeFragment : Fragment() {
                 inputDialog.setPositiveButton("OK") { dialog, _ ->
                     val newTagString = inputEditText.text.toString().trim()
                     if (newTagString.isNotEmpty()) {
-                        TagStorage.addTag(requireContext(), TagFactory.createTag(requireContext(), newTagString))
+                        TagStorage.addTag(
+                            requireContext(),
+                            TagFactory.createTag(requireContext(), newTagString)
+                        )
                         refresh()
                     }
                     dialog.dismiss()
@@ -103,7 +106,8 @@ class HomeFragment : Fragment() {
         }
 
         val tagRecyclerViewBinding = binding.filterBar.tagRecyclerView
-        tagRecyclerViewBinding.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        tagRecyclerViewBinding.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         tagRecyclerViewBinding.adapter = tagAdapter
         tagRecyclerViewBinding.itemAnimator = DefaultItemAnimator()
         homeViewModel.tagRecyclerViewData.observe(viewLifecycleOwner) { newData ->
@@ -141,6 +145,7 @@ class HomeFragment : Fragment() {
                     lastAction = MotionEvent.ACTION_DOWN
                     true
                 }
+
                 MotionEvent.ACTION_MOVE -> {
                     val newX = event.rawX + dX
                     val newY = event.rawY + dY
@@ -148,7 +153,8 @@ class HomeFragment : Fragment() {
                     val actionBarHeight = resources.getDimension(R.dimen.action_bar_height)
                     val bottomNavHeight = resources.getDimension(R.dimen.bottom_nav_height)
                     if (newY + view.height > parentView.height - bottomNavHeight + view.height
-                        || newY < actionBarHeight - view.height) {
+                        || newY < actionBarHeight - view.height
+                    ) {
                         true  // Still consume the event but don't move the view
                     } else {
                         view.animate()
@@ -160,6 +166,7 @@ class HomeFragment : Fragment() {
                         true
                     }
                 }
+
                 MotionEvent.ACTION_UP -> {
                     handler.postDelayed(fadeOutRunnable, 300)
                     val parentWidth = (view.parent as View).width.toFloat()
@@ -175,6 +182,7 @@ class HomeFragment : Fragment() {
                     }
                     true
                 }
+
                 else -> false
             }
         }
@@ -194,25 +202,32 @@ class HomeFragment : Fragment() {
 
     private fun updateMuscleImages(context: Context, muscles: List<Muscle>) {
         muscles.forEach { muscle ->
-            for (drawableName in muscle.layout){
-                val viewId = context.resources.getIdentifier(drawableName, "id", context.packageName)
+            for (drawableName in muscle.layout) {
+                val viewId =
+                    context.resources.getIdentifier(drawableName, "id", context.packageName)
                 val muscleView = view?.findViewById<ImageButton>(viewId)
-                muscleView?.setBackgroundResource(getDrawableResourceIdByStatus(requireContext(), muscle.status, drawableName))
+                muscleView?.setBackgroundResource(
+                    getDrawableResourceIdByStatus(
+                        requireContext(),
+                        muscle.status,
+                        drawableName
+                    )
+                )
             }
         }
     }
 
     private fun refresh() {
-        val tags : MutableList<Tag> = TagStorage.loadTags(requireContext()).toMutableList()
+        val tags: MutableList<Tag> = TagStorage.loadTags(requireContext()).toMutableList()
         tags.removeAll { it == Tag.ADD_TAG }
         tags.add(Tag.ADD_TAG)
         homeViewModel.updateTagRecyclerViewData(tags)
         val selectedTags = TagStorage.getSelectedTags(requireContext())
         val cards = CardStorage.getSelectedCard(requireContext(), selectedTags)
         homeViewModel.updateCardRecyclerViewData(cards)
-        val muscles =  MuscleStorage.loadMuscles(requireContext())
+        val muscles = MuscleStorage.loadMuscles(requireContext())
         println(muscles)
-        updateMuscleImages(requireContext(),muscles)
+        updateMuscleImages(requireContext(), muscles)
     }
 
     private fun handleItemClick(cardItem: ExerciseCard) {

@@ -7,13 +7,13 @@ import android.widget.TextView
 
 object TableSetup {
 
-    fun setKgRepTableRow(context: Context, set: Int?, kg: String, rep: String) : TableRow {
+    fun setKgRepTableRow(context: Context, set: Int?, kg: String, rep: String): TableRow {
         val tableRow = TableRow(context)
         val setCountTextView = TextView(context)
         val kgAndRepTextView = TextView(context)
 
         setCountTextView.text = if (set != null) {
-            "${set?.toString()} set"
+            "${set.toString()} set"
         } else {
             ""
         }
@@ -44,19 +44,27 @@ object TableSetup {
     }
 
 
-    fun setKgRepTableRow(context: Context, set: Int?, kg: Float?, rep: Int?) : TableRow {
+    fun setKgRepTableRow(context: Context, set: Int?, kg: Float?, rep: Int?): TableRow {
         val tableRow = TableRow(context)
         val setCountTextView = TextView(context)
         val kgAndRepTextView = TextView(context)
 
         setCountTextView.text = if (set != null) {
-            "${set?.toString()} set"
-        } else { "" }
-        val setCountParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT)
+            "${set.toString()} set"
+        } else {
+            ""
+        }
+        val setCountParams = TableRow.LayoutParams(
+            TableRow.LayoutParams.WRAP_CONTENT,
+            TableRow.LayoutParams.WRAP_CONTENT
+        )
         setCountTextView.layoutParams = setCountParams
 
         kgAndRepTextView.text = "${kg.toString()} kg * ${rep.toString()}"
-        val kgAndRepParams = TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT)
+        val kgAndRepParams = TableRow.LayoutParams(
+            TableRow.LayoutParams.MATCH_PARENT,
+            TableRow.LayoutParams.WRAP_CONTENT
+        )
         kgAndRepTextView.layoutParams = kgAndRepParams
 
         setCountTextView.setPadding(16, 8, 16, 8)

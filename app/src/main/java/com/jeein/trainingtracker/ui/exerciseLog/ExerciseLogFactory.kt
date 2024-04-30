@@ -5,19 +5,21 @@ import java.time.LocalDateTime
 
 object ExerciseLogFactory {
 
-    fun createEmptyExerciseLog(card: ExerciseCard): ExerciseLog{
+    fun createEmptyExerciseLog(card: ExerciseCard): ExerciseLog {
         return ExerciseLog(
             dateTime = LocalDateTime.now(),
             exerciseCard = card.id,
             exerciseSetList = emptyList(),
-            oneRepMax = null)
+            oneRepMax = null
+        )
     }
 
-    fun createExerciseLog(exerciseSetList: List<ExerciseSet>) : ExerciseLog{
+    fun createExerciseLog(exerciseSetList: List<ExerciseSet>): ExerciseLog {
         return ExerciseLog(
             dateTime = exerciseSetList[exerciseSetList.lastIndex].dateTime,
             exerciseCard = exerciseSetList[0].exerciseCard,
             exerciseSetList = exerciseSetList,
-            oneRepMax = (exerciseSetList.maxBy { it.oneRepMax ?: Float.MIN_VALUE }.oneRepMax))
+            oneRepMax = (exerciseSetList.maxBy { it.oneRepMax ?: Float.MIN_VALUE }.oneRepMax)
+        )
     }
 }

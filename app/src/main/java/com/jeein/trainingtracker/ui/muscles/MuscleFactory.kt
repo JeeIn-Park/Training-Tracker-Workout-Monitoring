@@ -1,11 +1,11 @@
 package com.jeein.trainingtracker.ui.muscles
 
-import android.content.Context
-import com.jeein.trainingtracker.ui.exerciseCard.ExerciseCard
 //import com.example.trainingtracker.databinding.FragmentMuscleBackBinding
 //import com.example.trainingtracker.databinding.FragmentMuscleFrontBinding
-import java.time.LocalDateTime
+import android.content.Context
+import com.jeein.trainingtracker.ui.exerciseCard.ExerciseCard
 import java.time.Duration
+import java.time.LocalDateTime
 
 object MuscleFactory {
     const val RECOVERED = 0
@@ -18,14 +18,26 @@ object MuscleFactory {
     private const val IN_DAYS = 3
 
 
-    private fun restingTime(lastActivity: LocalDateTime?, mode: Int) : Long {
+    private fun restingTime(lastActivity: LocalDateTime?, mode: Int): Long {
         val currentDateTime = LocalDateTime.now()
         val duration = Duration.between(lastActivity, currentDateTime)
         return when (mode) {
-            IN_SECONDS -> { duration.seconds }
-            IN_MINUTES -> { duration.toMinutes() }
-            IN_HOURS -> { duration.toHours() }
-            IN_DAYS -> { duration.toDays() }
+            IN_SECONDS -> {
+                duration.seconds
+            }
+
+            IN_MINUTES -> {
+                duration.toMinutes()
+            }
+
+            IN_HOURS -> {
+                duration.toHours()
+            }
+
+            IN_DAYS -> {
+                duration.toDays()
+            }
+
             else -> -1
         }
     }
@@ -46,28 +58,30 @@ object MuscleFactory {
     }
 
 
-    fun updateMuscle(context: Context, card: ExerciseCard){
+    fun updateMuscle(context: Context, card: ExerciseCard) {
         for (muscle in card.mainMuscles) {
             MuscleStorage.editMuscle(
                 context,
                 muscle,
-                Muscle( card.lastActivity, RECOVERING, muscle.name, muscle.layout))
+                Muscle(card.lastActivity, RECOVERING, muscle.name, muscle.layout)
+            )
         }
         for (muscle in card.subMuscles) {
             MuscleStorage.editMuscle(
                 context,
                 muscle,
-                Muscle( card.lastActivity, RECOVERING, muscle.name, muscle.layout))
+                Muscle(card.lastActivity, RECOVERING, muscle.name, muscle.layout)
+            )
         }
     }
 
 
-    fun refreshMuscle(context : Context){
+    fun refreshMuscle(context: Context) {
         val muscleList = MuscleStorage.loadMuscles(context)
-        val updatedMuscleList : MutableList<Muscle> = listOf<Muscle>().toMutableList()
+        val updatedMuscleList: MutableList<Muscle> = listOf<Muscle>().toMutableList()
 
-        for(muscle in muscleList) {
-            updatedMuscleList.add( muscleState(context, muscle))
+        for (muscle in muscleList) {
+            updatedMuscleList.add(muscleState(context, muscle))
         }
         MuscleStorage.updateMuscles(context, updatedMuscleList)
     }
@@ -75,9 +89,24 @@ object MuscleFactory {
 
     fun getDrawableResourceIdByStatus(context: Context, status: Int, drawableName: String): Int {
         return when (status) {
-            RECOVERED -> context.resources.getIdentifier("${drawableName}_recovered", "drawable", context.packageName)
-            RECOVERING -> context.resources.getIdentifier("${drawableName}_recovering", "drawable", context.packageName)
-            NEED_EXERCISE -> context.resources.getIdentifier("${drawableName}_need_exercise", "drawable", context.packageName)
+            RECOVERED -> context.resources.getIdentifier(
+                "${drawableName}_recovered",
+                "drawable",
+                context.packageName
+            )
+
+            RECOVERING -> context.resources.getIdentifier(
+                "${drawableName}_recovering",
+                "drawable",
+                context.packageName
+            )
+
+            NEED_EXERCISE -> context.resources.getIdentifier(
+                "${drawableName}_need_exercise",
+                "drawable",
+                context.packageName
+            )
+
             else -> context.resources.getIdentifier(drawableName, "drawable", context.packageName)
         }
     }

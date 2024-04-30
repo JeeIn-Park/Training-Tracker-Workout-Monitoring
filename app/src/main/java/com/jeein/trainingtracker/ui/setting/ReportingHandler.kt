@@ -67,7 +67,8 @@ object ReportingHandler {
     fun sendReportByEmail(context: Context, description: String) {
         val logcatData = getLogcatData()
         val userData = getUserData(context)
-        val emailBody = "Error Description: $description\n\nLogcat Data:\n$logcatData\n\nUser Data: $userData"
+        val emailBody =
+            "Error Description: $description\n\nLogcat Data:\n$logcatData\n\nUser Data: $userData"
 
         val intent = Intent(Intent.ACTION_SEND).apply {
             type = "message/rfc822"

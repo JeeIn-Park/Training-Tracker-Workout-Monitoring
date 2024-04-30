@@ -1,7 +1,7 @@
 package com.jeein.trainingtracker.ui.exerciseLog
 
-import java.time.LocalDateTime
 import java.io.Serializable
+import java.time.LocalDateTime
 import java.util.UUID
 
 // TODO : need serialisable?

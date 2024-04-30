@@ -14,15 +14,15 @@ import java.util.Locale
 
 object FormattedStringGetter {
 
-    fun mainMuscles(mainMuscles: List<Muscle>) : String{
-        return  "Main muscle : ${mainMuscles.joinToString(separator = ", ") { it.name }}"
+    fun mainMuscles(mainMuscles: List<Muscle>): String {
+        return "Main muscle : ${mainMuscles.joinToString(separator = ", ") { it.name }}"
     }
 
-    fun subMuscles(subMuscles: List<Muscle>) : String{
+    fun subMuscles(subMuscles: List<Muscle>): String {
         return "Sub muscle : ${subMuscles.joinToString(separator = ", ") { it.name }}"
     }
 
-    fun tags(tags: List<Tag>) : String{
+    fun tags(tags: List<Tag>): String {
         return tags.joinToString(prefix = "# ", separator = " # ") { it.name }
     }
 
@@ -67,7 +67,8 @@ object FormattedStringGetter {
         val textToShow = "1RM: $recordString kg \n$formattedDateText"
         val spannable = SpannableString(textToShow)
         val start = textToShow.indexOf(recordString)
-        val end = start + recordString.length + 3 // Include " kg" in the bold span (+3 for the space and "kg")
+        val end =
+            start + recordString.length + 3 // Include " kg" in the bold span (+3 for the space and "kg")
         spannable.setSpan(StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
 
         return spannable
@@ -75,16 +76,19 @@ object FormattedStringGetter {
 
     fun oneRepMaxRecordWithDate(card: ExerciseCard, newDate: LocalDateTime): SpannableString {
         return oneRepMaxRecordWithDate(
-            card.oneRepMaxRecord ?:0F,
+            card.oneRepMaxRecord ?: 0F,
             dateTimeWithDiff(card.oneRepMaxRecordDate ?: LocalDateTime.now(), newDate)
-            )
+        )
     }
 
-    fun oneRepMaxRecordWithDate_ShortPB(card: ExerciseCard, newDate: LocalDateTime): SpannableString {
+    fun oneRepMaxRecordWithDate_ShortPB(
+        card: ExerciseCard,
+        newDate: LocalDateTime
+    ): SpannableString {
         val recordString = "%.2f".format(card.oneRepMaxRecord)
         val dateText = dateTime(card.oneRepMaxRecordDate ?: LocalDateTime.now())
         val dateDiff = dateDiffWithDaysAgo(card.oneRepMaxRecordDate ?: LocalDateTime.now(), newDate)
-        val textToShow : String = if (dateDiff == "") {
+        val textToShow: String = if (dateDiff == "") {
             "1RM: $recordString kg \n$dateText"
         } else "1RM: $recordString kg \n$dateText \n($dateDiff)"
         val spannable = SpannableString(textToShow)

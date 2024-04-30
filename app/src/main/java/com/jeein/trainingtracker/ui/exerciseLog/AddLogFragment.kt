@@ -47,7 +47,7 @@ class AddLogFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentAddLogBinding.inflate(inflater, container, false)
 
         cardItem = arguments?.getSerializable("exerciseCardArg") as ExerciseCard

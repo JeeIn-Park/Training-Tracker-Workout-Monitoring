@@ -3,15 +3,15 @@ package com.jeein.trainingtracker.ui.exerciseLog
 object OneRepMax {
 
 
-    fun oneRepMaxRecord_pb(logs : List<ExerciseLog>) : Float {
-        var finalOneRepMax : Float = 0F
-        logs.forEach{
+    fun oneRepMaxRecord_pb(logs: List<ExerciseLog>): Float {
+        var finalOneRepMax: Float = 0F
+        logs.forEach {
             val sets = it.exerciseSetList
-            sets.forEach{
+            sets.forEach {
                 val mass = it.mass
                 val rep = it.rep
-                if ( (mass != null) && (rep != null)){
-                    val tempOneRepMax : Float = oneRepMax(mass, rep)
+                if ((mass != null) && (rep != null)) {
+                    val tempOneRepMax: Float = oneRepMax(mass, rep)
                     finalOneRepMax = maxOf(finalOneRepMax, tempOneRepMax)
                 }
             }
@@ -20,34 +20,34 @@ object OneRepMax {
     }
 
 
-    fun oneRepMaxRecord(log : ExerciseLog) : Float {
-        var finalOneRepMax : Float = 0F
+    fun oneRepMaxRecord(log: ExerciseLog): Float {
+        var finalOneRepMax: Float = 0F
         val sets = log.exerciseSetList
-        sets.forEach{
+        sets.forEach {
             val mass = it.mass
             val rep = it.rep
-            if ( (mass != null) && (rep != null)){
-                val tempOneRepMax : Float = oneRepMax(mass, rep)
+            if ((mass != null) && (rep != null)) {
+                val tempOneRepMax: Float = oneRepMax(mass, rep)
                 finalOneRepMax = maxOf(finalOneRepMax, tempOneRepMax)
             }
         }
         return finalOneRepMax
     }
 
-    fun oneRepMaxRecord(sets : List<ExerciseSet>) : Float {
-        var finalOneRepMax : Float = 0F
-        sets.forEach{
+    fun oneRepMaxRecord(sets: List<ExerciseSet>): Float {
+        var finalOneRepMax: Float = 0F
+        sets.forEach {
             val mass = it.mass
             val rep = it.rep
-            if ( (mass != null) && (rep != null)){
-                val tempOneRepMax : Float = oneRepMax(mass, rep)
+            if ((mass != null) && (rep != null)) {
+                val tempOneRepMax: Float = oneRepMax(mass, rep)
                 finalOneRepMax = maxOf(finalOneRepMax, tempOneRepMax)
             }
         }
         return finalOneRepMax
     }
 
-    fun oneRepMax(mass: Float?, reps: Int?): Float{
+    fun oneRepMax(mass: Float?, reps: Int?): Float {
         return if ((mass == null) || (reps == null)) {
             0F
         } else ((mass * (36f / (37 - reps))) +

@@ -10,10 +10,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.jeein.trainingtracker.FormattedStringGetter
+import com.jeein.trainingtracker.R
 import com.jeein.trainingtracker.ui.exerciseCard.CardStorage
 import com.jeein.trainingtracker.ui.exerciseCard.ExerciseCard
 import com.jeein.trainingtracker.ui.exerciseCard.ExerciseCardDiffCallback
-import com.jeein.trainingtracker.R
 import com.jeein.trainingtracker.ui.exerciseLog.LogStorage
 import java.time.LocalDateTime
 
@@ -62,7 +62,7 @@ class HomeCardAdapter(
                 exerciseName.setTypeface(null, Typeface.BOLD)
             }
 
-            if (cardItem.tag.isNotEmpty()){
+            if (cardItem.tag.isNotEmpty()) {
                 tag.text = FormattedStringGetter.tags(cardItem.tag)
             } else tag.text = ""
 
@@ -70,18 +70,19 @@ class HomeCardAdapter(
             val lastActivity = cardItem.lastActivity
 
             if (lastActivity != null) {
-                lastExercise.text = FormattedStringGetter.dateTimeWithDiff(lastActivity, LocalDateTime.now())
+                lastExercise.text =
+                    FormattedStringGetter.dateTimeWithDiff(lastActivity, LocalDateTime.now())
             } else {
                 lastExercise.visibility = View.GONE
             }
 
-            if (cardItem.mainMuscles.isEmpty()){
+            if (cardItem.mainMuscles.isEmpty()) {
                 mainMuscle.visibility = View.GONE
             } else {
                 mainMuscle.text = FormattedStringGetter.mainMuscles(cardItem.mainMuscles)
             }
 
-            if (cardItem.subMuscles.isEmpty()){
+            if (cardItem.subMuscles.isEmpty()) {
                 subMuscle.visibility = View.GONE
             } else {
                 subMuscle.text = FormattedStringGetter.subMuscles(cardItem.subMuscles)
@@ -90,7 +91,10 @@ class HomeCardAdapter(
 
             val oneRepMaxRecordDate = cardItem.oneRepMaxRecordDate
             if (oneRepMaxRecordDate != null) {
-                personalRecord.text = FormattedStringGetter.oneRepMaxRecordWithDate_ShortPB(cardItem, LocalDateTime.now())
+                personalRecord.text = FormattedStringGetter.oneRepMaxRecordWithDate_ShortPB(
+                    cardItem,
+                    LocalDateTime.now()
+                )
             } else {
                 personalRecord.visibility = View.GONE
             }
