@@ -57,4 +57,18 @@ object OneRepMax {
                 (mass * Math.pow(reps.toDouble(), 0.1).toFloat()) +
                 (mass * (1f + (0.025f * reps)))) / 4
     }
+
+    fun oneRepMaxComplex(totalMass: Float?, totalReps: Int?): Float{
+        return if ((totalMass == null) || (totalReps == null)) {
+            0F
+        } else {
+            val averageMass = totalMass / totalReps
+            (((averageMass * (36.0 / (37 - totalReps))) +
+                    (averageMass * (1 + 0.0333 * totalReps)) +
+                    (averageMass * Math.pow(totalReps.toDouble(), 0.1)) +
+                    (averageMass * (1 + 0.025 * totalReps))) / 4).toFloat()
+        }
+    }
+
+
 }

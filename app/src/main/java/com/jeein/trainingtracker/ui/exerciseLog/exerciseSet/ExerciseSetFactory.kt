@@ -2,7 +2,7 @@ package com.jeein.trainingtracker.ui.exerciseLog.exerciseSet
 
 import com.jeein.trainingtracker.ui.exerciseCard.ExerciseCard
 import com.jeein.trainingtracker.ui.exerciseLog.OneRepMax
-
+4
 object ExerciseSetFactory {
 
     fun createExerciseSet(
