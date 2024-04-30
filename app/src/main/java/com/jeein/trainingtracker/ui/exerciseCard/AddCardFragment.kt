@@ -64,8 +64,17 @@ class AddCardFragment : Fragment() {
             (requireActivity() as AppCompatActivity).supportActionBar?.title = cardItem.name
             exerciseNameEditText.setText(cardItem.name)
             mainMusclesSpinner.setSelection(cardItem.mainMuscles.map { it.name })
+            if(mainMusclesSpinner.getSelectedIndices().isEmpty()) {
+                mainMusclesSpinner.setItems(muscleList.map { it.name })
+            }
             subMusclesSpinner.setSelection(cardItem.subMuscles.map { it.name })
+            if(subMusclesSpinner.getSelectedIndices().isEmpty()) {
+                subMusclesSpinner.setItems(muscleList.map { it.name })
+            }
             tagSpinner.setSelection(cardItem.tag.map { it.name })
+            if(tagSpinner.getSelectedIndices().isEmpty()) {
+                tagSpinner.setItems(tagList.map { it.name })
+            }
             addButton.text = "SAVE"
         }
 
