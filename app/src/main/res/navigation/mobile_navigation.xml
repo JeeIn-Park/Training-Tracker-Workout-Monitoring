@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_home">
     <action
         android:id="@+id/action_homeFragment_to_addCardFragment"
-        app:destination="@id/addCardFragment" />
+        app:destination="@id/navigation_add_card" />
     </fragment>
 
     <fragment
@@ -28,17 +28,17 @@
         tools:layout="@layout/fragment_setting">
         <action
             android:id="@+id/action_settingFragment_to_privacyPolicyFragment"
-            app:destination="@id/privacyPolicyFragment" />
+            app:destination="@id/navigation_privacy_policy" />
     </fragment>
 
     <fragment
-        android:id="@+id/privacyPolicyFragment"
+        android:id="@+id/navigation_privacy_policy"
         android:name="com.jeein.trainingtracker.ui.setting.PrivacyPolicyFragment"
         android:label="Privacy Policy"
         tools:layout="@layout/fragment_setting_privacy_policy" />
 
     <fragment
-        android:id="@+id/addCardFragment"
+        android:id="@+id/navigation_add_card"
         android:name="com.jeein.trainingtracker.ui.exerciseCard.AddCardFragment"
         android:label="Add Exercise"
         tools:layout="@layout/fragment_add_card" />
