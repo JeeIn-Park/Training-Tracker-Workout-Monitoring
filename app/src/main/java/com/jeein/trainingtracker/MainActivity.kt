@@ -61,6 +61,7 @@ class MainActivity : AppCompatActivity() {
         if (currentExercise != null) {
             SetStorage.resetSets(this, currentExercise)
         }
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
