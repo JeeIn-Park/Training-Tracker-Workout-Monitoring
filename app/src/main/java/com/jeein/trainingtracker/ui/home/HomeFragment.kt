@@ -44,7 +44,7 @@ class HomeFragment : Fragment() {
     private val handler = Handler(Looper.getMainLooper())
     private val fadeOutRunnable = Runnable {
         val animator = ObjectAnimator.ofFloat(binding.addCardButton, "alpha", 0.5f)
-        animator.duration = 200
+        animator.duration = 500
         animator.start()
     }
 
@@ -63,39 +63,9 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_homeFragment_to_addCardFragment)
         }
 
-        cardAdapter = HomeCardAdapter(requireContext(), ::handleItemClick, ::navigateToEdit)
+        cardAdapter = HomeCardAdapter(requireContext(), ::navAddLog, ::navEditCard)
+        tagAdapter = TagAdapter(requireContext(), ::handleTagClick)
         // todo : study intent, put extra?
-
-        tagAdapter = TagAdapter(requireContext()) { clickedTag ->
-            if (clickedTag.name == Tag.ADD_TAG.name) {
-                val inputDialog = AlertDialog.Builder(requireContext())
-                val inputEditText = EditText(requireContext())
-                inputDialog.setView(inputEditText)
-                inputDialog.setTitle(getString(R.string.tag_enter_name))
-
-                inputDialog.setPositiveButton("OK") { dialog, _ ->
-                    val newTagString = inputEditText.text.toString().trim()
-                    if (newTagString.isNotEmpty()) {
-                        TagStorage.addTag(
-                            requireContext(),
-                            TagFactory.createTag(requireContext(), newTagString)
-                        )
-                        refresh()
-                    }
-                    dialog.dismiss()
-                }
-
-                inputDialog.setNegativeButton("Cancel") { dialog, _ ->
-                    dialog.dismiss()
-                }
-
-                inputDialog.show()
-            } else {
-                tagAdapter.editItem(clickedTag, TagFactory.clickTag(clickedTag))
-                refresh()
-            }
-        }
-
 
         val exerciseRecyclerViewBinding = binding.exerciseRecyclerView
         exerciseRecyclerViewBinding.layoutManager = LinearLayoutManager(requireContext())
@@ -168,7 +138,7 @@ class HomeFragment : Fragment() {
                 }
 
                 MotionEvent.ACTION_UP -> {
-                    handler.postDelayed(fadeOutRunnable, 300)
+                    handler.postDelayed(fadeOutRunnable, 1000)
                     val parentWidth = (view.parent as View).width.toFloat()
                     val toRight = view.x + view.width / 2 > parentWidth / 2
                     val finalPosition = if (toRight) parentWidth - view.width else 0f
@@ -230,14 +200,44 @@ class HomeFragment : Fragment() {
         updateMuscleImages(requireContext(), muscles)
     }
 
-    private fun handleItemClick(cardItem: ExerciseCard) {
+    private fun navAddLog(cardItem: ExerciseCard) {
         val bundle = bundleOf("exerciseCardArg" to cardItem)
         findNavController().navigate(R.id.action_homeFragment_to_addLogFragment, bundle)
     }
 
-    private fun navigateToEdit(cardItem: ExerciseCard) {
+    private fun navEditCard(cardItem: ExerciseCard) {
         val bundle = bundleOf("exerciseCardArg" to cardItem)
         findNavController().navigate(R.id.action_homeFragment_to_addCardFragment, bundle)
+    }
+
+    private fun handleTagClick(clickedTag: Tag) {
+        if (clickedTag.name == Tag.ADD_TAG.name) {
+            val inputDialog = AlertDialog.Builder(requireContext())
+            val inputEditText = EditText(requireContext())
+            inputDialog.setView(inputEditText)
+            inputDialog.setTitle(getString(R.string.tag_enter_name))
+
+            inputDialog.setPositiveButton("OK") { dialog, _ ->
+                val newTagString = inputEditText.text.toString().trim()
+                if (newTagString.isNotEmpty()) {
+                    TagStorage.addTag(
+                        requireContext(),
+                        TagFactory.createTag(requireContext(), newTagString)
+                    )
+                    refresh()
+                }
+                dialog.dismiss()
+            }
+
+            inputDialog.setNegativeButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+            }
+
+            inputDialog.show()
+        } else {
+            tagAdapter.editItem(clickedTag, TagFactory.clickTag(clickedTag))
+            refresh()
+        }
     }
 
     override fun onDestroyView() {

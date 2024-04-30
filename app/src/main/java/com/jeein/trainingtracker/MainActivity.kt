@@ -36,21 +36,17 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
+                // home
                 R.id.navigation_home -> navView.menu.findItem(R.id.navigation_home).isChecked = true
-                R.id.navigation_add_card -> navView.menu.findItem(R.id.navigation_home).isChecked =
-                    true
+                R.id.navigation_add_card -> navView.menu.findItem(R.id.navigation_home).isChecked = true
+                R.id.navigation_add_log -> navView.menu.findItem(R.id.navigation_home).isChecked = true
 
-                R.id.navigation_add_log -> navView.menu.findItem(R.id.navigation_home).isChecked =
-                    true
+                // status
+                R.id.navigation_status -> navView.menu.findItem(R.id.navigation_status).isChecked = true
 
-                R.id.navigation_status -> navView.menu.findItem(R.id.navigation_status).isChecked =
-                    true
-
-                R.id.navigation_setting -> navView.menu.findItem(R.id.navigation_setting).isChecked =
-                    true
-
-                R.id.navigation_privacy_policy -> navView.menu.findItem(R.id.navigation_setting).isChecked =
-                    true
+                // setting
+                R.id.navigation_setting -> navView.menu.findItem(R.id.navigation_setting).isChecked = true
+                R.id.navigation_privacy_policy -> navView.menu.findItem(R.id.navigation_setting).isChecked = true
             }
         }
 
