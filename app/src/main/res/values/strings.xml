@@ -9,9 +9,9 @@
 
     <!--    exercise    -->
     <string name="event_log">log</string>
-<!--    <string name="event_add_log">add log</string>-->
-<!--    <string name="event_delete_log">delete log</string>-->
-<!--    <string name="event_edit_log">edit log</string>-->
+    <!--    <string name="event_add_log">add log</string>-->
+    <!--    <string name="event_delete_log">delete log</string>-->
+    <!--    <string name="event_edit_log">edit log</string>-->
     <string name="exercise_add">Add a new exercise</string>
     <string name="exercise_enter_weight">Enter weight</string>
     <string name="exercise_enter_rep">Enter reps</string>
@@ -27,9 +27,9 @@
 
     <!--    muscle    -->
     <string name="event_muscle">muscle</string>
-<!--    <string name="event_add_muscle">add muscle</string>-->
-<!--    <string name="event_delete_muscle">delete muscle</string>-->
-<!--    <string name="event_edit_muscle">edit muscle</string>-->
+    <!--    <string name="event_add_muscle">add muscle</string>-->
+    <!--    <string name="event_delete_muscle">delete muscle</string>-->
+    <!--    <string name="event_edit_muscle">edit muscle</string>-->
     <string name="muscle_select">Select muscle</string>
     <string name="discard_set_count">discard set count</string>
     <string name="one_rep_max_pb">ONE REP MAX(PB)</string>

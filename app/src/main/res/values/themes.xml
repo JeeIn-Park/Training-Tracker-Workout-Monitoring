@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
 
     <!-- Basic theme -->
@@ -15,7 +15,6 @@
         <!-- Custom button style -->
         <item name="buttonStyle">?attr/colorPrimaryVariant</item>
     </style>
-
 
 
 </resources>

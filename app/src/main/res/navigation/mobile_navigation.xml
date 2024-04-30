@@ -22,7 +22,7 @@
         android:id="@+id/navigation_status"
         android:name="com.jeein.trainingtracker.ui.status.StatusFragment"
         android:label="@string/title_status"
-        tools:layout="@layout/fragment_status" >
+        tools:layout="@layout/fragment_status">
         <action
             android:id="@+id/action_statusFragment_to_addLogFragment"
             app:destination="@id/navigation_add_log" />
@@ -52,7 +52,7 @@
         <argument
             android:name="exerciseCardArg"
             app:argType="com.jeein.trainingtracker.ui.exerciseCard.ExerciseCard"
-            app:nullable="true"/>
+            app:nullable="true" />
     </fragment>
 
     <fragment
@@ -62,7 +62,7 @@
         tools:layout="@layout/fragment_add_log">
         <argument
             android:name="exerciseCardArg"
-            app:argType="com.jeein.trainingtracker.ui.exerciseCard.ExerciseCard"/>
+            app:argType="com.jeein.trainingtracker.ui.exerciseCard.ExerciseCard" />
     </fragment>
 
 </navigation>

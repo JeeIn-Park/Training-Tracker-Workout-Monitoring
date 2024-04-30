@@ -119,7 +119,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-
     <ImageButton
         android:id="@+id/muscle_front_calves"
         android:layout_width="48pt"
