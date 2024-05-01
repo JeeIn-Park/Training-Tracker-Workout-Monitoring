@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jeein.trainingtracker.FormattedStringGetter
@@ -33,6 +34,7 @@ class AddLogFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var pastLogTableAdapter: PastLogTableAdapter
+    private lateinit var todaySetTableAdapter: TodaySetTableAdapter
     private lateinit var addLogViewModel: AddLogViewModel
 
 
@@ -56,12 +58,10 @@ class AddLogFragment : Fragment() {
         if ( (currentExercise != null) && (currentExercise != cardItem.id)) {
             SetStorage.resetSets(requireContext(), currentExercise)
         }
-
         (requireActivity() as AppCompatActivity).supportActionBar?.title = cardItem.name
         val logStorage = LogStorage(cardItem.id)
         val pastLog: List<ExerciseLog> = logStorage.loadLogs(requireContext())
         println(pastLog)
-
 
         val oneRepMaxBar: TextView = binding.oneRepMaxBar
         val oneRepMaxRecordDate = cardItem.oneRepMaxRecordDate
@@ -71,7 +71,15 @@ class AddLogFragment : Fragment() {
         } else oneRepMaxBar.visibility = View.GONE
 
 
-        // Mid Right
+        // today sets
+        val todaySetRecyclerView: RecyclerView = binding.todaySetTable
+        todaySetRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        todaySetTableAdapter = TodaySetTableAdapter(SetStorage.getSets(requireContext()))
+        todaySetRecyclerView.adapter = todaySetTableAdapter
+        todaySetRecyclerView.itemAnimator = DefaultItemAnimator()
+        addLogViewModel.setRecyclerViewData.observe(viewLifecycleOwner) { newData ->
+            todaySetTableAdapter.updateData(newData)
+        }
 
         // past logs
         val pastLogRecyclerView: RecyclerView = binding.pastRecords
@@ -104,17 +112,13 @@ class AddLogFragment : Fragment() {
                 SetStorage.getCurrentSetNum(requireContext()) + 1
             }
 
-            SetStorage.addSet(requireContext(), ExerciseSetFactory.createExerciseSet(cardItem, mass, setNum, rep))
-            val midLeftLayout = binding.midLeft
-            val tableLayout = midLeftLayout.findViewById<TableLayout>(R.id.todaySetTable)
-            tableLayout.addView(
-                TableSetup.setKgRepTableRow(
-                    requireContext(),
+            SetStorage.addSet(requireContext(),
+                ExerciseSetFactory.createExerciseSet(
+                    cardItem,
+                    mass,
                     setNum,
-                    massString,
-                    repString
-                )
-            )
+                    rep))
+            addLogViewModel.updateSetRecyclerViewData(SetStorage.getSets(requireContext()))
 
         }
 

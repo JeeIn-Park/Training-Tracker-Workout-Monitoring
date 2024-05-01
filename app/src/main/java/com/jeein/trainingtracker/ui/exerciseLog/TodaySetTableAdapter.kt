@@ -8,11 +8,14 @@ import android.widget.TableRow
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.jeein.trainingtracker.R
+import androidx.recyclerview.widget.ListAdapter
 import com.jeein.trainingtracker.ui.exerciseSet.ExerciseSet
+import com.jeein.trainingtracker.ui.exerciseSet.ExerciseSetDiffCallback
 
 
-class TodaySetTableAdapter(private val items: List<ExerciseSet>)
-    : RecyclerView.Adapter<TodaySetTableAdapter.TableItemViewHolder>(){
+class TodaySetTableAdapter(
+    private val items: List<ExerciseSet>)
+    : ListAdapter<ExerciseSet, TodaySetTableAdapter.TableItemViewHolder>(ExerciseSetDiffCallback()){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TableItemViewHolder {
         val context = parent.context
@@ -36,16 +39,13 @@ class TodaySetTableAdapter(private val items: List<ExerciseSet>)
 
 
     override fun onBindViewHolder(holder: TableItemViewHolder, position: Int) {
-        val item = items[position]
+        val item = getItem(position)
         holder.bind(item)
     }
 
-
-    override fun getItemCount(): Int {
-        return items.size
+    fun updateData(newData: List<ExerciseSet>) {
+        submitList(newData)
     }
-
-
 
     inner class TableItemViewHolder(
         private val parentView: LinearLayout,
