@@ -27,6 +27,15 @@ object TagFactory {
         )
     }
 
+    fun selectedTagOf(tag: Tag): Tag{
+        return Tag(
+            id = tag.id,
+            timeAdded = tag.timeAdded,
+            name = tag.name,
+            isSelected = true
+        )
+    }
+
     fun resetSelection(context: Context) {
         val tags = TagStorage.loadTags(context)
         val updatedTags: MutableList<Tag> = mutableListOf()

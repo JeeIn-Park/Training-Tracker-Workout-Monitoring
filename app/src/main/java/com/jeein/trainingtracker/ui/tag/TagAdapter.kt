@@ -10,6 +10,8 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.jeein.trainingtracker.Event
+import com.jeein.trainingtracker.EventManager
 import com.jeein.trainingtracker.R
 
 class TagAdapter(private val context: Context, private val onItemClick: (Tag) -> Unit) :
@@ -35,6 +37,11 @@ class TagAdapter(private val context: Context, private val onItemClick: (Tag) ->
         val removedTag = updatedList.removeAt(position)
         TagStorage.removeTag(context, removedTag)
         submitList(updatedList)
+        EventManager.publish(
+            Event(
+                context.getString(R.string.event_delete_tag)
+            )
+        )
     }
 
 
@@ -46,6 +53,11 @@ class TagAdapter(private val context: Context, private val onItemClick: (Tag) ->
         }
         TagStorage.editTag(context, oldTag, newTag)
         submitList(updatedList)
+        EventManager.publish(
+            Event(
+                context.getString(R.string.event_edit_tag)
+            )
+        )
     }
 
 

@@ -5,6 +5,7 @@ import com.jeein.trainingtracker.ui.exerciseLog.ExerciseLog
 import com.jeein.trainingtracker.ui.muscles.MuscleFactory
 import com.jeein.trainingtracker.ui.tag.Tag
 import com.jeein.trainingtracker.ui.tag.TagFactory
+import com.jeein.trainingtracker.ui.tag.TagStorage
 import java.io.FileNotFoundException
 import java.io.IOException
 import java.io.ObjectInputStream
@@ -79,6 +80,32 @@ object CardStorage {
             if (card.tag.contains(tag)) {
                 val tags = card.tag.toMutableList()
                 tags.remove(tag)
+                currentCards[i] = ExerciseCardFactory.editExerciseCard(
+                    currentCards[i],
+                    card.name,
+                    card.mainMuscles,
+                    card.subMuscles,
+                    tags
+                )
+            }
+        }
+        saveCards(context, currentCards)
+    }
+
+
+    fun editTag(context: Context, oldT: Tag, newT: Tag) {
+        val oldTag = TagFactory.selectedTagOf(oldT)
+        val newTag = TagFactory.selectedTagOf(newT)
+
+        val currentCards = loadCards(context).toMutableList()
+        for (i in currentCards.indices) {
+            val card = currentCards[i]
+            if (card.tag.contains(oldTag)) {
+                val tags = card.tag.toMutableList()
+                val index = tags.indexOfFirst { it == oldTag }
+                if (index != -1) {
+                    tags[index] = newTag
+                }
                 currentCards[i] = ExerciseCardFactory.editExerciseCard(
                     currentCards[i],
                     card.name,

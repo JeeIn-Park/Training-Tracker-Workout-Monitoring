@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -20,10 +21,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.jeein.trainingtracker.Event
+import com.jeein.trainingtracker.EventManager
+import com.jeein.trainingtracker.FormattedStringGetter
 import com.jeein.trainingtracker.R
 import com.jeein.trainingtracker.databinding.FragmentHomeBinding
 import com.jeein.trainingtracker.ui.exerciseCard.CardStorage
 import com.jeein.trainingtracker.ui.exerciseCard.ExerciseCard
+import com.jeein.trainingtracker.ui.exerciseSet.ExerciseSet
 import com.jeein.trainingtracker.ui.muscles.Muscle
 import com.jeein.trainingtracker.ui.muscles.MuscleFactory.getDrawableResourceIdByStatus
 import com.jeein.trainingtracker.ui.muscles.MuscleStorage
@@ -87,14 +92,31 @@ class HomeFragment : Fragment() {
         return root
     }
 
-    override fun onResume() {
-        refresh()
-        super.onResume()
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupDraggableFAB(binding.addCardButton)
+
+        EventManager.subscribe(
+            requireContext().getString(R.string.event_delete_tag)
+        ) { event: Event ->
+            val selectedTags = TagStorage.getSelectedTags(requireContext())
+            val cards = CardStorage.getSelectedCard(requireContext(), selectedTags)
+            homeViewModel.updateCardRecyclerViewData(cards)
+        }
+
+        EventManager.subscribe(
+            requireContext().getString(R.string.event_edit_tag)
+        ) { event: Event ->
+            val selectedTags = TagStorage.getSelectedTags(requireContext())
+            val cards = CardStorage.getSelectedCard(requireContext(), selectedTags)
+            homeViewModel.updateCardRecyclerViewData(cards)
+        }
+    }
+
+    override fun onResume() {
+        refresh()
+        super.onResume()
     }
 
     @SuppressLint("ClickableViewAccessibility")

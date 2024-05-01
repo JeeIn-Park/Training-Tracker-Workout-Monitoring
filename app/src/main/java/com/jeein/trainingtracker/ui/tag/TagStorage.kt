@@ -65,6 +65,7 @@ object TagStorage {
             currentTags[index] = newTag
             saveTags(context, currentTags)
         }
+        CardStorage.editTag(context, oldTag, newTag)
     }
 
     fun isIdInUse(context: Context, id: UUID): Boolean {
