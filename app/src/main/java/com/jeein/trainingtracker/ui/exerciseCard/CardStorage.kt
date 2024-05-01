@@ -68,7 +68,6 @@ object CardStorage {
             card,
             ExerciseCardFactory.updateExerciseCard(card, log)
         )
-        // TODO : muscle factory
         MuscleFactory.updateMuscle(context, card)
     }
 

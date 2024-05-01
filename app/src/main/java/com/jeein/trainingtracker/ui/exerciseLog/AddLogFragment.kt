@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
-import android.widget.TableLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -17,17 +16,18 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.jeein.trainingtracker.EventManager
 import com.jeein.trainingtracker.FormattedStringGetter
 import com.jeein.trainingtracker.R
-import com.jeein.trainingtracker.TableSetup
 import com.jeein.trainingtracker.databinding.FragmentAddLogBinding
-import com.jeein.trainingtracker.ui.exerciseCard.CardStorage
 import com.jeein.trainingtracker.ui.exerciseCard.ExerciseCard
+import com.jeein.trainingtracker.ui.exerciseSet.ExerciseSet
 import com.jeein.trainingtracker.ui.exerciseSet.ExerciseSetFactory
 import com.jeein.trainingtracker.ui.exerciseSet.SetStorage
 import com.jeein.trainingtracker.views.GraphViewAdapter
 
 
+@Suppress("DEPRECATION")
 class AddLogFragment : Fragment() {
 
     private var _binding: FragmentAddLogBinding? = null
@@ -49,13 +49,13 @@ class AddLogFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         addLogViewModel =
-            ViewModelProvider(this).get(AddLogViewModel::class.java)
+            ViewModelProvider(this)[AddLogViewModel::class.java]
         _binding = FragmentAddLogBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val cardItem = arguments?.getSerializable("exerciseCardArg") as ExerciseCard
         val currentExercise = SetStorage.getCurrentExercise(requireContext())
-        if ( (currentExercise != null) && (currentExercise != cardItem.id)) {
+        if ((currentExercise != null) && (currentExercise != cardItem.id)) {
             SetStorage.resetSets(requireContext(), currentExercise)
         }
         (requireActivity() as AppCompatActivity).supportActionBar?.title = cardItem.name
@@ -75,7 +75,7 @@ class AddLogFragment : Fragment() {
         val currentSet = SetStorage.getSets(requireContext())
 
         val todayOneRepMaxTextViewBinding: TextView = binding.AddLogToday1RMTextView
-        todayOneRepMaxTextViewBinding.text = FormattedStringGetter.oneRepMaxToday(currentSet)
+        todayOneRepMaxTextViewBinding.text = FormattedStringGetter.totalMassLifted(currentSet)
 
         val todaySetRecyclerView: RecyclerView = binding.todaySetTable
         todaySetRecyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -118,12 +118,15 @@ class AddLogFragment : Fragment() {
                 SetStorage.getCurrentSetNum(requireContext()) + 1
             }
 
-            SetStorage.addSet(requireContext(),
+            SetStorage.addSet(
+                requireContext(),
                 ExerciseSetFactory.createExerciseSet(
                     cardItem,
                     mass,
                     setNum,
-                    rep))
+                    rep
+                )
+            )
             addLogViewModel.updateSetRecyclerViewData(SetStorage.getSets(requireContext()))
 
         }
@@ -131,6 +134,23 @@ class AddLogFragment : Fragment() {
         return root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        EventManager.subscribe(
+            requireContext().getString(R.string.event_add_set)
+        ) { event ->
+            when (event.data) {
+                is ExerciseSet -> {
+                    event.data.oneRepMax //TODO : update the ui
+                }
+                else -> println("Unhandled type of data: ${event.data}")
+            }
+        }
+
+        val currentSet = SetStorage.getSets(requireContext())
+        val todayOneRepMaxTextViewBinding: TextView = binding.AddLogToday1RMTextView
+        todayOneRepMaxTextViewBinding.text = FormattedStringGetter.totalMassLifted(currentSet)
+        super.onViewCreated(view, savedInstanceState)
+    }
 
     @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

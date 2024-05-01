@@ -1,6 +1,9 @@
 package com.jeein.trainingtracker.ui.exerciseSet
 
 import android.content.Context
+import com.jeein.trainingtracker.Event
+import com.jeein.trainingtracker.EventManager
+import com.jeein.trainingtracker.R
 import com.jeein.trainingtracker.ui.exerciseCard.CardStorage
 import com.jeein.trainingtracker.ui.exerciseLog.ExerciseLogFactory
 import com.jeein.trainingtracker.ui.exerciseLog.LogStorage
@@ -44,6 +47,12 @@ object SetStorage {
         val currentSets : MutableList<ExerciseSet> = loadSets(context).toMutableList()
         currentSets.add(set)
         saveSets(context, currentSets)
+                    EventManager.publish(
+                Event(
+                    context.getString(R.string.event_add_set),
+                    set
+                )
+            )
     }
 
     fun removeSet(context: Context, set: ExerciseSet) {

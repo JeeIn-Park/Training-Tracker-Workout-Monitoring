@@ -5,6 +5,7 @@
     <string name="title_setting">Setting</string>
     <string name="title_one_rep_max">One Rep Max</string>
 
+    <string name="event">event</string>
     <string name="general_deletion_warning">Are you sure you want to delete this item?</string>
 
     <!--    exercise    -->
@@ -16,6 +17,9 @@
     <string name="exercise_enter_weight">Enter weight</string>
     <string name="exercise_enter_rep">Enter reps</string>
     <string name="exercise_deletion_warning">All records will be deleted. Once deleted, they cannot be recovered. </string>
+
+    <string name="event_set">set</string>
+    <string name="event_add_set">add set</string>
 
     <!--    tag    -->
     <string name="event_tag">tag</string>
