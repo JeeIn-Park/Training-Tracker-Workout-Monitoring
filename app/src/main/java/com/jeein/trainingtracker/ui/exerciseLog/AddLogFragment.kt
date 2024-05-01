@@ -156,9 +156,12 @@ class AddLogFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
         EventManager.unsubscribe(requireContext().getString(R.string.event_add_set),
-            ::addSetSubscriber
-            )
+            ::addSetSubscriber)
     }
 
     private fun addSetSubscriber(event: Event) {

@@ -115,6 +115,10 @@ class HomeFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
         EventManager.unsubscribe(
             requireContext().getString(R.string.event_delete_tag),
             ::deleteTagSubscriber
@@ -124,9 +128,6 @@ class HomeFragment : Fragment() {
             requireContext().getString(R.string.event_edit_tag),
             ::editTagSubscriber
         )
-    }
-    override fun onDestroyView() {
-        super.onDestroyView()
         handler.removeCallbacks(fadeOutRunnable)
         _binding = null
     }
