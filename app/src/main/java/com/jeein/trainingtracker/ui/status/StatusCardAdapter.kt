@@ -87,7 +87,7 @@ class StatusCardAdapter(
 
             if (cardItem.tag.isNotEmpty()) {
                 tagTextView.text = FormattedStringGetter.tags(cardItem.tag)
-            } else tagTextView.text = ""
+            } else tagTextView.visibility = View.GONE
 
             val oneRepMaxRecordDate = cardItem.oneRepMaxRecordDate
             if (oneRepMaxRecordDate != null) {
