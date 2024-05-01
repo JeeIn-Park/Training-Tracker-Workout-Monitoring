@@ -72,11 +72,17 @@ class AddLogFragment : Fragment() {
 
 
         // today sets
+        val currentSet = SetStorage.getSets(requireContext())
+
+        val todayOneRepMaxTextViewBinding: TextView = binding.AddLogToday1RMTextView
+        todayOneRepMaxTextViewBinding.text = FormattedStringGetter.oneRepMaxToday(currentSet)
+
         val todaySetRecyclerView: RecyclerView = binding.todaySetTable
         todaySetRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        todaySetTableAdapter = TodaySetTableAdapter(SetStorage.getSets(requireContext()))
+        todaySetTableAdapter = TodaySetTableAdapter(currentSet)
         todaySetRecyclerView.adapter = todaySetTableAdapter
         todaySetRecyclerView.itemAnimator = DefaultItemAnimator()
+        addLogViewModel.updateSetRecyclerViewData(currentSet)
         addLogViewModel.setRecyclerViewData.observe(viewLifecycleOwner) { newData ->
             todaySetTableAdapter.updateData(newData)
         }

@@ -189,7 +189,6 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -198,6 +197,15 @@
                     android:textColor="?attr/colorOnBackground"
                     android:textStyle="bold" />
 
+
+                <TextView
+                    android:id="@+id/AddLog_Today1RMTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Today's 1RM : 0 kg"
+                    android:textColor="?attr/colorOnBackground"
+                    android:textSize="12sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/todaySetTable"
@@ -208,7 +216,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
 
             </LinearLayout>
 

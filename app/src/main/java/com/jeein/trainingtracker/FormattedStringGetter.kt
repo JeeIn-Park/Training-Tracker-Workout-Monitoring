@@ -5,6 +5,7 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.StyleSpan
 import com.jeein.trainingtracker.ui.exerciseCard.ExerciseCard
+import com.jeein.trainingtracker.ui.exerciseSet.ExerciseSet
 import com.jeein.trainingtracker.ui.muscles.Muscle
 import com.jeein.trainingtracker.ui.tag.Tag
 import java.time.Duration
@@ -96,6 +97,17 @@ object FormattedStringGetter {
         val end = start + recordString.length + 3
         spannable.setSpan(StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
         return spannable
+    }
+
+    fun oneRepMaxToday(sets: List<ExerciseSet>): String{
+        if (sets.isEmpty()) {
+            "Today's 1RM : 0 kg"
+        } else {
+            val oneRepMax = sets.maxBy { it.oneRepMax ?: Float.MIN_VALUE }.oneRepMax
+            val recordString = "%.2f".format(oneRepMax)
+            return "Today's 1RM : $recordString kg"
+        }
+        return "Today's 1RM : 0 kg"
     }
 
 }
