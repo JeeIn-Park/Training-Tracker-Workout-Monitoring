@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.jeein.trainingtracker.Event
+import com.jeein.trainingtracker.EventManager
 import com.jeein.trainingtracker.R
 import com.jeein.trainingtracker.databinding.FragmentStatusBinding
 import com.jeein.trainingtracker.ui.exerciseCard.CardStorage
@@ -24,14 +26,14 @@ class StatusFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var cardAdapter: StatusCardAdapter
     private lateinit var tagAdapter: TagAdapter
+    private lateinit var statusViewModel: StatusViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val statusViewModel =
-            ViewModelProvider(this).get(StatusViewModel::class.java)
+        statusViewModel = ViewModelProvider(this).get(StatusViewModel::class.java)
         _binding = FragmentStatusBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -77,7 +79,6 @@ class StatusFragment : Fragment() {
         exerciseRecyclerViewBinding.itemAnimator = DefaultItemAnimator()
         statusViewModel.cardRecyclerViewData.observe(viewLifecycleOwner) { newData ->
             cardAdapter.submitList(newData)
-            statusViewModel.updateCardRecyclerViewData(newData)
         }
 
         val tagRecyclerViewBinding = binding.filterBar.tagRecyclerView
@@ -87,11 +88,31 @@ class StatusFragment : Fragment() {
         tagRecyclerViewBinding.itemAnimator = DefaultItemAnimator()
         statusViewModel.tagRecyclerViewData.observe(viewLifecycleOwner) { newData ->
             tagAdapter.submitList(newData)
-            statusViewModel.updateTagRecyclerViewData(newData)
         }
 
         return root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        EventManager.subscribe(
+            requireContext().getString(R.string.event_delete_tag)
+        ) { event: Event ->
+            val selectedTags = TagStorage.getSelectedTags(requireContext())
+            val cards = CardStorage.getSelectedCard(requireContext(), selectedTags)
+            statusViewModel.updateCardRecyclerViewData(cards)
+        }
+
+        EventManager.subscribe(
+            requireContext().getString(R.string.event_edit_tag)
+        ) { event: Event ->
+            val selectedTags = TagStorage.getSelectedTags(requireContext())
+            val cards = CardStorage.getSelectedCard(requireContext(), selectedTags)
+            statusViewModel.updateCardRecyclerViewData(cards)
+        }
+    }
+
 
     override fun onResume() {
         super.onResume()
