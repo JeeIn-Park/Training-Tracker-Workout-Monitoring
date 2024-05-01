@@ -135,21 +135,20 @@ class AddLogFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         EventManager.subscribe(
             requireContext().getString(R.string.event_add_set)
         ) { event ->
-            when (event.data) {
-                is ExerciseSet -> {
-                    event.data.oneRepMax //TODO : update the ui
+            (event.data as? List<*>)?.let { list ->
+                if (list.all { it is ExerciseSet }) {
+                    val sets = list as List<ExerciseSet>
+                    val todayOneRepMaxTextViewBinding: TextView = binding.AddLogToday1RMTextView
+                    todayOneRepMaxTextViewBinding.text = FormattedStringGetter.totalMassLifted(sets)
+                } else {
+                    println("Unhandled type of data: ${event.data}")
                 }
-                else -> println("Unhandled type of data: ${event.data}")
             }
         }
-
-        val currentSet = SetStorage.getSets(requireContext())
-        val todayOneRepMaxTextViewBinding: TextView = binding.AddLogToday1RMTextView
-        todayOneRepMaxTextViewBinding.text = FormattedStringGetter.totalMassLifted(currentSet)
-        super.onViewCreated(view, savedInstanceState)
     }
 
     @Deprecated("Deprecated in Java")

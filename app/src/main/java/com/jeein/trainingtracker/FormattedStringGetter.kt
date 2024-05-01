@@ -101,13 +101,14 @@ object FormattedStringGetter {
 
     fun totalMassLifted(sets: List<ExerciseSet>): String{
         if (sets.isEmpty()) {
-            "\"Total weight lifted : 0 kg\" : 0 kg"
+            "Today's best 1RM : 0 kg"
         } else {
             val oneRepMax = sets.maxBy { it.oneRepMax ?: Float.MIN_VALUE }.oneRepMax
             val recordString = "%.2f".format(oneRepMax)
-            return "Total weight lifted : 0 kg : $recordString kg"
+            return "Today's best 1RM : $recordString kg"
         }
-        return "Total weight lifted : 0 kg"
+        return "Today's best 1RM : 0 kg"
     }
+
 
 }

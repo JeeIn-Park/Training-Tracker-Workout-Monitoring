@@ -203,7 +203,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Total weight lifted : 0 kg"
+                    android:text="Today's best 1RM : 0 kg"
                     android:textColor="?attr/colorOnBackground"
                     android:textSize="12sp" />
 

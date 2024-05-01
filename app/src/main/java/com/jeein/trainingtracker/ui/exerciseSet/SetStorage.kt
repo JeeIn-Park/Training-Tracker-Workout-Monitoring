@@ -50,7 +50,7 @@ object SetStorage {
                     EventManager.publish(
                 Event(
                     context.getString(R.string.event_add_set),
-                    set
+                    currentSets
                 )
             )
     }
