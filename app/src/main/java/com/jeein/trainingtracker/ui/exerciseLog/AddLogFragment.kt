@@ -62,7 +62,6 @@ class AddLogFragment : Fragment() {
         (requireActivity() as AppCompatActivity).supportActionBar?.title = cardItem.name
         val logStorage = LogStorage(cardItem.id)
         val pastLog: List<ExerciseLog> = logStorage.loadLogs(requireContext())
-        println(pastLog)
 
         val oneRepMaxBar: TextView = binding.oneRepMaxBar
         val oneRepMaxRecordDate = cardItem.oneRepMaxRecordDate
@@ -107,6 +106,14 @@ class AddLogFragment : Fragment() {
         val warmUpCheckBox: CheckBox = binding.warmUpCheck
         val logButton: Button = binding.logButton
 
+        if (pastLog.isNotEmpty()){
+            kgEditText.setText(
+                pastLog[0].exerciseSetList[0].mass?.toString() ?: "0"
+            )
+            repEditText.setText(
+                pastLog[0].exerciseSetList[0].rep?.toString() ?: "0"
+            )
+        }
 
         logButton.setOnClickListener {
             val massString = kgEditText.text.toString()
