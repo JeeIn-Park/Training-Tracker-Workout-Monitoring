@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.jeein.trainingtracker.Event
 import com.jeein.trainingtracker.EventManager
 import com.jeein.trainingtracker.FormattedStringGetter
 import com.jeein.trainingtracker.R
@@ -137,18 +138,9 @@ class AddLogFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         EventManager.subscribe(
-            requireContext().getString(R.string.event_add_set)
-        ) { event ->
-            (event.data as? List<*>)?.let { list ->
-                if (list.all { it is ExerciseSet }) {
-                    val sets = list as List<ExerciseSet>
-                    val todayOneRepMaxTextViewBinding: TextView = binding.AddLogToday1RMTextView
-                    todayOneRepMaxTextViewBinding.text = FormattedStringGetter.totalMassLifted(sets)
-                } else {
-                    println("Unhandled type of data: ${event.data}")
-                }
-            }
-        }
+            requireContext().getString(R.string.event_add_set),
+            ::addSetSubscriber
+        )
     }
 
     @Deprecated("Deprecated in Java")
@@ -160,6 +152,25 @@ class AddLogFragment : Fragment() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventManager.unsubscribe(requireContext().getString(R.string.event_add_set),
+            ::addSetSubscriber
+            )
+    }
+
+    private fun addSetSubscriber(event: Event) {
+        (event.data as? List<*>)?.let { list ->
+            if (list.all { it is ExerciseSet }) {
+                val sets = list as List<ExerciseSet>
+                val todayOneRepMaxTextViewBinding: TextView = binding.AddLogToday1RMTextView
+                todayOneRepMaxTextViewBinding.text = FormattedStringGetter.totalMassLifted(sets)
+            } else {
+                println("Unhandled type of data: ${event.data}")
+            }
+        }
     }
 
 }

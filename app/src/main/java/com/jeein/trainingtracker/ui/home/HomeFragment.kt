@@ -98,25 +98,37 @@ class HomeFragment : Fragment() {
         setupDraggableFAB(binding.addCardButton)
 
         EventManager.subscribe(
-            requireContext().getString(R.string.event_delete_tag)
-        ) { event: Event ->
-            val selectedTags = TagStorage.getSelectedTags(requireContext())
-            val cards = CardStorage.getSelectedCard(requireContext(), selectedTags)
-            homeViewModel.updateCardRecyclerViewData(cards)
-        }
+            requireContext().getString(R.string.event_delete_tag),
+            ::deleteTagSubscriber
+        )
 
         EventManager.subscribe(
-            requireContext().getString(R.string.event_edit_tag)
-        ) { event: Event ->
-            val selectedTags = TagStorage.getSelectedTags(requireContext())
-            val cards = CardStorage.getSelectedCard(requireContext(), selectedTags)
-            homeViewModel.updateCardRecyclerViewData(cards)
-        }
+            requireContext().getString(R.string.event_edit_tag),
+            ::editTagSubscriber
+        )
     }
 
     override fun onResume() {
         refresh()
         super.onResume()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventManager.unsubscribe(
+            requireContext().getString(R.string.event_delete_tag),
+            ::deleteTagSubscriber
+        )
+
+        EventManager.unsubscribe(
+            requireContext().getString(R.string.event_edit_tag),
+            ::editTagSubscriber
+        )
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        handler.removeCallbacks(fadeOutRunnable)
+        _binding = null
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -261,10 +273,16 @@ class HomeFragment : Fragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        handler.removeCallbacks(fadeOutRunnable)
-        _binding = null
+
+    private fun deleteTagSubscriber(event: Event){
+        val selectedTags = TagStorage.getSelectedTags(requireContext())
+        val cards = CardStorage.getSelectedCard(requireContext(), selectedTags)
+        homeViewModel.updateCardRecyclerViewData(cards)
+    }
+    private fun editTagSubscriber(event: Event){
+        val selectedTags = TagStorage.getSelectedTags(requireContext())
+        val cards = CardStorage.getSelectedCard(requireContext(), selectedTags)
+        homeViewModel.updateCardRecyclerViewData(cards)
     }
 
 }

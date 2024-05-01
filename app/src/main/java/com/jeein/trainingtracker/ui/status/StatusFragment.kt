@@ -97,20 +97,14 @@ class StatusFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         EventManager.subscribe(
-            requireContext().getString(R.string.event_delete_tag)
-        ) { event: Event ->
-            val selectedTags = TagStorage.getSelectedTags(requireContext())
-            val cards = CardStorage.getSelectedCard(requireContext(), selectedTags)
-            statusViewModel.updateCardRecyclerViewData(cards)
-        }
+            requireContext().getString(R.string.event_delete_tag),
+            ::deleteTagSubscriber
+        )
 
         EventManager.subscribe(
-            requireContext().getString(R.string.event_edit_tag)
-        ) { event: Event ->
-            val selectedTags = TagStorage.getSelectedTags(requireContext())
-            val cards = CardStorage.getSelectedCard(requireContext(), selectedTags)
-            statusViewModel.updateCardRecyclerViewData(cards)
-        }
+            requireContext().getString(R.string.event_edit_tag),
+            ::editTagSubscriber
+        )
     }
 
 
@@ -118,6 +112,21 @@ class StatusFragment : Fragment() {
         super.onResume()
         refresh()
     }
+
+
+    override fun onStop() {
+        super.onStop()
+        EventManager.unsubscribe(
+            requireContext().getString(R.string.event_delete_tag),
+            ::deleteTagSubscriber
+        )
+
+        EventManager.unsubscribe(
+            requireContext().getString(R.string.event_edit_tag),
+            ::editTagSubscriber
+        )
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -133,5 +142,17 @@ class StatusFragment : Fragment() {
         val cards = CardStorage.getSelectedCard(requireContext(), selectedTags)
         cardAdapter.submitList(cards)
     }
+
+    private fun deleteTagSubscriber(event: Event){
+        val selectedTags = TagStorage.getSelectedTags(requireContext())
+        val cards = CardStorage.getSelectedCard(requireContext(), selectedTags)
+        statusViewModel.updateCardRecyclerViewData(cards)
+    }
+    private fun editTagSubscriber(event: Event){
+        val selectedTags = TagStorage.getSelectedTags(requireContext())
+        val cards = CardStorage.getSelectedCard(requireContext(), selectedTags)
+        statusViewModel.updateCardRecyclerViewData(cards)
+    }
+
 
 }
