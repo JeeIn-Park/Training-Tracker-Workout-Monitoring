@@ -12,6 +12,7 @@ import android.widget.TableLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -31,12 +32,9 @@ class AddLogFragment : Fragment() {
     private var _binding: FragmentAddLogBinding? = null
     private val binding get() = _binding!!
 
-    // past log
     private lateinit var pastLogTableAdapter: PastLogTableAdapter
+    private lateinit var addLogViewModel: AddLogViewModel
 
-    // get selected card
-    private lateinit var cardItem: ExerciseCard
-    private lateinit var logStorage: LogStorage
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,16 +46,19 @@ class AddLogFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        addLogViewModel =
+            ViewModelProvider(this).get(AddLogViewModel::class.java)
         _binding = FragmentAddLogBinding.inflate(inflater, container, false)
+        val root: View = binding.root
 
-        cardItem = arguments?.getSerializable("exerciseCardArg") as ExerciseCard
+        val cardItem = arguments?.getSerializable("exerciseCardArg") as ExerciseCard
         val currentExercise = SetStorage.getCurrentExercise(requireContext())
         if ( (currentExercise != null) && (currentExercise != cardItem.id)) {
             SetStorage.resetSets(requireContext(), currentExercise)
         }
 
         (requireActivity() as AppCompatActivity).supportActionBar?.title = cardItem.name
-        logStorage = LogStorage(cardItem.id)
+        val logStorage = LogStorage(cardItem.id)
         val pastLog: List<ExerciseLog> = logStorage.loadLogs(requireContext())
         println(pastLog)
 
@@ -117,7 +118,7 @@ class AddLogFragment : Fragment() {
 
         }
 
-        return binding.root
+        return root
     }
 
 

@@ -52,7 +52,7 @@ class PastLogTableAdapter(private val items: List<ExerciseLog>) :
         return items.size
     }
 
-    class TableItemViewHolder(
+    inner class TableItemViewHolder(
         private val parentView: LinearLayout,
         private val setTableLayout: TableLayout,
         private val dateTableLayout: TableLayout,
