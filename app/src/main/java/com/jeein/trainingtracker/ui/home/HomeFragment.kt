@@ -128,20 +128,9 @@ class HomeFragment : Fragment() {
         )
 
         EventManager.subscribe(
-            requireContext().getString(R.string.event_empty_log)
-        ) { event ->
-            when (event.data as? Boolean) {
-                true -> {
-                    binding.HomeDescriptionTextView.visibility = View.VISIBLE
-                }
-                false -> {
-                    binding.HomeDescriptionTextView.visibility = View.GONE
-                }
-                else -> {
-                    // unhandled type passed
-                }
-            }
-        }
+            requireContext().getString(R.string.event_empty_log),
+            ::emptyCardSubscriber
+        )
 
     }
 
@@ -166,6 +155,12 @@ class HomeFragment : Fragment() {
             requireContext().getString(R.string.event_edit_tag),
             ::editTagSubscriber
         )
+
+        EventManager.unsubscribe(
+            requireContext().getString(R.string.event_empty_log),
+            ::emptyCardSubscriber
+        )
+
         handler.removeCallbacks(fadeOutRunnable)
         _binding = null
     }
@@ -381,6 +376,20 @@ class HomeFragment : Fragment() {
         val selectedTags = TagStorage.getSelectedTags(requireContext())
         val cards = CardStorage.getSelectedCard(requireContext(), selectedTags)
         homeViewModel.updateCardRecyclerViewData(cards)
+    }
+
+    private fun emptyCardSubscriber(event: Event) {
+        when (event.data as? Boolean) {
+            true -> {
+                binding.HomeDescriptionTextView.visibility = View.VISIBLE
+            }
+            false -> {
+                binding.HomeDescriptionTextView.visibility = View.GONE
+            }
+            else -> {
+                // unhandled type passed
+            }
+        }
     }
 
 }
