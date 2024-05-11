@@ -148,6 +148,7 @@ class AddLogFragment : Fragment() {
             requireContext().getString(R.string.event_add_set),
             ::addSetSubscriber
         )
+        setupSwipeListeners()
     }
 
     @Deprecated("Deprecated in Java")
@@ -181,6 +182,20 @@ class AddLogFragment : Fragment() {
                 println("Unhandled type of data: ${event.data}")
             }
         }
+    }
+
+
+    private fun setupSwipeListeners() {
+        val kgEditText: EditText = binding.kgEnterText
+        val repEditText: EditText = binding.repEnterText
+
+        // Assume the increment for kg is 1.25 and for reps is 1 (or choose as needed)
+        kgEditText.setOnTouchListener(GestureListener(kgEditText, 1.25f))
+        repEditText.setOnTouchListener(GestureListener(repEditText, 1f))
+
+        // Set up initial values, potentially loading the last log or default values
+        kgEditText.setText("0")
+        repEditText.setText("0")
     }
 
 }
