@@ -76,6 +76,14 @@ class AddCardFragment : Fragment() {
                 tagSpinner.setItems(tagList.map { it.name })
             }
             addButton.text = "SAVE"
+        } else {
+            val selectedTags = TagStorage.getSelectedTags(requireContext())
+            if (selectedTags.isNotEmpty()) {
+                tagSpinner.setSelection(selectedTags.map { it.name })
+                if (tagSpinner.getSelectedIndices().isEmpty()) {
+                    tagSpinner.setItems(tagList.map { it.name })
+                }
+            }
         }
 
         addButton.setOnClickListener {

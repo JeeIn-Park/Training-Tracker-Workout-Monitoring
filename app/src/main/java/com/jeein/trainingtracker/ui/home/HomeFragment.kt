@@ -296,19 +296,6 @@ class HomeFragment : Fragment() {
         homeViewModel.updateTagRecyclerViewData(tags)
         val selectedTags = TagStorage.getSelectedTags(requireContext())
         val cards = CardStorage.getSelectedCard(requireContext(), selectedTags)
-//        if (cards.isEmpty()) {
-//            EventManager.publish(
-//                Event(
-//                    getString(R.string.event_empty_log), true
-//                )
-//            )
-//        } else {
-//            EventManager.publish(
-//                Event(
-//                    getString(R.string.event_empty_log), false
-//                )
-//            )
-//        }
         homeViewModel.updateCardRecyclerViewData(cards)
         val muscles = MuscleStorage.loadMuscles(requireContext())
         updateMuscleImages(requireContext(), muscles)
