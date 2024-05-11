@@ -139,25 +139,36 @@ class HomeFragment : Fragment() {
         var isDrag = false
 
         fab.setOnTouchListener { view, event ->
+            val parentView = view.parent as View
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     dX = view.x - event.rawX
                     dY = view.y - event.rawY
                     isDrag = false
-                    handler.removeCallbacks(fadeOutRunnable)  // Stop any ongoing fade out animations
-                    view.alpha = 1.0f  // Make the button fully opaque
+                    handler.removeCallbacks(fadeOutRunnable)  // Cancel any pending fade-out actions
+                    view.alpha = 1.0f  // Ensure the button is fully visible when touched
                     true
                 }
 
                 MotionEvent.ACTION_MOVE -> {
                     val newX = event.rawX + dX
                     val newY = event.rawY + dY
-                    // Consider it a drag if the movement is beyond a certain threshold
-                    if (Math.abs(newX - view.x) > 10 || Math.abs(newY - view.y) > 10) {
+
+                    // Restrict the FAB's movement within the bounds of the parent view
+                    val leftBound = 0f
+                    val rightBound = parentView.width - view.width
+                    val topBound = 0f
+                    val bottomBound = parentView.height - view.height
+
+                    // Apply constraints to newX and newY
+                    val constrainedX = newX.coerceIn(leftBound, rightBound.toFloat())
+                    val constrainedY = newY.coerceIn(topBound, bottomBound.toFloat())
+
+                    if (Math.abs(constrainedX - view.x) > 10 || Math.abs(constrainedY - view.y) > 10) {
                         isDrag = true
                         view.animate()
-                            .x(newX)
-                            .y(newY)
+                            .x(constrainedX)
+                            .y(constrainedY)
                             .setDuration(0)
                             .start()
                     }
@@ -167,17 +178,17 @@ class HomeFragment : Fragment() {
                 MotionEvent.ACTION_UP -> {
                     if (isDrag) {
                         // Snap to left or right side
-                        val parentWidth = (view.parent as View).width
+                        val parentWidth = parentView.width
                         val toRight = view.x + view.width / 2 > parentWidth / 2
                         view.animate()
                             .x(if (toRight) parentWidth - view.width.toFloat() else 0f)
                             .setDuration(300)
                             .start()
                     } else {
-                        // Perform click if it was not a drag
+                        // If not dragged, perform the click action
                         fab.performClick()
                     }
-                    handler.postDelayed(fadeOutRunnable, 2000)  // Delay fading out the FAB
+                    handler.postDelayed(fadeOutRunnable, 2000)  // Re-initiate the fade out
                     true
                 }
                 else -> false
@@ -194,7 +205,6 @@ class HomeFragment : Fragment() {
     private fun performFabClick() {
         findNavController().navigate(R.id.action_homeFragment_to_addCardFragment)
     }
-
 
 
     private fun updateMuscleImages(context: Context, muscles: List<Muscle>) {
