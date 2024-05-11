@@ -8,6 +8,7 @@ import android.widget.SpinnerAdapter
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatSpinner
+import com.jeein.trainingtracker.R
 import java.util.Arrays
 
 class MultiSelectionSpinner : AppCompatSpinner, DialogInterface.OnMultiChoiceClickListener {
@@ -69,12 +70,25 @@ class MultiSelectionSpinner : AppCompatSpinner, DialogInterface.OnMultiChoiceCli
     override fun performClick(): Boolean {
         AlertDialog.Builder(context).apply {
             _items?.let { items ->
-                setMultiChoiceItems(items, mSelection, this@MultiSelectionSpinner)
+                val selectedItems = BooleanArray(items.size)
+                System.arraycopy(mSelection!!, 0, selectedItems, 0, items.size)
+                setMultiChoiceItems(items, selectedItems, this@MultiSelectionSpinner)
+
+                // Add "Confirm" button to finalize selection
+                setPositiveButton("Confirm") { dialog, which ->
+                    System.arraycopy(selectedItems, 0, mSelection!!, 0, items.size)
+                    simpleAdapter.clear()
+                    simpleAdapter.add(buildSelectedItemString())
+                    dialog.dismiss()
+                }
+
+
                 show()
             }
         }
         return true
     }
+
 
     override fun setAdapter(adapter: SpinnerAdapter) {
         throw RuntimeException("setAdapter is not supported by MultiSelectSpinner.")
