@@ -23,11 +23,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:paddingHorizontal="14sp"
+            android:paddingHorizontal="16sp"
             android:paddingVertical="8sp"
             android:text="Tag"
             android:textColor="?attr/colorOnBackground"
-            android:textSize="12sp" />
+            android:textSize="16sp" />
 
     </androidx.cardview.widget.CardView>
 

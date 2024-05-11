@@ -11,7 +11,7 @@
         android:layout_margin="3dp"
         android:foregroundGravity="center"
         app:cardBackgroundColor="?attr/colorPrimary"
-        app:cardCornerRadius="12sp"
+        app:cardCornerRadius="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -32,7 +32,7 @@
                 android:padding="4sp"
                 android:text="Exercise Name"
                 android:textColor="?attr/colorOnBackground"
-                android:textSize="12sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/StatusCard_Tag_TextView"
@@ -43,7 +43,7 @@
                 android:paddingBottom="4sp"
                 android:text="Tag"
                 android:textColor="?attr/colorPrimaryVariant"
-                android:textSize="12sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/StatusCard_MainMuscle_TextView"
@@ -54,7 +54,7 @@
                 android:paddingBottom="4sp"
                 android:text="Main Muscles"
                 android:textColor="?attr/colorPrimaryVariant"
-                android:textSize="12sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/StatusCard_SubMuscle_TextView"
@@ -65,7 +65,7 @@
                 android:paddingBottom="4sp"
                 android:text="Sub Muscles"
                 android:textColor="?attr/colorPrimaryVariant"
-                android:textSize="12sp" />
+                android:textSize="16sp" />
 
         </LinearLayout>
 
@@ -76,7 +76,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
-        android:textSize="12sp"
+        android:textSize="14sp"
         android:text="One Rep Max"
         android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
