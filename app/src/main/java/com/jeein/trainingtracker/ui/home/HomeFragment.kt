@@ -7,6 +7,7 @@ import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -95,6 +96,10 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        super.onViewCreated(view, savedInstanceState)
+        view.post {
+            restoreFABPosition()
+        }
         setupDraggableFAB(binding.addCardButton)
 
         EventManager.subscribe(
@@ -115,6 +120,7 @@ class HomeFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
+        saveFABPosition(binding.addCardButton.x, binding.addCardButton.y)
     }
 
     override fun onDestroyView() {
@@ -177,20 +183,23 @@ class HomeFragment : Fragment() {
 
                 MotionEvent.ACTION_UP -> {
                     if (isDrag) {
-                        // Snap to left or right side
                         val parentWidth = parentView.width
                         val toRight = view.x + view.width / 2 > parentWidth / 2
+                        val finalX = if (toRight) (parentWidth - view.width).toFloat() else 0f
                         view.animate()
-                            .x(if (toRight) parentWidth - view.width.toFloat() else 0f)
+                            .x(finalX)
                             .setDuration(300)
+                            .withEndAction {
+                                saveFABPosition(view.x, view.y)
+                            }
                             .start()
                     } else {
-                        // If not dragged, perform the click action
                         fab.performClick()
                     }
-                    handler.postDelayed(fadeOutRunnable, 2000)  // Re-initiate the fade out
+                    handler.postDelayed(fadeOutRunnable, 2000)
                     true
                 }
+
                 else -> false
             }
         }
@@ -204,6 +213,31 @@ class HomeFragment : Fragment() {
 
     private fun performFabClick() {
         findNavController().navigate(R.id.action_homeFragment_to_addCardFragment)
+    }
+
+
+    private fun saveFABPosition(x: Float, y: Float) {
+        Log.d("FABPosition", "Saving position: x=$x, y=$y")
+        val sharedPrefs = requireActivity().getSharedPreferences("FABPosition", Context.MODE_PRIVATE)
+        with(sharedPrefs.edit()) {
+            putFloat("fabX", x)
+            putFloat("fabY", y)
+            apply()
+        }
+    }
+
+    private fun restoreFABPosition() {
+        val sharedPrefs = requireActivity().getSharedPreferences("FABPosition", Context.MODE_PRIVATE)
+        val defaultX = -1.0f
+        val defaultY = -1.0f
+        val x = sharedPrefs.getFloat("fabX", defaultX)
+        val y = sharedPrefs.getFloat("fabY", defaultY)
+        if (x != defaultX && y != defaultY) {
+            binding.addCardButton.x = x
+            binding.addCardButton.y = y
+        } else {
+            Log.d("HomeFragment", "Default values are being used: x=$x, y=$y")
+        }
     }
 
 
