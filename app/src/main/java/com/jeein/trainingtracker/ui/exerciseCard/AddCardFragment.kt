@@ -38,11 +38,11 @@ class AddCardFragment : Fragment() {
     ): View {
         _binding = FragmentAddCardBinding.inflate(inflater, container, false)
 
-        val exerciseNameEditText: EditText = binding.exerciseName
-        val mainMusclesSpinner: MultiSelectionSpinner = binding.mainMuscles
-        val subMusclesSpinner: MultiSelectionSpinner = binding.subMuscles
-        val tagSpinner: MultiSelectionSpinner = binding.selectTag
-        val addButton: Button = binding.addButton
+        val exerciseNameEditText: EditText = binding.AddCardExerciseNameEditText
+        val mainMusclesSpinner: MultiSelectionSpinner = binding.AddCardMainMuscleSpinner
+        val subMusclesSpinner: MultiSelectionSpinner = binding.AddCardSubMuscleSpinner
+        val tagSpinner: MultiSelectionSpinner = binding.AddCardTagSpinner
+        val addButton: Button = binding.AddCardAddButton
 
         val cardItem = arguments?.getSerializable("exerciseCardArg") as? ExerciseCard
         val selectMuscle = Muscle(null, 0, getString(R.string.muscle_select), listOf())
