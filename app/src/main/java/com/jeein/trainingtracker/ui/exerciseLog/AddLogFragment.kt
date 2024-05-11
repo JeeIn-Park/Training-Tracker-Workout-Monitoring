@@ -189,13 +189,9 @@ class AddLogFragment : Fragment() {
         val kgEditText: EditText = binding.kgEnterText
         val repEditText: EditText = binding.repEnterText
 
-        // Assume the increment for kg is 1.25 and for reps is 1 (or choose as needed)
-        kgEditText.setOnTouchListener(GestureListener(kgEditText, 1.25f))
-        repEditText.setOnTouchListener(GestureListener(repEditText, 1f))
-
-        // Set up initial values, potentially loading the last log or default values
-        kgEditText.setText("0")
-        repEditText.setText("0")
+        // Initialize the swipe listener with the appropriate increment value
+        kgEditText.setOnTouchListener(GestureListenerMass(kgEditText, 1.25f))
+        repEditText.setOnTouchListener(GestureListenerRep(repEditText, 1))
     }
 
 }
