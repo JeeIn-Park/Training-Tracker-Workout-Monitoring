@@ -136,70 +136,44 @@ class HomeFragment : Fragment() {
     private fun setupDraggableFAB(fab: FloatingActionButton) {
         var dX = 0f
         var dY = 0f
-        var lastAction: Int = MotionEvent.ACTION_CANCEL
+        var lastAction = MotionEvent.ACTION_CANCEL
+        var isDrag = false
 
         fab.setOnTouchListener { view, event ->
-            handler.removeCallbacks(fadeOutRunnable)
-            if (event.action == MotionEvent.ACTION_DOWN || event.action == MotionEvent.ACTION_MOVE) {
-                view.alpha = 1.0f
-            }
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     dX = view.x - event.rawX
                     dY = view.y - event.rawY
-                    lastAction = MotionEvent.ACTION_DOWN
+                    isDrag = false
                     true
                 }
 
                 MotionEvent.ACTION_MOVE -> {
-                    val newX = event.rawX + dX
-                    val newY = event.rawY + dY
-                    val parentView = view.parent as View
-                    val actionBarHeight = resources.getDimension(R.dimen.action_bar_height)
-                    val bottomNavHeight = resources.getDimension(R.dimen.bottom_nav_height)
-                    if (newY + view.height > parentView.height - bottomNavHeight + view.height
-                        || newY < actionBarHeight - view.height
-                    ) {
-                        true  // Still consume the event but don't move the view
-                    } else {
+                    val moveThreshold = 10
+                    if (Math.abs(dX + event.rawX - view.x) > moveThreshold || Math.abs(dY + event.rawY - view.y) > moveThreshold) {
+                        isDrag = true
+                        val newX = event.rawX + dX
+                        val newY = event.rawY + dY
                         view.animate()
                             .x(newX)
                             .y(newY)
                             .setDuration(0)
                             .start()
-                        lastAction = MotionEvent.ACTION_MOVE
-                        true
-                    }
-                }
-
-                MotionEvent.ACTION_UP -> {
-                    handler.postDelayed(fadeOutRunnable, 1000)
-                    val parentWidth = (view.parent as View).width.toFloat()
-                    val toRight = view.x + view.width / 2 > parentWidth / 2
-                    val finalPosition = if (toRight) parentWidth - view.width else 0f
-                    if (lastAction == MotionEvent.ACTION_MOVE) {
-                        view.animate()
-                            .x(finalPosition)
-                            .setDuration(300)
-                            .start()
-                    } else {
-                        performFabClick()
                     }
                     true
                 }
 
+                MotionEvent.ACTION_UP -> {
+                    if (!isDrag) {
+                        view.performClick()
+                    }
+                    true
+                }
                 else -> false
             }
         }
-
-        fab.setOnClickListener {
-            performFabClick()
-            handler.postDelayed(fadeOutRunnable, 300)
-        }
-
-        fab.alpha = 1.0f
-        handler.postDelayed(fadeOutRunnable, 300)
     }
+
 
     private fun performFabClick() {
         findNavController().navigate(R.id.action_homeFragment_to_addCardFragment)
