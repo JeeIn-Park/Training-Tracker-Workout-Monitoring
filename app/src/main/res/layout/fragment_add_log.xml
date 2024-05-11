@@ -193,6 +193,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textSize="16sp"
+                    android:paddingTop="3dp"
                     android:text="TODAY"
                     android:textColor="?attr/colorOnBackground"
                     android:textStyle="bold" />
@@ -205,7 +206,7 @@
                     android:gravity="center"
                     android:text="Today's best 1RM : 0 kg"
                     android:textColor="?attr/colorOnBackground"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/todaySetTable"
