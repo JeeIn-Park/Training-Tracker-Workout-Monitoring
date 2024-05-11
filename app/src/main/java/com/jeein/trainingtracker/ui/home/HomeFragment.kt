@@ -24,12 +24,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.jeein.trainingtracker.Event
 import com.jeein.trainingtracker.EventManager
-import com.jeein.trainingtracker.FormattedStringGetter
 import com.jeein.trainingtracker.R
 import com.jeein.trainingtracker.databinding.FragmentHomeBinding
 import com.jeein.trainingtracker.ui.exerciseCard.CardStorage
 import com.jeein.trainingtracker.ui.exerciseCard.ExerciseCard
-import com.jeein.trainingtracker.ui.exerciseSet.ExerciseSet
 import com.jeein.trainingtracker.ui.muscles.Muscle
 import com.jeein.trainingtracker.ui.muscles.MuscleFactory.getDrawableResourceIdByStatus
 import com.jeein.trainingtracker.ui.muscles.MuscleStorage
@@ -53,6 +51,7 @@ class HomeFragment : Fragment() {
         animator.duration = 500
         animator.start()
     }
+    private var isCardEmpty: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -90,12 +89,15 @@ class HomeFragment : Fragment() {
             tagAdapter.submitList(newData)
         }
 
+//        if (! isCardEmpty) {
+//            binding.HomeDescriptionTextView.visibility = View.GONE
+//        }
+
         return root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         super.onViewCreated(view, savedInstanceState)
         view.post {
             restoreFABPosition()
@@ -266,6 +268,11 @@ class HomeFragment : Fragment() {
         homeViewModel.updateTagRecyclerViewData(tags)
         val selectedTags = TagStorage.getSelectedTags(requireContext())
         val cards = CardStorage.getSelectedCard(requireContext(), selectedTags)
+        if (cards.isEmpty()) {
+           isCardEmpty = true
+        } else {
+            isCardEmpty = false
+        }
         homeViewModel.updateCardRecyclerViewData(cards)
         val muscles = MuscleStorage.loadMuscles(requireContext())
         updateMuscleImages(requireContext(), muscles)

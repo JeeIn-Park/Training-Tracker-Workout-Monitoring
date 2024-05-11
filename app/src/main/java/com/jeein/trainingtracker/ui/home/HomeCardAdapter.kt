@@ -40,8 +40,8 @@ class HomeCardAdapter(
     fun removeItem(position: Int) {
         val updatedList = currentList.toMutableList()
         val removedCard = updatedList.removeAt(position)
-        submitList(updatedList)
         CardStorage.removeCard(context, removedCard)
+        submitList(updatedList)
     }
 
     inner class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
