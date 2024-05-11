@@ -81,5 +81,8 @@
         ]]>
     </string>
     <string name="feedback_mail">trainingtrackermailbox@gmail.com</string>
+    <string name="home_description">
+        Looks like you don\'t have any exercises yet! Tap the blue \'+\' button to add some tags or categories, and use the yellow \'+\' button to start adding your exercises. Feel free to drag and move the yellow \'+\' button to wherever it suits you best on the screen. Let\'s get moving!
+    </string>
 
 </resources>

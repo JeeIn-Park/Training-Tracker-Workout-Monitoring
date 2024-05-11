@@ -258,6 +258,7 @@ class HomeFragment : Fragment() {
         }
     }
 
+
     private fun refresh() {
         val tags: MutableList<Tag> = TagStorage.loadTags(requireContext()).toMutableList()
         tags.removeAll { it == Tag.ADD_TAG }
@@ -270,15 +271,18 @@ class HomeFragment : Fragment() {
         updateMuscleImages(requireContext(), muscles)
     }
 
+
     private fun navAddLog(cardItem: ExerciseCard) {
         val bundle = bundleOf("exerciseCardArg" to cardItem)
         findNavController().navigate(R.id.action_homeFragment_to_addLogFragment, bundle)
     }
 
+
     private fun navEditCard(cardItem: ExerciseCard) {
         val bundle = bundleOf("exerciseCardArg" to cardItem)
         findNavController().navigate(R.id.action_homeFragment_to_addCardFragment, bundle)
     }
+
 
     private fun handleTagClick(clickedTag: Tag) {
         if (clickedTag.name == Tag.ADD_TAG.name) {
@@ -316,6 +320,8 @@ class HomeFragment : Fragment() {
         val cards = CardStorage.getSelectedCard(requireContext(), selectedTags)
         homeViewModel.updateCardRecyclerViewData(cards)
     }
+
+
     private fun editTagSubscriber(event: Event){
         val selectedTags = TagStorage.getSelectedTags(requireContext())
         val cards = CardStorage.getSelectedCard(requireContext(), selectedTags)

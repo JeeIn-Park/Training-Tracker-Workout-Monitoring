@@ -94,14 +94,16 @@
         android:layout_height="0dp"
         android:fadeScrollbars="true"
         android:orientation="horizontal"
-        android:paddingVertical="6dp"
         android:paddingHorizontal="3dp"
+        android:paddingVertical="6dp"
         android:scrollbarThumbVertical="@drawable/style_scroll_bar_vertical"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/filterBarContainer">
+        app:layout_constraintTop_toBottomOf="@+id/filterBarContainer"
+        app:layout_constraintVertical_bias="0.0">
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -112,7 +114,23 @@
         android:clickable="true"
         android:src="@drawable/baseline_add_circle_24"
         app:backgroundTint="?attr/colorPrimaryVariant"
-        app:layout_constraintBottom_toBottomOf="@+id/filterBarContainer"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/filterBarContainer"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/Home_DescriptionTextView"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30sp"
+        android:layout_marginEnd="30sp"
+        android:text="@string/home_description"
+        app:layout_constraintBottom_toTopOf="@id/addCardButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/filterBarContainer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
