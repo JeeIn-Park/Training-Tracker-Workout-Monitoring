@@ -14,7 +14,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import androidx.core.os.bundleOf
+import androidx.core.view.marginLeft
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -318,7 +320,29 @@ class HomeFragment : Fragment() {
         if (clickedTag.name == Tag.ADD_TAG.name) {
             val inputDialog = AlertDialog.Builder(requireContext())
             val inputEditText = EditText(requireContext())
-            inputDialog.setView(inputEditText)
+
+            // Calculate the desired padding and margins in pixels
+            val horizontalPaddingInPixels = (16 * requireContext().resources.displayMetrics.density).toInt()
+            val verticalPaddingInPixels = (16 * requireContext().resources.displayMetrics.density).toInt()
+
+            // Apply padding to the EditText for internal spacing
+            inputEditText.setPadding(horizontalPaddingInPixels, verticalPaddingInPixels,
+                horizontalPaddingInPixels, verticalPaddingInPixels)
+
+            // Set the custom view with margins for the EditText
+            val layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            layoutParams.setMargins(horizontalPaddingInPixels, 0, horizontalPaddingInPixels, 0)
+
+            val container = LinearLayout(requireContext())
+            container.orientation = LinearLayout.VERTICAL
+            container.addView(inputEditText, layoutParams)
+
+            // Set the LinearLayout as the view for the dialog
+            inputDialog.setView(container)
+
             inputDialog.setTitle(getString(R.string.tag_enter_name))
 
             inputDialog.setPositiveButton("OK") { dialog, _ ->
@@ -343,6 +367,7 @@ class HomeFragment : Fragment() {
             refresh()
         }
     }
+
 
 
     private fun deleteTagSubscriber(event: Event){
