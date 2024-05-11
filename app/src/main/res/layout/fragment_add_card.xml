@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -17,6 +18,7 @@
         android:maxLength="30"
         android:minHeight="48dp"
         android:textSize="16sp"
+        android:paddingHorizontal="16sp"
         app:layout_constraintBottom_toTopOf="@+id/AddCard_mainMuscleTextView"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -28,17 +30,17 @@
         android:id="@+id/AddCard_mainMuscleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
-        android:layout_marginBottom="14sp"
+        android:layout_marginVertical="8dp"
+        android:layout_marginHorizontal="30dp"
         android:padding="4dp"
         android:text="Main Muscle Group(s) : "
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/AddCard_mainMuscleSpinner"
+        app:layout_constraintBottom_toTopOf="@id/AddCard_mainMuscleSpinnerContainer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/AddCard_exerciseNameEditText" />
 
-    <com.jeein.trainingtracker.views.MultiSelectionSpinner
-        android:id="@+id/AddCard_mainMuscleSpinner"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/AddCard_mainMuscleSpinnerContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
@@ -47,62 +49,98 @@
         android:minHeight="48dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AddCard_mainMuscleTextView" />
+        android:background="@drawable/style_textview_outline"
+        app:layout_constraintTop_toBottomOf="@+id/AddCard_mainMuscleTextView" >
 
+        <com.jeein.trainingtracker.views.MultiSelectionSpinner
+            android:id="@+id/AddCard_mainMuscleSpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:layout_margin="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <TextView
         android:id="@+id/AddCard_subMuscleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
-        android:layout_marginBottom="16sp"
+        android:layout_marginVertical="8dp"
+        android:layout_marginHorizontal="30dp"
         android:padding="4dp"
         android:text="Sub Muscle Group(s) : "
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/AddCard_subMuscleSpinner"
+        app:layout_constraintBottom_toTopOf="@id/AddCard_subMuscleSpinnerContainer"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/AddCard_mainMuscleSpinner" />
+        app:layout_constraintTop_toBottomOf="@id/AddCard_mainMuscleSpinnerContainer" />
 
 
-    <com.jeein.trainingtracker.views.MultiSelectionSpinner
-        android:id="@+id/AddCard_subMuscleSpinner"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/AddCard_subMuscleSpinnerContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
         android:layout_marginBottom="16sp"
         android:layout_marginRight="24dp"
         android:minHeight="48dp"
+        android:background="@drawable/style_textview_outline"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AddCard_subMuscleTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/AddCard_subMuscleTextView" >
+
+        <com.jeein.trainingtracker.views.MultiSelectionSpinner
+            android:id="@+id/AddCard_subMuscleSpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <TextView
         android:id="@+id/AddCard_tagTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
-        android:layout_marginBottom="16sp"
+        android:layout_marginVertical="8dp"
+        android:layout_marginHorizontal="30dp"
         android:padding="4dp"
         android:text="Tags : "
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/AddCard_tagSpinner"
+        app:layout_constraintBottom_toTopOf="@id/AddCard_tagSpinnerContainer"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/AddCard_subMuscleSpinner" />
+        app:layout_constraintTop_toBottomOf="@id/AddCard_subMuscleSpinnerContainer" />
 
 
-    <com.jeein.trainingtracker.views.MultiSelectionSpinner
-        android:id="@+id/AddCard_tagSpinner"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/AddCard_tagSpinnerContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
         android:layout_marginBottom="16sp"
         android:layout_marginRight="24dp"
         android:minHeight="48dp"
+        android:background="@drawable/style_textview_outline"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AddCard_tagTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/AddCard_tagTextView" >
+
+        <com.jeein.trainingtracker.views.MultiSelectionSpinner
+            android:id="@+id/AddCard_tagSpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <Button
