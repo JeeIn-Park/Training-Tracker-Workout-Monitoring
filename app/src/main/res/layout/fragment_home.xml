@@ -114,24 +114,37 @@
         android:clickable="true"
         android:src="@drawable/baseline_add_circle_24"
         app:backgroundTint="?attr/colorPrimaryVariant"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/filterBarContainer"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintVertical_bias="0.8" />
 
-    <TextView
-        android:id="@+id/Home_DescriptionTextView"
-        android:gravity="center"
-        android:layout_width="0dp"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30sp"
-        android:layout_marginEnd="30sp"
-        android:text="@string/home_description"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@id/addCardButton"
+        android:layout_margin="16dp"
+        app:cardBackgroundColor="@color/white_t"
+        app:cardCornerRadius="32sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/filterBarContainer" />
+        app:layout_constraintTop_toBottomOf="@id/filterBarContainer"
+        app:layout_constraintVertical_bias="0.2">
+
+        <TextView
+            android:id="@+id/Home_DescriptionTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30sp"
+            android:layout_marginEnd="30sp"
+            android:gravity="center"
+            android:paddingHorizontal="6sp"
+            android:paddingVertical="12sp"
+            android:text="@string/home_description"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
