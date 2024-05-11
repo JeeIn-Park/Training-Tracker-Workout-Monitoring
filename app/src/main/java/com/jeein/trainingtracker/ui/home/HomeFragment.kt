@@ -136,7 +136,6 @@ class HomeFragment : Fragment() {
     private fun setupDraggableFAB(fab: FloatingActionButton) {
         var dX = 0f
         var dY = 0f
-        var lastAction = MotionEvent.ACTION_CANCEL
         var isDrag = false
 
         fab.setOnTouchListener { view, event ->
@@ -145,15 +144,17 @@ class HomeFragment : Fragment() {
                     dX = view.x - event.rawX
                     dY = view.y - event.rawY
                     isDrag = false
+                    handler.removeCallbacks(fadeOutRunnable)  // Stop any ongoing fade out animations
+                    view.alpha = 1.0f  // Make the button fully opaque
                     true
                 }
 
                 MotionEvent.ACTION_MOVE -> {
-                    val moveThreshold = 10
-                    if (Math.abs(dX + event.rawX - view.x) > moveThreshold || Math.abs(dY + event.rawY - view.y) > moveThreshold) {
+                    val newX = event.rawX + dX
+                    val newY = event.rawY + dY
+                    // Consider it a drag if the movement is beyond a certain threshold
+                    if (Math.abs(newX - view.x) > 10 || Math.abs(newY - view.y) > 10) {
                         isDrag = true
-                        val newX = event.rawX + dX
-                        val newY = event.rawY + dY
                         view.animate()
                             .x(newX)
                             .y(newY)
@@ -164,20 +165,37 @@ class HomeFragment : Fragment() {
                 }
 
                 MotionEvent.ACTION_UP -> {
-                    if (!isDrag) {
-                        view.performClick()
+                    if (isDrag) {
+                        // Snap to left or right side
+                        val parentWidth = (view.parent as View).width
+                        val toRight = view.x + view.width / 2 > parentWidth / 2
+                        view.animate()
+                            .x(if (toRight) parentWidth - view.width.toFloat() else 0f)
+                            .setDuration(300)
+                            .start()
+                    } else {
+                        // Perform click if it was not a drag
+                        fab.performClick()
                     }
+                    handler.postDelayed(fadeOutRunnable, 2000)  // Delay fading out the FAB
                     true
                 }
                 else -> false
             }
         }
-    }
 
+        fab.setOnClickListener {
+            performFabClick()
+        }
+
+        handler.postDelayed(fadeOutRunnable, 2000)  // Initial delayed fade out
+    }
 
     private fun performFabClick() {
         findNavController().navigate(R.id.action_homeFragment_to_addCardFragment)
     }
+
+
 
     private fun updateMuscleImages(context: Context, muscles: List<Muscle>) {
         muscles.forEach { muscle ->
