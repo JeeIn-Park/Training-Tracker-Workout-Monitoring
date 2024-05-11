@@ -61,21 +61,22 @@
                         android:id="@+id/ExerciseName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="2sp"
-                        android:paddingHorizontal="4sp"
+                        android:layout_marginVertical="1dp"
+                        android:paddingHorizontal="2dp"
                         android:text="ExerciseName"
                         android:textColor="?attr/colorOnBackground"
                         android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/Tag"
+                        android:gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="2sp"
-                        android:paddingHorizontal="4sp"
+                        android:layout_marginVertical="1dp"
+                        android:paddingHorizontal="2dp"
                         android:text="Tag"
                         android:textColor="?attr/colorPrimaryVariant"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -83,31 +84,31 @@
                     android:id="@+id/LastExercise"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="2sp"
-                    android:paddingHorizontal="4sp"
+                    android:layout_marginVertical="1dp"
+                    android:paddingHorizontal="2dp"
                     android:text="Last exercise"
                     android:textColor="?attr/colorPrimaryVariant"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/MainMuscle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="2sp"
-                    android:paddingHorizontal="4sp"
+                    android:layout_marginVertical="1dp"
+                    android:paddingHorizontal="2dp"
                     android:text="MainMuscle"
                     android:textColor="?attr/colorOnBackground"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/SubMuscle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="2sp"
-                    android:paddingHorizontal="4sp"
+                    android:layout_marginVertical="1dp"
+                    android:paddingHorizontal="2dp"
                     android:text="SubMuscle"
                     android:textColor="?attr/colorOnBackground"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
