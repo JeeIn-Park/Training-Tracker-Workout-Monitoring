@@ -32,7 +32,7 @@
         android:layout_marginBottom="14sp"
         android:padding="4dp"
         android:text="Main Muscle Group(s) : "
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@id/AddCard_mainMuscleSpinner"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/AddCard_exerciseNameEditText" />
@@ -59,7 +59,7 @@
         android:layout_marginBottom="16sp"
         android:padding="4dp"
         android:text="Sub Muscle Group(s) : "
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@id/AddCard_subMuscleSpinner"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/AddCard_mainMuscleSpinner" />
@@ -86,7 +86,7 @@
         android:layout_marginBottom="16sp"
         android:padding="4dp"
         android:text="Tags : "
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@id/AddCard_tagSpinner"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/AddCard_subMuscleSpinner" />
@@ -112,7 +112,7 @@
         android:layout_marginBottom="16dp"
         android:backgroundTint="?attr/buttonStyle"
         android:text="ADD"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:textColor="?attr/colorOnBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

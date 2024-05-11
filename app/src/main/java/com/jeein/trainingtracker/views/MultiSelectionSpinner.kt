@@ -27,7 +27,7 @@ class MultiSelectionSpinner : AppCompatSpinner, DialogInterface.OnMultiChoiceCli
                 parent: android.view.ViewGroup
             ): android.view.View {
                 val view = super.getView(position, convertView, parent) as TextView
-                view.textSize = 12f // Adjust text size for the spinner view
+                view.textSize = 14f // Adjust text size for the spinner view
                 return view
             }
         }
@@ -46,7 +46,7 @@ class MultiSelectionSpinner : AppCompatSpinner, DialogInterface.OnMultiChoiceCli
                 parent: android.view.ViewGroup
             ): android.view.View {
                 val view = super.getView(position, convertView, parent) as TextView
-                view.textSize = 12f // Adjust text size for the spinner view
+                view.textSize = 14f // Adjust text size for the spinner view
                 return view
             }
         }
