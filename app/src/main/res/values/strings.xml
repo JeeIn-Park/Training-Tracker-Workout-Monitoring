@@ -10,6 +10,7 @@
 
     <!--    exercise    -->
     <string name="event_log">log</string>
+    <string name="event_empty_log">empty_log</string>
     <!--    <string name="event_add_log">add log</string>-->
     <!--    <string name="event_delete_log">delete log</string>-->
     <!--    <string name="event_edit_log">edit log</string>-->

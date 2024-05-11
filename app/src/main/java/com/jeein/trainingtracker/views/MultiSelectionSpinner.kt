@@ -82,7 +82,6 @@ class MultiSelectionSpinner : AppCompatSpinner, DialogInterface.OnMultiChoiceCli
                     dialog.dismiss()
                 }
 
-
                 show()
             }
         }

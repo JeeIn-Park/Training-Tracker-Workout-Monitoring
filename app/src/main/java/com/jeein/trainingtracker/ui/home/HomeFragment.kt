@@ -50,7 +50,6 @@ class HomeFragment : Fragment() {
         animator.duration = 500
         animator.start()
     }
-    private var isCardEmpty: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -77,6 +76,19 @@ class HomeFragment : Fragment() {
         exerciseRecyclerViewBinding.itemAnimator = DefaultItemAnimator()
         homeViewModel.cardRecyclerViewData.observe(viewLifecycleOwner) { newData ->
             cardAdapter.submitList(newData)
+            if (newData.isEmpty()) {
+                EventManager.publish(
+                    Event(
+                        getString(R.string.event_empty_log), true
+                    )
+                )
+            } else {
+                EventManager.publish(
+                    Event(
+                        getString(R.string.event_empty_log), false
+                    )
+                )
+            }
         }
 
         val tagRecyclerViewBinding = binding.filterBar.tagRecyclerView
@@ -112,6 +124,23 @@ class HomeFragment : Fragment() {
             requireContext().getString(R.string.event_edit_tag),
             ::editTagSubscriber
         )
+
+        EventManager.subscribe(
+            requireContext().getString(R.string.event_empty_log)
+        ) { event ->
+            when (event.data as? Boolean) {
+                true -> {
+                    binding.HomeDescriptionTextView.visibility = View.VISIBLE
+                }
+                false -> {
+                    binding.HomeDescriptionTextView.visibility = View.GONE
+                }
+                else -> {
+                    // unhandled type passed
+                }
+            }
+        }
+
     }
 
     override fun onResume() {
@@ -267,11 +296,19 @@ class HomeFragment : Fragment() {
         homeViewModel.updateTagRecyclerViewData(tags)
         val selectedTags = TagStorage.getSelectedTags(requireContext())
         val cards = CardStorage.getSelectedCard(requireContext(), selectedTags)
-        if (cards.isEmpty()) {
-           isCardEmpty = true
-        } else {
-            isCardEmpty = false
-        }
+//        if (cards.isEmpty()) {
+//            EventManager.publish(
+//                Event(
+//                    getString(R.string.event_empty_log), true
+//                )
+//            )
+//        } else {
+//            EventManager.publish(
+//                Event(
+//                    getString(R.string.event_empty_log), false
+//                )
+//            )
+//        }
         homeViewModel.updateCardRecyclerViewData(cards)
         val muscles = MuscleStorage.loadMuscles(requireContext())
         updateMuscleImages(requireContext(), muscles)
