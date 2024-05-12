@@ -133,52 +133,59 @@ class HomeFragment : Fragment() {
     private fun setupDraggableFAB(fab: FloatingActionButton) {
         var dX = 0f
         var dY = 0f
-        var lastAction: Int = MotionEvent.ACTION_CANCEL
+        var isDrag = false
 
         fab.setOnTouchListener { view, event ->
-            handler.removeCallbacks(fadeOutRunnable)
-            if (event.action == MotionEvent.ACTION_DOWN || event.action == MotionEvent.ACTION_MOVE) {
-                view.alpha = 1.0f
-            }
+            val parentView = view.parent as View
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     dX = view.x - event.rawX
                     dY = view.y - event.rawY
-                    lastAction = MotionEvent.ACTION_DOWN
+                    isDrag = false
+                    handler.removeCallbacks(fadeOutRunnable)  // Cancel any pending fade-out actions
+                    view.alpha = 1.0f  // Ensure the button is fully visible when touched
                     true
                 }
+
                 MotionEvent.ACTION_MOVE -> {
                     val newX = event.rawX + dX
                     val newY = event.rawY + dY
-                    val parentView = view.parent as View
-                    val actionBarHeight = resources.getDimension(R.dimen.action_bar_height)
-                    val bottomNavHeight = resources.getDimension(R.dimen.bottom_nav_height)
-                    if (newY + view.height > parentView.height - bottomNavHeight + view.height
-                        || newY < actionBarHeight - view.height) {
-                        true  // Still consume the event but don't move the view
-                    } else {
+
+                    // Restrict the FAB's movement within the bounds of the parent view
+                    val leftBound = 0f
+                    val rightBound = parentView.width - view.width
+                    val topBound = 0f
+                    val bottomBound = parentView.height - view.height
+
+                    // Apply constraints to newX and newY
+                    val constrainedX = newX.coerceIn(leftBound, rightBound.toFloat())
+                    val constrainedY = newY.coerceIn(topBound, bottomBound.toFloat())
+
+                    if (Math.abs(constrainedX - view.x) > 10 || Math.abs(constrainedY - view.y) > 10) {
+                        isDrag = true
                         view.animate()
-                            .x(newX)
-                            .y(newY)
+                            .x(constrainedX)
+                            .y(constrainedY)
                             .setDuration(0)
                             .start()
-                        lastAction = MotionEvent.ACTION_MOVE
-                        true
                     }
+                    true
                 }
+
                 MotionEvent.ACTION_UP -> {
-                    handler.postDelayed(fadeOutRunnable, 300)
-                    val parentWidth = (view.parent as View).width.toFloat()
-                    val toRight = view.x + view.width / 2 > parentWidth / 2
-                    val finalPosition = if (toRight) parentWidth - view.width else 0f
-                    if (lastAction == MotionEvent.ACTION_MOVE) {
+                    if (isDrag) {
+                        // Snap to left or right side
+                        val parentWidth = parentView.width
+                        val toRight = view.x + view.width / 2 > parentWidth / 2
                         view.animate()
-                            .x(finalPosition)
+                            .x(if (toRight) (parentWidth - view.width).toFloat() else 0f)
                             .setDuration(300)
                             .start()
                     } else {
-                        performFabClick()
+                        // If not dragged, perform the click action
+                        fab.performClick()
                     }
+                    handler.postDelayed(fadeOutRunnable, 2000)  // Re-initiate the fade out
                     true
                 }
                 else -> false
@@ -187,11 +194,9 @@ class HomeFragment : Fragment() {
 
         fab.setOnClickListener {
             performFabClick()
-            handler.postDelayed(fadeOutRunnable, 300)
         }
 
-        fab.alpha = 1.0f
-        handler.postDelayed(fadeOutRunnable, 300)
+        handler.postDelayed(fadeOutRunnable, 2000)  // Initial delayed fade out
     }
 
     private fun performFabClick() {
