@@ -8,7 +8,8 @@ Welcome to TrainingTracker (TT)! We take the protection of your personal data ve
 Download and try out our app by clicking on the link below:
 
 - **Version 2.1.0** : [Training Tracker v2.1.0 APK](https://github.com/JeeIn-Park/TrainingTracker/raw/main/release/TrainingTracker_ver210.apk)
-        Feedback From : [Feedback From for v2.1.0](https://forms.gle/SfoAL97pRNvBynbo9)
+
+Feedback From : [Feedback From for v2.1.0](https://forms.gle/SfoAL97pRNvBynbo9)
 
 Make sure to check back regularly for updates and new features!
 
