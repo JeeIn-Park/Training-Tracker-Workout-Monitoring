@@ -73,7 +73,7 @@ object CardStorage {
     }
 
     fun deleteTag(context: Context, t: Tag) {
-        val tag = TagFactory.clickTag(t)
+        val tag = TagFactory.selectedTagOf(t)
         val currentCards = loadCards(context).toMutableList()
         for (i in currentCards.indices) {
             val card = currentCards[i]
