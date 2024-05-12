@@ -2,6 +2,7 @@ package com.jeein.trainingtracker.ui.exerciseLog
 
 import android.view.Gravity
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TableLayout
 import android.widget.TableRow
@@ -69,33 +70,33 @@ class PastLogTableAdapter(private val items: List<ExerciseLog>) :
                 for (exerciseSet in item.exerciseSetList) {
                     val setRow = TableRow(setTableLayout.context)
 
-                    val setCountTextView = TextView(setTableLayout.context)
-                    setCountTextView.text = if (exerciseSet.set != null) {
+                    val setCountEditText = EditText(setTableLayout.context)
+                    setCountEditText.setText(if (exerciseSet.set != null) {
                         "${exerciseSet.set} set"
                     } else {
                         ""
-                    }
+                    })
                     val setCountParams = TableRow.LayoutParams(
                         TableRow.LayoutParams.WRAP_CONTENT,
                         TableRow.LayoutParams.WRAP_CONTENT
                     )
-                    setCountTextView.layoutParams = setCountParams
+                    setCountEditText.layoutParams = setCountParams
 
-                    val kgAndRepTextView = TextView(setTableLayout.context)
-                    kgAndRepTextView.text = "${exerciseSet.mass} kg x ${exerciseSet.rep}"
+                    val kgAndRepEditText = EditText(setTableLayout.context)
+                    kgAndRepEditText.setText("${exerciseSet.mass} kg x ${exerciseSet.rep}")
                     val kgAndRepParams = TableRow.LayoutParams(
                         TableRow.LayoutParams.MATCH_PARENT,
                         TableRow.LayoutParams.WRAP_CONTENT
                     )
-                    kgAndRepTextView.layoutParams = kgAndRepParams
+                    kgAndRepEditText.layoutParams = kgAndRepParams
 
-                    setCountTextView.setPadding(16, 8, 16, 8)
-                    kgAndRepTextView.setPadding(16, 8, 16, 8)
-                    setCountTextView.gravity = Gravity.CENTER_VERTICAL
-                    setCountTextView.setBackgroundResource(R.drawable.style_textview_outline)
+                    setCountEditText.setPadding(16, 8, 16, 8)
+                    kgAndRepEditText.setPadding(16, 8, 16, 8)
+                    setCountEditText.gravity = Gravity.CENTER_VERTICAL
+                    setCountEditText.setBackgroundResource(R.drawable.style_textview_outline)
 
-                    setRow.addView(setCountTextView)
-                    setRow.addView(kgAndRepTextView)
+                    setRow.addView(setCountEditText)
+                    setRow.addView(kgAndRepEditText)
                     setRow.setBackgroundResource(R.drawable.style_textview_outline)
                     setTableLayout.addView(setRow)
                 }
@@ -108,6 +109,7 @@ class PastLogTableAdapter(private val items: List<ExerciseLog>) :
                 emptyTableLayout.addView(emptyRow)
             }
         }
+
 
         private fun dateRow(dateTime: LocalDateTime) {
             dateTableLayout.removeAllViews()
