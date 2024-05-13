@@ -1,0 +1,716 @@
+% The document class supplies options to control rendering of some standard
+% features in the result.  The goal is for uniform style, so some attention 
+% to detail is *vital* with all fields.  Each field (i.e., text inside the
+% curly braces below, so the MEng text inside {MEng} for instance) should 
+% take into account the following:
+%
+% - author name       should be formatted as "FirstName LastName"
+%   (not "Initial LastName" for example),
+% - supervisor name   should be formatted as "Title FirstName LastName"
+%   (where Title is "Dr." or "Prof." for example),
+% - degree programme  should be "BSc", "MEng", "MSci", "MSc" or "PhD",
+% - dissertation title should be correctly capitalised (plus you can have
+%   an optional sub-title if appropriate, or leave this field blank),
+% - dissertation type should be formatted as one of the following:
+%   * for the MEng degree programme either "enterprise" or "research" to
+%     reflect the stream,
+%   * for the MSc  degree programme "$X/Y/Z$" for a project deemed to be
+%     X%, Y% and Z% of type I, II and III.
+% - year              should be formatted as a 4-digit year of submission
+%   (so 2014 rather than the academic year, say 2013/14 say).
+
+\documentclass[ oneside,% the name of the author
+                    author={Ally Park},
+                % the degree programme: BSc, MEng, MSci or MSc.
+                    degree={BSc},
+                % the dissertation    title (which cannot be blank)
+                     title={ Training Tracker (TT) : Effective Workout Progress Monitoring \\ through Visual Analytics },
+                % the dissertation subtitle (which can    be blank)
+                  subtitle={Empowering Motivation with a Visual Fitness Performance Tracker}]{dissertation}
+
+
+\usepackage{makecell}
+\usepackage{enumitem}
+\begin{document}
+
+% =============================================================================
+
+% This section simply introduces the structural guidelines.  It can clearly
+% be deleted (or commented out) if you use the file as a template for your
+% own dissertation: everything following it is in the correct order to use 
+% as is.
+
+
+
+% =============================================================================
+
+% This macro creates the standard UoB title page by using information drawn
+% from the document class (meaning it is vital you select the correct degree 
+% title and so on).
+
+\maketitle
+
+% After the title page (which is a special case in that it is not numbered)
+% comes the front matter or preliminaries; this macro signals the start of
+% such content, meaning the pages are numbered with Roman numerals.
+
+\frontmatter
+
+
+%\lstlistoflistings
+
+% The following sections are part of the front matter, but are not generated
+% automatically by LaTeX; the use of \chapter* means they are not numbered.
+
+% -----------------------------------------------------------------------------
+
+\chapter*{Abstract}
+
+{\bf A compulsory section, of at most 300 words} 
+\vspace{1cm} 
+
+\noindent
+This section should pr\'{e}cis the project context, aims and objectives,
+and main contributions (e.g., deliverables) and achievements; the same 
+section may be called an abstract elsewhere.  The goal is to ensure the 
+reader is clear about what the topic is, what you have done within this 
+topic, {\em and} what your view of the outcome is.
+
+The former aspects should be guided by your specification: essentially 
+this section is a (very) short version of what is typically the first 
+chapter. If your project is experimental in nature, this should include 
+a clear research hypothesis.  This will obviously differ significantly
+for each project, but an example might be as follows:
+
+\begin{quote}
+My research hypothesis is that a suitable genetic algorithm will yield
+more accurate results (when applied to the standard ACME data set) than 
+the algorithm proposed by Jones and Smith, while also executing in less
+time.
+\end{quote}
+
+\noindent
+The latter aspects should (ideally) be presented as a concise, factual 
+bullet point list.  Again the points will differ for each project, but 
+an might be as follows:
+
+\begin{quote}
+\noindent
+\begin{itemize}
+\item I spent $120$ hours collecting material on and learning about the 
+      Java garbage-collection sub-system. 
+\item I wrote a total of $5000$ lines of source code, comprising a Linux 
+      device driver for a robot (in C) and a GUI (in Java) that is 
+      used to control it.
+\item I designed a new algorithm for computing the non-linear mapping 
+      from A-space to B-space using a genetic algorithm, see page $17$.
+\item I implemented a version of the algorithm proposed by Jones and 
+      Smith in [6], see page $12$, corrected a mistake in it, and 
+      compared the results with several alternatives.
+\end{itemize}
+\end{quote}
+
+% -----------------------------------------------------------------------------
+
+
+\chapter*{Dedication and Acknowledgements}
+
+{\bf A compulsory section}
+\vspace{1cm} 
+
+\noindent
+It is common practice (although totally optional) to acknowledge any
+third-party advice, contribution or influence you have found useful
+during your work.  Examples include support from friends or family, 
+the input of your Supervisor and/or Advisor, external organisations 
+or persons who  have supplied resources of some kind (e.g., funding, 
+advice or time), and so on.
+
+
+% -----------------------------------------------------------------------------
+
+% LaTeX automatically generates a table of contents, plus associated lists 
+% of figures and tables.  These are all compulsory parts of the dissertation.
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+% -----------------------------------------------------------------------------
+
+
+
+\chapter*{Ethics Statement}
+
+
+An ethics application for this project was reviewed and approved by the faculty research ethics committee as application 18166
+
+
+% -----------------------------------------------------------------------------
+
+\chapter*{Supporting Technologies}
+
+{\bf An optional section}
+\vspace{1cm} 
+
+\noindent
+This section should present a detailed summary, in bullet point form, 
+of any third-party resources (e.g., hardware and software components) 
+used during the project.  Use of such resources is always perfectly 
+acceptable: the goal of this section is simply to be clear about how
+and where they are used, so that a clear assessment of your work can
+result.  The content can focus on the project topic itself (rather,
+for example, than including ``I used \mbox{\LaTeX} to prepare my 
+dissertation''); an example is as follows:
+
+\begin{quote}
+\noindent
+\begin{itemize}
+\item I used the Java {\tt BigInteger} class to support my implementation 
+      of RSA.
+\item I used a parts of the OpenCV computer vision library to capture 
+      images from a camera, and for various standard operations (e.g., 
+      threshold, edge detection).
+\item I used an FPGA device supplied by the Department, and altered it 
+      to support an open-source UART core obtained from 
+      \url{http://opencores.org/}.
+\item The web-interface component of my system was implemented by 
+      extending the open-source WordPress software available from
+      \url{http://wordpress.org/}.
+\end{itemize}
+\end{quote}
+
+% -----------------------------------------------------------------------------
+
+\chapter*{Notation and Acronyms}
+
+{\bf An optional section}
+\vspace{1cm} 
+
+\noindent
+Any well written document will introduce notation and acronyms before
+their use, {\em even if} they are standard in some way: this ensures 
+any reader can understand the resulting self-contained content.  
+
+Said introduction can exist within the dissertation itself, wherever 
+that is appropriate.  For an acronym, this is typically achieved at 
+the first point of use via ``Advanced Encryption Standard (AES)'' or 
+similar, noting the capitalisation of relevant letters.  However, it 
+can be useful to include an additional, dedicated list at the start 
+of the dissertation; the advantage of doing so is that you cannot 
+mistakenly use an acronym before defining it.  A limited example is 
+as follows:
+
+\begin{quote}
+\noindent
+\begin{tabular}{lcl}
+AES                 &:     & Advanced Encryption Standard                                         \\
+DES                 &:     & Data Encryption Standard                                             \\
+                    &\vdots&                                                                      \\
+${\mathcal H}( x )$ &:     & the Hamming weight of $x$                                            \\
+${\mathbb  F}_q$    &:     & a finite field with $q$ elements                                     \\
+$x_i$               &:     & the $i$-th bit of some binary sequence $x$, st. $x_i \in \{ 0, 1 \}$ \\
+\end{tabular}
+\end{quote}
+
+
+% =============================================================================
+
+% After the front matter comes a number of chapters; under each chapter,
+% sections, subsections and even subsubsections are permissible.  The
+% pages in this part are numbered with Arabic numerals.  Note that:
+%
+% - A reference point can be marked using \label{XXX}, and then later
+%   referred to via \ref{XXX}; for example Chapter\ref{chap:context}.
+% - The chapters are presented here in one file; this can become hard
+%   to manage.  An alternative is to save the content in seprate files
+%   the use \input{XXX} to import it, which acts like the #include
+%   directive in C.
+
+\mainmatter
+
+% -----------------------------------------------------------------------------
+\chapter{Introduction}
+\label{chap:context}
+
+\noindent
+In recent years there has been a surge in public awareness of the important role physical activity plays in maintaining health, which is reflected in the frequency of gym visits. From 2010 to 2019, there had been a 24\% increase in the number of individuals attending the gym over 100 times annually.
+
+As fitness demands increase, the importance of monitoring workout progress becomes more apparent because the availability of quantifiable data can stimulate users' interest in enhancing their activity levels. This implies that providing tools to track this data supports the maintenance of motivation and commitment to fitness goals, which could lead to improved health outcomes over time.
+
+The growth in recognition of training and tracking progression has led to significant expansion in the global fitness app market, as these apps allow users to monitor their workouts anytime and anywhere. In 2023, the market was valued at \$1.54 billion and is expected to grow at a compound annual growth rate (CAGR) of 17.7\% from 2024 to 2030. This trend is underscored by a marked rise in the number of fitness app users and downloads, with hundreds of millions of users and over 850 million downloads reported in 2023 alone. 
+
+The market expansion has led to numerous workout tracking apps that primarily focus on quantitative data. However, features limited to logging and analysing progress are inadequate for sustaining user adherence to physical activity goals. Identifying and integrating motivational factors into app design is crucial for enhancing user engagement and promoting consistent exercise routines.
+
+
+\begin{quote}
+\noindent
+The primary goal of this project is to create an Android application designed to effectively monitor workout routines and boost motivation.
+More particularly, the solid aims are: 
+
+\begin{enumerate}
+\item Investigate factors that can extend user engagement and commitment to their physical goals and understand the role of the training tracking app in sustaining this motivation.
+\item Design an application that addresses the possible shortcomings of workout apps, which can deter consistency, and enhance the benefits that such apps can offer to users.
+\item Implement the app by utilising technical resources to improve the user experience.
+\item Evaluate the app in terms of efficiency and user satisfaction and demonstrate that the proposed enhancements are beneficial.
+
+\end{enumerate}
+\end{quote}
+
+% -----------------------------------------------------------------------------
+
+
+\chapter{Background}
+\label{chap:technical}
+
+
+\section{Muscle Physiology and Its Relevance to Fitness Tracking Technology}
+
+In the context of this software development project, understanding muscle dynamics is not merely an academic exercise but a practical necessity for creating an app that transcends simple activity tracking. A comprehensive grasp of muscle physiology is crucial for developing fitness applications that do more than merely monitor user activity—they also significantly enhance user engagement and the effectiveness of their training routines. By incorporating scientifically grounded recommendations for workout frequency, intensity, recovery, and strength benchmarks, the app can be crafted to offer users a tailored fitness experience that optimizes their progression and adheres to safe training practices.
+
+The physiological insights discussed here will provide the scientific foundation essential to guiding the app's development, ensuring that all features are designed to effectively support the user's fitness journey. This background not only positions the app as a robust tracking tool but also as an educational resource that promotes physical well-being and informed training choices, distinguishing it from less comprehensive solutions currently on the market.
+
+
+\subsection{Muscle Growth}
+
+Muscle hypertrophy, or growth, is primarily driven by consistent and strategically varied resistance training. Key factors influencing hypertrophy include the frequency of workouts, intensity and volume of exercises, and crucially, adequate recovery times between sessions. Scientifically, muscles require regeneration periods after being stressed, which involves both the repair of muscle fibers and their growth in strength and size. This biological process is the basis for recommending that each muscle group be trained approximately two to three times per week \cite{Schoenfeld2016}. Integrating this knowledge into a fitness app ensures users receive scientifically-backed guidance on how to structure their workouts for maximum efficacy.
+
+
+\subsection{Muscle Loss}
+
+Conversely, muscle atrophy occurs when there is a prolonged lack of muscle use, and understanding this is just as vital. The rate at which muscles atrophy can begin is startling—noticeable decreases in muscle mass and strength can occur within just a few weeks of inactivity. This understanding is essential for developing app features that motivate users to maintain regular exercise routines. For example, the app can remind users to engage muscle groups that have not been recently active, thereby utilizing physiological data to help prevent atrophy and promote healthier, more active lifestyles.
+
+
+\subsection{One-Rep Max (1RM)}
+
+Furthermore, the one-rep max (1RM) is a critical metric in strength training, representing the maximum weight an individual can lift in a single repetition for a given exercise. It is a valuable index for setting benchmarks and measuring strength gains over time. Incorporating 1RM calculations into the app provides users with a quantitative tool to set realistic goals and track their progress in strength training, enhancing both motivation and the personalization of training programs.
+
+
+% -----------------------------------------------------------------------------
+
+\chapter{Project Execution}
+\label{chap:execution}
+
+
+% -----------------------------------------------------------------------------
+\section{Enhancing User Engagement: The Role of Workout Tracking Apps}
+
+\subsection{Strategic Considerations for Developing Effective Fitness Tracking Applications: Prioritizing Key Attributes}
+
+Developing a fitness tracking application involves a nuanced understanding of key attributes critical to meeting user needs. These attributes include usability, functionality, and security, which are essential throughout the development lifecycle. Emphasizing these aspects from the initial design to integration and adaptation based on user feedback and technology evolution ensures an efficient development process and aligns the application with user expectations, thus enhancing user engagement and competitive positioning.
+
+In fitness tracking apps, where personal data sensitivity and health impact are significant, it is crucial to focus on motivation, consistency, accessibility, accuracy, and privacy:
+
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+
+\item \textbf{Motivation}: Critical for user engagement, features such as goal-setting, progress tracking, and gamification (badges, leaderboards) encourage regular use and help users meet fitness objectives, fostering community and competition.
+
+\item \textbf{Consistency}: Ensuring the app's reliable performance through stable features and regular updates promotes user habit formation and continued use.
+
+\item \textbf{Accessibility}: Features that simplify daily integration and usability, such as automatic activity tracking and straightforward input methods, reduce barriers to entry and maintain routine use.
+
+\item \textbf{Accuracy}: Precise data tracking builds user trust and informs health decisions, making accuracy a cornerstone of the app’s utility.
+
+\item \textbf{Privacy}: With high data sensitivity, strong encryption and clear data management policies are paramount in safeguarding user information and enhancing trust.
+
+\end{enumerate}
+
+By prioritizing these key properties, developers can surpass user expectations and deliver a reliable, intuitive, and secure tool for health and fitness management, establishing a successful presence in the competitive market.
+
+\subsection{The Impact of Features on Fitness App Properties: Strategic Considerations for Development and Implementation}
+
+The influence of features on fitness apps is crucial for user engagement and the overall success of the app:
+
+\begin{enumerate}
+    \item \textbf{User Engagement and Retention}: Aligning features with user needs enhances engagement and retention, allowing developers to refine offerings for increased user satisfaction and loyalty.
+
+    \item \textbf{Customization and Personalization}: Tailoring features to individual user preferences accommodates diverse fitness needs and broadens market appeal.
+
+    \item \textbf{Motivational Impact}: Features such as goal setting and progress tracking motivate users, supporting regular exercise and healthy habits.
+
+    \item \textbf{Technical Performance and Scalability}: Understanding features' impacts on app performance and scalability ensures optimal functionality for a growing user base.
+
+    \item \textbf{Privacy and Security}: Features must safeguard user data, with robust security measures to mitigate privacy risks.
+
+    \item \textbf{Market Differentiation}: Unique features help differentiate the app in a competitive market, highlighting benefits and capturing user interest.
+
+    \item \textbf{Resource Allocation}: Effective resource management ensures that essential features are prioritized, optimizing development efforts.
+
+    \item \textbf{User Experience (UX) Design}: Features designed with usability in mind improve the user journey and interface interaction.
+
+    \item \textbf{User Interface (UI) Design}: Aesthetic and functional coherence in feature integration enhances the app's visual appeal.
+
+    \item \textbf{Architectural Planning}: Features dictate technical architecture, influencing technology choices and data structure.
+
+    \item \textbf{Scalability}: Designing features for scalability facilitates future growth without extensive modifications.
+
+    \item \textbf{Feasibility and Cost Analysis}: Early evaluation of feature integration costs supports budgeting and resource allocation.
+
+    \item \textbf{Risk Management}: Identifying and mitigating risks associated with features prevents potential setbacks.
+
+    \item \textbf{Compliance and Privacy}: Features must comply with privacy laws, ensuring regulatory adherence from the start.
+
+    \item \textbf{Integration with Other Systems}: Seamless integration with external systems enhances app functionality and user experience.
+
+    \item \textbf{Testing and Quality Assurance}: Comprehensive testing protocols ensure features perform as intended and interact effectively with other app components.
+
+    \item \textbf{Marketing and Launch Strategy}: Features form the basis of marketing strategies, emphasizing the app’s unique selling points to attract the target audience.
+\end{enumerate}
+
+This strategic approach not only improves user satisfaction and engagement but also solidifies the app’s market position. Effective planning and design are essential for meeting user expectations and achieving long-term success.
+
+
+
+\subsection{Strategic Considerations for Developing Effective Fitness Tracking Applications: Prioritizing Key Attributes}
+Embarking on the development of any application necessitates a deep understanding of certain core properties to ensure the product effectively meets the needs of its end users. These essential attributes include usability, functionality, and security, which are critical across all types of applications \cite{Myers2000}. A solid grasp of these aspects not only shapes the initial design but also influences the entire development lifecycle, from integrating new features to adapting based on user feedback and technological advancements.
+
+In the realm of app development, recognizing and prioritizing these core properties streamlines the process and enhances efficiency. The ability of these properties to adapt dynamically in response to evolving user needs is crucial. It aligns the application with user expectations, increases user engagement, and positions the application for success in a competitive market \cite{Hallsteinsen2008}. By clearly defining these fundamental aspects, developers can prevent feature creep—the inclusion of unnecessary features that do not serve the app's primary purpose. This focused approach maintains essential functionality, optimizes resource allocation, and improves the user experience by making the app more intuitive and easier to navigate \cite{Lieberman2006}.
+
+This understanding is particularly critical in the context of fitness tracking apps, where the sensitivity of personal data and its direct impact on users' health heighten the importance of these considerations. Fitness apps provide robust tools for logging and managing exercise details such as type, duration, intensity, and frequency. This systematic logging helps users track their progress and adjust their fitness routines to better achieve their goals. Features that provide visual representations of progress and historical performance data not only support goal-setting but also motivate users by clearly demonstrating their advancements.
+The deliberate selection of motivation, consistency, accessibility, accuracy, and privacy as key properties significantly enhances the effectiveness and user satisfaction of fitness tracking apps. Each attribute plays a strategic role:
+
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*]
+
+\item \textbf{Motivation}: Motivation is essential for engaging users and encouraging regular app usage, critical for achieving fitness goals. Features that foster motivation include goal-setting, progress tracking, and gamification elements such as badges and leaderboards. These elements not only help users set and meet personal fitness goals but also create a sense of community and competition, substantially increasing the likelihood of app retention and routine adherence.
+
+\item \textbf{Consistency}: Consistency ensures the app remains a reliable tool throughout the user's fitness journey. This reliability comes from stable performance, regular feature updates, and a consistent user interface, crucial for habit formation. Users are more likely to continue using an app that provides a predictable and smooth experience without frequent crashes or bugs, fostering trust and a routine usage pattern.
+
+\item \textbf{Accessibility}: Accessibility enhances the app's ease of integration into daily routines and its overall user-friendliness. Convenience in a fitness app encompasses several aspects that minimize effort and maximize efficiency for the user. Moreover, convenience involves ensuring that the app does not require excessive setup or maintenance from the user. Features like automatic tracking of activities, straightforward input methods for food and exercise logs, and easy-to-navigate menus contribute to an app’s convenience. The goal is to reduce barriers to entry and continued use, thereby integrating smoothly into daily routines without causing disruption. Simplicity relates closely to the design and usability of the app. A simple, clean interface with intuitive navigation and minimalistic design helps users understand how to use the app quickly without needing extensive tutorials or help pages. Simplifying the interaction design—such as reducing the number of taps required to enter or retrieve information—enhances user satisfaction and decreases frustration. Simplicity also means focusing on core functionalities and avoiding unnecessary features that can clutter the app and confuse the user. By concentrating on the essentials, developers can provide a streamlined experience that prioritizes ease of use over complexity.
+
+\item \textbf{Accuracy}: Accuracy of the data collected by the app builds trust and utility. Precise tracking of steps, calories burned, and other fitness metrics allows users to monitor their progress accurately and make informed decisions about their health routines. Trust in the app’s data accuracy is critical, as it not only impacts user confidence in the app but also influences their long-term fitness strategies and outcomes.
+
+\item \textbf{Privacy}: Privacy is paramount, especially given the sensitivity of the data handled by fitness apps. Protecting this data through strong encryption, compliance with data privacy laws, and clear user data controls reassures users about the security of their personal information. Transparency in data management builds further trust, ensuring users feel safe sharing their health data with the app.
+
+\end{enumerate}
+
+By emphasizing these properties, developers can ensure that a fitness app not only meets but exceeds user expectations, providing a reliable, accessible, and secure tool that effectively supports individual health and fitness goals. This strategic focus on key attributes is crucial for creating a successful app in the competitive fitness app market.
+
+
+\subsection{The Impact of Features on Fitness App Properties: Strategic Considerations for Development and Implementation}
+
+Understanding the influence of various features on the properties of fitness apps is crucial for several reasons, each contributing to the overall success and effectiveness of the app in engaging users and meeting their fitness needs:
+
+\begin{enumerate}
+    \item \textbf{User Engagement and Retention}: Features directly shape how users interact with the app. Well-designed features that align with user expectations and needs can significantly enhance engagement levels, encouraging regular use and ultimately improving retention. Studying the effects of specific features on app properties such as usability and functionality allows developers to refine their offerings to boost user satisfaction and loyalty.
+
+    \item \textbf{Customization and Personalization}: Given that users have diverse fitness goals, abilities, and preferences, personalizing features to fit individual needs allows developers to create a more inclusive and adaptable app. This customization not only enhances the user experience but also accommodates a broader range of fitness levels and types, thus expanding the app’s market appeal.
+
+    \item \textbf{Motivational Impact}: Features like goal setting, reminders, and progress tracking are designed to motivate users. Understanding how these features influence user motivation and behavior can aid in developing mechanisms that effectively encourage regular exercise and healthy habits—key elements in fitness apps where sustained motivation is crucial for achieving long-term health goals.
+
+    \item \textbf{Technical Performance and Scalability}: Features affect the technical aspects of the app, including performance issues such as speed, stability, and data consumption. Grasping these impacts is essential for optimizing app performance and ensuring it can scale effectively to support a growing user base without compromising user experience.
+
+    \item \textbf{Privacy and Security}: With increased focus on data privacy and security, it is vital to understand how features that collect and store personal data impact these aspects. This includes evaluating risks associated with data breaches and implementing safeguards to protect user information, thereby mitigating potential legal and reputational risks associated with privacy violations.
+
+    \item \textbf{Market Differentiation}: In a competitive market, apps need distinctive features to capture user interest. Understanding the unique benefits and challenges of each feature can assist developers in effectively highlighting and marketing these aspects, distinguishing their product from others in the market and capturing significant market share.
+
+    \item \textbf{Resource Allocation}: Developing and maintaining app features requires substantial resources. Understanding the impact of each feature on the app’s core properties helps developers make informed decisions about resource allocation, ensuring that the most beneficial features are prioritized.
+\end{enumerate}
+
+This strategic approach not only enhances user satisfaction and engagement but also positions the app favorably in the competitive market. The planning and design phase, in particular, is critical as it sets the groundwork for how the app will function, how it will be perceived by users, and how effectively it can meet its intended goals. Key areas include:
+
+\begin{enumerate}[resume]
+    \item \textbf{User Experience (UX) Design}: Ensuring features are designed with the user in mind to provide a seamless and intuitive experience. Understanding how features impact usability can guide decisions on interface layout, interaction design, and the overall user journey within the app. This can prevent usability issues that could deter users from fully engaging with the app.
+
+    \item \textbf{User Interface (UI) Design}: The look and feel of the app are largely determined by its features. Designers need to know how each feature functions not only independently but also as part of the larger system to create a coherent and aesthetically pleasing interface. This involves choosing appropriate visual elements, animations, and transitions that complement the functionality of each feature.
+
+    \item \textbf{Architectural Planning}: Features determine the technical specifications and architecture of the app. Knowing the impact of features helps in planning the underlying structure of the app, including the choice of technologies, frameworks, and the data architecture required to support functionality efficiently without compromising performance.
+
+    \item \textbf{Scalability}: Features need to be designed with scalability in mind. Understanding their impact on app performance and resources can help in planning for future growth, such as increasing user numbers or adding additional functionalities without significant rework.
+
+    \item \textbf{Feasibility and Cost Analysis}: Early in the planning phase, it’s important to assess the feasibility and cost of integrating various features. This includes not only the initial development costs but also ongoing maintenance and potential scalability costs. Understanding the implications of each feature allows for more accurate budgeting and resource allocation.
+
+    \item \textbf{Risk Management}: Identifying potential risks associated with each feature, including technical risks (like security vulnerabilities) and business risks (such as user adoption), is critical. This insight allows teams to implement risk mitigation strategies early in the design phase, which can save considerable time and expense later on.
+
+    \item \textbf{Compliance and Privacy}: Designing features with a clear understanding of privacy laws and regulatory compliance requirements is crucial, especially for apps that handle sensitive user data. Planning for compliance from the outset avoids costly redesigns and legal issues that could arise from non-compliance.
+
+    \item \textbf{Integration with Other Systems}: Many apps need to integrate with external systems or third-party services. Understanding how app features will interact with these external elements is essential for ensuring smooth integration and operation.
+
+    \item \textbf{Testing and Quality Assurance}: Knowing the intended function and potential impact of features guides the development of testing and quality assurance protocols. It ensures that all features are tested in a way that reflects their real-world use and interactions with other app components.
+
+    \item \textbf{Marketing and Launch Strategy}: The features of the app often form the core of marketing and launch strategies. Understanding their benefits and unique selling points can help tailor marketing messages that highlight the app’s strengths and appeal to the target audience.
+\end{enumerate}
+
+
+
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|m{4cm}|*{5}{c|}}
+\hline
+ & \textbf{Motivation} & \textbf{Consistency} & \makecell[c]{\textbf{Convenience} \\ \textbf{\& Simplicity}} & \textbf{Accuracy} & \textbf{Privacy} \\ \hline
+Analysis & + & + & + & - & - \\ \hline
+Goal Setting & + & + & + & - & - \\ \hline
+Exercise Personalising & & + & + & - & \\ \hline
+Routine Personalising & & + & + & - & \\ \hline
+Planning & & + & - & & - \\ \hline
+UI Personalising & & + & + & & \\ \hline
+Reminder & + & - & & & \\ \hline
+Socialising & + & & - & & - \\ \hline
+Gaming & + & - & - & - & - \\ \hline
+Visualisation & + & + & & - & \\ \hline
+\end{tabular}
+\caption{Impact of various features on key properties in health application design. The symbols `+` and `-` indicate a positive and negative effect, respectively, on the corresponding property. This table aids in identifying which features enhance or detract from user motivation, consistency, convenience, accuracy, and privacy.}
+\end{table}
+
+
+\subsection{Critical Challenges and Limitations of Workout Tracking Applications}
+
+
+Despite their extensive benefits, workout tracking apps face several challenges that can impede user satisfaction and effectiveness. Privacy is a major concern, as these apps often require users to enter sensitive information, including health and location details. The risk of data breaches can make potential users hesitant, particularly when privacy policies are not transparent or robust. Furthermore, the accuracy of the data collected is critical, yet often problematic; sensors and algorithms may not accurately capture all types of activities, especially those with complex movements or mechanics, potentially misleading users about their true performance.
+% accuracy : calculation from the algorithms used / not just data logged (for analysis)
+Is there any feedback you want to give me to improve our app?
+Another significant challenge is notification fatigue, where users become overwhelmed by frequent reminders and prompts, leading to disengagement. Additionally, economic factors such as the necessity of premium subscriptions for full functionality can deter users, especially those unsure of the app's value or those averse to recurring costs. The complexity of app interfaces can also vary significantly, potentially alienating less tech-savvy users who find intricate menus and settings frustrating to navigate.
+
+Moreover, while gamification can initially attract users by making the fitness process more engaging through rewards and competition, it can also lead to what's known as gamification fatigue. This occurs when the novelty of game-like elements wears off, and the motivational boost they provide begins to decline. To sustain motivation effectively, it is crucial to cultivate an intrinsic interest in exercise itself, rather than merely making interaction with the app enjoyable. This deeper engagement with physical activity encourages a lasting commitment to fitness, transcending the initial excitement of gamified features and fostering a genuine, enduring lifestyle change.
+
+Lastly, the dependency on advanced technology and consistent internet access can limit the accessibility and functionality of these apps, particularly for users in regions with poor internet infrastructure or those without access to the latest smartphones. This technological dependency can exclude a significant segment of potential users, underscoring the importance of developing more accessible and user-friendly designs. Such improvements could expand the reach and democratise the benefits of digital fitness tools, making them more universally beneficial.
+
+
+
+
+In developing fitness tracking apps, the integration and impact of various features on core app properties—motivation, consistency, convenience and simplicity, accuracy, and privacy concerns—are critical. These features not only enhance user experience but also determine the app's success in engaging and retaining users. The following details illustrate how each key feature of fitness tracking apps influences these essential properties:
+
+\begin{itemize}
+  \item \textbf{Workout Analysis Features (Progress Calculation):} These features enhance \textit{Accuracy} by providing detailed feedback on users' performance, enabling precise tracking of fitness progress. This accurate feedback motivates users by clearly showing the results of their efforts, thereby also supporting \textit{Motivation}.
+
+  \item \textbf{Goal Setting Features:} Setting personal fitness goals helps users achieve specific targets, which boosts \textit{Motivation} by providing clear objectives. Additionally, regular interaction with goal-tracking features promotes \textit{Consistency} in app usage, as users return to update and review their goals.
+
+  \item \textbf{Exercise Personalisation Features (Add My Own Exercises):} Allowing users to add and customize their exercises enhances the \textit{Convenience and Simplicity} of the app, making it adaptable to individual needs and preferences. This customization capability also ensures that the app remains relevant and useful to the user, increasing overall engagement.
+
+  \item \textbf{Routine Personalisation Features (Add My Own Routines/Categories):} Similar to exercise personalization, these features promote \textit{Convenience and Simplicity} by enabling users to tailor their fitness routines, thereby making the app's use more intuitive and user-friendly.
+
+  \item \textbf{Planning Features (Workout Planning Calendar):} These features support \textit{Consistency} by helping users plan their workouts in advance, which can aid in forming and maintaining regular exercise habits critical for fitness success.
+
+  \item \textbf{UI Personalisation Features (User-Personalisable Interface / Changeable Screen Layout):} By allowing users to modify the user interface, these features improve the app's \textit{Convenience and Simplicity}, making it more attractive and easier to use, which enhances user experience and satisfaction.
+
+  \item \textbf{Reminder Features (Notifications for Workout Reminders):} Notifications serve as effective reminders for workouts, significantly aiding in maintaining \textit{Consistency} of app usage and fitness activities, which is vital for habit formation.
+
+  \item \textbf{Socialising Features (Sharing My Workout Progress with Others):} These features leverage social influence to increase \textit{Motivation}, as sharing progress can create a sense of community and support among users. However, they also raise \textit{Privacy Concerns} due to the sharing of personal health data.
+
+  \item \textbf{Gaming Features (Earning Badges and Achievements):} Gamification elements like badges and achievements provide immediate rewards and recognition for users' efforts, greatly enhancing \textit{Motivation} by tapping into the psychological aspects of reward-based learning.
+
+  \item \textbf{Visualisation Features (Muscle Visualisation):} These features improve \textit{Accuracy} by offering detailed visual feedback on which muscles are being targeted during exercises, helping users optimize their workouts based on precise anatomical data.
+\end{itemize}
+
+By examining how each feature contributes to the desired properties of fitness tracking apps, developers can ensure that their products not only meet the functional needs of users but also foster a conducive environment for sustained engagement and satisfaction.
+
+% -----------------------------------------------------------------------------
+
+
+\section{Strategic Design and Development of Workout Apps: Enhancing Consistency and Maximising User Benefits}
+
+% -----------------------------------------------------------------------------
+
+
+\section{Implementation Strategies for Workout Apps: Technical Development and User-Centric Enhancements}
+
+% -----------------------------------------------------------------------------
+
+
+\subsection{Initial Release: Emphasising Core Features and Standard Tracking Capabilities}
+
+The development of the Minimal Viable Product (MVP) for the workout tracking app focused on establishing core functionalities and a robust tracking framework. By selecting Kotlin for its advanced features and Android Studio for its comprehensive development tools, the foundation was set for a scalable and reliable application. This phase was critical in laying the groundwork for subsequent enhancements, ensuring that the MVP not only met basic user needs but also provided a solid base for future development and community collaboration.
+
+\subsubsection{Development Environment and Language Selection}
+
+For the development of the Minimal Viable Product (MVP) for the workout tracking app, I chose Kotlin as the primary programming language. Kotlin is renowned for its modern features that enhance developer productivity and software robustness, making it particularly suitable for Android app development. Compared to Java, Kotlin provides significant advantages, such as null safety, extension functions, and improved syntax that helps reduce boilerplate code, which are crucial for maintaining a clean and maintainable codebase. These features significantly reduce the likelihood of common programming errors, such as null pointer exceptions, and streamline the development process by allowing more functions with fewer lines of code.
+
+Android Studio was selected as the integrated development environment (IDE) for its comprehensive support for Android development. This IDE is directly supported by Google and offers advanced features for code editing, debugging, performance tuning, and version control integration. Android Studio's robust set of tools includes a real-time profiler that helps track memory usage and CPU cycles, an emulator to test applications in various Android configurations, and an integrated testing framework that facilitates continuous integration and deployment processes. These tools are essential for managing a complex development project single-handedly, as they enable efficient debugging and performance optimization, critical for ensuring a high-quality user experience.
+
+\subsubsection{Planning and Initial Development}
+The initial phase of the project involved meticulous planning and setup of the development environment. Establishing a Git repository was a foundational step for effective version control. This repository was not only crucial for tracking changes and managing different development branches but also served as a backup and documentation tool. It allowed me to revert to previous versions of the codebase when needed and facilitated a structured development process where incremental changes were documented and tracked systematically.
+
+The planning of the MVP's features was detailed and methodical. I utilized various project management tools to create a timeline and set milestones for the project, ensuring that each feature was developed on schedule and met predefined specifications. This included the development of user interface elements, backend logic, and integration of third-party services like database management and API interfaces. Each major feature, such as exercise logging and user customization options, was developed iteratively. These features were tested in isolated environments before being merged into the main project branch, ensuring they functioned as expected without introducing bugs to the working codebase.
+
+\subsubsection{Background Research and Competitive Analysis}
+Conducting extensive background research ensured that the app was not only technically sound but also met the practical needs of its users. This involved studying various types of gym equipment and the specific exercises associated with each, which would form a comprehensive database within the app. Additionally, I researched muscle groups and workout routines to offer scientifically-backed exercise recommendations within the app. This level of detail was intended to provide users with not just a tracking tool but also a resource for learning and improving their workout efficiency.
+
+The competitive analysis involved downloading and using numerous existing fitness apps to understand their functionality, user interface, and user experience. I analyzed user reviews and ratings for these apps to identify common pain points and features that were well-received. This analysis helped pinpoint essential features and functionalities that were popular among users and those that were lacking in current offerings on the market. By integrating this insight into the development of my app, I aimed to create a product that not only matched but surpassed the user experience provided by existing apps.
+
+\subsubsection{Implementation and Iteration}
+Adopting a branch-based workflow in Git for developing and integrating new features allowed for a structured and efficient development process. This approach was instrumental in minimizing disruptions to the main codebase, facilitating isolated testing, and refining of each component before integration. It provided a safety net by isolating experimental features from the production environment, ensuring that any new code would not destabilize the core functionalities of the app.
+
+The implementation phase was characterized by a continuous loop of coding, testing, and debugging to refine features and ensure the app's reliability and performance. Each feature underwent rigorous testing in simulated environments using the Android Studio emulator as well as on physical Android devices. This dual approach allowed me to catch and fix device-specific bugs and optimize the app's performance across different hardware configurations. The debugging process was especially focused on optimizing memory usage and ensuring smooth UI interactions, which are critical for the fluid performance of mobile applications.
+
+\subsubsection{Preparing for Release}
+The preparation for the GitHub release involved thorough documentation and final code refinements. Releasing the MVP on GitHub not only provided a platform for version control and issue tracking but also opened the project to the community for feedback, bug reports, and potential contributions from other developers. This collaborative aspect was intended to foster an open-source community around the app, which could lead to faster iterations and more robust feature development.
+
+In parallel, I prepared for the app store submission, which involved meeting the technical and policy requirements of various app marketplaces. This included fine-tuning the app's metadata, such as descriptions, tags, and visuals, which play a significant role in how the app is perceived by potential users. Ensuring compliance with privacy policies and user interface guidelines was also crucial for a smooth review process by the app stores. This meticulous preparation was aimed at optimizing the app's visibility and user acquisition strategy upon launch.
+
+Each of these phases was crucial in developing a comprehensive, user-friendly, and competitive workout tracking app. The detailed planning, robust research, and meticulous implementation and testing phases were designed to ensure that the app not only met but exceeded the expectations of its potential users, setting a strong foundation for future enhancements.
+
+% -----------------------------------------------------------------------------
+
+
+\subsection{Advancing User Engagement: Iterative Design and Enhanced Functionality in Version 2 of TrainingTracker(TT)}
+
+The development of version 2 of the workout tracking app represented a focused endeavor to improve the user interface and integrate functionalities that would set a foundation for future enhancements. By prioritizing accessibility and user engagement through sophisticated design choices and forward-thinking feature integration, this phase was instrumental in evolving the app's design and functionality. Although not released to the public, the advancements made in this version were crucial in preparing the app for a more comprehensive and robust version 3, which aimed to combine these improvements with new features for a full public launch.
+
+ \subsubsection{Enhancing User Interface and Accessibility}
+
+
+
+
+After evaluating the initial release of the MVP, I embarked on developing version 2 of the workout tracking app with a focus on significantly enhancing the user interface (UI) and accessibility. This effort was motivated by the need to make the app more visually appealing and functionally accessible to users with diverse needs, including those with color vision deficiencies. Research into visual accessibility suggested that a color palette featuring strong contrasts, such as yellow and blue, would be most beneficial for users with color blindness. Implementing this involved meticulous adjustments to the app’s CSS and XML files to ensure uniform application across the app’s interface, adhering to accessibility standards and improving the user experience.
+
+Simultaneously, the app’s logo was redesigned to better communicate its identity and to align visually with these new accessibility improvements. This new logo was crafted using vector graphics, a method chosen for its scalability and clarity across various device resolutions and screen sizes. The redesign aimed to enhance brand recognition and consistency, which are crucial for user retention and engagement.
+
+ \subsubsection{Integrating Advanced Functionalities}
+
+To further engage users and enrich the app’s functionality, I introduced several new features in version 2. One of the major additions was the progress analysis tool, equipped with graphical displays to visually represent workout trends and achievements. While the backend integration for dynamically syncing user data was still under development, the frontend interface was prepared to handle these features upon completion. This forward-looking design was intended to motivate users by visually documenting their progress, thus encouraging more consistent app usage.
+
+Additionally, the muscle visualization feature was designed to educate users about the muscles involved in their workouts. Using detailed vector graphics prepared in Inkscape, this feature allowed users to interactively explore different muscle groups, thus enhancing the app's educational value. This functionality aimed not only to inform but also to engage users more deeply with their fitness routines by providing a clear link between exercises and the muscles they target.
+
+\subsubsection{Optimizing Data Structures and User Experience}
+
+The integration of new features necessitated a comprehensive overhaul of the app’s data architecture. To accommodate the enhanced functionality and ensure smooth performance, I optimized the existing database schema and introduced new indexing strategies. These improvements were critical for enabling quick data access and efficient management of the increased data volume produced by the new features.
+
+A major goal for version 2 was to streamline user interactions within the app. Efforts to refine the UI supported intuitive touch gestures, such as long presses for editing and deleting entries, which simplified the user experience by reducing the number of steps needed to perform common tasks. These UI enhancements were aimed at minimizing user effort, thereby making the app more intuitive and reducing cognitive load.
+
+\subsubsection{Final Preparations for Public Release}
+
+The development of version 2 was completed with extensive testing to ensure that all new features were integrated smoothly and functioned as intended. However, unlike the first iteration, version 2 was not prepared for immediate public release. The focus of this phase was on refining the interface and backend processes, setting the stage for a more comprehensive version 3 that would include these enhancements along with additional functionalities suitable for public deployment.
+
+Testing involved simulated user interactions on multiple device configurations to ensure compatibility and performance. These tests were crucial for identifying any issues in real-time, allowing for timely corrections and ensuring that the app would ultimately meet the high standards of user experience set in the MVP.
+
+
+% -----------------------------------------------------------------------------
+
+
+\subsection{Market Introduction: Integrating Researched Factors for a User-Centred Approach}
+
+
+% -----------------------------------------------------------------------------
+
+
+\subsection{Continuous Improvement: Integrating User Feedback and Agile Reflection}
+
+
+% -----------------------------------------------------------------------------
+
+
+
+\section{Evaluating Workout App Performance: Efficiency and User Satisfaction Metrics}
+
+
+% -----------------------------------------------------------------------------
+
+\chapter{Critical Evaluation}
+\label{chap:evaluation}
+
+{\bf A topic-specific chapter} 
+\vspace{1cm} 
+
+\noindent
+This chapter is intended to evaluate what you did.  The content is highly 
+topic-specific, but for many projects will have flavours of the following:
+
+\begin{enumerate}
+\item functional  testing, including analysis and explanation of failure 
+      cases,
+\item behavioural testing, often including analysis of any results that 
+      draw some form of conclusion wrt. the aims and objectives,
+      and
+\item evaluation of options and decisions within the project, and/or a
+      comparison with alternatives.
+\end{enumerate}
+
+\noindent
+This chapter often acts to differentiate project quality: even if the work
+completed is of a high technical quality, critical yet objective evaluation 
+and comparison of the outcomes is crucial.  In essence, the reader wants to
+learn something, so the worst examples amount to simple statements of fact 
+(e.g., ``graph X shows the result is Y''); the best examples are analytical 
+and exploratory (e.g., ``graph X shows the result is Y, which means Z; this 
+contradicts [1], which may be because I use a different assumption'').  As 
+such, both positive {\em and} negative outcomes are valid {\em if} presented 
+in a suitable manner.
+
+% -----------------------------------------------------------------------------
+
+\chapter{Conclusion}
+\label{chap:conclusion}
+
+\noindent
+The concluding chapter of a dissertation is often underutilised because it 
+is too often left too close to the deadline: it is important to allocate
+enough attention to it.  Ideally, the chapter will consist of three parts:
+
+\begin{enumerate}
+\item (Re)summarise the main contributions and achievements, in essence
+      summing up the content.
+\item Clearly state the current project status (e.g., ``X is working, Y 
+      is not'') and evaluate what has been achieved with respect to the 
+      initial aims and objectives (e.g., ``I completed aim X outlined 
+      previously, the evidence for this is within Chapter Y'').  There 
+      is no problem including aims which were not completed, but it is 
+      important to evaluate and/or justify why this is the case.
+\item Outline any open problems or future plans.  Rather than treat this
+      only as an exercise in what you {\em could} have done given more 
+      time, try to focus on any unexplored options or interesting outcomes
+      (e.g., ``my experiment for X gave counter-intuitive results, this 
+      could be because Y and would form an interesting area for further 
+      study'' or ``users found feature Z of my software difficult to use,
+      which is obvious in hindsight but not during at design stage; to 
+      resolve this, I could clearly apply the technique of Smith [7]'').
+\end{enumerate}
+
+% =============================================================================
+
+% Finally, after the main matter, the back matter is specified.  This is
+% typically populated with just the bibliography.  LaTeX deals with these
+% in one of two ways, namely
+%
+% - inline, which roughly means the author specifies entries using the 
+%   \bibitem macro and typesets them manually, or
+% - using BiBTeX, which means entries are contained in a separate file
+%   (which is essentially a databased) then inported; this is the 
+%   approach used below, with the databased being dissertation.bib.
+%
+% Either way, the each entry has a key (or identifier) which can be used
+% in the main matter to cite it, e.g., \cite{X}, \cite[Chapter 2}{Y}.
+%
+% We would recommend using BiBTeX, since it guarantees a consistent referencing style 
+% and since many sites (such as dblp) provide references in BiBTeX format. 
+% However, note that by default, BiBTeX will ignore capital letters in article titles 
+% to ensure consistency of style. This can lead to e.g. "NP-completeness" becoming
+% "np-completeness". To avoid this, make sure any capital letters you want to preserve
+% are enclosed in braces in the .bib, e.g. "{NP}-completeness".
+
+\backmatter
+
+\bibliography{dissertation}
+
+% -----------------------------------------------------------------------------
+
+% The dissertation concludes with a set of (optional) appendicies; these are 
+% the same as chapters in a sense, but once signaled as being appendicies via
+% the associated macro, LaTeX manages them appropriatly.
+
+\appendix
+
+\chapter{An Example Appendix}
+\label{appx:example}
+
+Content which is not central to, but may enhance the dissertation can be 
+included in one or more appendices; examples include, but are not limited
+to
+
+\begin{itemize}
+\item lengthy mathematical proofs, numerical or graphical results which 
+      are summarised in the main body,
+\item sample or example calculations, 
+      and
+\item results of user studies or questionnaires.
+\end{itemize}
+
+\noindent
+Note that in line with most research conferences, the marking panel is not
+obliged to read such appendices. The point of including them is to serve as
+an additional reference if and only if the marker needs it in order to check
+something in the main text. For example, the marker might check a program listing 
+in an appendix if they think the description in the main dissertation is ambiguous.
+
+% =============================================================================
+
+\end{document}

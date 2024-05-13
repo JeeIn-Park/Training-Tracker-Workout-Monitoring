@@ -1,0 +1,36 @@
+Exercise Personalisation 
+Title : Exercise Personalisation 
+(do not use sub-headings between paragraphs. Also, make it formal as it is a part of thesis)
+
+introduction(what is it?) :
+Exercise personalisation allows users to add custom exercises to their fitness regimen, which is useful for those who may want to include unique or specialized exercises not typically found in generic fitness apps. Users can customize their workout by adding exercises that might not be included in the app's default exercise library. This is particularly useful for users engaged in specialized sports or activities that require specific movements.
+
+First paragraph(pros) : 
+Users often combine activities from various disciplines that may not be pre-included in the app’s default exercise library. Customization allows users to tailor the app to fit their specific needs and preferences, which can include unique workouts or exercises not typically covered in general fitness apps. This enhances user satisfaction and adherence to a fitness plan. It Allows users to integrate their preferred exercises, accommodating specific training needs or interests that may not be universally applicable. This customization makes the app more versatile and personally relevant, which can increase user satisfaction and long-term use. Being able to add unique exercises helps keep the workout routine diverse and interesting, which can be crucial for maintaining long-term exercise engagement. Personalized exercises can cater to individual needs, such as accommodating a physical injury or targeting a specific muscle group(increasing app accessibility).
+
+Second paragraph(cons) : 
+Users without a strong understanding of exercise fundamentals might add inappropriate or unsafe exercises to their routines, increasing the risk of injury.
+By adding their own exercises, users cannot get accurate track on their progress and performance over time,  the algorithm calculation to keep track on users' progress for each exercise can be vary depends on what exercise it is. So, if user can personalise the exercise, it will decrease the accuracy. This is because app cannot provide fine-tuned and specialised algorithm for all specialised exercises. 
+
+------
+
+do people use fitness tracking app use exercise personalisation features(Add My Own Exercises) on the app? 
+will it more convenience to use app which has exercise personalisation features or will it simpler to find an app which has all the exercises I do on the app? 
+
+----------------------------------------------------------
+
+Exercise personalization is a feature that enhances the adaptability of fitness apps by allowing users to add custom exercises to their routines, from those engaged in mainstream workouts to others pursuing niche or highly specific physical activities. 
+
+The ability to customize workout routines by incorporating preferred or specialized exercises directly addresses the diverse needs and interests of users, significantly enhancing their engagement and satisfaction with the app. This capability is particularly beneficial for individuals involved in specialized sports or activities that necessitate unique movements not commonly available in standard exercise libraries. This personalization not only allows users to maintain a varied and interesting workout regimen but also to tailor their fitness plan to specific goals, such as rehabilitation from injuries or targeted muscle development.By enabling the inclusion of bespoke exercises, these apps cater to a broader range of fitness enthusiasts.The inclusion of unique exercises that cater to individual preferences and requirements increases the app's utility and relevance, thereby promoting longer-term use and adherence to a consistent exercise schedule. Additionally, this feature makes fitness apps more accessible and accommodating, potentially serving a wider audience with varied physical capabilities and training goals.
+
+However, there are several challenges associated with exercise personalization. Users who lack a robust understanding of exercise principles may introduce unsuitable or unsafe exercises into their routines, which could lead to injuries. Furthermore, the personalization of exercises complicates the app’s ability to track and analyze performance accurately. Most fitness apps are equipped with algorithms designed to track progress on pre-programmed exercises, and these algorithms may not adapt well to customized activities. This could result in less precise tracking and feedback for exercises outside the standard library, potentially diminishing the effectiveness of the app in monitoring user progress and providing valuable insights. Therefore, while exercise personalization offers significant benefits, it also requires careful consideration and potentially enhanced educational resources to ensure safe and effective use.
+
+----------------------------------------------------------
+
+Exercise personalization is a feature that improves the flexibility of fitness apps by enabling users to incorporate custom exercises into their routines, catering to everyone from mainstream fitness enthusiasts to those engaged in niche or highly specific activities.
+
+This feature allows for the customization by adding preferred or specialized exercises, meeting the varied needs and interests of users and significantly boosting their engagement and satisfaction with the app. It is especially useful for individuals involved in specialized sports or activities requiring unique movements not typically found in standard exercise databases. Personalization not only keeps exercises diverse and interesting but also allows users to adapt their fitness plans for specific objectives, such as injury rehabilitation or focused muscle development. By supporting the integration of tailored exercises, these apps appeal to a wide array of fitness enthusiasts. The ability to add unique exercises that meet individual preferences and needs enhances the app’s usefulness and relevance, thus encouraging longer-term commitment and consistent exercise routines. Additionally, this feature increases the accessibility and inclusiveness of fitness apps, potentially attracting a larger audience with various physical abilities and training objectives.
+
+However, exercise personalization introduces several challenges. Users with limited knowledge of exercise fundamentals might add inappropriate or unsafe exercises to their routines, increasing the risk of injuries. Additionally, personalizing exercises can complicate the app’s capacity to track and analyze performance effectively. While most fitness apps use algorithms designed to monitor progress with predefined exercises, these may not perform as well with customized activities. This can lead to less accurate tracking and feedback for non-standard exercises, potentially reducing the app's effectiveness in monitoring progress and offering valuable insights. Therefore, while exercise personalization provides significant advantages, it necessitates cautious implementation and possibly improved educational resources to ensure its safe and effective utilization.
+
+
