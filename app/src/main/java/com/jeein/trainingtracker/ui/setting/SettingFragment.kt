@@ -1,17 +1,17 @@
 package com.jeein.trainingtracker.ui.setting
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.jeein.trainingtracker.R
 import com.jeein.trainingtracker.databinding.FragmentSettingBinding
-import android.app.AlertDialog
-import android.widget.EditText
-import android.widget.TextView
-import androidx.lifecycle.ViewModelProvider
 
 
 class SettingFragment : Fragment() {
@@ -59,7 +59,7 @@ class SettingFragment : Fragment() {
         val editText = EditText(context)
         AlertDialog.Builder(context)
             .setTitle("Send Feedback")
-            .setMessage("Please enter your feedback below:")
+            .setMessage("We value your feedback! Please share your thoughts and suggestions about the app. The more detail you provide, the better we can improve.")
             .setView(editText)
             .setPositiveButton("Submit") { dialog, which ->
                 val feedback = editText.text.toString()
@@ -74,7 +74,7 @@ class SettingFragment : Fragment() {
         val editText = EditText(context)
         AlertDialog.Builder(context)
             .setTitle("Report Error")
-            .setMessage("Please describe the error, including steps to reproduce it. By submitting, you agree to our Privacy Policy.")
+            .setMessage("Please describe how to reproduce the error, including any specific steps or actions taken. The more detail you provide, the better we can assist.")
             .setView(editText)
             .setPositiveButton("Submit") { dialog, which ->
                 val description = editText.text.toString()

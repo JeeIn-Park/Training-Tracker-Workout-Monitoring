@@ -1,4 +1,5 @@
 package com.jeein.trainingtracker.ui.tag
+
 import androidx.recyclerview.widget.DiffUtil
 
 class TagDiffCallback : DiffUtil.ItemCallback<Tag>() {

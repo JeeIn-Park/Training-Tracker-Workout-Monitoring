@@ -11,17 +11,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.jeein.trainingtracker.FormattedStringGetter
+import com.jeein.trainingtracker.R
 import com.jeein.trainingtracker.ui.exerciseCard.CardStorage
 import com.jeein.trainingtracker.ui.exerciseCard.ExerciseCard
 import com.jeein.trainingtracker.ui.exerciseCard.ExerciseCardDiffCallback
-import com.jeein.trainingtracker.R
 import com.jeein.trainingtracker.ui.exerciseLog.LogStorage
 import com.jeein.trainingtracker.ui.exerciseLog.PastLogTableAdapter
 import com.jeein.trainingtracker.views.GraphViewAdapter
 import com.jjoe64.graphview.GraphView
 import java.time.LocalDateTime
 
-class StatusCardAdapter(private val context: Context, private val onItemClick: (ExerciseCard) -> Unit) :
+class StatusCardAdapter(
+    private val context: Context,
+    private val onItemClick: (ExerciseCard) -> Unit
+) :
     ListAdapter<ExerciseCard, StatusCardAdapter.CardViewHolder>(ExerciseCardDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
@@ -38,13 +41,6 @@ class StatusCardAdapter(private val context: Context, private val onItemClick: (
         }
     }
 
-    fun addItem(cardItem: ExerciseCard) {
-        val updatedList = currentList.toMutableList()
-        updatedList.add(cardItem)
-        submitList(updatedList)
-        CardStorage.addCard(context, cardItem)
-    }
-
     fun removeItem(position: Int) {
         val updatedList = currentList.toMutableList()
         val removedCard = updatedList.removeAt(position)
@@ -53,12 +49,18 @@ class StatusCardAdapter(private val context: Context, private val onItemClick: (
     }
 
     inner class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val exerciseNameTextView: TextView = itemView.findViewById(R.id.StatusCard_ExerciseName_TextView)
-        private val mainMuscleTextView: TextView = itemView.findViewById(R.id.StatusCard_MainMuscle_TextView)
-        private val subMuscleTextView: TextView = itemView.findViewById(R.id.StatusCard_SubMuscle_TextView)
-        private val oneRepMaxTextView: TextView = itemView.findViewById(R.id.StatusCard_OneRepMax_TextView)
+        private val exerciseNameTextView: TextView =
+            itemView.findViewById(R.id.StatusCard_ExerciseName_TextView)
+        private val mainMuscleTextView: TextView =
+            itemView.findViewById(R.id.StatusCard_MainMuscle_TextView)
+        private val subMuscleTextView: TextView =
+            itemView.findViewById(R.id.StatusCard_SubMuscle_TextView)
+        private val tagTextView: TextView = itemView.findViewById(R.id.StatusCard_Tag_TextView)
+        private val oneRepMaxTextView: TextView =
+            itemView.findViewById(R.id.StatusCard_OneRepMax_TextView)
         private val graphView: GraphView = itemView.findViewById(R.id.StatusCard_GraphView)
-        private val pastLogRecyclerView: RecyclerView = itemView.findViewById(R.id.StatusCard_PastLogs_RecyclerView)
+        private val pastLogRecyclerView: RecyclerView =
+            itemView.findViewById(R.id.StatusCard_PastLogs_RecyclerView)
         private lateinit var pastLogTableAdapter: PastLogTableAdapter
 
         fun bind(cardItem: ExerciseCard) {
@@ -83,10 +85,14 @@ class StatusCardAdapter(private val context: Context, private val onItemClick: (
                 subMuscleTextView.text = FormattedStringGetter.subMuscles(cardItem.subMuscles)
             } else subMuscleTextView.visibility = View.GONE
 
+            if (cardItem.tag.isNotEmpty()) {
+                tagTextView.text = FormattedStringGetter.tags(cardItem.tag)
+            } else tagTextView.visibility = View.GONE
 
             val oneRepMaxRecordDate = cardItem.oneRepMaxRecordDate
             if (oneRepMaxRecordDate != null) {
-                oneRepMaxTextView.text = FormattedStringGetter.oneRepMaxRecordWithDate(cardItem, LocalDateTime.now())
+                oneRepMaxTextView.text =
+                    FormattedStringGetter.oneRepMaxRecordWithDate(cardItem, LocalDateTime.now())
             } else oneRepMaxTextView.visibility = View.GONE
 
 

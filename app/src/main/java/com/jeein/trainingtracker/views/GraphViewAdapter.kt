@@ -14,7 +14,7 @@ object GraphViewAdapter {
         val series = LineGraphSeries<DataPoint>()
         relevantLogs.mapIndexed { index, log ->  // Use index as x-value
             if (log.oneRepMax != null) {
-                val oneRepMax = log.oneRepMax ?:0F
+                val oneRepMax = log.oneRepMax ?: 0F
                 DataPoint(index.toDouble(), oneRepMax.toDouble())
             } else {
                 null
@@ -25,8 +25,10 @@ object GraphViewAdapter {
         graph.viewport.isXAxisBoundsManual = true
         graph.viewport.setMinX(0.0)  // Start at 0 since we are only showing up to 8 points
         graph.viewport.setMaxX(relevantLogs.size - 1.toDouble())  // Set max to the size of relevantLogs minus one for proper indexing
-        graph.viewport.isScalable = false  // You may want to disable scaling to keep the view fixed on these 8 points
-        graph.viewport.isScrollable = false  // You may want to disable scrolling to keep the view fixed
+        graph.viewport.isScalable =
+            false  // You may want to disable scaling to keep the view fixed on these 8 points
+        graph.viewport.isScrollable =
+            false  // You may want to disable scrolling to keep the view fixed
 
         // Custom label formatter to display month and day
         graph.gridLabelRenderer.labelFormatter = object : DefaultLabelFormatter() {

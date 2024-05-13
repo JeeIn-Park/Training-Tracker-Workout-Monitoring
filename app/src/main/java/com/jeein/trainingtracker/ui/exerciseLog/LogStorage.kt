@@ -5,16 +5,18 @@ import com.jeein.trainingtracker.Event
 import com.jeein.trainingtracker.EventManager
 import com.jeein.trainingtracker.R
 import com.jeein.trainingtracker.ui.exerciseCard.CardStorage
+import com.jeein.trainingtracker.ui.exerciseSet.ExerciseSet
+import com.jeein.trainingtracker.ui.exerciseSet.OneRepMax
 import java.io.FileNotFoundException
 import java.io.IOException
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
 import java.util.UUID
 
-class LogStorage(id : UUID) {
+class LogStorage(id: UUID) {
     private val fileName = "log_${id}.dat"
 
-    private fun saveLogs(context: Context, logs :List<ExerciseLog>) {
+    private fun saveLogs(context: Context, logs: List<ExerciseLog>) {
         try {
             ObjectOutputStream(context.openFileOutput(fileName, Context.MODE_PRIVATE)).use {
                 it.writeObject(logs)
@@ -25,22 +27,22 @@ class LogStorage(id : UUID) {
                     logs
                 )
             )
-        } catch (e : IOException) {
+        } catch (e: IOException) {
             e.printStackTrace()
         }
     }
 
-    fun loadLogs(context: Context) : List<ExerciseLog> {
+    fun loadLogs(context: Context): List<ExerciseLog> {
         try {
             ObjectInputStream(context.openFileInput(fileName)).use {
                 return it.readObject() as? List<ExerciseLog> ?: emptyList()
             }
-        } catch (e : FileNotFoundException) {
+        } catch (e: FileNotFoundException) {
             return emptyList()
-        } catch (e : IOException) {
+        } catch (e: IOException) {
             e.printStackTrace()
             return emptyList()
-        } catch (e : ClassNotFoundException) {
+        } catch (e: ClassNotFoundException) {
             e.printStackTrace()
             return emptyList()
         }
@@ -71,7 +73,7 @@ class LogStorage(id : UUID) {
         }
     }
 
-    fun updateLog(context: Context, log: ExerciseLog, sets: List<ExerciseSet>) : ExerciseLog {
+    fun updateLog(context: Context, log: ExerciseLog, sets: List<ExerciseSet>): ExerciseLog {
         val currentLogs = loadLogs(context).toMutableList()
         val index = currentLogs.indexOfFirst { it.dateTime == log.dateTime }
         var updatedLog = log

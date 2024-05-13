@@ -21,7 +21,7 @@ class PrivacyPolicyFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true) // Enable this to handle menu events in the fragment.
+        setHasOptionsMenu(true)
     }
 
 
@@ -32,7 +32,10 @@ class PrivacyPolicyFragment : Fragment() {
         _binding = FragmentSettingPrivacyPolicyBinding.inflate(inflater, container, false)
 
         val textView: TextView = binding.SettingPrivacyPolicyPrivacyPolicyTextView
-        textView.text = Html.fromHtml(getString(R.string.terms_and_conditions_html), Html.FROM_HTML_MODE_LEGACY);
+        textView.text = Html.fromHtml(
+            getString(R.string.terms_and_conditions_html),
+            Html.FROM_HTML_MODE_LEGACY
+        )
 
 
         return binding.root

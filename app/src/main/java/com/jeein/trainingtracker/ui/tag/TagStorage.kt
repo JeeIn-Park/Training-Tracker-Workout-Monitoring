@@ -1,6 +1,7 @@
 package com.jeein.trainingtracker.ui.tag
 
 import android.content.Context
+import com.jeein.trainingtracker.ui.exerciseCard.CardStorage
 import java.io.FileNotFoundException
 import java.io.IOException
 import java.io.ObjectInputStream
@@ -53,7 +54,9 @@ object TagStorage {
         val currentTags = loadTags(context).toMutableList()
         currentTags.remove(tag)
         saveTags(context, currentTags)
+        CardStorage.deleteTag(context, tag)
     }
+
 
     fun editTag(context: Context, oldTag: Tag, newTag: Tag) {
         val currentTags = loadTags(context).toMutableList()
@@ -62,6 +65,7 @@ object TagStorage {
             currentTags[index] = newTag
             saveTags(context, currentTags)
         }
+        CardStorage.editTag(context, oldTag, newTag)
     }
 
     fun isIdInUse(context: Context, id: UUID): Boolean {
@@ -70,7 +74,7 @@ object TagStorage {
     }
 
     fun getSelectedTags(context: Context): List<Tag> {
-        val tags = TagStorage.loadTags(context)
+        val tags = loadTags(context)
         val selectedTags: MutableList<Tag> = mutableListOf()
         for (tag in tags) {
             if (tag.isSelected) {

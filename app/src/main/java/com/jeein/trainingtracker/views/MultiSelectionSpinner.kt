@@ -8,6 +8,7 @@ import android.widget.SpinnerAdapter
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatSpinner
+import com.jeein.trainingtracker.R
 import java.util.Arrays
 
 class MultiSelectionSpinner : AppCompatSpinner, DialogInterface.OnMultiChoiceClickListener {
@@ -16,10 +17,18 @@ class MultiSelectionSpinner : AppCompatSpinner, DialogInterface.OnMultiChoiceCli
     private val simpleAdapter: ArrayAdapter<String>
 
     constructor(context: Context) : super(context) {
-        simpleAdapter = object : ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, android.R.id.text1) {
-            override fun getView(position: Int, convertView: android.view.View?, parent: android.view.ViewGroup): android.view.View {
+        simpleAdapter = object : ArrayAdapter<String>(
+            context,
+            android.R.layout.simple_spinner_item,
+            android.R.id.text1
+        ) {
+            override fun getView(
+                position: Int,
+                convertView: android.view.View?,
+                parent: android.view.ViewGroup
+            ): android.view.View {
                 val view = super.getView(position, convertView, parent) as TextView
-                view.textSize = 12f // Adjust text size for the spinner view
+                view.textSize = 14f // Adjust text size for the spinner view
                 return view
             }
         }
@@ -27,10 +36,18 @@ class MultiSelectionSpinner : AppCompatSpinner, DialogInterface.OnMultiChoiceCli
     }
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        simpleAdapter = object : ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, android.R.id.text1) {
-            override fun getView(position: Int, convertView: android.view.View?, parent: android.view.ViewGroup): android.view.View {
+        simpleAdapter = object : ArrayAdapter<String>(
+            context,
+            android.R.layout.simple_spinner_item,
+            android.R.id.text1
+        ) {
+            override fun getView(
+                position: Int,
+                convertView: android.view.View?,
+                parent: android.view.ViewGroup
+            ): android.view.View {
                 val view = super.getView(position, convertView, parent) as TextView
-                view.textSize = 12f // Adjust text size for the spinner view
+                view.textSize = 14f // Adjust text size for the spinner view
                 return view
             }
         }
@@ -53,12 +70,24 @@ class MultiSelectionSpinner : AppCompatSpinner, DialogInterface.OnMultiChoiceCli
     override fun performClick(): Boolean {
         AlertDialog.Builder(context).apply {
             _items?.let { items ->
-                setMultiChoiceItems(items, mSelection, this@MultiSelectionSpinner)
+                val selectedItems = BooleanArray(items.size)
+                System.arraycopy(mSelection!!, 0, selectedItems, 0, items.size)
+                setMultiChoiceItems(items, selectedItems, this@MultiSelectionSpinner)
+
+                // Add "Confirm" button to finalize selection
+                setPositiveButton("Confirm") { dialog, which ->
+                    System.arraycopy(selectedItems, 0, mSelection!!, 0, items.size)
+                    simpleAdapter.clear()
+                    simpleAdapter.add(buildSelectedItemString())
+                    dialog.dismiss()
+                }
+
                 show()
             }
         }
         return true
     }
+
 
     override fun setAdapter(adapter: SpinnerAdapter) {
         throw RuntimeException("setAdapter is not supported by MultiSelectSpinner.")
@@ -131,7 +160,8 @@ class MultiSelectionSpinner : AppCompatSpinner, DialogInterface.OnMultiChoiceCli
     }
 
     private fun buildSelectedItemString(): String {
-        return _items?.withIndex()?.filter { mSelection!![it.index] }?.joinToString(", ") { it.value } ?: ""
+        return _items?.withIndex()?.filter { mSelection!![it.index] }
+            ?.joinToString(", ") { it.value } ?: ""
     }
 
     fun getSelectedItemsAsString(): String {

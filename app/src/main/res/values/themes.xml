@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
 
     <!-- Basic theme -->
@@ -7,15 +7,14 @@
         <item name="colorPrimary">@color/turquoise</item>
         <item name="colorSecondary">@color/brighter_turquoise</item>
         <item name="colorPrimaryVariant">@color/cafeLatte</item>
-        <item name="colorOnPrimary">@color/damp</item>  <!--    how is this used    -->-
+        <item name="colorOnPrimary">@color/damp</item>
         <item name="colorOnBackground">@color/white</item>
         <item name="android:windowBackground">@color/damp</item>
         <item name="colorOnSurface">@color/grey</item>
+        <item name="colorOnSecondary">@color/black</item>
 
-        <!-- Custom button style -->
         <item name="buttonStyle">?attr/colorPrimaryVariant</item>
     </style>
-
 
 
 </resources>

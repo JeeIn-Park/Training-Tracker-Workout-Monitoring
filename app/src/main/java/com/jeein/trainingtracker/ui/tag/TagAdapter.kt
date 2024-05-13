@@ -10,6 +10,8 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.jeein.trainingtracker.Event
+import com.jeein.trainingtracker.EventManager
 import com.jeein.trainingtracker.R
 
 class TagAdapter(private val context: Context, private val onItemClick: (Tag) -> Unit) :
@@ -29,19 +31,17 @@ class TagAdapter(private val context: Context, private val onItemClick: (Tag) ->
         }
     }
 
-    // TODO : manual to addItem
-    fun addItem(tag: Tag) {
-        val updatedList = currentList.toMutableList()
-        updatedList.add(tag)
-        submitList(updatedList)
-        TagStorage.addTag(context, tag)
-    }
 
     fun removeItem(position: Int) {
         val updatedList = currentList.toMutableList()
         val removedTag = updatedList.removeAt(position)
         TagStorage.removeTag(context, removedTag)
         submitList(updatedList)
+        EventManager.publish(
+            Event(
+                context.getString(R.string.event_delete_tag)
+            )
+        )
     }
 
 
@@ -53,17 +53,22 @@ class TagAdapter(private val context: Context, private val onItemClick: (Tag) ->
         }
         TagStorage.editTag(context, oldTag, newTag)
         submitList(updatedList)
+        EventManager.publish(
+            Event(
+                context.getString(R.string.event_edit_tag)
+            )
+        )
     }
 
 
-    inner class TagViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)  {
-        private val tagCard : CardView = itemView.findViewById(R.id.tagCard)
-        private val tagName : TextView = itemView.findViewById(R.id.tagName)
+    inner class TagViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val tagCard: CardView = itemView.findViewById(R.id.tagCard)
+        private val tagName: TextView = itemView.findViewById(R.id.tagName)
 
-        fun bind(tag : Tag, position: Int) {
-            if(tag.isSelected){
+        fun bind(tag: Tag, position: Int) {
+            if (tag.isSelected) {
                 tagCard.setCardBackgroundColor(context.getColor(R.color.turquoise))
-            }else{
+            } else {
                 tagCard.setCardBackgroundColor(context.getColor(R.color.brighter_turquoise))
             }
             if (tag != Tag.ADD_TAG) {

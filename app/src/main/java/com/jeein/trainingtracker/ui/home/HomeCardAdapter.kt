@@ -2,7 +2,6 @@ package com.jeein.trainingtracker.ui.home
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.Intent
 import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
@@ -11,17 +10,18 @@ import android.widget.TextView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.jeein.trainingtracker.FormattedStringGetter
+import com.jeein.trainingtracker.R
 import com.jeein.trainingtracker.ui.exerciseCard.CardStorage
 import com.jeein.trainingtracker.ui.exerciseCard.ExerciseCard
 import com.jeein.trainingtracker.ui.exerciseCard.ExerciseCardDiffCallback
-import com.jeein.trainingtracker.R
-import com.jeein.trainingtracker.ui.exerciseCard.AddCardActivity
 import com.jeein.trainingtracker.ui.exerciseLog.LogStorage
 import java.time.LocalDateTime
 
 class HomeCardAdapter(
-    private val context: Context, private val onItemClick: (ExerciseCard) -> Unit) :
-    ListAdapter<ExerciseCard, HomeCardAdapter.CardViewHolder>(ExerciseCardDiffCallback()) {
+    private val context: Context,
+    private val onItemClick: (ExerciseCard) -> Unit,
+    private val navigateToEdit: (ExerciseCard) -> Unit
+) : ListAdapter<ExerciseCard, HomeCardAdapter.CardViewHolder>(ExerciseCardDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -37,18 +37,11 @@ class HomeCardAdapter(
         }
     }
 
-    fun addItem(cardItem: ExerciseCard) {
-        val updatedList = currentList.toMutableList()
-        updatedList.add(cardItem)
-        submitList(updatedList)
-        CardStorage.addCard(context, cardItem)
-    }
-
     fun removeItem(position: Int) {
         val updatedList = currentList.toMutableList()
         val removedCard = updatedList.removeAt(position)
-        submitList(updatedList)
         CardStorage.removeCard(context, removedCard)
+        submitList(updatedList)
     }
 
     inner class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -69,26 +62,27 @@ class HomeCardAdapter(
                 exerciseName.setTypeface(null, Typeface.BOLD)
             }
 
-            if (cardItem.tag.isNotEmpty()){
-                tag.text = cardItem.tag.joinToString(prefix = "# ", separator = " ") { it.name }
+            if (cardItem.tag.isNotEmpty()) {
+                tag.text = FormattedStringGetter.tags(cardItem.tag)
             } else tag.text = ""
 
             // Create a local immutable copy of lastActivity
             val lastActivity = cardItem.lastActivity
 
             if (lastActivity != null) {
-                lastExercise.text = FormattedStringGetter.dateTimeWithDiff(lastActivity, LocalDateTime.now())
+                lastExercise.text =
+                    FormattedStringGetter.dateTimeWithDiff(lastActivity, LocalDateTime.now())
             } else {
                 lastExercise.visibility = View.GONE
             }
 
-            if (cardItem.mainMuscles.isEmpty()){
+            if (cardItem.mainMuscles.isEmpty()) {
                 mainMuscle.visibility = View.GONE
             } else {
                 mainMuscle.text = FormattedStringGetter.mainMuscles(cardItem.mainMuscles)
             }
 
-            if (cardItem.subMuscles.isEmpty()){
+            if (cardItem.subMuscles.isEmpty()) {
                 subMuscle.visibility = View.GONE
             } else {
                 subMuscle.text = FormattedStringGetter.subMuscles(cardItem.subMuscles)
@@ -97,7 +91,10 @@ class HomeCardAdapter(
 
             val oneRepMaxRecordDate = cardItem.oneRepMaxRecordDate
             if (oneRepMaxRecordDate != null) {
-                personalRecord.text = FormattedStringGetter.oneRepMaxRecordWithDate_ShortPB(cardItem, LocalDateTime.now())
+                personalRecord.text = FormattedStringGetter.oneRepMaxRecordWithDate_ShortPB(
+                    cardItem,
+                    LocalDateTime.now()
+                )
             } else {
                 personalRecord.visibility = View.GONE
             }
@@ -116,10 +113,7 @@ class HomeCardAdapter(
                     when (which) {
                         // Edit
                         0 -> {
-                            val intent = Intent(context, AddCardActivity::class.java).apply {
-                                putExtra("EXTRA_CARD_ITEM", cardItem)
-                            }
-                            context.startActivity(intent)
+                            navigateToEdit(cardItem)
                         }
                         // Delete
                         1 -> {
@@ -146,7 +140,6 @@ class HomeCardAdapter(
                 .show()
         }
     }
-
 
 }
 

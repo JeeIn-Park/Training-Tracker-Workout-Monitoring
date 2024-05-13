@@ -1,7 +1,7 @@
 package com.jeein.trainingtracker.ui.tag
 
-import java.time.LocalDateTime
 import java.io.Serializable
+import java.time.LocalDateTime
 import java.util.UUID
 
 data class Tag(
@@ -9,7 +9,7 @@ data class Tag(
     val timeAdded: LocalDateTime = LocalDateTime.now(),
     val name: String = "",
     var isSelected: Boolean = false
-): Serializable {
+) : Serializable {
     companion object {
         val ADD_TAG = Tag(
             id = UUID.randomUUID(),

@@ -5,21 +5,37 @@
     <string name="title_setting">Setting</string>
     <string name="title_one_rep_max">One Rep Max</string>
 
+    <string name="event">event</string>
     <string name="general_deletion_warning">Are you sure you want to delete this item?</string>
 
     <!--    exercise    -->
     <string name="event_log">log</string>
+    <string name="event_empty_log">empty_log</string>
+    <!--    <string name="event_add_log">add log</string>-->
+    <!--    <string name="event_delete_log">delete log</string>-->
+    <!--    <string name="event_edit_log">edit log</string>-->
     <string name="exercise_add">Add a new exercise</string>
     <string name="exercise_enter_weight">Enter weight</string>
     <string name="exercise_enter_rep">Enter reps</string>
     <string name="exercise_deletion_warning">All records will be deleted. Once deleted, they cannot be recovered. </string>
 
+    <string name="event_set">set</string>
+    <string name="event_add_set">add set</string>
+
     <!--    tag    -->
+    <string name="event_tag">tag</string>
+    <string name="event_add_tag">add tag</string>
+    <string name="event_delete_tag">delete tag</string>
+    <string name="event_edit_tag">edit tag</string>
+    <string name="event_click_tag">click tag</string>
     <string name="tag_enter_name">Enter a tag name</string>
-    <string name="tag_deletion_warning">All records will be deleted. Once deleted, they cannot be recovered. This action will not delete exercises or remove tags associated with exercises.</string>
+    <string name="tag_deletion_warning">All records will be deleted. Once deleted, they cannot be recovered.</string>
 
     <!--    muscle    -->
     <string name="event_muscle">muscle</string>
+    <!--    <string name="event_add_muscle">add muscle</string>-->
+    <!--    <string name="event_delete_muscle">delete muscle</string>-->
+    <!--    <string name="event_edit_muscle">edit muscle</string>-->
     <string name="muscle_select">Select muscle</string>
     <string name="discard_set_count">discard set count</string>
     <string name="one_rep_max_pb">ONE REP MAX(PB)</string>
@@ -66,5 +82,8 @@
         ]]>
     </string>
     <string name="feedback_mail">trainingtrackermailbox@gmail.com</string>
+    <string name="home_description">
+        Looks like you don\'t have any exercises yet! Tap the blue \'+\' button to add some tags or categories, and use the yellow \'+\' button to start adding your exercises. Feel free to drag and move the yellow \'+\' button to wherever it suits you best on the screen. Let\'s get moving!
+    </string>
 
 </resources>

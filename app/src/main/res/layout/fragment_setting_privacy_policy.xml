@@ -20,7 +20,7 @@
             android:id="@+id/Setting_PrivacyPolicy_PrivacyPolicyTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
+            android:textSize="16sp"
             android:padding="10dp"
             tools:context=".ui.setting.PrivacyPolicyFragment" />
 

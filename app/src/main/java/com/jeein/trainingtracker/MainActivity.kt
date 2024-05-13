@@ -1,42 +1,55 @@
 package com.jeein.trainingtracker
 
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.jeein.trainingtracker.R
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.jeein.trainingtracker.databinding.ActivityMainBinding
+import com.jeein.trainingtracker.ui.exerciseSet.SetStorage
 import com.jeein.trainingtracker.ui.muscles.MuscleFactory
 import com.jeein.trainingtracker.ui.tag.TagFactory
 
 class MainActivity : AppCompatActivity() {
 
-private lateinit var binding: ActivityMainBinding
-
-//private lateinit var statusCardAdapter: StatusCardAdapter
-//private lateinit var homeCardAdapter: HomeCardAdapter
-
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var navController: NavController
+    private lateinit var navView: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-     binding = ActivityMainBinding.inflate(layoutInflater)
-     setContentView(binding.root)
+        navView = binding.navView
+        navController = findNavController(R.id.nav_host_fragment_activity_main)
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.navigation_home, R.id.navigation_status, R.id.navigation_setting
+            )
+        )
 
-        val navView: BottomNavigationView = binding.navView
-
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.navigation_home, R.id.navigation_status, R.id.navigation_setting))
-
-        //TODO : deal with data sync
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                // home
+                R.id.navigation_home -> navView.menu.findItem(R.id.navigation_home).isChecked = true
+                R.id.navigation_add_card -> navView.menu.findItem(R.id.navigation_home).isChecked = true
+                R.id.navigation_add_log -> navView.menu.findItem(R.id.navigation_home).isChecked = true
+
+                // status
+                R.id.navigation_status -> navView.menu.findItem(R.id.navigation_status).isChecked = true
+
+                // setting
+                R.id.navigation_setting -> navView.menu.findItem(R.id.navigation_setting).isChecked = true
+                R.id.navigation_privacy_policy -> navView.menu.findItem(R.id.navigation_setting).isChecked = true
+            }
+        }
 
         MuscleFactory.refreshMuscle(this)
     }
@@ -44,5 +57,14 @@ private lateinit var binding: ActivityMainBinding
     override fun onStop() {
         super.onStop()
         TagFactory.resetSelection(this)
+        val currentExercise = SetStorage.getCurrentExercise(this)
+        if (currentExercise != null) {
+            SetStorage.resetSets(this, currentExercise)
+        }
+
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }
