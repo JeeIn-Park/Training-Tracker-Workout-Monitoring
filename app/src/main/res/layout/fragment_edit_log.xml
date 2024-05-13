@@ -4,20 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:gravity="center"
+    <DatePicker
         android:id="@+id/EditLog_Date"
         android:layout_width="wrap_content"
-        android:layout_height="45dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:hint="Date Exercised"
-        android:ems="10"
-        android:inputType="date"
+        android:datePickerMode="spinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textSize="16sp"
-        android:padding="6dp"/>
+        app:layout_constraintTop_toTopOf="parent"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/EditLog_PastLog"

@@ -3,17 +3,13 @@ package com.jeein.trainingtracker.ui.exerciseLog
 
 import android.app.AlertDialog
 import android.content.Context
-import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.jeein.trainingtracker.FormattedStringGetter
 import com.jeein.trainingtracker.R
-import com.jeein.trainingtracker.ui.exerciseLog.LogStorage
-import java.time.LocalDateTime
 
 
 class EditLogAdapter(
