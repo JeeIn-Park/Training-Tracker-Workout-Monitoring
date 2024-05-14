@@ -1,0 +1,227 @@
+starting wtith analysis
+selected the features to implement 
+planning and designing
+then implemented version 1.5
+
+
+feedback using the 
+
+
+critical evaluation
+check if the research I've done can be applied practically
+did survey
+
+
+
+(2) version 2 implementation
+I tested mvp myself as the ethics aproval was not available yet
+
+
+
+
+
+
+I made a plan for completed version 2, I started with version 1.5 implementation.
+in this phase, I focused on the enhancing design(namely UI). This involved improving ui for existing features, and preparing for other features implementation. 
+for more user friendly ui, I picked colour scheme which is yellow & blue for colour blind people
+This colour scheme is used for theme {
+    colour scheme added
+    -> button theme 
+    -> bottom navigation theme 
+}
+and logo design. Logo is made with drawable vector path. I used inkscape to draw it and added the vector asset. 
+
+
+section - version 1.5 implementation 
+I made a plan for version 2.
+I started with version 1.5 implementation.
+In this phase, I focused on the enhancing design(namely UI). 
+This involved improving ui for existing features, 
+and preparing for other features implementation considering the plan I made.
+for more user friendly ui, 
+I picked colour scheme which is yellow & blue.
+This colour scheme is a colour scheme which red/green colour blind person can also see.
+This colour scheme is used for generating the application theme.  
+I added colours from the chosen colour scheme to app/src/main/res/values/colors.xml.
+These colours were used for consistent app design using app/src/main/res/values/themes.xml.
+Using the colour theme setted, I changed the buttons' design and bottom navigation bar's design.
+General app's colour were all changed through using the theme giving enhanced aesthetically pleasing looking.
+I desgined app logo as well. For consistent desgin and colour marketing, I used the colours from the picked colour scheme.
+I made the logo with drawable vector path. So I didn't need to make logos for each resolution. 
+because if you don't use drawable vector path, you need to make image for each specifiv dpi. 
+I used inkscape to draw it and added the vector asset. 
+
+
+
+2nd version - Improve usability
+
+% functionality - why did I implement it / how did I implement it?
+
+
+intuitive ui for exercise cards and layout, arrangement
+
+
+% general UI improvement
+
+
+
+% section - Home framgment and Status fragment improvement
+The initial version of the app was using log button to access the add log activity.
+This made each element in recyclerView to have log button.
+Too many repeated button was not only looked bad, but also was not really convenient to use as user need to click on a specific button space on each element.
+In version 1.5, I deleted these buttons by making each element in recyclerview clickable. 
+In this version of the app, user could access the add log activity by simply clicking the exercise they want to add log on.
+when recyclerView item is clicked, it opens up the add log activity.
+With the same reasons, I deleted "delete" buttons from the status screen.
+Instead of clicking delete button on each button on an element, user can delete an exercise by long-clicking the exercise and select delete option.
+Edit option is also added for future functionality implement(to enable user to edit existing exercises).  
+In pervious version of the app, user was only able to delete the exercises though the status screen.
+By deleting delete buttons and implementing long click for exercise deletion, users will feel they can delete the exercise items by long clicking them
+but this could possibly decrease the clarity of app usability, since exercises were also displayed on home screen.
+In this reason, I implemented long click for home screen's recyclerView as well. 
+There were additional design enhancements on recyclerView element. 
+For more clarity, I made card layout for each recyclerView element.
+As this gave barriers between each element, user could visually feel each element and recognise them as a card.
+Also, rather than display every single data on the card, managing visibility of each components, I made useless information invisible.
+For the visible information, I formatted text to deliver the information to the user clearer.
+personal record field is added on card  preparing for a new functionality.
+I also customised the scroll bar.
+This enable me to use the consistent colour scheme.
+I wanted user to be able to feel how many cards the user have, and where in the list the user at visually by scroll bar.
+tag bar above the recycerview is added for future functionality implementation as well.
+above the tag bar, I added visualised muscles. it was perparation for a new functionality (will enable visualised muscles)
+I used drawable vectors path / asset for each muscle.
+I researched muscle groups people exercise, categorised them, and visualised them into vector path using inkscape.
+In other words, I made drawable vector graphics, checked muscle groups and find information about muscles, group them for exercise and visualised them. 
+sketched first and then used the inkscape to make a drawable vector
+
+    going to add muscle map - preparing for a new functionality (to change the muscle colour refelcting the muscle status checking the exercise log user enters, it needed to check which muscle vectors are related to which muscle user added for the exercise card)
+
+    
+% section - Add log Avtivity (this has the biggest change in this implemented version)
+when I was using the app, I found that if I am not sure where I am entering the exercise
+started with planning how I am going to arrange or fit all the views in one screen. 
+as the space is limited, I needed to arrange them efficiently. 
+user shouldn't be distrubted when they are logging, or checking past logs
+so I displayed the exercise name on the action bar in add log activity. 
+from this, when logging the exercise, user could continuesly check which exercise log they are entering, so they don't forget which exercise they are logging. 
+also, it makes sure that user is entering logs to the right place. 
+when I log the exercise logs, I found I want to check how my progress is being changed.
+Which means, I didn't want to go around in the app for checking mu progress. 
+I wanted it to be shown when I am logging. 
+it was annoying to separate the place I can check the analysis and enter the log.
+As then I cannot check it while I am doing exercise, or I need to move around within the app to check log and analysis. 
+In this reason, I made the past logs available on logging screen.
+only relavant logs (with same exercise) are shown in table with the date they exercised
+two table row layouts are used for implementing this.
+there were a table row layout for one element and two elements.
+as the row with date only needs one element 
+and the set row needs two elements (set count and exercise records which contains weight lifted and reps completed)
+I implemented them seperately
+By adding the empty table row at the end of each session, I enhanced clarity.
+Using the recyclerView for this table, even if all the logs are not fitted on screen, user could see all the past logs by scrolling.
+to display the information as much as possible, I dynamically allocated the space for logs users' are entering and past logs.
+Before user enters any log, the space is filled with past logs.
+Adding logs, it gradually decrease the space for past logs displaying current logs being entered
+wrap content for the height and then put recycler view for the remaining page, 
+as I wanted to maximise the space for pastlog efficiently when user didn't entered a lot of logs today. 
+intuitive but effective past log checking and current log checking, I employed excel-like structure (namely table), also this enable user to check all the logs at a glance)
+So I used the space below the today's log, and it dynamically allocated the space
+Also, I made layout to implement analysis display in the future.
+this include cardViews which will contain analysis and graphViews which will display user's exercise progress.
+This is added for easy and intuitive access of analysis
+Along the weight lifted and reps completed, now user can discard set count for a set they are entering.
+This can be used for better customisation as it enable user to enter  warming up sets, also, someone might lift different weights for one set. 
+when you do exercise, for each session, they have sets.
+also, each set consists of weight lifted and reps completed, and predicted 1rm calculated from weight lifted and reps completed they entered.
+For 1rm calculation, one rep max algorithm is implemented as well.
+For more accurate calculation, I employed four different algorithms to calculate the 1rm and found the average value. 
+reflecting real world working out structure, I implemented the set class.
+and from this point, each exercise log contains set of sets they've done.
+Alongside this, the class for the session, namely ExerciseLog is updated.
+The lastActivity attribute in this class became null-able.
+In version 1, it automatically updated the last activity to the date they created the exercise.
+However, this doesn't logically makes sence cuz entering a new kind of exercise doesn't mean they actually did that exercise.
+In this reason, to deal with empty date, this attribute is changed to null-able attribute. 
+Now this attribute is updated when users are actually entering the logs for that exercise.
+(this was for better track on the last activity user entered. 
+As entering the exercise doesn't mean they did the workout, I made the attribute nullable)
+Also, while I was updating this class, I found it is not effective and unneccesary to include whole ExerciseCard class in each ExerciseLog.
+Since each ExerciseCard has unique UUID, I could use this UUID value to recognise each card.
+in the log, it only store the card id rather than whole card
+when user enter logs, they are stored in fragment's attribute? variable?
+once user finishes logging session by exiting the fragment,
+it automatically upload it to the local storage in the phone.
+
+
+% section -  Setting Fragment 
+updated setting layout : 
+moved the textView that displaying version to the bottom for adding buttons
+These buttons were added for further functionalities implementation/
+Imployed layout rename system.
+for id used in xml file, I used LayoutName_Contents&ViewType.
+when binding the data with the layout, it gave me the clearer view on layout reducing ambiguacy. 
+
+
+
+
+(3) version 2.1 implementation - app deployment (app store release, gitHub release)
+focus on researched factors (user centered app)
+enhancing user experiences
+(minimalise steps that user needs to take to log their progress, user can customise set recording, long click to delete a card with warning)
+
+
+
+\version v2.1.0 {
+    adding new functionalities
+} 
+
+% Home framgment
+
+% Status Fragment 
+
+% Setting Fragment 
+
+
+% Add log Avtivity
+
+% Add card Activity
+
+% Scalability
+
+
+
+and analysis available on the logging screen. 
+this is the noticable unique feature of this app. 
+other exercise apps are separating the analysis screen and the logging screen, 
+also, not only giving the past logs, can see the progress at a glance. 
+so it is also better than just using excel which simply gives you past logs.
+Making analysis is possible with excel as well, but for this, users need to manually setup all the things for each exercise they add.
+but with this app, 
+
+
+
+feedback agaile reflection
+
+
+version 3 dissertation
+
+survey result
+user feedbacks -> solution
+
+
+git log categorising
+functionality - why did I implement it / how did I implement it?
+app scalability / technical explanation
+
+
+
+critical evaluation
+user feedback
+what can I do better
+following studies
+
+4. Evaluate the app in terms of efficiency and user satisfaction and demonstrate that the proposed enhancements are beneficial.
+	smart goal evaluation
+	app reviews
+	what I can do better if I do it again next time?
