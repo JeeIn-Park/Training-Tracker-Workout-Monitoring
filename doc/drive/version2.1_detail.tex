@@ -1,6 +1,53 @@
 
 significant changes 
 
+employ benefits from excel and fitness tracking apps.
+what is the benefit of excel?
+what is disadvantages?
+these disadvantages can be solved with fitness tracking app. 
+
+
+focus on researched factors (user centered app)
+enhancing user experiences
+(minimalise steps that user needs to take to log their progress, user can customise set recording, long click to delete a card with warning)
+
+
+
+
+section - app  Scalability  update 
+
+1. string formatter 
+when views are dealing with data and do formatting it to the form of string,
+rather than deal with it in all separated classes,
+I added the central object for string formatting, called FormattedStringGetter.
+This class gives various ways for formatting data to string. 
+receieving the data with selected method, this object returns the formatted string in the form you needed.
+so passing the data and the form you want to format it, you can get the formatted string.
+as all the string formatation is handled in this one object,
+it became easier to deal with app consistency in terms of string formatation.
+for example, if I want to make change on one specific data's formatation,
+I can easily modify all the usage of this data when it is formatted to string.
+just by modifying methods in this object which utilise that data. 
+
+2. improved data management
+additional components are introduced for better data management, followiing the factory design pattern.
+These factories are responsible on generating object with given data class and data.
+Alongside with default value setted in data class,
+using the factories, I could deal with data generation from given information, specifying and dealing with cases.
+I implemented what data needs to be generated in each case, 
+depends on where it is used.
+As all the data generation accross the app is dealed with factories,
+I could easily deal with making changes on data class itself, or making change on usage.
+
+Also, made changes on data storages.
+I made saving methods private.
+explain how and why I did it 
+
+Detailed exception control was emplyed for data loading as well.
+ explain how and why I did it 
+
+
+
 1. new features implementation (Tag & Muscle & Workout Analysis)
 
 % Section - Muscle visualisation
@@ -127,11 +174,63 @@ this was critical to show workout progress as user can see how their strength is
 Finally, I added oneRepMax attribute to ExerciseCard.
 When the app is storing a new exercise log, it checks the stored exercise card's oneRepMax and if the new log contains bigger 1RM, it updates the 1RM for the card.
 This enable user to check their personal best record which makes them feel good and motivates them.
-For 1RM showed on the card, 
+
+the main way user can access to workout analysis is provided by status fragment.
+With this status screen, user can see all of exercises' logs they entered in one screen.
+Below each exercise card which has exercise name, main and sub muscle groups, the workout analysis is displayed.
+this includes the personal best 1RM of the corresponding exercise and the graph shows progress changed.
+alongside withe thes personal best, it shows when the user reached that record which ecourage users to keep making further progress. 
+below this analysis, user can also check the all the actual original logs they enterd in form of table.
+
+
+% screenshot 
+- > today's log - match parent
+the use of an empty row at the end of each session improves visual separation and helps distinguish between sessions.
+when add log or card, the most current one to the first index
+I will do the add log activity first
+add log layout
+one rep max with two decimal with kg
+one rep max bar
+make part bold
+new line instead of coloum
+implementing the graph
+today box : user don't know where to log
+table setup object
+add log activity keep updating thr logs
+grapg visibility
+1rm bar visibility
+1rm visibility and formatting, muscle text formattin
+floating button loaction
+
+analysis is available on the logging screen as well.
+this is the noticable unique feature of this app. 
+Thanks to this feature, user don't need to go check analysis and logs seperately.
+it automatically provides the relavant logs and analysis when user enters their workout records
+
+simple Analysis (1Rm) is also available on home screen. 
+For 1RM showed on the each exercise card on home fragment, 
+alongside withe thes personal best, it shows when the user reached that record which ecourage users to keep making further progress just like status fragment.
+even user don't check the analysis manually with the status screen,
+with the home screen and AddLogActivity, analysis are provided to the user which ecourage users to keep making further progress even without checking them manually.
+
+By making status screen as a place where can check the analysis,
+there need to be another place for adding customised exercise card.
+becaue originally the status screen was responsible for this.
+I moved this reponsibility to home fragment screen.
+I added the floating button on the home fragment to enable user to enter customised exercise.
+For first implementation of thie floating button, it was fixed on the screen, 
+but I found this needs to be draggable.
+As this was covering the fixed area of the screen which covers the data on the exercise cards.
+In this reason, to maximise the limited screen area usage. I made it draggable.
+User can drag the button on the screen.
+also, to not cover the contents as much as possible,
+the button turns into half transperant if the user doesn't touch it for a while.
+also the button is aligned to the left or right wall to minimise distraction by covering contents.
+
+
 
 log 
 status
-
 
 \predicted 1RM
 update existing data structure (added 1RM)
@@ -150,82 +249,38 @@ table setup object
 grapg visibility
 
 
-% Add log Avtivity
-changed the data structure, but the log storage is not initialisable 
-\todo : need to check which data structure is actually changed in this state
-today's log - match parent
-Additionally, the use of an empty row at the end of each session improves visual separation and helps distinguish between sessions.
-when add log or card, the most current one to the first index
-I will do the add log activity first
-add log layout
-one rep max with two decimal with kg
-one rep max bar
-make part bold
-new line instead of coloum
-implementing the graph
-today box : user don't know where to log
-table setup object
-add log activity keep updating thr logs
-grapg visibility
-1rm bar visibility
-1rm visibility and formatting, muscle text formattin
-floating button loaction
-
-% Home framgment
-floating button layout 
-floating button acts
-home add card works
-home card adapter updated
-home layout
-home card one rep max
-moving floating button around
-button is clickable
-don't go too up and down
-floating button goes left or right
-fading out
-floating button up and down
-floating button clickable
-
-
 
 (5) feedback / error report / privacy policy
+
+% section - setting 
+I implemented the setting screen buttons I added when I was implementing the version 1.5.
+Namely there are three buttons I implemented.
+1. report error 
+2. send feedback 
+3. privacy policy 
+
+from this implementation, the setting fragment took the responsibility on communication between users and the app.
+By reproting errors and giving feedbacks, user can contribue on app development.
+which gives chance for user to use apps which satisfies their requirement better.
+this is for accesibility of the app.
+
+reporting error and send feedback button enable user to send an email to the developer.
+I made an account which specifically for this app. (trainingtrackermainbox@gamil.com)
+when user click the report error or send feedback, they can enter contents they want to send, and then by clicking sending,
+user can send this via email.
+I needed permission to implement this for an android app
+{description on what permission I needed, how I did it, why it is needed.}
+Also, I added privacy policy to collect information from user when they are reporting error.
+this data collection tries to load data user stored locally,
+and report me what data is succesfully loaded.
+so I can get better vision on the error. (cuz I can know if this error is generated from failing loading data)
+
+// more reasons why the reporting error and feedback is important and references
+
 % Setting Fragment 
-implementing setting screen
-setting privacy policy
-privacy poilicy up button
-privacy policy scroll bar
 send feedback via email
-reporting
-error reporting
 feedback and reporting handelr
 
-
-2. data structure & data management 
-% Scalability
-change package name
-string formatter
-formatter -> stringGetter
-1rm visibility and formatting, muscle text formattin
-going to rename packge
-package domain changed
-debuggable
-turn off debugging
-version name update
-app version
-
--- app scalability update
-(1). improved data management : factory pattern implementation, set default value 
-    ExerciseCard, ExerciseLog, ExerciseSet, Tag, Muscle
-    muscle drawable selector to muscle factory, horizontal scrollbar
-detailed exception control for loadMuscles
-    tag factory, applying tag storage
-
-(2). secure data treatment : storage -save in private
-
-(3). observer pattern 
-
-
-3. new declaration on fragments in terms of their roles
 
 (3) storage sequence adoptation 
     ExerciseCard, ExerciseLog
@@ -233,11 +288,18 @@ detailed exception control for loadMuscles
 
 
 
-
-
 \\\version 1.5 : 
 research on muscle group and visualisation
 didn't have 1rm for log, card
+delete [
+    and analysis available on the logging screen. 
+this is the noticable unique feature of this app. 
+other exercise apps are separating the analysis screen and the logging screen, 
+also, not only giving the past logs, can see the progress at a glance. 
+so it is also better than just using excel which simply gives you past logs.
+Making analysis is possible with excel as well, but for this, users need to manually setup all the things for each exercise they add.
+but with this app, 
+]
 
 
 commit 247e0bf258184c9faf0ffe614508a7354dcc27bf
@@ -274,21 +336,72 @@ Date:   Fri Apr 12 22:34:46 2024 +0100
     only first set is saved
 
 
-(3) version 2.1 implementation - app deployment (app store release, gitHub release)
-focus on researched factors (user centered app)
-enhancing user experiences
-(minimalise steps that user needs to take to log their progress, user can customise set recording, long click to delete a card with warning)
+section - market introduction stage - app deployment (app store release, gitHub release)
+
+for market introduction, I needed a few steps to make my app to be prepared for release.
+1. specify the version name and version code for this release. 
+2. package domain changed (com.example.trainingtracker -> com.jeein.trainingtracker)
+{explanation on what it does, why I need to change it, how my passport name can be suitable for this.}
+3. preparing build variant for releasing
+by seperating debud(debuggable) / release(not debuggable)
+how do I do it and why do I need it?
+4. generate signed apk
+(build a signed APK that I can deploy to a device, why do I need it/)
+-1. steps for setting key store configuration. (how I can get it, why do I need it)
+-2. set build variants 
 
 
-and analysis available on the logging screen. 
+I did app store releasing
+I needed to set... 
+app title
+app SKU
+app category
+subcategory
+language support
+customer support contact 
+availability (countries / regions)
+target audience (age groups)
+content rating 
+user data privacy
+appstore detail
+app pricing
+description
+feature bullets 
+keywords
+icon
+screenshots
+promotional image (feature graphic)
+
+for each components, state what it is, how it will be used/why I need it, why it is important. 
+
+github releasing 
+I used the promotional image (feature graphic), and privacy policy on readme when I release it on github.
+also on release description, I gave the feature bullets with changes I made from the first version. 
+
+
+conclusion of version 2 implementation
+
+Status fragment is designed to combine the benefit of excel and fitness tracking app.
+giving all tje exercies' analysis on one single screen, user can take the benefit of excel which enable people to see all the datas on one screen,
+which makes people easily compare their data and see them at a glance.
+But also, this gives you the benefit of fitness tracking app.
+This includes that
+1. user can simply enter their records and don't need to do anything else to see the data and analysis.
+2. user can easily filter the exercies they want to see the analysis or logs with the groups they customised.
+this is a unique feature provided only on this app which enable user to be able to check the analysis and data on one screen.
+By this feature, user don't need to go through and enter each exercise analysis and log to check or compare them.
+This solves the reason why people don't use fitness tracking app and use excel instead providing the benefit of excel but also provide even more advantages.
+asked people who used the excel instead of fitness app
+they said it is indeed helpful and useful feature
+and it is even better than excel
+as it makes them easily manage the data and it also provide analysis and filter the data.
+
+analysis is available on the logging screen as well.
 this is the noticable unique feature of this app. 
 other exercise apps are separating the analysis screen and the logging screen, 
 also, not only giving the past logs, can see the progress at a glance. 
 so it is also better than just using excel which simply gives you past logs.
 Making analysis is possible with excel as well, but for this, users need to manually setup all the things for each exercise they add.
-but with this app, 
-
-
 
 feedback agaile reflection
 
