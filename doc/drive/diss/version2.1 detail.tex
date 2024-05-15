@@ -1,0 +1,307 @@
+
+significant changes 
+
+1. new features implementation (Tag & Muscle & Workout Analysis)
+
+% Section - Muscle visualisation
+
+Utilising muscle group vector graphics, enabled to track on muscle status
+(wether it is fully recovered, being recovered, or haven't been used for long time)
+By using different colour for each muscle state, user can see all muscle status at a glance.
+
+To managing muscle status efficiently, I implemented muscle class.
+This class provides the bridge between muscle vector graphics and muscle status data.
+I added drawable muscle pathes with each status colour. 
+For each muscle group, it checks the saved muscle status and update the displayed muscle graphic's colour.
+comparing saved data's muscle name and status, and drawable asset's file name, the app displays the appropriate muscle status.
+Additionally, if there is no saved data for muscle, it initialise the muscle data with default values. 
+the initial muscle saved data have null value for lastActivity attribute, and the initial status is fully recovered(as there is no workout record added.)
+
+status of muscle is calculated comparing lastActivity attribute in muscle calss and current time.
+when user run the app, the app refreshes muscle states checking the current time.
+the algorithm detects which msucle status the muscle is currently in.
+if the user hasn't worked on that muscle
+(empty data on muscle status means user run this app for the first time, 
+as when the app initialise the muscles, it puts the lastActivity to null), 
+when it's null -> find when the user opened the app and if the time and use it as the last activity 
+it assigns the current time to tell user that he hasn't worked on that muscle for long time if he doesn't use that muscle for long time.
+if this is not the case, muscle status is determined following logic.
+if the user hasn't work on that muscle more 10 days -> this muscle needs to be exercised
+else if the user worked on this muscle in recent 2 days -> this muscle needs to be recovered.
+otherwise the muscle status is considered as fully recovered.
+once the status attributes in muscle data class is updated,
+the saved muscle status value can be used to find the appropriate drawable resource.
+
+to enable user to enter any number of muscle groups associated to an exercise when they custom an exercise,
+spinner which can select multiple items is employed.
+When user enters an exercise log, the main and sub msucle groups associated to that exercise is checked 
+and those muscle state are updated to be recovered and the lastActivity attribute will be recovered as well.
+
+
+
+% The muscle visualization feature significantly enhances how users interact with and manage their workout progress for each muscle group. The application provides a visual representation of muscle status, such as whether a muscle is fully recovered, in the process of recovery, or has not been used for an extended period. Each state is distinctly colored, enabling users to quickly ascertain the status of their muscles at a glance. This holistic approach not only enriches the user's interaction with the app by providing clear visual cues and updates but also enhances the functionality and accuracy of workout tracking.
+
+% To efficiently manage this feature, I introduced a 'Muscle' class, which serves as a bridge between the muscle vector graphics and the associated muscle status data. This class is crucial for dynamically updating the displayed colors of the muscle graphics based on their current status. It works by comparing the saved muscle data—including names and statuses—with the drawable assets' file names, allowing the app to accurately display the appropriate muscle status for each group. If no data is loaded, the system initializes it with default values, setting the 'lastActivity' attribute to null and the initial status to fully recovered, as this process is done when user run the app for the first time. Which means there will be no workouts have been recorded.
+
+% The app determines muscle status by comparing the 'lastActivity' timestamp in the muscle data with the current time. Upon each app launch, it refreshes the muscle states by checking the current time and applying a logical algorithm to ascertain the muscle's condition. 
+% if the lastActivity is null (empty data on lastActivity feild means user run this app for the first time), it puts the lastActivity to null), it assigns the current time for further muscle status tracking. 
+% If a muscle has not been exercised for more than ten days, the system flags it as needing exercise; if it has been worked out within the last two days, it indicates that the muscle is in recovery. If none of these conditions apply, the muscle is considered fully recovered. Following this update, the status within the muscle data class is adjusted, and the system then links the updated status to the appropriate drawable resource for visual representation.
+
+% To further tailor the user experience, the application includes a feature allowing users to customize exercises with any number of associated muscle groups. This customization is facilitated by a spinner that can select multiple items, ensuring users can specify both main and sub muscle groups for each exercise log. When an exercise log is entered, the application checks the associated muscle groups and updates their status to 'being recovered', and the lastActivity attribute is updated. 
+
+
+
+% section - tag
+
+I implemented tag to provide user ability to customise categories and use this for filtering.
+User can add customised tag depends on their needs.
+For example, they can use this for customise routines, group specific exercises depends on muscle groups. 
+
+I had two attemptions to succesfully implement this feature.
+For the first attempt, 
+
+first implementation attempt : use string to deal with each tag (there was no specified data structure for tags)
+second implementation attempt : implemented tag data class for clearer data strucrue and management 
+    adding tag class
+    add tag object created
+    plus button
+
+\view
+tag layout
+recycler mapping
+horrizontal recycler
+tag layout with padding
+
+\viewModel
+tag adapter
+going to add view holder for the tag
+trying to change colour when clicked
+implementing tag background colour, changed extracted strings
+implementing the colour changing for the tag but doesn
+fixed add button doesn't work. it was because lastly it assgien the behaviour of it when it's clicked in the adapter later than the fragement. but the correct behaviour was defined in the fragment
+adding tag works again
+will manually change the colour rn
+selected state is corrrectly being passed
+change colour work
+
+\model
+tag storage
+save tags when it's added
+delete and edit tag work
+
+%utilisation
+\addCardActivity
+tag spinner layout 
+tag dropdown menu
+    multiple ite selectiable
+    add multiple muscles and tags
+\homeFragment\statusFragment
+tag bar
+    making filter... doesn't work
+    filter works, need to refresh whenever change the tag selection
+    filter works, need to edit status
+    reset tags when stop app
+    add tag (? what did I exactly mean by this?)
+    save tag (? what did I exactly mean by this?)
+
+
+
+(3) workout analysis 
+\graph
+data point with distances
+
+\predicted 1RM
+update existing data structure (added 1RM)
+deal with empty list for algorithm
+One rep max -> 1rm
+
+data structure update
+    \ExerciseCard
+        one rep max to exercise card, so don't need to calculate again and again
+    \ExerciseLog
+        one rep max 
+    \ExerciseSet
+        one rep max
+
+% Status Fragment 
+will change the status layout
+implementing the graph
+status card
+status recycler
+table setup object
+grapg visibility
+
+
+% Add log Avtivity
+changed the data structure, but the log storage is not initialisable 
+\todo : need to check which data structure is actually changed in this state
+today's log - match parent
+Additionally, the use of an empty row at the end of each session improves visual separation and helps distinguish between sessions.
+when add log or card, the most current one to the first index
+I will do the add log activity first
+add log layout
+one rep max with two decimal with kg
+one rep max bar
+make part bold
+new line instead of coloum
+implementing the graph
+today box : user don't know where to log
+table setup object
+add log activity keep updating thr logs
+grapg visibility
+1rm bar visibility
+1rm visibility and formatting, muscle text formattin
+floating button loaction
+
+
+(4) add card 
+% Add card Activity
+remove edit mode
+tag dropdown menu
+card edit
+home add card works
+add card layout
+
+% Home framgment
+floating button layout 
+floating button acts
+home add card works
+home card adapter updated
+home layout
+home card one rep max
+moving floating button around
+button is clickable
+don't go too up and down
+floating button goes left or right
+fading out
+floating button up and down
+floating button clickable
+
+
+
+(5) feedback / error report / privacy policy
+% Setting Fragment 
+implementing setting screen
+setting privacy policy
+privacy poilicy up button
+privacy policy scroll bar
+send feedback via email
+reporting
+error reporting
+feedback and reporting handelr
+
+
+2. data structure & data management 
+% Scalability
+change package name
+string formatter
+formatter -> stringGetter
+1rm visibility and formatting, muscle text formattin
+going to rename packge
+package domain changed
+debuggable
+turn off debugging
+version name update
+app version
+
+-- app scalability update
+(1). improved data management : factory pattern implementation, set default value 
+    ExerciseCard, ExerciseLog, ExerciseSet, Tag, Muscle
+    muscle drawable selector to muscle factory, horizontal scrollbar
+detailed exception control for loadMuscles
+    tag factory, applying tag storage
+
+(2). secure data treatment : storage -save in private
+
+(3). observer pattern 
+
+
+3. new declaration on fragments in terms of their roles
+
+(3) storage sequence adoptation 
+    ExerciseCard, ExerciseLog
+
+
+
+
+
+
+\\\version 1.5 : 
+research on muscle group and visualisation
+didn't have 1rm for log, card
+
+
+commit 247e0bf258184c9faf0ffe614508a7354dcc27bf
+Date:   Sun Mar 24 02:33:01 2024 +0000
+    no need to filter card
+
+commit 9e60ba9b2783710f61608191951fc5bbaa30575c
+Date:   Fri Apr 5 18:05:18 2024 +0100
+    loop
+
+commit 73e4fbbe2f14968cad2ee2921a684ceec0358e54
+Date:   Fri Apr 5 20:18:52 2024 +0100
+    can see the cards again
+
+commit 6911b60d767a06c4fe0e25a7049b536db530051f
+Date:   Mon Apr 8 16:02:56 2024 +0100
+    add app download date
+
+commit 777245ddb2b130e679de96ee2c4d05dcca4bbe56
+Date:   Mon Apr 8 15:48:37 2024 +0100
+    data map
+
+commit 7c29dacc8f26ecd64c9c3ca0877bfa3f49ed86f5
+Date:   Fri Apr 12 20:35:33 2024 +0100
+    update out of lambda function
+
+commit 50c353137bc570f1afc35a90af3f737adb651c62
+Date:   Fri Apr 12 12:30:43 2024 +0100
+    going to update observe lambda
+
+
+commit 1d1e848cc3b1c889e8a14b5a01d180e539c10ef1
+Date:   Fri Apr 12 22:34:46 2024 +0100
+    only first set is saved
+
+
+(3) version 2.1 implementation - app deployment (app store release, gitHub release)
+focus on researched factors (user centered app)
+enhancing user experiences
+(minimalise steps that user needs to take to log their progress, user can customise set recording, long click to delete a card with warning)
+
+
+and analysis available on the logging screen. 
+this is the noticable unique feature of this app. 
+other exercise apps are separating the analysis screen and the logging screen, 
+also, not only giving the past logs, can see the progress at a glance. 
+so it is also better than just using excel which simply gives you past logs.
+Making analysis is possible with excel as well, but for this, users need to manually setup all the things for each exercise they add.
+but with this app, 
+
+
+
+feedback agaile reflection
+
+
+version 3 dissertation
+
+survey result
+user feedbacks -> solution
+
+
+git log categorising
+functionality - why did I implement it / how did I implement it?
+app scalability / technical explanation
+
+
+
+critical evaluation
+user feedback
+what can I do better
+following studies
+
+4. Evaluate the app in terms of efficiency and user satisfaction and demonstrate that the proposed enhancements are beneficial.
+	smart goal evaluation
+	app reviews
+	what I can do better if I do it again next time?
