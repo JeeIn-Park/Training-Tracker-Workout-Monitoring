@@ -105,10 +105,10 @@ class StatusCardAdapter(
             pastLogRecyclerView.adapter = pastLogTableAdapter
 
 
-            itemView.setOnLongClickListener {
-                showEditDeleteOptions(cardItem)
-                true // Consume the long click
-            }
+//            itemView.setOnLongClickListener {
+//                showEditDeleteOptions(cardItem)
+//                true // Consume the long click
+//            }
 
         }
 
