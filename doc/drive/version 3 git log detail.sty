@@ -1,0 +1,135 @@
+version code change
+
+based on users' feedback
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+critical error report 
+critical errors which make it impossible for users to use app
+fixed these error first for better feedback data collection.
+After this fixage of error, the app was re-released.
+
+app crashes report  (from 3 people)
+when entering setting screen, error generated.
+inspect the code, found this happens when users' phone is one darkmode.
+-> dark mode adjustment by implementing dark mode theme colours
+
+button doesn't work (from two people)
+when click the button, the app doesn't direct users to the add card activity.
+found error and fixed it.
+
+% release 
+auto download
+upload feedback form
+version update
+version 2.1 release
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+
+minor error / inconvenience / suggestions report
+
+
+% tag selection reset 
+-> life cycle control 
+home add card activity to add card fragment
+addOnDestinationChangedListener added for fragment bottom nav bar error fix
+added an extra argument for homeCardAdapter constructor and used function references instead of lambda functions in homeFragment. It calls navigator with wrappers so the abstract adapter got the access to the navigator without being initialised.
+log activity to log fragment
+
+tag addition improved layout
+
+
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+in this version of implementation,
+it was critical to implement observer pattern 
+specialised events
+unsub when stop
+unsub to Destroy View
+
+observer pattern was used to deal with enhancements based on these feedbacks. 
+publish / observe 
+
+% tag delettion/ edit error 
+-> changed tag deletion warning, added event strings
+tag deletion clear the card tags (used tag factory)
+change all the cards when a tag is edited/delted, home observer for tag change and deletion
+status observer patter
+click tag to selectedtag
+
+% today's 1rm 
+today's table addapter, add log view model
+list adapter for today table and live data update
+today's 1rm
+implemented the add log observer pattern outlibe
+add log observer pattern
+
+today's 1rm text layout
+
+
+% home fragment 
+description on add card view
+description
+description visibility
+
+
+
+
+
+
+
+
+
+% add card inconvenience 
+only one line can be added for the exercise name
+reset spinner for edit card when nothing is selected
+spinner confirm button
+
+tag auto selection
+intuitive add card
+
+
+% status screen inconvenience 
+add tag on status card, use formatter for tags, each tag got #
+status and home card layout - bottom padding
+
+
+% home fragment 
+status and home card layout - bottom padding
+
+inconvenience -> can move the button, but it always return to where it was! no point 
+slower bubble
+bubble improvement
+button doesn't go over the view
+store button
+
+
+% add log 
+want to continue logging before I finish session,
+might want to check other fragment
+so, I think it would be good it will end when the user finally start to log on another exercise!
+-> added set local storage
+set num using local storage
+exercise set package refactoring (need to check detail for technical implementation)
+empty set storage null control
+store sets and reset sets when close app
+
+add log auto enter
+
+swipale mass and reps
+
+
+
+% card layout inconvenience
+when tag list is empty, visibility = gone
+text size, more stable layout
+home card layout
+
+
+% privacy policy
+changed the report
+feedback and report description
+update privacy readme
