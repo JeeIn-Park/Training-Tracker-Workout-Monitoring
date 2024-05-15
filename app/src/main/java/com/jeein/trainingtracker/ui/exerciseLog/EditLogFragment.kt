@@ -141,30 +141,6 @@ class EditLogFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        EventManager.unsubscribe(requireContext().getString(R.string.event_add_set),
-            ::addSetSubscriber)
-    }
-
-    private fun addSetSubscriber(event: Event) {
-        (event.data as? List<*>)?.let { list ->
-            if (list.all { it is ExerciseSet }) {
-                val sets = list as List<ExerciseSet>
-                val todayOneRepMaxTextViewBinding: TextView = binding.AddLogToday1RMTextView
-                todayOneRepMaxTextViewBinding.text = FormattedStringGetter.totalMassLifted(sets)
-            } else {
-                println("Unhandled type of data: ${event.data}")
-            }
-        }
-    }
-
-
-    private fun setupSwipeListeners() {
-        val kgEditText: EditText = binding.kgEnterText
-        val repEditText: EditText = binding.repEnterText
-
-        // Initialize the swipe listener with the appropriate increment value
-        kgEditText.setOnTouchListener(GestureListenerMass(kgEditText, 1.25f))
-        repEditText.setOnTouchListener(GestureListenerRep(repEditText, 1))
     }
 
 }
