@@ -11,6 +11,10 @@ Download and try out our app by clicking on the link below:
 
 Feedback From : [Feedback From for v2.1.0](https://forms.gle/SfoAL97pRNvBynbo9)
 
+- **Version 3.0.0** : [Training Tracker v2.1.0 APK](https://github.com/JeeIn-Park/TrainingTracker/raw/main/release/TrainingTracker_ver300.apk)
+
+Feedback From : [Feedback From for v2.1.0](https://forms.gle/SfoAL97pRNvBynbo9)
+
 Make sure to check back regularly for updates and new features!
 
 
