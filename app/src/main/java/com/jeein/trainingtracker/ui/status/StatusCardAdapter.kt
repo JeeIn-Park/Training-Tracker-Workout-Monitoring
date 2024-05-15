@@ -120,6 +120,7 @@ class StatusCardAdapter(
                         // Edit
                         0 -> {
                             // implement edit
+
                         }
                         // Delete
                         1 -> {
