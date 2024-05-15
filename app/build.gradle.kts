@@ -11,8 +11,8 @@ android {
         applicationId = "com.jeein.trainingtracker"
         minSdk = 26
         targetSdk = 34
-        versionCode = 3
-        versionName = "2.2.0"
+        versionCode = 4
+        versionName = "3.0.0"
         multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
