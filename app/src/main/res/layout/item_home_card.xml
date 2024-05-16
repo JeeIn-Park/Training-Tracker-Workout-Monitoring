@@ -112,8 +112,6 @@
 
             </LinearLayout>
 
-            <!--TODO : width 0dp to date-->
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

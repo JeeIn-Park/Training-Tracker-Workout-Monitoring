@@ -4,7 +4,6 @@ import java.io.Serializable
 import java.time.LocalDateTime
 import java.util.UUID
 
-// TODO : need serialisable?
 
 data class ExerciseSet(
     val dateTime: LocalDateTime = LocalDateTime.now(),

@@ -50,7 +50,7 @@ object TagFactory {
             )
         }
         if (tags.size != updatedTags.size) {
-            throw error("error while resetting tag selections") // TODO : check if this throws error
+            throw error("error while resetting tag selections")
         } else TagStorage.saveTags(context, updatedTags)
     }
 

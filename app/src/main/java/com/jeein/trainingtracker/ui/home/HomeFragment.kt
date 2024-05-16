@@ -70,7 +70,6 @@ class HomeFragment : Fragment() {
 
         cardAdapter = HomeCardAdapter(requireContext(), ::navAddLog, ::navEditCard)
         tagAdapter = TagAdapter(requireContext(), ::handleTagClick)
-        // todo : study intent, put extra?
 
         val exerciseRecyclerViewBinding = binding.exerciseRecyclerView
         exerciseRecyclerViewBinding.layoutManager = LinearLayoutManager(requireContext())

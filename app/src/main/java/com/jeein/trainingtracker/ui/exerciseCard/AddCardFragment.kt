@@ -93,10 +93,6 @@ class AddCardFragment : Fragment() {
             val subMuscles = getSelectedMuscles(subMusclesSpinner.getSelectedIndices(), muscleList)
             val tags = getSelectedTags(tagSpinner.getSelectedIndices(), tagList)
 
-            // TODO : if there is card stored with false tag, needs to change it to true.
-            // TODO : data migrain when start app, need to update all the data as well
-
-            // TODO : edit card to select multiple muscles and tags
 
             if (cardItem != null) {
                 CardStorage.editCard(

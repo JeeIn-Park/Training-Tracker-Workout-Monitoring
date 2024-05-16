@@ -23,7 +23,6 @@ object TagStorage {
         }
     }
 
-    // TODO : when not match the type
     fun loadTags(context: Context): List<Tag> {
         try {
             ObjectInputStream(context.openFileInput(FILE_NAME)).use {

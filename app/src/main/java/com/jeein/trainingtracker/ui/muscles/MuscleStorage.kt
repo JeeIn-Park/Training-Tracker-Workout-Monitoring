@@ -15,7 +15,6 @@ object MuscleStorage {
             ObjectOutputStream(context.openFileOutput(FILE_NAME, Context.MODE_PRIVATE)).use {
                 it.writeObject(muscles)
             }
-            // TODO : when publish muscle update it should refresh muscle colour
         } catch (e: IOException) {
             e.printStackTrace()
         }

@@ -68,7 +68,6 @@ class StatusCardAdapter(
             val logStorage = LogStorage(cardItem.id)
             val pastLog = logStorage.loadLogs(context)
 
-            // TODO : extract this to the formatted text getter
             if (cardItem.name == "") {
                 exerciseNameTextView.text = "N/A"
                 exerciseNameTextView.setTypeface(null, Typeface.BOLD)

@@ -12,42 +12,6 @@ import java.io.IOException
 import java.io.InputStreamReader
 
 object ReportingHandler {
-//    private fun getLogcatData(): String {
-//        try {
-//            val process = Runtime.getRuntime().exec("logcat -d -v time MyAppTag:* *:S")
-//            val bufferedReader = BufferedReader(InputStreamReader(process.inputStream))
-//
-//            val log = StringBuilder()
-//            var line: String?
-//            while (bufferedReader.readLine().also { line = it } != null) {
-//                log.append(line).append("\n")
-//            }
-//            return log.toString()
-//        } catch (ex: IOException) {
-//            Log.e("SettingFragment", "Error reading logcat", ex)
-//        }
-//        return "Unable to collect Logcat data."
-//    }
-
-
-//    private fun getUserData(context: Context): List<Uri> {
-//        val filesToAttach = mutableListOf<Uri>()
-////        "log_${specificId}.dat",
-//        // TODO : store list of id in separate place so it can ensure it has those ids
-//        val fileNames = listOf("exercise_cards.dat", "muscles.dat", "tags.dat")
-//
-//        fileNames.forEach { fileName ->
-//            val file = File(context.filesDir, fileName)
-//            if (file.exists()) {
-//                val fileUri = Uri.fromFile(file)
-//                filesToAttach.add(fileUri)
-//            } else {
-//                Log.e("SettingsFragment", "File not found: $fileName")
-//            }
-//        }
-//        return filesToAttach
-//    }
-
 
     fun sendFeedbackByEmail(context: Context, feedback: String) {
         val intent = Intent(Intent.ACTION_SEND).apply {
