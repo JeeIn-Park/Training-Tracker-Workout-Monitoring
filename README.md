@@ -1,4 +1,4 @@
-# TrainingTracker (TT) - Unleash Your Fitness Potential
+# RepViz – Fast. Simple. Any Workout.
 
 Welcome to TrainingTracker (TT)! We take the protection of your personal data very seriously. This document outlines our privacy policy regarding the collection, use, and handling of your personal data.
 
