@@ -7,6 +7,7 @@ Meet **RepViz**, your go-to workout tracker that makes logging exercises effortl
 
 ![Feature Graphic](https://raw.githubusercontent.com/JeeIn-Park/Training-Tracker-Workout-Monitoring/main/doc/screenshots/RepVizPoster.png)
 
+
 ## **📥 Download RepViz App**  
 
 **No clutter. No distractions. Just your fitness journey, visualized.**  
