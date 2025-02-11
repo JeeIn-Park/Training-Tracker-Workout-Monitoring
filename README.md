@@ -5,7 +5,7 @@
 ## **📌 About RepViz**  
 Meet **RepViz**, your go-to workout tracker that makes logging exercises effortless and fun. Whether you're lifting weights, running, or doing yoga, RepViz helps you **track, analyze, and optimize** your workouts with **visualized progress insights**.  
 
-![Feature Graphic](https://raw.githubusercontent.com/JeeIn-Park/Training-Tracker-Workout-Monitoring/main/doc/screenshots/RepVizPoster.png)
+<img src="https://raw.githubusercontent.com/JeeIn-Park/Training-Tracker-Workout-Monitoring/main/doc/screenshots/RepVizPoster.png" width="50%">
 
 
 ## **📥 Download RepViz App**  
