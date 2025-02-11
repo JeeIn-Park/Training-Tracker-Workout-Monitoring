@@ -2,7 +2,7 @@
 
 Welcome to TrainingTracker (TT)! We take the protection of your personal data very seriously. This document outlines our privacy policy regarding the collection, use, and handling of your personal data.
 
-![Feature Graphic](https://raw.githubusercontent.com/JeeIn-Park/Training-Tracker-Workout-Monitoring/main/doc/screenshots/featureGraphic.png)
+![Feature Graphic](https://raw.githubusercontent.com/JeeIn-Park/Training-Tracker-Workout-Monitoring/main/doc/screenshots/RepVizPromotionGraphic.png)
 
 
 ## Download Training Tracker App
